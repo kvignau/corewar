@@ -10,7 +10,7 @@ int		main(int argc, char **argv)
 	printf("hello, %d\n", argc);
 	if (argc != 1)
 	{
-		fd = clean_open(argv[1], O_RDONLY);
+		fd = open(argv[1], O_RDONLY);
 		while (read(fd, buffer, 1024) != 0)
 		{
 			stock = ft_strjoin(stock, buffer);
