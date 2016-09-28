@@ -46,10 +46,7 @@ static void		ptr_with_zero(t_elem *tmpa, char **str)
 
 void			ft_ptr(t_elem *tmpa, char **str, int *cpt_null)
 {
-	char	*tmp;
-
 	(void)cpt_null;
-	tmp = NULL;
 	*str = ft_itoabase_uimax((uintmax_t)ARG->arg, 16);
 	if (ft_atoi(*str) == 0 && SPREC.pt == 1)
 	{

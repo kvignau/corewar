@@ -45,11 +45,9 @@ char			**ft_strsplit(char const *s, char c)
 {
 	char		**str;
 	size_t		i;
-	size_t		k;
 	size_t		j;
 
 	i = 0;
-	k = 0;
 	j = 0;
 	if (s == NULL)
 		return (NULL);

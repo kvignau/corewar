@@ -15,12 +15,10 @@
 char	*ft_itoa(int n)
 {
 	char			*str;
-	int				i;
 	unsigned int	nb;
 	int				len;
 
 	len = ft_intlen(n);
-	i = 0;
 	nb = (unsigned int)n;
 	str = ft_strnew(len + 1);
 	if (n < 0)
