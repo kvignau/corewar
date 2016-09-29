@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 
 int		store_file(char **argv, t_data *data, int i)
 {

@@ -10,12 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include "asm.h"
 
 int			main(int argc, char **argv)
 {
 	int		i;
 	int		j;
+	int		error;
 	t_data	*data;
 
 	i = 0;
@@ -23,14 +24,17 @@ int			main(int argc, char **argv)
 
 	data_initializer(&data);
 	if (argc != 1)
+	{
 		i = store_file(argv, data, i);
+		while (j++ < i)
+			ft_printf("[%d]:%s\n", j, data->file[j]);
+		error = file_manager(data);
+	}
 	else
 	{
 		ft_putstr("Please provide at least one .s file");
 		return(1);
 	}
-	while (j++ < i)
-		ft_printf("[%d]: %s \n", j, data->file[j]);
+
 	return (0);
 }
-
