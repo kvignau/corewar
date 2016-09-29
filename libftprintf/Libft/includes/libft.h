@@ -46,6 +46,8 @@ typedef struct		s_lines
 	int				fd;
 }					t_lines;
 
+int					clean_open(const char *path, int flag);
+int					clean_read(int fildes, char *buf, size_t nbyte);
 int					get_next_line(int const fd, char **line);
 int					ft_atoi(const char *str);
 intmax_t			ft_atoi_intmax(const char *str);
@@ -94,6 +96,7 @@ void				ft_putnbr(int n);
 void				ft_putnbr_fd(int n, int fd);
 void				ft_putstr(char const *s);
 void				ft_putstr_fd(char const*s, int fd);
+char				**ft_realloc(char **tab);
 char				*ft_strcat(char *s1, const char *s2);
 char				*ft_strchr(const char *s, int c);
 void				ft_strclr(char *s);

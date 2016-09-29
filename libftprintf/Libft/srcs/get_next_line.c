@@ -3,139 +3,90 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/01/03 11:34:39 by mpaincha          #+#    #+#             */
-/*   Updated: 2016/01/11 14:00:37 by mpaincha         ###   ########.fr       */
+/*   Created: 2016/01/06 11:31:14 by mchevall          #+#    #+#             */
+/*   Updated: 2016/02/16 13:29:28 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include "../includes/libft.h"
 
-static	t_list	*findfd(int const fd, t_list *lst)
-{
-	int		found;
-	t_list	*tmp;
-
-	tmp = lst;
-	found = 0;
-	while (tmp != NULL && !found)
-	{
-		if (((t_lines *)(tmp->content))->fd == fd)
-			found = 1;
-		else
-			tmp = tmp->next;
-	}
-	if (found == 0)
-		tmp = NULL;
-	return (tmp);
-}
-
-static	void	filllines(char *buf, int const fd, t_list **lst)
-{
-	t_lines		stlines;
-	t_list		*tmp;
-	char		*tmplines;
-
-	stlines.lines = NULL;
-	stlines.fd = 0;
-	if ((tmp = findfd(fd, *lst)))
-	{
-		if (LINES)
-		{
-			tmplines = LINES;
-			LINES = ft_strjoin(tmplines, buf);
-			free(tmplines);
-		}
-		else
-			LINES = ft_strdup(buf);
-	}
-	else
-	{
-		stlines.lines = ft_strdup(buf);
-		stlines.fd = fd;
-		ft_lstadd(lst, ft_lstnew(&stlines, sizeof(t_lines)));
-	}
-}
-
-static void		ft_delelem(t_list **lst, t_list *to_del)
-{
-	t_list		*tmp;
-	t_list		*next;
-	t_list		*prev;
-
-	tmp = *lst;
-	prev = NULL;
-	while (tmp)
-	{
-		if (tmp == to_del)
-		{
-			next = tmp->next;
-			ft_strdel(&(LINES));
-			ft_memdel((void **)tmp);
-			if (prev == NULL)
-				*lst = next;
-			else
-				prev->next = next;
-		}
-		prev = tmp;
-		tmp = tmp->next;
-	}
-	ft_memdel((void **)&prev);
-}
-
-static void		sendingline(t_list **lst, int const fd, char **line)
+static int		line_cutter(char **remain, int len, char **line, int ret)
 {
 	int		i;
-	char	*endline;
-	t_list	*tmp;
-	char	*tmplines;
+	char	*tmp;
 
 	i = 0;
-	tmp = findfd(fd, *lst);
-	endline = ft_strchr(LINES, '\n');
-	*line = endline ? ft_strnew(endline - LINES) \
-						: ft_strnew(ft_strlen(LINES));
-	while (LINES[i] != '\n' && LINES[i] != '\0')
+	while ((*remain)[i] != '\0' && (*remain)[i] != '\n')
 	{
-		(*line)[i] = (LINES)[i];
-		i++;
+		if (++i == len && ret == 0)
+		{
+			*line = ft_strsub(*remain, 0, i);
+			tmp = *remain;
+			*remain = ft_strsub(*remain, i + 1, len);
+			len = ft_strlen(*remain);
+			ft_strdel(&tmp);
+			return (-1);
+		}
 	}
-	if ((LINES)[i + 1])
+	if ((i <= len && (*remain)[i] == '\n'))
 	{
-		tmplines = LINES;
-		LINES = ft_strsub(tmplines, i + 1, ft_strlen(tmplines) - (i + 1));
-		free(tmplines);
+		*line = ft_strsub(*remain, 0, i);
+		tmp = *remain;
+		*remain = ft_strsub(*remain, i + 1, len);
+		ft_strdel(&tmp);
+		return (-1);
+	}
+	return (i);
+}
+
+static int		line_manager(char *buf, char **remain, char **line, int ret)
+{
+	size_t			i;
+	char			*tmp;
+	size_t			len;
+
+	i = 0;
+	if (*remain)
+	{
+		tmp = *remain;
+		*remain = ft_strjoin(*remain, buf);
+		ft_strdel(&tmp);
 	}
 	else
-		ft_delelem(lst, tmp);
+		*remain = ft_strdup(buf);
+	len = ft_strlen(*remain);
+	if (line_cutter(remain, len, line, ret) == -1)
+		return (-1);
+	if (ret == 0 && len == 0)
+	{
+		ft_strdel(remain);
+		return (0);
+	}
+	return (i);
 }
 
 int				get_next_line(int const fd, char **line)
 {
-	static t_list	*lst = NULL;
+	static char		*remain;
 	char			buf[BUFF_SIZE + 1];
 	int				ret;
+	int				checkline;
 
-	while (line != NULL && (ret = read(fd, buf, BUFF_SIZE)) > 0
-	&& ft_strchr(buf, '\n') == NULL)
-	{
-		buf[ret] = '\0';
-		filllines(buf, fd, &lst);
-	}
-	if (ret == 0 && line != NULL)
-	{
-		if (findfd(fd, lst) == NULL)
-			return (0);
-		sendingline(&lst, fd, line);
-	}
-	else if (ft_strchr(buf, '\n') != NULL && line != NULL)
-	{
-		buf[ret] = '\0';
-		filllines(buf, fd, &lst);
-		sendingline(&lst, fd, line);
-	}
-	else
+	checkline = 0;
+	if (!line)
 		return (-1);
+	while (checkline != -1)
+	{
+		ret = clean_read(fd, buf, BUFF_SIZE);
+		if (ret == -1)
+			return (ret);
+		buf[ret] = '\0';
+		checkline = line_manager(buf, &remain, line, ret);
+		if (checkline == 0 && remain == NULL && ret == 0)
+			return (0);
+	}
 	return (1);
 }
