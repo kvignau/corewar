@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_read.c                                       :+:      :+:    :+:   */
+/*   store_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/12/18 13:52:33 by mchevall          #+#    #+#             */
-/*   Updated: 2015/12/18 15:56:18 by mchevall         ###   ########.fr       */
+/*   Created: 2016/09/29 15:55:20 by mchevall          #+#    #+#             */
+/*   Updated: 2016/09/29 15:55:48 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/uio.h>
-#include <unistd.h>
+#include "corewar.h"
 
-int		clean_read(int fildes, char *buf, size_t nbyte)
+int		store_file(char **argv, t_data *data, int i)
 {
-	int	ret;
+	int		fd;
 
-	ret = read(fildes, buf, nbyte);
-	if (ret == -1)
+	fd = clean_open(argv[1], O_RDONLY);
+	while (get_next_line(fd, &data->line) != 0)
 	{
-		ft_putstr("read() error\nexiting program\n");
-		exit(EXIT_FAILURE);
+		data->file[i] = ft_strdup(data->line);
+		i++;
+		if (i % 1024 == 0)
+			data->file = ft_realloc(data->file);
 	}
-	buf[ret] = '\0';
-	return (ret);
+	return (i);
 }
