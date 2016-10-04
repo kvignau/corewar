@@ -1,9 +1,16 @@
-#by zaz, it's not very good, but what did you expect, rainbowdash is way better
-#2013
+		#by zaz, it's not very good, but what did you expect, rainbowdash is way better
+		#2013
 
-.name		"fluttershy"
-.comment	"oh, my, what a scary project"
 
+
+
+
+		.name		"fluttershy"
+	.comment	"oh, my, what a scary proj
+t"
+
+
+;
 entry:
 	fork	%:coregeni
 	st		r1, 6
@@ -43,7 +50,7 @@ ardefchk:
 	live	%3940641
 	xor		r2, r5, r15
 	zjmp	%:ardefinit
-ardefloop:	
+ardefloop:
 	ld		%0, r16
 	zjmp	%:ardefwrite
 
@@ -109,7 +116,7 @@ avdefchk:
 	live	%3940641
 	xor		r2, r5, r15
 	zjmp	%:avdefinit
-avdefloop:	
+avdefloop:
 	ld		%0, r16
 	zjmp	%:avdefwrite
 
@@ -138,7 +145,7 @@ torpl1:
 	add		r2, r3, r2
 torpchk:
 	live	%89523
-	xor		r2, r5, r15	
+	xor		r2, r5, r15
 	zjmp	%362
 torploop:
 	ld		%0, r15

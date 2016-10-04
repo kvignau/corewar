@@ -1,0 +1,174 @@
+[0]:		#by zaz, it's not very good, but what did you expect, rainbowdash is way better
+[1]:		#2013
+[2]:
+[3]:	.comment	"oh, my, what a scary proj
+[4]:
+[5]:
+[6]:ec
+[7]:
+[8]:t"
+[9]:		.name		"fluttershy"
+[10]:
+[11]:;
+[12]:entry:
+[13]:	fork	%:coregeni
+[14]:	st		r1, 6
+[15]:	live	%42
+[16]:	fork	%:torpgeni
+[17]:	st		r1, 6
+[18]:	live	%42
+[19]:	fork	%:avdefgeni
+[20]:
+[21]:ardeftgt:
+[22]:
+[23]:ardefgeni:
+[24]:	st 		r1, 6
+[25]:
+[26]:ardefgen:
+[27]:	live 	%213904
+[28]:	fork 	%:ardefgen
+[29]:
+[30]:ardefinit:
+[31]:	sti		r1, %:ardefl1, %1
+[32]:	st		r1, 6
+[33]:	live	%43123
+[34]:	sti		r1, %:ardefchk, %1
+[35]:	ld		%-6, r2
+[36]:	ld		%-6, r3
+[37]:	ld		%150994953, r4
+[38]:	ld		%-186, r5
+[39]:
+[40]:ardefwrite:
+[41]:ardefl1:
+[42]:	live	%295423
+[43]:	sti		r4, %:ardeftgt, r2
+[44]:	add		r2, r3, r2
+[45]:	sti		r4, %:ardeftgt, r2
+[46]:	add		r2, r3, r2
+[47]:ardefchk:
+[48]:	live	%3940641
+[49]:	xor		r2, r5, r15
+[50]:	zjmp	%:ardefinit
+[51]:ardefloop:
+[52]:	ld		%0, r16
+[53]:	zjmp	%:ardefwrite
+[54]:
+[55]:
+[56]:coregeni:
+[57]:	st		r1, 6
+[58]:
+[59]:coregen:
+[60]:	live	%123012
+[61]:	fork	%:coregen
+[62]:
+[63]:coreinit:
+[64]:	st		r1, 58
+[65]:	st		r1, 58
+[66]:	st		r1, 58
+[67]:	st		r1, 58
+[68]:	st		r1, 58
+[69]:	st		r1, 58
+[70]:	st		r1, 58
+[71]:	st		r1, 58
+[72]:	st		r1, 58
+[73]:	st		r1, 58
+[74]:	ld		%0, r16
+[75]:
+[76]:corelive:
+[77]:	live	%985341
+[78]:	live	%985341
+[79]:	live	%985341
+[80]:	live	%985341
+[81]:	live	%985341
+[82]:	live	%985341
+[83]:	live	%985341
+[84]:	live	%985341
+[85]:	live	%985341
+[86]:	live	%985341
+[87]:	zjmp	%:corelive
+[88]:
+[89]:avdefgeni:
+[90]:	st 		r1, 6
+[91]:
+[92]:avdefgen:
+[93]:	live 	%213904
+[94]:	fork 	%:avdefgen
+[95]:
+[96]:avdefinit:
+[97]:	sti		r1, %:avdefl1, %1
+[98]:	st		r1, 6
+[99]:	live	%43123
+[100]:	sti		r1, %:avdefchk, %1
+[101]:	ld		%0, r2
+[102]:	ld		%6, r3
+[103]:	ld		%150994953, r4
+[104]:	ld		%180, r5
+[105]:
+[106]:avdefwrite:
+[107]:avdefl1:
+[108]:	live	%295423
+[109]:	sti		r4, %:avdeftgt, r2
+[110]:	add		r2, r3, r2
+[111]:	sti		r4, %:avdeftgt, r2
+[112]:	add		r2, r3, r2
+[113]:avdefchk:
+[114]:	live	%3940641
+[115]:	xor		r2, r5, r15
+[116]:	zjmp	%:avdefinit
+[117]:avdefloop:
+[118]:	ld		%0, r16
+[119]:	zjmp	%:avdefwrite
+[120]:
+[121]:torpgeni:
+[122]:	st		r1, 6
+[123]:
+[124]:torpgen:
+[125]:	live	%96824
+[126]:	fork	%:torpgen
+[127]:
+[128]:torpinit:
+[129]:	ld		%0, r2
+[130]:	ld		%4, r3
+[131]:	ld		%96, r5
+[132]:	sti		r1, %:torpchk, %1
+[133]:	st		r1, 6
+[134]:
+[135]:torpwrite:
+[136]:torpl1:
+[137]:	live	%8008135
+[138]:	ldi		%:torpinit, r2, r4
+[139]:	sti		r4, %400, r2
+[140]:	add		r2, r3, r2
+[141]:	ldi		%:torpinit, r2, r4
+[142]:	sti		r4, %383, r2
+[143]:	add		r2, r3, r2
+[144]:torpchk:
+[145]:	live	%89523
+[146]:	xor		r2, r5, r15
+[147]:	zjmp	%362
+[148]:torploop:
+[149]:	ld		%0, r15
+[150]:	zjmp	%:torpwrite
+[151]:
+[152]:avdeftgt:
+[153]:(null)
+hi
+i : [0], j : [0], com : [0], name : [0] 
+i : [0], j : [1], com : [0], name : [0] 
+i : [0], j : [2], com : [0], name : [0] 
+i : [1], j : [0], com : [0], name : [0] 
+i : [1], j : [1], com : [0], name : [0] 
+i : [1], j : [2], com : [0], name : [0] 
+i : [2], j : [0], com : [0], name : [0] 
+i : [3], j : [0], com : [0], name : [0] 
+i : [3], j : [1], com : [0], name : [0] 
+red:[31mi : [3], j : [1], com : [0], name : [0] [0m
+3 9
+HELLLLLOO
+i : [3], j : [10],
+[32mDone[0m
+[33mi : [3], j : [10], com : [1], name : [0] [0m
+i : [3], j : [10], com : [1], name : [0] 
+hi
+data->comment :
+data->name :(null)
