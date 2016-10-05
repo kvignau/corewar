@@ -26,8 +26,6 @@ int			main(int argc, char **argv)
 	if (argc != 1)
 	{
 		i = store_file(argv, data, i);
-		while (j++ < i)
-			ft_printf("[%d]:%s\n", j, data->file[j]);
 		error = file_manager(data, i);
 	}
 	else
