@@ -19,18 +19,20 @@
 
 typedef struct 		s_data
 {
-	char			**tmpfile;
-	char			**cleanfile;
 	char			**file;
 	char			*line;
 	char			*comment;
 	char			*name;
+	int				nb_lines;
 }					t_data;
 
 int					store_file(char **argv, t_data *data, int i);
 void				data_initializer(t_data **data);
 int					file_manager(t_data *data, int nb_lines);
 int					ft_iscomment(int c);
+int					header_manager(t_data *data, int nb_lines);
+int					name_manager(t_data *data, int *i, int *j, int nb_lines);
+int					comment_manager(t_data *data, int *i, int *j, int nb_lines);
 
 /*
 **********************  Recovery  **********************
