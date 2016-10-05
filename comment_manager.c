@@ -12,7 +12,20 @@
 
 #include "asm.h"
 
-int		comment_manager(t_data *data, int *i, int *j, int nb_lines)
+static void	gotonextline(int *i, int *j)
+{
+	*i += 1;
+	*j = 0;
+}
+
+static void	savecomment(t_data *data, int *comment_size, int *i, int *j)
+{
+	data->comment[*comment_size] = data->file[*i][*j];
+	*j += 1;
+	*comment_size += 1;
+}
+
+int			comment_manager(t_data *data, int *i, int *j)
 {
 	int		comment_size;
 
@@ -23,27 +36,18 @@ int		comment_manager(t_data *data, int *i, int *j, int nb_lines)
 	if (data->file[*i][*j] == '"')
 	{
 		*j += 1;
-		while (data->file[*i][*j] != '"' && comment_size <= 2048 && *i <= nb_lines)
+		while (data->file[*i][*j] != '"' && comment_size <= 2048 &&
+			*i <= data->nb_lines)
 		{
 			if (data->file[*i][*j] == '\0')
-			{
-				*i += 1;
-				*j = 0;
-			}
+				gotonextline(i, j);
 			else
-			{
-				data->comment[comment_size] = data->file[*i][*j];
-				*j += 1;
-				comment_size++;
-			}
+				savecomment(data, &comment_size, i, j);
 		}
 	}
 	else
-	{
 		return (0);
-	}
-	if (comment_size > 2048 || *i >= nb_lines)
+	if (comment_size > 2048 || *i >= data->nb_lines)
 		return (0);
 	return (1);
 }
-

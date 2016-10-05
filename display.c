@@ -15,7 +15,7 @@
 void	display_file(t_data *data)
 {
 	int		i;
-	int 	j;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -23,7 +23,7 @@ void	display_file(t_data *data)
 	{
 		if (data->file[i][j] != '\0')
 		{
-			ft_printf("%s",data->file[i]);
+			ft_printf("%s", data->file[i]);
 			j++;
 		}
 		ft_putchar('\n');

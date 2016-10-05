@@ -12,44 +12,47 @@
 
 #include "asm.h"
 
-int		comment_cleaner(t_data *data, int nb_lines)
+static void			comment_remover(t_data *data, int i, int j)
+{
+	int		k;
+
+	k = 0;
+	while (k < ft_strlen(&data->file[i][j]))
+	{
+		data->file[i][j + k] = '\0';
+		k++;
+	}
+}
+
+static int			comment_cleaner(t_data *data)
 {
 	char	**cleaned_file;
 	int		i;
 	int		j;
-	int		k;
 
 	i = 0;
 	j = 0;
-	k = 0;
 	if ((cleaned_file =
-		(char **)ft_memalloc(sizeof(char *) * nb_lines)) == NULL)
+		(char **)ft_memalloc(sizeof(char *) * data->nb_lines)) == NULL)
 		return (0);
-	while (i < nb_lines)
+	while (i < data->nb_lines)
 	{
 		while (data->file[i][j] != '\0')
 		{
 			if (data->file[i][j] == ';')
-			{
-				while (k < ft_strlen(&data->file[i][j]))
-				{
-					data->file[i][j + k] = '\0';
-					k++;
-				}
-			}
+				comment_remover(data, i, j);
 			j++;
-			k = 0;
 		}
 		cleaned_file[i] = ft_strdup(data->file[i]);
 		i++;
 		j = 0;
 	}
-	ft_free2dtab((void **)data->file, nb_lines);
+	ft_free2dtab((void **)data->file, data->nb_lines);
 	data->file = cleaned_file;
 	return (1);
 }
 
-int		file_trimer(t_data *data, int *nb_lines, int *i)
+static int			file_trimer(t_data *data, int *nb_lines, int i)
 {
 	char	**trimmed_file;
 	int		j;
@@ -60,8 +63,8 @@ int		file_trimer(t_data *data, int *nb_lines, int *i)
 		return (0);
 	while (j < *nb_lines)
 	{
-		trimmed_file[j] = ft_strtrim(data->file[*i]);
-		*i += 1;
+		trimmed_file[j] = ft_strtrim(data->file[i]);
+		i += 1;
 		j++;
 	}
 	ft_free2dtab((void **)data->file, *nb_lines);
@@ -69,11 +72,10 @@ int		file_trimer(t_data *data, int *nb_lines, int *i)
 	return (1);
 }
 
-int		sharp_cleaner(t_data *data, int *nb_lines)
+static int			sharp_cleaner(t_data *data, int *nb_lines)
 {
 	int		i;
 	int		j;
-	int		k;
 	char	**sharp_cleaned;
 
 	i = 0;
@@ -99,21 +101,23 @@ int		sharp_cleaner(t_data *data, int *nb_lines)
 	return (1);
 }
 
-
-int		file_manager(t_data *data, int nb_lines)
+int					file_manager(t_data *data, int nb_lines)
 {
 	int i;
 
 	i = 0;
-	if ((i = header_manager(data, nb_lines)) == 0)
-		return (1);
-	nb_lines = nb_lines - i;
-	if (!file_trimer(data, &nb_lines, &i))
-		return (2);
-	if (!sharp_cleaner(data, &nb_lines))
-		return (3);
-	if (!comment_cleaner (data, nb_lines))
-		return (4);
 	data->nb_lines = nb_lines;
+	if ((i = header_manager(data)) == 0)
+		return (1);
+	data->nb_lines = data->nb_lines - i;
+	if (!file_trimer(data, &data->nb_lines, i))
+		return (2);
+	if (!sharp_cleaner(data, &data->nb_lines))
+		return (3);
+	if (!comment_cleaner(data))
+		return (4);
+	i = 0;
+	if (!file_trimer(data, &data->nb_lines, i))
+		return (5);
 	return (0);
 }
