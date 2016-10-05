@@ -16,7 +16,8 @@ NAME = asm
 FLAGS += -Wall -Wextra -Werror -fsanitize=address
 
 SRC = main.c op.c store_file.c data_initializer.c file_manager.c \
-ft_iscomment.c recovery.c display.c ft_iscomment.c
+ft_iscomment.c recovery.c display.c header_manager.c name_manager.c\
+comment_manager.c
 
 OBJ = $(SRC:%.c=%.o)
 
