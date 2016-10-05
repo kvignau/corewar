@@ -31,4 +31,21 @@ int					store_file(char **argv, t_data *data, int i);
 void				data_initializer(t_data **data);
 int					file_manager(t_data *data, int nb_lines);
 int					ft_iscomment(int c);
+
+/*
+**********************  Recovery  **********************
+*/
+
+void				recovery(t_data *data);
+int					check_line(char	*line);
+int					line_valid(char *line);
+
+
+
+/*
+**********************  Display  **********************
+*/
+
+void				display_file(t_data *data);
+
 #endif
