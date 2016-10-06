@@ -18,38 +18,42 @@ static void	mini_iscomment(int *i, int *j)
 	*j = 0;
 }
 
-int			header_manager(t_data *data, int nb_lines)
+static void	comment_found(t_data *data, int *i, int *j, int *comment)
+{
+	*j += 8;
+	*comment = comment_manager(data, i, j);
+	*j += 1;
+}
+
+static void	name_found(t_data *data, int *i, int *j, int *name)
+{
+	*j += 5;
+	*name = name_manager(data, i, j);
+	*j += 1;
+}
+
+int			header_manager(t_data *data)
 {
 	int		i;
 	int		j;
 	int		comment;
 	int		name;
 
-
 	i = 0;
 	j = 0;
 	comment = 0;
 	name = 0;
-	while (i < nb_lines && (comment == 0 || name == 0))
+	while (i < data->nb_lines && (comment == 0 || name == 0))
 	{
 		if (ft_isspace(data->file[i][j]) != 0)
 			j++;
 		else if (ft_iscomment(data->file[i][j]) != 0 ||
-			data->file [i][j] == '\0')
+			data->file[i][j] == '\0')
 			mini_iscomment(&i, &j);
 		else if (ft_strncmp(&data->file[i][j], ".comment", 8) == 0)
-		{
-			//comment_found(data, &i, &j, nb_lines);
-			j += 8;
-			comment = comment_manager(data, &i, &j, nb_lines);
-			j++;
-		}
+			comment_found(data, &i, &j, &comment);
 		else if (ft_strncmp(&data->file[i][j], ".name", 5) == 0)
-		{
-			j += 5;
-			name = name_manager(data, &i , &j, nb_lines);
-			j++;
-		}
+			name_found(data, &i, &j, &name);
 		else
 			return (0);
 	}

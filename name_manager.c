@@ -12,7 +12,20 @@
 
 #include "asm.h"
 
-int		name_manager(t_data *data, int *i, int *j, int nb_lines)
+static void	gotonextline(int *i, int *j)
+{
+	*i += 1;
+	*j = 0;
+}
+
+static void	savename(t_data *data, int *name_size, int *i, int *j)
+{
+	data->name[*name_size] = data->file[*i][*j];
+	*j += 1;
+	*name_size += 1;
+}
+
+int			name_manager(t_data *data, int *i, int *j)
 {
 	int		name_size;
 
@@ -23,24 +36,18 @@ int		name_manager(t_data *data, int *i, int *j, int nb_lines)
 	if (data->file[*i][*j] == '"')
 	{
 		*j += 1;
-		while (data->file[*i][*j] != '"' && name_size <= 128 && *i <= nb_lines)
+		while (data->file[*i][*j] != '"' && name_size <= 128 &&
+			*i <= data->nb_lines)
 		{
 			if (data->file[*i][*j] == '\0')
-			{
-				*i += 1;
-				*j = 0;
-			}
+				gotonextline(i, j);
 			else
-			{
-				data->name[name_size] = data->file[*i][*j];
-				*j += 1;
-				name_size++;
-			}
+				savename(data, &name_size, i, j);
 		}
 	}
 	else
 		return (0);
-	if (name_size > 128 || *i >= nb_lines)
+	if (name_size > 128 || *i >= data->nb_lines)
 		return (0);
 	return (1);
 }
