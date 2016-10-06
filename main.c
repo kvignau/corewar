@@ -32,4 +32,4 @@ int			main(int argc, char **argv)
 	//display_file(data);
 	recovery(data);
 	return (0);
-
+}

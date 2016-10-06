@@ -18,12 +18,14 @@ void		data_initializer(t_data **data)
 	*data = (t_data *)ft_memalloc(sizeof(t_data));
 	if (*data)
 	{
-		(*data)->file = (char **)ft_memalloc(sizeof(char *) * BUFF);
+		((((*data)->file = (char **)ft_memalloc(sizeof(char *) * BUFF)) == NULL)
+		? error(*data, "File malloc error\n") : 0);
 		(*data)->line = NULL;
 		(*data)->comment = NULL;
 		(*data)->name = NULL;
+		((((*data)->lst_op = ft_lstdblnew()) == NULL) ?
+			error(*data, "lst_op malloc error") : 0);
 	}
-	(*data)->lst_op = ft_lstdblnew();
 	else
 		error(*data, "Couldn't malloc data");
 }
