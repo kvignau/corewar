@@ -39,7 +39,6 @@ int					comment_manager(t_data *data, int *i, int *j);
 **********************  Recovery  **********************
 */
 
-void				ini_op(t_dbllist **lst_op);
 
 /*
 **********************  Recovery  **********************
@@ -48,6 +47,7 @@ void				ini_op(t_dbllist **lst_op);
 void				recovery(t_data *data);
 int					check_line(char	*line);
 int					line_valid(char *line);
+int					check_first(char *line);
 
 
 

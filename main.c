@@ -34,8 +34,6 @@ int			main(int argc, char **argv)
 		return(0);
 	}
 	// display_file(data);
-	// recovery(data);
-	ini_op(&data->lst_op);
-	ft_printf("%d\n",op_tab[0]);
+	recovery(data);
 	return (1);
 }
