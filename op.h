@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef OP_H
+#define OP_H
+
 /*
 ** Toutes les tailles sont en octets.
 ** On part du principe qu'un int fait 32 bits. Est-ce vrai chez vous ?
@@ -82,7 +85,11 @@ typedef struct		s_op
 	t_arg_type		arg[MAX_ARGS_NUMBER];
 	int				op_code;
 	int				nb_cycle;
-	char			*desc;
+	char			*comment;
 	int				codage_oct;
-	int				je_sais_pas_a_voir;
+	int				unknown;
 }					t_op;
+
+extern t_op			op_tab[17];
+
+#endif

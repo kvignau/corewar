@@ -31,9 +31,11 @@ int			main(int argc, char **argv)
 	else
 	{
 		ft_putstr("Please provide at least one .s file");
-		return(1);
+		return(0);
 	}
-	//display_file(data);
-	recovery(data);
-	return (0);
+	// display_file(data);
+	// recovery(data);
+	ini_op(&data->lst_op);
+	ft_printf("%d\n",op_tab[0]);
+	return (1);
 }
