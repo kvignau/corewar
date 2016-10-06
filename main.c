@@ -33,6 +33,7 @@ int			main(int argc, char **argv)
 		ft_putstr("Please provide at least one .s file");
 		return(1);
 	}
-
+	//display_file(data);
+	recovery(data);
 	return (0);
 }

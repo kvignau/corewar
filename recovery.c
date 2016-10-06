@@ -17,8 +17,6 @@ int		line_valid(char *line)
 	int		i;
 
 	i = 0;
-	while (line[i] != '\n')
-		i++;
 	return (1);
 }
 
@@ -37,7 +35,7 @@ void	recovery(t_data *data)
 
 	i = 0;
 	j = 0;
-	while (data->file[i] != '\0')
+	while (i < data->nb_lines)
 	{
 		if (data->file[i][j] != '\0')
 		{
