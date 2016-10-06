@@ -26,13 +26,16 @@ typedef struct 		s_data
 	int				nb_lines;
 }					t_data;
 
-int					store_file(char **argv, t_data *data, int i);
+int					store_file(char **argv, t_data *data, int *i);
 void				data_initializer(t_data **data);
 int					file_manager(t_data *data, int nb_lines);
 int					ft_iscomment(int c);
 int					header_manager(t_data *data);
 int					name_manager(t_data *data, int *i, int *j);
 int					comment_manager(t_data *data, int *i, int *j);
+void				error(t_data *data, char *str);
+void				free_all_data(t_data *data);
+
 
 /*
 **********************  Recovery  **********************

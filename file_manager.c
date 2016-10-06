@@ -34,7 +34,7 @@ static int			comment_cleaner(t_data *data)
 	j = 0;
 	if ((cleaned_file =
 		(char **)ft_memalloc(sizeof(char *) * data->nb_lines)) == NULL)
-		return (0);
+		error(data, "Cleaned_file malloc error\n");
 	while (i < data->nb_lines)
 	{
 		while (data->file[i][j] != '\0')
@@ -60,7 +60,7 @@ static int			file_trimer(t_data *data, int *nb_lines, int i)
 	j = 0;
 	if ((trimmed_file =
 		(char **)ft_memalloc(sizeof(char *) * *nb_lines)) == NULL)
-		return (0);
+		error(data, "Trimmed_file malloc error\n");
 	while (j < *nb_lines)
 	{
 		trimmed_file[j] = ft_strtrim(data->file[i]);
@@ -82,18 +82,17 @@ static int			sharp_cleaner(t_data *data, int *nb_lines)
 	j = 0;
 	if ((sharp_cleaned =
 		(char **)ft_memalloc(sizeof(char *) * *nb_lines)) == NULL)
-		return (0);
+		error(data, "Sharp_cleaned malloc error\n");
 	while (i < *nb_lines)
 	{
-		if (data->file[i][0] == '#' || data->file[i][0] == ';' ||
-			data->file[i][0] == '\0')
-			i++;
-		else
+		if (!(data->file[i][0] == '#' || data->file[i][0] == ';' ||
+			data->file[i][0] == '\0'))
 		{
-			sharp_cleaned[j] = ft_strdup(data->file[i]);
+			(((sharp_cleaned[j] = ft_strdup(data->file[i])) == NULL) ?
+				error(data, "Malloc error\n") : 0);
 			j++;
-			i++;
 		}
+		i++;
 	}
 	ft_free2dtab((void **)data->file, *nb_lines);
 	*nb_lines = j;
@@ -108,16 +107,12 @@ int					file_manager(t_data *data, int nb_lines)
 	i = 0;
 	data->nb_lines = nb_lines;
 	if ((i = header_manager(data)) == 0)
-		return (1);
+		error(data, "Header error\n");
 	data->nb_lines = data->nb_lines - i;
-	if (!file_trimer(data, &data->nb_lines, i))
-		return (2);
-	if (!sharp_cleaner(data, &data->nb_lines))
-		return (3);
-	if (!comment_cleaner(data))
-		return (4);
+	file_trimer(data, &data->nb_lines, i);
+	sharp_cleaner(data, &data->nb_lines);
+	comment_cleaner(data);
 	i = 0;
-	if (!file_trimer(data, &data->nb_lines, i))
-		return (5);
-	return (0);
+	file_trimer(data, &data->nb_lines, i);
+	return (1);
 }

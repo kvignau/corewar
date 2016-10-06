@@ -18,5 +18,10 @@ void		data_initializer(t_data **data)
 	if (*data)
 	{
 		(*data)->file = (char **)ft_memalloc(sizeof(char *) * BUFF);
+		(*data)->line = NULL;
+		(*data)->comment = NULL;
+		(*data)->name = NULL;
 	}
+	else
+		error(*data, "Couldn't malloc data");
 }

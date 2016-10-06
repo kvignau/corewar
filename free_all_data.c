@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free_all_data.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/29 15:59:53 by mchevall          #+#    #+#             */
-/*   Updated: 2016/09/29 16:14:55 by mchevall         ###   ########.fr       */
+/*   Created: 2016/10/06 14:20:44 by mchevall          #+#    #+#             */
+/*   Updated: 2016/10/06 14:20:52 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-int			main(int argc, char **argv)
+void		free_all_data(t_data *data)
 {
-	int		i;
-	int		j;
-	t_data	*data;
-
-	i = 0;
-	j = -1;
-
-	data_initializer(&data);
-	if (argc != 1)
+	if (data != NULL)
 	{
-		store_file(argv, data, &i);
-		file_manager(data, i);
+		((data->file != NULL) ? ft_free2dtab((void **)data->file, data->nb_lines) : 0);
+		((data->line != NULL) ? ft_memdel((void **)&data->line) : 0);
+		((data->comment != NULL) ? ft_memdel((void **)&data->comment) : 0);
+		((data->name != NULL) ? ft_memdel((void **)&data->name) : 0);
 	}
-	else
-		error(data, "Please provide a .s file");
-	display_file(data);
-	//recovery(data);
-	return (0);
 }
