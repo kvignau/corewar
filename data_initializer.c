@@ -20,5 +20,6 @@ void		data_initializer(t_data **data)
 	{
 		(*data)->file = (char **)ft_memalloc(sizeof(char *) * BUFF);
 	}
-	(*data)->lst_op = ft_lstdblnew();
+	(*data)->label_kw = ft_lstdblnew();
+	(*data)->label_unkw = ft_lstdblnew();
 }

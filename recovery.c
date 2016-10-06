@@ -12,32 +12,40 @@
 
 #include "asm.h"
 
-int		check_first(char *line)
+int		check_first(char *line, t_data **data)
 {
 	int		i;
 	char	*name;
+	int		label;
 
 	i = 0;
+	label = 0;
+	(void)data; //debug
 	while (line[i] != ' ' && line[i] != '\t')
 		i++;
 	name = ft_strsub(line, 0, i);
-	ft_printf("Op: %s",name); //debug
+	ft_printf("Op: %s\n",name); //debug
 	if (name[ft_strlen(name) - 1] == ':')
-		ft_putstr("it's a label\n");
-	else
-		ft_putstr("instructions\n");
+	{
+		name = ft_strsub(name, 0, ft_strlen(name) - 1);
+		ft_printf("Op: %s\n",name); //debug
+		// if (!(exist_label(ft_strsub())))
+	}
 	return (1);
 }
 
-int		line_valid(char *line)
+int		line_valid(char *line, t_data **data)
 {
-	check_first(line);
+	(void)data; //debug
+
+	check_first(line, data);
 	return (1);
 }
 
-int		check_line(char	*line)
+int		check_line(char	*line, t_data **data)
 {
-	if (!(line_valid(line)))
+	(void)data; //debug
+	if (!(line_valid(line, data)))
 		return (0);
 	// ft_putstr("\nVALID\n");
 	return (1);
@@ -56,7 +64,7 @@ void	recovery(t_data *data)
 		{
 			ft_putstr("Line analysed :\n"); //debug
 			ft_printf("%s\n",data->file[i]); //debug
-			check_line(data->file[i]);
+			check_line(data->file[i], &data);
 			j++;
 		}
 		ft_putchar('\n');

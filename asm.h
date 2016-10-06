@@ -24,7 +24,8 @@ typedef struct 		s_data
 	char			*comment;
 	char			*name;
 	int				nb_lines;
-	t_dbllist		*lst_op;
+	t_dbllist		*label_kw;
+	t_dbllist		*label_unkw;
 }					t_data;
 
 int					store_file(char **argv, t_data *data, int i);
@@ -45,9 +46,9 @@ int					comment_manager(t_data *data, int *i, int *j);
 */
 
 void				recovery(t_data *data);
-int					check_line(char	*line);
-int					line_valid(char *line);
-int					check_first(char *line);
+int					check_line(char	*line, t_data **data);
+int					line_valid(char *line, t_data **data);
+int					check_first(char *line, t_data **data);
 
 
 
