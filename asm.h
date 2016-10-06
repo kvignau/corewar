@@ -24,6 +24,7 @@ typedef struct 		s_data
 	char			*comment;
 	char			*name;
 	int				nb_lines;
+	t_dbllist		*lst_op;
 }					t_data;
 
 int					store_file(char **argv, t_data *data, int *i);
@@ -44,6 +45,7 @@ void				free_all_data(t_data *data);
 void				recovery(t_data *data);
 int					check_line(char	*line);
 int					line_valid(char *line);
+int					check_first(char *line);
 
 
 

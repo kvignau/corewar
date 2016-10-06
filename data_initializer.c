@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "asm.h"
+#include "op.h"
 
 void		data_initializer(t_data **data)
 {
@@ -22,6 +23,7 @@ void		data_initializer(t_data **data)
 		(*data)->comment = NULL;
 		(*data)->name = NULL;
 	}
+	(*data)->lst_op = ft_lstdblnew();
 	else
 		error(*data, "Couldn't malloc data");
 }

@@ -53,7 +53,6 @@ int					ft_atoi(const char *str);
 intmax_t			ft_atoi_intmax(const char *str);
 void				*ft_bzero(void *s, size_t n);
 int					ft_count_words(char const *s, char c);
-void				ft_error(char *str);
 void				ft_free2dtab(void **tab, int tab_size);
 size_t				ft_intlen(int n);
 size_t				ft_intlenbase(int n, size_t base);

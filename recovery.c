@@ -12,11 +12,26 @@
 
 #include "asm.h"
 
-int		line_valid(char *line)
+int		check_first(char *line)
 {
 	int		i;
+	char	*name;
 
 	i = 0;
+	while (line[i] != ' ' && line[i] != '\t')
+		i++;
+	name = ft_strsub(line, 0, i);
+	ft_printf("Op: %s",name); //debug
+	if (name[ft_strlen(name) - 1] == ':')
+		ft_putstr("it's a label\n");
+	else
+		ft_putstr("instructions\n");
+	return (1);
+}
+
+int		line_valid(char *line)
+{
+	check_first(line);
 	return (1);
 }
 
@@ -24,7 +39,7 @@ int		check_line(char	*line)
 {
 	if (!(line_valid(line)))
 		return (0);
-	ft_putstr("VALID\n");
+	// ft_putstr("\nVALID\n");
 	return (1);
 }
 
@@ -39,8 +54,8 @@ void	recovery(t_data *data)
 	{
 		if (data->file[i][j] != '\0')
 		{
-			ft_putstr("Line analysed :"); //debug
-			ft_printf("%s",data->file[i]); //debug
+			ft_putstr("Line analysed :\n"); //debug
+			ft_printf("%s\n",data->file[i]); //debug
 			check_line(data->file[i]);
 			j++;
 		}
@@ -49,3 +64,5 @@ void	recovery(t_data *data)
 		j = 0;
 	}
 }
+
+	// ft_printf("%s\n", op_tab[0].name);

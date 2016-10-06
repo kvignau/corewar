@@ -29,7 +29,7 @@ int			main(int argc, char **argv)
 	}
 	else
 		error(data, "Please provide a .s file");
-	display_file(data);
-	//recovery(data);
+	//display_file(data);
+	recovery(data);
 	return (0);
-}
+
