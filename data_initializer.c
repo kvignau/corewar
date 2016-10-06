@@ -31,3 +31,13 @@ void		data_initializer(t_data **data)
 	else
 		error(*data, "Couldn't malloc data");
 }
+
+void	ini_lab(t_lab *lab)
+{
+	lab = (t_lab *)ft_memalloc(sizeof(t_lab));
+	if (lab == NULL)
+	{
+		error(*data, "File malloc error\n");
+		return ;
+	}
+}

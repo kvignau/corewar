@@ -12,6 +12,32 @@
 
 #include "asm.h"
 
+int		save_label(char *name, t_data **data)
+{
+	t_lab	lab;
+
+	ini_lab(&lab);
+	ft_lstdbladd_tail(data->label_kw, &lab, sizeof(t_lab));
+	return (0);
+}
+
+int		label_valid(char *name, t_data **data)
+{
+	int		i;
+
+	i = 0;
+	while (name[i] != '\0')
+	{
+		if (!(ft_strchr(LABEL_CHARS, name[i])))
+		{
+			error(*data, "label_chars invalide");
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
 int		check_first(char *line, t_data **data)
 {
 	int		i;
@@ -29,7 +55,9 @@ int		check_first(char *line, t_data **data)
 	{
 		name = ft_strsub(name, 0, ft_strlen(name) - 1);
 		ft_printf("Op: %s\n",name); //debug
-		// if (!(exist_label(ft_strsub())))
+		if (!(label_valid(name, data)))
+			return (0);
+		save_label(name);
 	}
 	return (1);
 }

@@ -17,6 +17,10 @@
 # include <fcntl.h>
 # define BUFF 1024
 
+/*
+**********************  Structures  **********************
+*/
+
 typedef struct 		s_data
 {
 	char			**file;
@@ -27,6 +31,15 @@ typedef struct 		s_data
 	t_dbllist		*label_kw;
 	t_dbllist		*label_unkw;
 }					t_data;
+
+typedef struct 		s_label
+{
+	char			*name;
+	int				oct;
+}					t_label;
+/*
+**********************  Cleaning  **********************
+*/
 
 int					store_file(char **argv, t_data *data, int *i);
 void				data_initializer(t_data **data);
@@ -47,8 +60,7 @@ void				recovery(t_data *data);
 int					check_line(char	*line, t_data **data);
 int					line_valid(char *line, t_data **data);
 int					check_first(char *line, t_data **data);
-
-
+int					label_valid(char *name, t_data **data);
 
 /*
 **********************  Display  **********************

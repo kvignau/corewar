@@ -31,3 +31,8 @@ void	display_file(t_data *data)
 		j = 0;
 	}
 }
+
+void	show_label_lst(t_dbllst	)
+{
+
+}
