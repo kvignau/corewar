@@ -31,6 +31,15 @@ static void	name_found(t_data *data, int *i, int *j, int *name)
 	*name = name_manager(data, i, j);
 	*j += 1;
 }
+static void	error_manager(t_data *data, int comment, int name)
+{
+	if (comment == 1)
+		error(data, "Error after comment\n");
+	else if (name == 1)
+		error(data, "Error after name\n");
+	else
+		error(data, "Missing header\n");
+}
 
 int			header_manager(t_data *data)
 {
@@ -55,7 +64,7 @@ int			header_manager(t_data *data)
 		else if (ft_strncmp(&data->file[i][j], ".name", 5) == 0)
 			name_found(data, &i, &j, &name);
 		else
-			return (0);
+			error_manager(data, comment, name);
 	}
 	return ((comment == 0 || name == 0) ? 0 : i + 1);
 }

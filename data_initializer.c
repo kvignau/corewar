@@ -18,8 +18,16 @@ void		data_initializer(t_data **data)
 	*data = (t_data *)ft_memalloc(sizeof(t_data));
 	if (*data)
 	{
-		(*data)->file = (char **)ft_memalloc(sizeof(char *) * BUFF);
+		((((*data)->file = (char **)ft_memalloc(sizeof(char *) * BUFF)) == NULL)
+		? error(*data, "File malloc error\n") : 0);
+		(*data)->line = NULL;
+		(*data)->comment = NULL;
+		(*data)->name = NULL;
+		((((*data)->label_kw = ft_lstdblnew()) == NULL) ?
+			error(*data, "label_kw malloc error") : 0);
+		((((*data)->label_unkw = ft_lstdblnew()) == NULL) ?
+			error(*data, "label_unkw malloc error") : 0);
 	}
-	(*data)->label_kw = ft_lstdblnew();
-	(*data)->label_unkw = ft_lstdblnew();
+	else
+		error(*data, "Couldn't malloc data");
 }

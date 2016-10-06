@@ -80,7 +80,7 @@ int				get_next_line(int const fd, char **line)
 		return (-1);
 	while (checkline != -1)
 	{
-		ret = clean_read(fd, buf, BUFF_SIZE);
+		ret = read(fd, buf, BUFF_SIZE);
 		if (ret == -1)
 			return (ret);
 		buf[ret] = '\0';
