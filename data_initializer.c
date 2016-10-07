@@ -32,7 +32,7 @@ void		data_initializer(t_data **data)
 		error(*data, "Couldn't malloc data");
 }
 
-void	ini_lab(t_lab *lab)
+void	ini_lab(t_lab *lab, t_data **data)
 {
 	lab = (t_lab *)ft_memalloc(sizeof(t_lab));
 	if (lab == NULL)

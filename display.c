@@ -32,7 +32,16 @@ void	display_file(t_data *data)
 	}
 }
 
-void	show_label_lst(t_dbllst	)
+void	show_label_lst(t_dbllist *lst)
 {
+	t_elem	*tmp;
 
+	tmp = lst->tail;
+	ft_printf("Label KW :\n");
+	while (tmp != NULL)
+	{
+		ft_printf("Label : %s\n", ((t_lab *)((tmp)->content))->name);
+		tmp = tmp->prev;
+	}
+	ft_printf("\n");
 }

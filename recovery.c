@@ -12,13 +12,32 @@
 
 #include "asm.h"
 
+int		exist_label(char *name, t_data **data)
+{
+	t_elem	*tmp;
+
+	tmp = ((*data)->label_kw)->tail;
+	while (tmp != NULL)
+	{
+		if (ft_strcmp(((t_lab *)((tmp)->content))->name, name) == 0)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
+
 int		save_label(char *name, t_data **data)
 {
 	t_lab	lab;
 
-	ini_lab(&lab);
-	ft_lstdbladd_tail(data->label_kw, &lab, sizeof(t_lab));
-	return (0);
+	ini_lab(&lab, data);
+	lab.name = ft_strdup(name);
+	if (exist_label(name, data))
+	{
+		ft_putstr("IN\n");
+		ft_lstdbladd_head((*data)->label_kw, &lab, sizeof(t_lab));
+	}
+	return (1);
 }
 
 int		label_valid(char *name, t_data **data)
@@ -46,7 +65,6 @@ int		check_first(char *line, t_data **data)
 
 	i = 0;
 	label = 0;
-	(void)data; //debug
 	while (line[i] != ' ' && line[i] != '\t')
 		i++;
 	name = ft_strsub(line, 0, i);
@@ -56,23 +74,24 @@ int		check_first(char *line, t_data **data)
 		name = ft_strsub(name, 0, ft_strlen(name) - 1);
 		ft_printf("Op: %s\n",name); //debug
 		if (!(label_valid(name, data)))
+		{
+			ft_strdel(&name);
 			return (0);
-		save_label(name);
+		}
+		save_label(name, data);
 	}
+	ft_strdel(&name);
 	return (1);
 }
 
 int		line_valid(char *line, t_data **data)
 {
-	(void)data; //debug
-
 	check_first(line, data);
 	return (1);
 }
 
 int		check_line(char	*line, t_data **data)
 {
-	(void)data; //debug
 	if (!(line_valid(line, data)))
 		return (0);
 	// ft_putstr("\nVALID\n");
@@ -99,6 +118,7 @@ void	recovery(t_data *data)
 		i++;
 		j = 0;
 	}
+	show_label_lst(data->label_kw);
 }
 
 	// ft_printf("%s\n", op_tab[0].name);

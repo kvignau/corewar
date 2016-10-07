@@ -32,17 +32,16 @@ typedef struct 		s_data
 	t_dbllist		*label_unkw;
 }					t_data;
 
-typedef struct 		s_label
+typedef struct 		s_lab
 {
 	char			*name;
 	int				oct;
-}					t_label;
+}					t_lab;
 /*
 **********************  Cleaning  **********************
 */
 
 int					store_file(char **argv, t_data *data, int *i);
-void				data_initializer(t_data **data);
 int					file_manager(t_data *data, int nb_lines);
 int					ft_iscomment(int c);
 int					header_manager(t_data *data);
@@ -67,5 +66,13 @@ int					label_valid(char *name, t_data **data);
 */
 
 void				display_file(t_data *data);
+void				show_label_lst(t_dbllist *lst);
+
+/*
+**********************  Initializer  **********************
+*/
+
+void				data_initializer(t_data **data);
+void				ini_lab(t_lab *lab, t_data **data);
 
 #endif
