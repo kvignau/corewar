@@ -57,31 +57,34 @@ int		label_valid(char *name, t_data **data)
 	return (1);
 }
 
+int		check_label(char *name, t_data **data)
+{
+	name = ft_strsub(name, 0, ft_strlen(name) - 1);
+	ft_printf("Op: %s\n",name); //debug
+	if (!(label_valid(name, data)))
+		return (0);
+	save_label(name, data);
+	return (1);
+}
+
 int		check_first(char *line, t_data **data)
 {
 	int		i;
 	char	*name;
-	int		label;
+	int		ret;
 
 	i = 0;
-	label = 0;
+	ret = 0;
 	while (line[i] != ' ' && line[i] != '\t')
 		i++;
 	name = ft_strsub(line, 0, i);
 	ft_printf("Op: %s\n",name); //debug
 	if (name[ft_strlen(name) - 1] == ':')
-	{
-		name = ft_strsub(name, 0, ft_strlen(name) - 1);
-		ft_printf("Op: %s\n",name); //debug
-		if (!(label_valid(name, data)))
-		{
-			ft_strdel(&name);
-			return (0);
-		}
-		save_label(name, data);
-	}
+		ret = check_label(name, data);
+	else
+		ret = check_instruct(line, name, data);
 	ft_strdel(&name);
-	return (1);
+	return (ret);
 }
 
 int		line_valid(char *line, t_data **data)

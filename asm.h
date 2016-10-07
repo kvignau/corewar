@@ -60,6 +60,10 @@ int					check_line(char	*line, t_data **data);
 int					line_valid(char *line, t_data **data);
 int					check_first(char *line, t_data **data);
 int					label_valid(char *name, t_data **data);
+int					check_label(char *name, t_data **data);
+int					check_instruct(char *line, char *name, t_data **data);
+void				ft_strtrim_tab(char **args_tab);
+
 
 /*
 **********************  Display  **********************

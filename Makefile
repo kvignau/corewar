@@ -17,7 +17,7 @@ FLAGS += -Wall -Wextra -Werror -fsanitize=address
 
 SRC = main.c op.c store_file.c data_initializer.c file_manager.c \
 ft_iscomment.c recovery.c display.c header_manager.c name_manager.c\
-comment_manager.c error.c free_all_data.c
+comment_manager.c error.c free_all_data.c recovery_instruc.c
 
 OBJ = $(SRC:%.c=%.o)
 
