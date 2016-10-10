@@ -40,7 +40,7 @@ int		save_label(char *name, t_data **data)
 	return (1);
 }
 
-int		label_valid(char *name, t_data **data)
+int		label_valid(char *name)
 {
 	int		i;
 
@@ -48,10 +48,7 @@ int		label_valid(char *name, t_data **data)
 	while (name[i] != '\0')
 	{
 		if (!(ft_strchr(LABEL_CHARS, name[i])))
-		{
-			error(*data, "label_chars invalide");
 			return (0);
-		}
 		i++;
 	}
 	return (1);
@@ -61,7 +58,7 @@ int		check_label(char *name, t_data **data)
 {
 	name = ft_strsub(name, 0, ft_strlen(name) - 1);
 	ft_printf("Op: %s\n",name); //debug
-	if (!(label_valid(name, data)))
+	if (!(label_valid(name)))
 		return (0);
 	save_label(name, data);
 	return (1);

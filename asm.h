@@ -17,6 +17,13 @@
 # include <fcntl.h>
 # define BUFF 1024
 
+
+/*
+**********************  Typedef  **********************
+*/
+
+
+
 /*
 **********************  Structures  **********************
 */
@@ -48,7 +55,6 @@ int					header_manager(t_data *data);
 int					name_manager(t_data *data, int *i, int *j);
 int					comment_manager(t_data *data, int *i, int *j);
 void				error(t_data *data, char *str);
-void				free_all_data(t_data *data);
 
 
 /*
@@ -56,13 +62,14 @@ void				free_all_data(t_data *data);
 */
 
 void				recovery(t_data *data);
-int					check_line(char	*line, t_data **data);
-int					line_valid(char *line, t_data **data);
-int					check_first(char *line, t_data **data);
-int					label_valid(char *name, t_data **data);
+int					check_line(char	*line, t_data **data); //maybe static
+int					line_valid(char *line, t_data **data); //maybe static
+int					check_first(char *line, t_data **data); //maybe static
+int					label_valid(char *name); //maybe static
 int					check_label(char *name, t_data **data);
 int					check_instruct(char *line, char *name, t_data **data);
 void				ft_strtrim_tab(char **args_tab);
+int					check_args(char **args_tab, int op_code, t_data **data); //maybe static
 
 
 /*
@@ -78,5 +85,12 @@ void				show_label_lst(t_dbllist *lst);
 
 void				data_initializer(t_data **data);
 void				ini_lab(t_lab *lab, t_data **data);
+
+/*
+**********************  No leaks  **********************
+*/
+
+void				free_all_data(t_data *data);
+void				free_tab_char(char ***tab);
 
 #endif
