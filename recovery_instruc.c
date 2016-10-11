@@ -128,7 +128,7 @@ int		define_type_args(char *arg)
 	return (0);
 }
 
-int		valid_args(char **args_tab, int op_code, int *to_check)
+int		recover_args(char **args_tab, int *to_check)
 {
 	int		i;
 	int		type;
@@ -156,6 +156,58 @@ int		valid_args(char **args_tab, int op_code, int *to_check)
 	return (*to_check);
 }
 
+int		recover_valid_type(int op_code, int *type)
+{
+	int		i;
+	int		tmp;
+
+	i = 0;
+	tmp = 0;
+	while (op_tab[op_code - 1].arg[i])
+	{
+		// ft_printf("%s\n", args_tab[i]); //debug
+		tmp = 0;
+		if (i == 0)
+			(*type) = op_tab[op_code - 1].arg[i];
+		else if (i == 1)
+			(*type) = (*type) | (op_tab[op_code - 1].arg[i] << 4);
+		else if (i == 2)
+			(*type) = (*type) | (op_tab[op_code - 1].arg[i] << 8);
+		else
+			return (0);
+		i++;
+	}
+	ft_printf("valid type : %d\n", (*type));
+	return (*type);
+}
+int		verif_type(int type, int op_code)
+{
+	int		i;
+	int		valid_type;
+
+	i = 0;
+	recover_valid_type(op_code, &valid_type);
+	if ((type & valid_type) == type)
+		ft_printf("les types sont bons\n");
+	else
+		ft_printf("les types NE sont PAS bons\n");
+	return (1);
+}
+
+int		valid_args(char **args_tab, int op_code, int *to_check)
+{
+	int		i;
+	int		type;
+
+	i = 0;
+	type = 0;
+	if (!(type = recover_args(args_tab, to_check)))
+		return (0);
+	if (!(verif_type(type, op_code)))
+		return (0);
+	return (1);
+}
+
 int		check_args(char **args_tab, int op_code, t_data **data)
 {
 	int		to_check;
@@ -167,10 +219,7 @@ int		check_args(char **args_tab, int op_code, t_data **data)
 		return (0);
 	}
 	if (!(valid_args(args_tab, op_code, &to_check)))
-	{
-		error(*data, "Wrong param type");
 		return (0);
-	}
 	return (1);
 }
 
@@ -184,7 +233,10 @@ int		check_instruct(char *line, char *name, t_data **data)
 	args_tab = NULL;
 	op_code = 0;
 	if ((op_code = instruc_valid(name)) == -1)
+	{
+		ft_printf("nom instruction non valide\n");
 		return (0);
+	}
 	args = ft_strtrim(ft_strsub(line, ft_strlen(name), ft_strlen(line)));
 	args_tab = ft_strsplit(args, ',');
 	ft_strdel(&args);

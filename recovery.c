@@ -86,7 +86,8 @@ int		check_first(char *line, t_data **data)
 
 int		line_valid(char *line, t_data **data)
 {
-	check_first(line, data);
+	if (!(check_first(line, data)))
+		return (0);
 	return (1);
 }
 
@@ -111,7 +112,8 @@ void	recovery(t_data *data)
 		{
 			ft_putstr("Line analysed :\n"); //debug
 			ft_printf("%s\n",data->file[i]); //debug
-			check_line(data->file[i], &data);
+			if (!(check_line(data->file[i], &data)))
+				return ;
 			j++;
 		}
 		ft_putchar('\n');
