@@ -64,7 +64,7 @@ int		check_label(char *name, t_data **data)
 	return (1);
 }
 
-int		check_first(char *line, t_data **data)
+int		check_line(char *line, t_data **data)
 {
 	int		i;
 	char	*name;
@@ -82,21 +82,6 @@ int		check_first(char *line, t_data **data)
 		ret = check_instruct(line, name, data);
 	ft_strdel(&name);
 	return (ret);
-}
-
-int		line_valid(char *line, t_data **data)
-{
-	if (!(check_first(line, data)))
-		return (0);
-	return (1);
-}
-
-int		check_line(char	*line, t_data **data)
-{
-	if (!(line_valid(line, data)))
-		return (0);
-	// ft_putstr("\nVALID\n");
-	return (1);
 }
 
 void	recovery(t_data *data)

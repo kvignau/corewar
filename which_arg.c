@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   recovery_instruc.c                                 :+:      :+:    :+:   */
+/*   which_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,58 +12,78 @@
 
 #include "asm.h"
 
-int		instruc_valid(char *name)
+int		is_ind(char *arg)
 {
 	int		i;
 
 	i = 0;
-	while (i < 16)
+	while (arg[i])
 	{
-		if (ft_strcmp(op_tab[i].name, name) == 0)
-			return (op_tab[i].op_code);
+		if (!(ft_isdigit(arg[i])))
+			return (0);
 		i++;
 	}
-	return (-1);
+	return (T_IND);
 }
 
-void	ft_strtrim_tab(char **args_tab)
+int		is_dir(char *arg)
 {
 	int		i;
-	char	*tmp;
+	char	*label;
+	int		ret;
 
 	i = 0;
-	tmp = NULL;
-	while (args_tab[i])
+	label = NULL;
+	ret = 0;
+	if (arg[i] != '%')
+		return (0);
+	i++;
+	if (arg[i] == ':')
 	{
-		tmp = ft_strtrim(args_tab[i]);
-		args_tab[i] = ft_strdup(tmp);
-		ft_strdel(&tmp);
+		label = ft_strsub(arg, i + 1, ft_strlen(arg));
+		if (label_valid(label))
+			ret = 2;
+		ft_strdel(&label);
+		return (ret);
+	}
+	while (arg[i])
+	{
+		if (!(ft_isdigit(arg[i])))
+			return (0);
 		i++;
 	}
+	return (T_DIR);
 }
 
-int		check_instruct(char *line, char *name, t_data **data)
+int		is_reg(char *arg)
 {
-	char	*args;
-	char	**args_tab;
-	int		op_code;
+	int		i;
 
-	args = NULL;
-	args_tab = NULL;
-	op_code = 0;
-	if ((op_code = instruc_valid(name)) == -1)
-	{
-		ft_printf("nom instruction non valide\n");
+	i = 0;
+	if (arg[i] != 'r')
 		return (0);
-	}
-	args = ft_strtrim(ft_strsub(line, ft_strlen(name), ft_strlen(line)));
-	args_tab = ft_strsplit(args, ',');
-	ft_strdel(&args);
-	ft_strtrim_tab(args_tab);
-	if (!(check_args(args_tab, op_code, data)))
+	i++;
+	while (arg[i])
 	{
-		free_tab_char(&args_tab);
-		return (0);
+		if (!(ft_isdigit(arg[i])))
+			return (0);
+		i++;
 	}
-	return (1);
+	return (T_REG);
+}
+
+int		define_type_args(char *arg)
+{
+	int		type;
+	int		i;
+
+	type = 0;
+	i = 0;
+	if (is_reg(arg))
+		return (T_REG);
+	if (is_ind(arg))
+		return (T_IND);
+	if (is_dir(arg))
+		return (T_DIR);
+	return (0);
 }
