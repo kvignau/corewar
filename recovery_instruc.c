@@ -119,68 +119,54 @@ int		define_type_args(char *arg)
 
 	type = 0;
 	i = 0;
-	if (is_ind(arg))
-	{
-		ft_printf("is_ind\n"); //debug
-		return (4);
-	}
 	if (is_reg(arg))
-	{
-		ft_printf("is_reg\n"); //debug
-		return (1);
-	}
+		return (T_REG);
+	if (is_ind(arg))
+		return (T_IND);
 	if (is_dir(arg))
-	{
-		if (is_dir(arg) == 2) //debug
-			ft_printf("is_dir with label\n"); //debug
-		else //debug
-			ft_printf("is_dir\n"); //debug
-		return (2);
-	}
+		return (T_DIR);
 	return (0);
 }
 
-int		valid_args(char **args_tab, int op_code)
+int		valid_args(char **args_tab, int op_code, int *to_check)
 {
 	int		i;
-	char	*to_check;
 	int		type;
 
 	i = 0;
-	to_check = NULL;
 	type = 0;
-	// to_check = (char *)malloc(sizeof(args_tab));
-	ft_printf("Listes des args :\n");
-	to_check = (char *)malloc(sizeof(char) * (nb_arg(args_tab) + 1));
 	while (args_tab[i])
 	{
 		// ft_printf("%s\n", args_tab[i]); //debug
+		type = 0;
 		if ((type = define_type_args(args_tab[i])) == 0)
 			return (0);
-		to_check[i] = type;
-		// ft_printf("\n"); //debug
+		// ft_printf("type : %d\n", type);
+		if (i == 0)
+			(*to_check) = type;
+		else if (i == 1)
+			(*to_check) = (*to_check) | (type << 4);
+		else if (i == 2)
+			(*to_check) = (*to_check) | (type << 8);
+		else
+			return (0);
 		i++;
 	}
-	//
-	// STOCKER ET AFFICHER LE BINAIRE AVEC TO_CHECK
-	// i = 0;
-	// while (to_check[i])
-	// {
-	// 	ft_printf("%d\n", to_check[i]);
-	// 	i++;
-	// }
-	//
-	return (1);
+	ft_printf("to_check : %d\n", (*to_check));
+	return (*to_check);
 }
 
 int		check_args(char **args_tab, int op_code, t_data **data)
 {
+	int		to_check;
+
+	to_check = 0;
 	if (nb_arg(args_tab) != op_tab[op_code - 1].nb_param)
 	{
 		error(*data, "Nb param of instruc wrong");
 		return (0);
 	}
-	if (!(valid_args(args_tab, op_code)))
+	if (!(valid_args(args_tab, op_code, &to_check)))
 	{
 		error(*data, "Wrong param type");
 		return (0);
