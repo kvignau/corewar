@@ -25,15 +25,15 @@ OBJ = $(SRC:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	make -C libftprintf/ all
-	gcc $(FLAGS) -o $(NAME) $(OBJ) -L libftprintf/ -lftprintf
+	make -C ../libftprintf/ all
+	gcc $(FLAGS) -o $(NAME) $(OBJ) -L ../libftprintf/ -lftprintf
 
 clean:
-	make -C libftprintf/ clean
+	make -C ../libftprintf/ clean
 	rm -f $(OBJ)
 
 fclean: clean
-	make -C libftprintf/ fclean
+	make -C ../libftprintf/ fclean
 	rm -f $(NAME)
 
 re: fclean all

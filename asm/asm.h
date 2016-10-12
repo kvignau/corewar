@@ -12,7 +12,7 @@
 
 #ifndef ASM_H
 #define ASM_H
-# include "libftprintf/includes/ft_printf.h"
+# include "../libftprintf/includes/ft_printf.h"
 # include "op.h"
 # include <fcntl.h>
 # define BUFF 1024
