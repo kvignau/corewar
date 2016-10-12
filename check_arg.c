@@ -31,11 +31,9 @@ int		recover_args(char **args_tab, int *to_check)
 	type = 0;
 	while (args_tab[i])
 	{
-		// ft_printf("%s\n", args_tab[i]); //debug
 		type = 0;
 		if ((type = define_type_args(args_tab[i])) == 0)
 			return (0);
-		// ft_printf("type : %d\n", type);
 		if (i == 0)
 			(*to_check) = type;
 		else if (i == 1)
@@ -46,7 +44,6 @@ int		recover_args(char **args_tab, int *to_check)
 			return (0);
 		i++;
 	}
-	ft_printf("to_check : %d\n", (*to_check));
 	return (*to_check);
 }
 
@@ -71,7 +68,7 @@ int		check_args(char **args_tab, int op_code, t_data **data)
 	to_check = 0;
 	if (nb_arg(args_tab) != op_tab[op_code - 1].nb_param)
 	{
-		error(*data, "Nb param of instruc wrong");
+		error(*data, "Number of param for this instruction is wrong");
 		return (0);
 	}
 	if (!(valid_args(args_tab, op_code, &to_check)))

@@ -26,6 +26,13 @@
 /*
 **********************  Structures  **********************
 */
+typedef struct 		s_recup
+{
+	int				label;
+	char			*label_name;
+	int				op_code;
+	char			**args_tab;
+}					t_recup;
 
 typedef struct 		s_data
 {
@@ -36,6 +43,7 @@ typedef struct 		s_data
 	int				nb_lines;
 	t_dbllist		*label_kw;
 	t_dbllist		*label_unkw;
+	t_dbllist		*lst_data;
 }					t_data;
 
 typedef struct 		s_lab
@@ -77,6 +85,8 @@ int					verif_type(int type, int op_code);
 
 void				display_file(t_data *data);
 void				show_label_lst(t_dbllist *lst);
+void				show_lst_data(t_dbllist *lst);
+void				show_tab_char(char **tab);
 
 /*
 **********************  Initializer  **********************

@@ -45,3 +45,37 @@ void	show_label_lst(t_dbllist *lst)
 	}
 	ft_printf("\n");
 }
+
+void	show_tab_char(char **tab)
+{
+	int		i;
+
+	i = 0;
+	while (tab[i])
+	{
+		ft_printf("%s\n", tab[i]);
+		i++;
+	}
+}
+
+void	show_lst_data(t_dbllist *lst)
+{
+	t_elem	*tmp;
+
+	tmp = lst->tail;
+	ft_printf("Data saved :\n");
+	while (tmp != NULL)
+	{
+		if (((t_recup *)((tmp)->content))->label == 1)
+			ft_printf("Label named : %s\n", ((t_recup *)((tmp)->content))->label_name);
+		else
+		{
+			ft_printf("Instructions : %s\n", op_tab[(((t_recup *)((tmp)->content))->op_code) - 1].name);
+			ft_printf("Opcode : %d\n", ((t_recup *)((tmp)->content))->op_code);
+			show_tab_char(((t_recup *)((tmp)->content))->args_tab);
+		}
+		tmp = tmp->prev;
+		ft_printf("\n");
+	}
+	ft_printf("\n");
+}

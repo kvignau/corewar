@@ -21,7 +21,6 @@ int		recover_valid_type(int op_code, int *type)
 	tmp = 0;
 	while (op_tab[op_code - 1].arg[i])
 	{
-		// ft_printf("%s\n", args_tab[i]); //debug
 		tmp = 0;
 		if (i == 0)
 			(*type) = op_tab[op_code - 1].arg[i];
@@ -33,7 +32,6 @@ int		recover_valid_type(int op_code, int *type)
 			return (0);
 		i++;
 	}
-	ft_printf("valid type : %d\n", (*type));
 	return (*type);
 }
 int		verif_type(int type, int op_code)
@@ -43,9 +41,10 @@ int		verif_type(int type, int op_code)
 
 	i = 0;
 	recover_valid_type(op_code, &valid_type);
-	if ((type & valid_type) == type)
-		ft_printf("les types sont bons\n");
-	else
-		ft_printf("les types NE sont PAS bons\n");
+	if ((type & valid_type) != type)
+	{
+		ft_printf("One or more of arg's type is invalid\n");
+		return (0);
+	}
 	return (1);
 }

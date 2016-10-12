@@ -56,11 +56,17 @@ int		label_valid(char *name)
 
 int		check_label(char *name, t_data **data)
 {
+	t_recup		recup;
+
+	ft_bzero(&recup, sizeof(t_recup));
+	recup.label = 1;
 	name = ft_strsub(name, 0, ft_strlen(name) - 1);
 	ft_printf("Op: %s\n",name); //debug
 	if (!(label_valid(name)))
 		return (0);
-	save_label(name, data);
+	save_label(name, data); // a voir
+	recup.label_name = ft_strdup(name);
+	ft_lstdbladd_head((*data)->lst_data, &recup, sizeof(t_recup));
 	return (1);
 }
 
@@ -106,6 +112,7 @@ void	recovery(t_data *data)
 		j = 0;
 	}
 	show_label_lst(data->label_kw);
+	show_lst_data(data->lst_data);
 }
 
 	// ft_printf("%s\n", op_tab[0].name);

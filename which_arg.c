@@ -37,8 +37,7 @@ int		is_dir(char *arg)
 	ret = 0;
 	if (arg[i] != '%')
 		return (0);
-	i++;
-	if (arg[i] == ':')
+	if (arg[++i] == ':')
 	{
 		label = ft_strsub(arg, i + 1, ft_strlen(arg));
 		if (label_valid(label))

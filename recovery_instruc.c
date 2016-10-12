@@ -45,25 +45,28 @@ void	ft_strtrim_tab(char **args_tab)
 int		check_instruct(char *line, char *name, t_data **data)
 {
 	char	*args;
-	char	**args_tab;
-	int		op_code;
+	// char	**args_tab;
+	// int		op_code;
+	t_recup	recup;
 
 	args = NULL;
-	args_tab = NULL;
-	op_code = 0;
-	if ((op_code = instruc_valid(name)) == -1)
+	// args_tab = NULL;
+	// op_code = 0;
+	ft_bzero(&recup, sizeof(t_recup));
+	if ((recup.op_code = instruc_valid(name)) == -1)
 	{
-		ft_printf("nom instruction non valide\n");
+		ft_printf("Instruction's name incorrect\n");
 		return (0);
 	}
 	args = ft_strtrim(ft_strsub(line, ft_strlen(name), ft_strlen(line)));
-	args_tab = ft_strsplit(args, ',');
+	recup.args_tab = ft_strsplit(args, ',');
 	ft_strdel(&args);
-	ft_strtrim_tab(args_tab);
-	if (!(check_args(args_tab, op_code, data)))
+	ft_strtrim_tab(recup.args_tab);
+	if (!(check_args(recup.args_tab, recup.op_code, data)))
 	{
-		free_tab_char(&args_tab);
+		free_tab_char(&recup.args_tab);
 		return (0);
 	}
+	ft_lstdbladd_head((*data)->lst_data, &recup, sizeof(t_recup));
 	return (1);
 }
