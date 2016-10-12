@@ -114,5 +114,3 @@ void	recovery(t_data *data)
 	show_label_lst(data->label_kw);
 	show_lst_data(data->lst_data);
 }
-
-	// ft_printf("%s\n", op_tab[0].name);

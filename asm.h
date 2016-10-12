@@ -32,6 +32,7 @@ typedef struct 		s_recup
 	char			*label_name;
 	int				op_code;
 	char			**args_tab;
+	char			*hex;
 }					t_recup;
 
 typedef struct 		s_data

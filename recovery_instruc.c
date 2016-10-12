@@ -45,13 +45,9 @@ void	ft_strtrim_tab(char **args_tab)
 int		check_instruct(char *line, char *name, t_data **data)
 {
 	char	*args;
-	// char	**args_tab;
-	// int		op_code;
 	t_recup	recup;
 
 	args = NULL;
-	// args_tab = NULL;
-	// op_code = 0;
 	ft_bzero(&recup, sizeof(t_recup));
 	if ((recup.op_code = instruc_valid(name)) == -1)
 	{
