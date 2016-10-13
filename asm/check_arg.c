@@ -47,6 +47,13 @@ int		recover_args(char **args_tab, int *to_check)
 	return (*to_check);
 }
 
+/*
+Explanation (int)type :
+sti	r1, %:live, %1
+type :   0010  0010  0001
+		T_DIR T_DIR T_REG
+*/
+
 int		valid_args(char **args_tab, int op_code, int *to_check)
 {
 	int		i;
@@ -73,5 +80,6 @@ int		check_args(char **args_tab, int op_code, t_data **data)
 	}
 	if (!(valid_args(args_tab, op_code, &to_check)))
 		return (0);
+	sum_args(args_tab);
 	return (1);
 }

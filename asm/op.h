@@ -57,10 +57,10 @@
 
 typedef char	t_arg_type;
 
-#define T_REG					(1 << 0)
-#define T_DIR					(T_REG << 1)
-#define T_IND					(T_DIR << 1)
-#define T_LAB					(T_IND << 1)
+#define T_REG					(1 << 0) //1
+#define T_DIR					(T_REG << 1) //2
+#define T_IND					(T_DIR << 1) //4
+#define T_LAB					(T_IND << 1) //8
 
 /*
 **
@@ -86,7 +86,7 @@ typedef struct		s_op
 	int				op_code;
 	int				nb_cycle;
 	char			*comment;
-	int				codage_oct;
+	int				octcod;
 	int				unknown;
 }					t_op;
 

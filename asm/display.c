@@ -58,7 +58,7 @@ void	show_tab_char(char **tab)
 	}
 }
 
-void	show_lst_data(t_dbllist *lst)
+void	show_lst_recup(t_dbllist *lst)
 {
 	t_elem	*tmp;
 
@@ -79,3 +79,23 @@ void	show_lst_data(t_dbllist *lst)
 	}
 	ft_printf("\n");
 }
+
+// void	show_trad(t_dbllist *lst)
+// {
+// 	t_elem	*tmp;
+
+// 	tmp = lst->tail;
+// 	ft_printf("TRAD :\n");
+// 	while (tmp != NULL)
+// 	{
+// 		if (((t_trad *)((tmp)->content))->label == 1)
+// 			ft_printf("Label named : %s\n", ((t_trad *)((tmp)->content))->label_name);
+// 		else
+// 		{
+// 			ft_printf("Hex : %s\n", ((t_trad *)((tmp)->content))->hexa);
+// 		}
+// 		tmp = tmp->prev;
+// 		ft_printf("\n");
+// 	}
+// 	ft_printf("\n");
+// }

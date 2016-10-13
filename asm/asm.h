@@ -26,13 +26,16 @@
 /*
 **********************  Structures  **********************
 */
+
 typedef struct 		s_recup
 {
 	int				label;
 	char			*label_name;
+	int				pos_oct;
 	int				op_code;
 	char			**args_tab;
-	char			*hex;
+	char			*hexa;
+	int				nb_oct;
 }					t_recup;
 
 typedef struct 		s_data
@@ -44,7 +47,7 @@ typedef struct 		s_data
 	int				nb_lines;
 	t_dbllist		*label_kw;
 	t_dbllist		*label_unkw;
-	t_dbllist		*lst_data;
+	t_dbllist		*lst_recup;
 }					t_data;
 
 typedef struct 		s_lab
@@ -79,18 +82,20 @@ void				error(t_data *data, char *str);
 void				recovery(t_data *data);
 int					check_line(char	*line, t_data **data); //maybe static
 int					label_valid(char *name); //maybe static
-int					check_label(char *name, t_data **data);
-int					check_instruct(char *line, char *name, t_data **data);
+int					check_label(char *name, t_data **data, int *current_oct);
+int					check_instruct(char *line, char *name, t_data **data, int *current_oct);
 void				ft_strtrim_tab(char **args_tab);
 int					check_args(char **args_tab, int op_code, t_data **data); //maybe static
 int					define_type_args(char *arg);
 int					verif_type(int type, int op_code);
+int					nb_arg(char **args_tab);
 
 /*
 **********************  Transformation  ****************
 */
 
-int					transform(t_data **data);
+int					trad(t_data **data);
+char				*sum_args(char **args_tab);
 
 /*
 **********************  Display  ***********************
@@ -98,7 +103,7 @@ int					transform(t_data **data);
 
 void				display_file(t_data *data);
 void				show_label_lst(t_dbllist *lst);
-void				show_lst_data(t_dbllist *lst);
+void				show_lst_recup(t_dbllist *lst);
 void				show_tab_char(char **tab);
 
 /*
