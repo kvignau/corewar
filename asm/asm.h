@@ -52,8 +52,16 @@ typedef struct 		s_lab
 	char			*name;
 	int				oct;
 }					t_lab;
+
 /*
-**********************  Cleaning  **********************
+**********************  Initializer  *******************
+*/
+
+void				data_initializer(t_data **data);
+void				ini_lab(t_lab *lab, t_data **data);
+
+/*
+**********************  File Cleaning  *****************
 */
 
 int					store_file(char **argv, t_data *data, int *i);
@@ -63,7 +71,6 @@ int					header_manager(t_data *data);
 int					name_manager(t_data *data, int *i, int *j);
 int					comment_manager(t_data *data, int *i, int *j);
 void				error(t_data *data, char *str);
-
 
 /*
 **********************  Recovery  **********************
@@ -79,22 +86,20 @@ int					check_args(char **args_tab, int op_code, t_data **data); //maybe static
 int					define_type_args(char *arg);
 int					verif_type(int type, int op_code);
 
+/*
+**********************  Transformation  ****************
+*/
+
+int					transform(t_data **data);
 
 /*
-**********************  Display  **********************
+**********************  Display  ***********************
 */
 
 void				display_file(t_data *data);
 void				show_label_lst(t_dbllist *lst);
 void				show_lst_data(t_dbllist *lst);
 void				show_tab_char(char **tab);
-
-/*
-**********************  Initializer  **********************
-*/
-
-void				data_initializer(t_data **data);
-void				ini_lab(t_lab *lab, t_data **data);
 
 /*
 **********************  No leaks  **********************
