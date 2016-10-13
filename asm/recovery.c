@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/29 15:59:53 by mchevall          #+#    #+#             */
-/*   Updated: 2016/09/29 16:14:55 by mchevall         ###   ########.fr       */
+/*   Created: 2016/09/29 15:59:53 by mpaincha          #+#    #+#             */
+/*   Updated: 2016/09/29 16:14:55 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,6 @@ void	recovery(t_data *data)
 		i++;
 		j = 0;
 	}
-	show_label_lst(data->label_kw);
-	show_lst_data(data->lst_data);
+	show_label_lst(data->label_kw); // debug
+	show_lst_data(data->lst_data); // debug
 }
