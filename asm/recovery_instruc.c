@@ -59,17 +59,21 @@ int		check_instruct(char *line, char *name, t_data **data, int *current_oct)
 
 	args = NULL;
 	ft_bzero(&recup, sizeof(t_recup));
+	ft_putstr("Check_instruction\n");
 	if ((recup.op_code = instruc_valid(name)) == -1)
 		return (0);
 	make_args_tab(line, name, &recup);
-
 	if (!(check_args(recup.args_tab, recup.op_code, data)))
 	{
 		free_tab_char(&recup.args_tab);
 		return (0);
 	}
+	ft_putstr("Before sum\n");
 	recup.sum = ft_strdup(sum_args(recup.args_tab));
+	ft_putstr("After sum\n");
+	// AJOUTER TRAD INSTRUCTIONS + SUM
 	trad_args(&recup);
+	ft_putstr("After trad\n");
 	ft_lstdbladd_head((*data)->lst_recup, &recup, sizeof(t_recup));
 	return (1);
 }

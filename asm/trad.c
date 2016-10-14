@@ -22,13 +22,14 @@ void	trad_args(t_recup *recup)
 	ft_bzero(&hex, sizeof(t_hexa));
 	recup->lst_hexa = ft_lstdblnew();
 	i = 0;
+	ft_putstr("Trad_args\n");
 	while (recup->args_tab[i])
 	{
-		ft_printf("%s\n", recup->args_tab[i]);
-		trad = ft_trad[define_type_args(recup->args_tab[i]) - 1];
+		ft_printf("recup->args_tab[i] : %s\n", recup->args_tab[i]);
+		trad = ft_trad[define_trad_fct(recup->args_tab[i])];
 		trad(recup->args_tab[i], &hex);
 		i++;
-		ft_printf("\n\n");
+		ft_lstdbladd_head(recup->lst_hexa, &hex, sizeof(t_hexa));
 	}
 }
 
@@ -57,53 +58,3 @@ char	*sum_args(char **args_tab)
 	}
 	return (ft_itoabase_imax(sum, 16));
 }
-
-// char	*sum_args(char **args_tab)
-// {
-// 	char	*hex;
-// 	int		i;
-// 	char	*tmp;
-
-// 	return (hex);
-// }
-
-// void	trad_instruction(t_data **data)
-// {
-// 	t_trad	trad;
-// 	int		op_code;
-// 	char	*tmp;
-
-// 	ft_bzero(&trad, sizeof(t_trad));
-// 	op_code = ((t_recup *)((tmp)->content))->op_code;
-// 	tmp = NULL;
-// 	trad.hexa = ft_strdup(ft_itoabase_uimax(op_code, 16));
-// 	ft_lstdbladd_head((*data)->hex, &recup, sizeof(t_recup));
-// 	if (op_tab[op_code - 1].octcod == 1)
-// 	{
-// 		tmp = ft_strdup(sum_args(((t_recup *)((tmp)->content))->args_tab));
-// 	}
-
-// }
-
-// int		trad(t_data **data)
-// {
-// 	t_elem	*tmp;
-
-
-// 	tmp = lst->tail;
-// 	while (tmp != NULL)
-// 	{
-// 		if (((t_recup *)((tmp)->content))->label == 0)
-// 			trad_instruction(data, &trad);
-// 		else
-// 		{
-// 			trad.label = 1;
-// 			trad.label_name = ft_strdup(((t_recup *)((tmp)->content))->label);
-// 			ft_lstdbladd_head((*data)->trad, &trad, sizeof(t_trad));
-// 		}
-
-// 		tmp = tmp->prev;
-// 	}
-
-// 	return (1);
-// }

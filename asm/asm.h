@@ -29,7 +29,6 @@
 
 typedef struct 		s_hexa
 {
-	int				ok;
 	char			*hexa;
 	char			*lbl_name;
 }					t_hexa;
@@ -111,6 +110,7 @@ void				trad_reg(char *arg, t_hexa *hex);
 void				trad_ind(char *arg, t_hexa *hex);
 void				trad_dir(char *arg, t_hexa *hex);
 void				trad_args(t_recup *recup);
+int					define_trad_fct(char *arg);
 
 /*
 **********************  Display  ***********************
@@ -120,6 +120,7 @@ void				display_file(t_data *data);
 void				show_label_lst(t_dbllist *lst);
 void				show_lst_recup(t_dbllist *lst);
 void				show_tab_char(char **tab);
+void				show_trad(t_dbllist *lst);
 
 /*
 **********************  No leaks  **********************
