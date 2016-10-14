@@ -12,17 +12,29 @@
 
 #include "asm.h"
 
-void	trad_reg(char *arg)
+void	trad_reg(char *arg, t_hexa *hex)
 {
 	ft_printf("TRAD REG\n");
+	int		i;
+	char	*tmp;
+
+	i = 1;
+	tmp = ft_itoabase_imax(ft_atoi(ft_strsub(arg, 1, ft_strlen(&arg[i]))), 16);
+	if (ft_strlen(tmp) != 2)
+		ft_putstr("a completer de 0");
+	else
+		ft_putstr("good");
+	// hex->hexa = ft_strcat(ft_strdup("0"), ft_strsub(arg, 1, ft_strlen(&arg[i])));
+	// ft_printf("hex->hexa : %s\n", hex->hexa);
+	// ft_printf("n : %d\n", n);
 }
 
-void	trad_dir(char *arg)
+void	trad_dir(char *arg, t_hexa *hex)
 {
 	ft_printf("TRAD DIRs\n");
 }
 
-void	trad_ind(char *arg)
+void	trad_ind(char *arg, t_hexa *hex)
 {
 	ft_printf("TRAD IND\n");
 }

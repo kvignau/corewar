@@ -68,6 +68,8 @@ int		is_reg(char *arg)
 			return (0);
 		i++;
 	}
+	if (i > 3)
+		return (0);
 	return (T_REG);
 }
 

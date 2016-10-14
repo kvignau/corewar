@@ -61,6 +61,7 @@ int		valid_args(char **args_tab, int op_code, int *to_check)
 
 	i = 0;
 	type = 0;
+	show_tab_char(args_tab);
 	if (!(type = recover_args(args_tab, to_check)))
 		return (0);
 	if (!(verif_type(type, op_code)))
@@ -79,6 +80,9 @@ int		check_args(char **args_tab, int op_code, t_data **data)
 		return (0);
 	}
 	if (!(valid_args(args_tab, op_code, &to_check)))
+	{
+		ft_putstr("arg non valid\n");
 		return (0);
+	}
 	return (1);
 }

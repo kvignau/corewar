@@ -59,10 +59,10 @@ int		check_instruct(char *line, char *name, t_data **data, int *current_oct)
 
 	args = NULL;
 	ft_bzero(&recup, sizeof(t_recup));
-	recup.lst_hexa = ft_lstdblnew();
 	if ((recup.op_code = instruc_valid(name)) == -1)
 		return (0);
 	make_args_tab(line, name, &recup);
+
 	if (!(check_args(recup.args_tab, recup.op_code, data)))
 	{
 		free_tab_char(&recup.args_tab);

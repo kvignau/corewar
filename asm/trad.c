@@ -22,12 +22,11 @@ void	trad_args(t_recup *recup)
 	ft_bzero(&hex, sizeof(t_hexa));
 	recup->lst_hexa = ft_lstdblnew();
 	i = 0;
-	ft_printf("TRADUCION REPARTITION\n");
 	while (recup->args_tab[i])
 	{
 		ft_printf("%s\n", recup->args_tab[i]);
 		trad = ft_trad[define_type_args(recup->args_tab[i]) - 1];
-		trad(recup->args_tab[i]);
+		trad(recup->args_tab[i], &hex);
 		i++;
 		ft_printf("\n\n");
 	}
