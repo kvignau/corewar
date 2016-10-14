@@ -33,10 +33,7 @@ int		save_label(char *name, t_data **data)
 	ini_lab(&lab, data);
 	lab.name = ft_strdup(name);
 	if (exist_label(name, data))
-	{
-		ft_putstr("IN\n");
 		ft_lstdbladd_head((*data)->label_kw, &lab, sizeof(t_lab));
-	}
 	return (1);
 }
 
@@ -61,7 +58,7 @@ int		check_label(char *name, t_data **data, int *current_oct)
 	ft_bzero(&recup, sizeof(t_recup));
 	recup.label = 1;
 	name = ft_strsub(name, 0, ft_strlen(name) - 1);
-	ft_printf("Op: %s\n",name); //debug
+	// ft_printf("Op: %s\n",name); //debug
 	if (!(label_valid(name)))
 		return (0);
 	save_label(name, data); // a voir
@@ -81,7 +78,7 @@ int		check_line(char *line, t_data **data)
 	while (line[i] != ' ' && line[i] != '\t')
 		i++;
 	name = ft_strsub(line, 0, i);
-	ft_printf("Op: %s\n",name); //debug
+	// ft_printf("Op: %s\n",name); //debug
 	if (name[ft_strlen(name) - 1] == ':')
 	{
 		if (check_label(name, data, &current_oct) == 0)
@@ -107,16 +104,16 @@ void	recovery(t_data *data)
 	{
 		if (data->file[i][j] != '\0')
 		{
-			ft_putstr("Line analysed :\n"); //debug
-			ft_printf("%s\n",data->file[i]); //debug
+			// ft_putstr("Line analysed :\n"); //debug
+			// ft_printf("%s\n",data->file[i]); //debug
 			if (!(check_line(data->file[i], &data)))
 				return ;
 			j++;
 		}
-		ft_putchar('\n');
+		// ft_putchar('\n');
 		i++;
 		j = 0;
 	}
 	// show_label_lst(data->label_kw); // debug
-	// show_lst_recup(data->lst_recup); // debug
+	show_lst_recup(data->lst_recup); // debug
 }

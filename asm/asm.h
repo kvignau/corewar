@@ -27,6 +27,13 @@
 **********************  Structures  **********************
 */
 
+typedef struct 		s_hexa
+{
+	int				ok;
+	char			*hexa;
+	char			*lbl_name;
+}					t_hexa;
+
 typedef struct 		s_recup
 {
 	int				label;
@@ -34,7 +41,9 @@ typedef struct 		s_recup
 	int				pos_oct;
 	int				op_code;
 	char			**args_tab;
-	char			*hexa;
+	int				nb_arg;
+	char			*sum;
+	t_dbllist		*lst_hexa;
 	int				nb_oct;
 }					t_recup;
 
@@ -55,6 +64,8 @@ typedef struct 		s_lab
 	char			*name;
 	int				oct;
 }					t_lab;
+
+typedef	void		(*t_trad)(char *);
 
 /*
 **********************  Initializer  *******************
@@ -96,6 +107,10 @@ int					nb_arg(char **args_tab);
 
 int					trad(t_data **data);
 char				*sum_args(char **args_tab);
+void				trad_reg(char *arg);
+void				trad_ind(char *arg);
+void				trad_dir(char *arg);
+void				trad_args(t_recup *recup);
 
 /*
 **********************  Display  ***********************

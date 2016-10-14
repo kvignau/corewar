@@ -73,6 +73,7 @@ void	show_lst_recup(t_dbllist *lst)
 			ft_printf("Instructions : %s\n", op_tab[(((t_recup *)((tmp)->content))->op_code) - 1].name);
 			ft_printf("Opcode : %d\n", ((t_recup *)((tmp)->content))->op_code);
 			show_tab_char(((t_recup *)((tmp)->content))->args_tab);
+			ft_printf("Sum hexa : %s\n", ((t_recup *)((tmp)->content))->sum);
 		}
 		tmp = tmp->prev;
 		ft_printf("\n");

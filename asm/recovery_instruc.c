@@ -42,32 +42,37 @@ void	ft_strtrim_tab(char **args_tab)
 	}
 }
 
+static void	make_args_tab(char *line, char *name, t_recup *recup)
+{
+	char	*args;
+
+	args = ft_strtrim(ft_strsub(line, ft_strlen(name), ft_strlen(line)));
+	recup->args_tab = ft_strsplit(args, ',');
+	ft_strdel(&args);
+	ft_strtrim_tab(recup->args_tab);
+}
+
 int		check_instruct(char *line, char *name, t_data **data, int *current_oct)
 {
 	char	*args;
 	t_recup	recup;
-	// char	*instr_hex;
 
 	args = NULL;
 	ft_bzero(&recup, sizeof(t_recup));
-	// instr_hex = NULL;
+	recup.lst_hexa = ft_lstdblnew();
 	if ((recup.op_code = instruc_valid(name)) == -1)
-	{
-		ft_printf("Instruction's name incorrect\n");
 		return (0);
-	}
-	// instr_hex = ft_strdup(ft_itoabase_uimax(recup.op_code, 16));
-	args = ft_strtrim(ft_strsub(line, ft_strlen(name), ft_strlen(line)));
-	recup.args_tab = ft_strsplit(args, ',');
-	ft_strdel(&args);
-	ft_strtrim_tab(recup.args_tab);
+	make_args_tab(line, name, &recup);
 	if (!(check_args(recup.args_tab, recup.op_code, data)))
 	{
 		free_tab_char(&recup.args_tab);
 		return (0);
 	}
-	sum_args(recup.args_tab);
-	ft_printf("HEX : %s\n",sum_args(recup.args_tab)); //debug
+	recup.sum = ft_strdup(sum_args(recup.args_tab));
+	trad_args(&recup);
 	ft_lstdbladd_head((*data)->lst_recup, &recup, sizeof(t_recup));
 	return (1);
 }
+
+
+// instr_hex = ft_strdup(ft_itoabase_uimax(recup.op_code, 16));

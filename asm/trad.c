@@ -12,6 +12,27 @@
 
 #include "asm.h"
 
+void	trad_args(t_recup *recup)
+{
+	t_hexa					hex;
+	int						i;
+	static const t_trad		ft_trad[] = {trad_reg, trad_dir, trad_ind};
+	t_trad					trad;
+
+	ft_bzero(&hex, sizeof(t_hexa));
+	recup->lst_hexa = ft_lstdblnew();
+	i = 0;
+	ft_printf("TRADUCION REPARTITION\n");
+	while (recup->args_tab[i])
+	{
+		ft_printf("%s\n", recup->args_tab[i]);
+		trad = ft_trad[define_type_args(recup->args_tab[i]) - 1];
+		trad(recup->args_tab[i]);
+		i++;
+		ft_printf("\n\n");
+	}
+}
+
 char	*sum_args(char **args_tab)
 {
 	int		i;
