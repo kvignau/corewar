@@ -152,9 +152,13 @@ void	show_trad(t_dbllist *lst)
 			tmp2 = ft_strdup(trad);
 			ft_strdel(&trad);
 		}
-		new = lsthexa_tostr(((t_recup *)((tmp)->content))->lst_hexa);
-		ft_printf("new : %s\n", new);
-		trad = ft_strjoin(tmp2, new);
+		if (((t_recup *)((tmp)->content))->lst_hexa)
+		{
+			new = lsthexa_tostr(((t_recup *)((tmp)->content))->lst_hexa);
+			// ft_printf("new : %s\n", new);
+			trad = ft_strjoin(tmp2, new);
+		}
+		//a voir quoi faire pour les dir label
 		ft_printf("TRAD : %s\n", trad);
 		ft_strdel(&tmp2);
 		ft_strdel(&new);

@@ -30,22 +30,23 @@ void	hex_to_lower(char **hex)
 	}
 }
 
-void	trad_reg(char *arg, char **hexa)
+void	trad_reg(char *arg, char **hexa, t_data **data)
 {
 	char	*tmp;
 	char	*zero;
 	char	*tmp2;
 	char	*tmp3;
 
+	(void)data;
 	tmp = ft_itoabase_imax(ft_atoi(ft_strsub(arg, 1, ft_strlen(arg))), 16);
+	hex_to_lower(&tmp);
 	zero = NULL;
 	tmp2 = NULL;
 	tmp3 = ft_strdup(*hexa);
 	ft_strdel(hexa);
-	ft_printf("tmp : %s\n, strlen %d", tmp, ft_strlen(tmp));
+	// ft_printf("tmp : %s\n, strlen %d", tmp, ft_strlen(tmp));
 	if (ft_strlen(tmp) == 1)
 	{
-		hex_to_lower(&tmp);
 		zero = ft_strdup("0");
 		tmp2 = ft_strjoin(zero, tmp);
 		ft_strdel(&zero);
@@ -56,17 +57,29 @@ void	trad_reg(char *arg, char **hexa)
 	(*hexa) = ft_strjoin(tmp3, tmp2);
 	ft_strdel(&tmp2);
 	ft_strdel(&tmp3);
-	ft_printf("(*hexa) : %s\n", (*hexa));
+	// ft_printf("(*hexa) : %s\n", (*hexa));
 	// ft_printf("n : %d\n", n);
 }
 
-void	trad_dir(char *arg, char **hexa)
+void	trad_label(char *arg, char **hexa, t_data **data)
 {
-	ft_putstr("TRAD DIR\n");
-
+	ft_printf("TRAD LABEL\n");
+	// if (label_known)
 }
 
-void	trad_ind(char *arg, char **hexa)
+void	trad_dir(char *arg, char **hexa, t_data **data)
+{
+	ft_putstr("TRAD DIR\n");
+	int		i;
+
+	i = 1;
+	if (arg[i] == ':')
+		trad_label(arg, hexa, data);
+	else
+		trad_ind(ft_strsub(arg, 2, ft_strlen(arg)), hexa, data);
+}
+
+void	trad_ind(char *arg, char **hexa, t_data **data)
 {
 	char	*tmp;
 	int		i;
@@ -74,6 +87,7 @@ void	trad_ind(char *arg, char **hexa)
 	char	*new;
 	char	*tmp2;
 
+	(void)data;
 	tmp = NULL;
 	i = 0;
 	zero = ft_strdup("0");

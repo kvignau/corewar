@@ -64,7 +64,7 @@ typedef struct 		s_lab
 	int				oct;
 }					t_lab;
 
-typedef	void		(*t_trad)(char *, char **);
+typedef	void		(*t_trad)(char *, char **, t_data **);
 
 /*
 **********************  Initializer  *******************
@@ -107,10 +107,11 @@ int					nb_arg(char **args_tab);
 
 int					trad(t_data **data);
 void				sum_args(t_recup *recup, char **hexa);
-void				trad_reg(char *arg, char **hexa);
-void				trad_ind(char *arg, char **hexa);
-void				trad_dir(char *arg, char **hexa);
-void				trad_args(t_recup *recup, char **hexa);
+void				trad_reg(char *arg, char **hexa, t_data **data);
+void				trad_ind(char *arg, char **hexa, t_data **data);
+void				trad_dir(char *arg, char **hexa, t_data **data);
+void				trad_args(t_recup *recup, char **hexa, t_data **data);
+void				trad_label(char *arg, char **hexa, t_data **data);
 int					define_trad_fct(char *arg);
 void				trad_name_instruct(int op_code, char **hexa);
 void				hex_to_lower(char **hex);

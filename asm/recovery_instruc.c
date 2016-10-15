@@ -76,16 +76,9 @@ int		check_instruct(char *line, char *name, t_data **data, int *current_oct)
 	sum_args(&recup, &hex.hexa);
 	// ft_putstr("After sum\n");
 	// AJOUTER TRAD INSTRUCTIONS + SUM
-	trad_args(&recup, &hex.hexa);
+	trad_args(&recup, &hex.hexa, data);
 	// ft_putstr("After trad\n");
 	ft_lstdbladd_head(recup.lst_hexa, &hex, sizeof(t_hexa));
 	ft_lstdbladd_head((*data)->lst_recup, &recup, sizeof(t_recup));
-	ft_putstr(">>>>>>>>>>>>>>>>>>>> Show lst hexa\n");
-	show_lst_hexa(recup.lst_hexa);
-	ft_putstr("<<<<<<<<<<<<<<<<<<END\n");
-
 	return (1);
 }
-
-
-// instr_hex = ft_strdup(ft_itoabase_uimax(recup.op_code, 16));
