@@ -30,45 +30,56 @@ void	hex_to_lower(char **hex)
 	}
 }
 
-void	trad_reg(char *arg, t_hexa *hex)
+void	trad_reg(char *arg, char **hexa)
 {
 	char	*tmp;
 	char	*zero;
+	char	*tmp2;
+	char	*tmp3;
 
 	tmp = ft_itoabase_imax(ft_atoi(ft_strsub(arg, 1, ft_strlen(arg))), 16);
 	zero = NULL;
+	tmp2 = NULL;
+	tmp3 = ft_strdup(*hexa);
+	ft_strdel(hexa);
 	ft_printf("tmp : %s\n, strlen %d", tmp, ft_strlen(tmp));
 	if (ft_strlen(tmp) == 1)
 	{
 		hex_to_lower(&tmp);
 		zero = ft_strdup("0");
-		hex->hexa = ft_strjoin(zero, tmp);
+		tmp2 = ft_strjoin(zero, tmp);
 		ft_strdel(&zero);
 	}
 	else
-		hex->hexa = ft_strdup(tmp);
+		tmp2 = ft_strdup(tmp);
 	ft_strdel(&tmp);
-	ft_printf("hex->hexa : %s\n", hex->hexa);
+	(*hexa) = ft_strjoin(tmp3, tmp2);
+	ft_strdel(&tmp2);
+	ft_strdel(&tmp3);
+	ft_printf("(*hexa) : %s\n", (*hexa));
 	// ft_printf("n : %d\n", n);
 }
 
-void	trad_dir(char *arg, t_hexa *hex)
+void	trad_dir(char *arg, char **hexa)
 {
 	ft_putstr("TRAD DIR\n");
 
 }
 
-void	trad_ind(char *arg, t_hexa *hex)
+void	trad_ind(char *arg, char **hexa)
 {
 	char	*tmp;
 	int		i;
 	char	*zero;
 	char	*new;
+	char	*tmp2;
 
 	tmp = NULL;
 	i = 0;
 	zero = ft_strdup("0");
 	new = ft_itoabase_imax(ft_atoi(arg), 16);
+	tmp2 = ft_strdup(*hexa);
+	ft_strdel(hexa);
 	hex_to_lower(&new);
 	while (ft_strlen(new) != 4)
 	{
@@ -78,8 +89,9 @@ void	trad_ind(char *arg, t_hexa *hex)
 		ft_strdel(&tmp);
 		i++;
 	}
-	hex->hexa = ft_strdup(new);
+	(*hexa) = ft_strjoin(tmp2, new);
 	ft_strdel(&new);
+	ft_strdel(&tmp2);
 	ft_strdel(&zero);
 }
 

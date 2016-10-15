@@ -64,7 +64,7 @@ typedef struct 		s_lab
 	int				oct;
 }					t_lab;
 
-typedef	void		(*t_trad)(char *, t_hexa *);
+typedef	void		(*t_trad)(char *, char **);
 
 /*
 **********************  Initializer  *******************
@@ -106,13 +106,13 @@ int					nb_arg(char **args_tab);
 */
 
 int					trad(t_data **data);
-void				sum_args(t_recup *recup);
-void				trad_reg(char *arg, t_hexa *hex);
-void				trad_ind(char *arg, t_hexa *hex);
-void				trad_dir(char *arg, t_hexa *hex);
-void				trad_args(t_recup *recup);
+void				sum_args(t_recup *recup, char **hexa);
+void				trad_reg(char *arg, char **hexa);
+void				trad_ind(char *arg, char **hexa);
+void				trad_dir(char *arg, char **hexa);
+void				trad_args(t_recup *recup, char **hexa);
 int					define_trad_fct(char *arg);
-void				trad_name_instruct(int op_code, t_recup *recup);
+void				trad_name_instruct(int op_code, char **hexa);
 void				hex_to_lower(char **hex);
 
 /*
@@ -124,6 +124,7 @@ void				show_label_lst(t_dbllist *lst);
 void				show_lst_recup(t_dbllist *lst);
 void				show_tab_char(char **tab);
 void				show_trad(t_dbllist *lst);
+void				show_lst_hexa(t_dbllist *lst);
 
 /*
 **********************  No leaks  **********************
