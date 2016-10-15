@@ -41,7 +41,7 @@ typedef struct 		s_recup
 	int				op_code;
 	char			**args_tab;
 	int				nb_arg;
-	char			*sum;
+	// char			*sum;
 	t_dbllist		*lst_hexa;
 	int				nb_oct;
 }					t_recup;
@@ -72,6 +72,7 @@ typedef	void		(*t_trad)(char *, t_hexa *);
 
 void				data_initializer(t_data **data);
 void				ini_lab(t_lab *lab, t_data **data);
+void				ini_recup(t_recup **recup);
 
 /*
 **********************  File Cleaning  *****************
@@ -105,12 +106,14 @@ int					nb_arg(char **args_tab);
 */
 
 int					trad(t_data **data);
-char				*sum_args(char **args_tab);
+void				sum_args(t_recup *recup);
 void				trad_reg(char *arg, t_hexa *hex);
 void				trad_ind(char *arg, t_hexa *hex);
 void				trad_dir(char *arg, t_hexa *hex);
 void				trad_args(t_recup *recup);
 int					define_trad_fct(char *arg);
+void				trad_name_instruct(int op_code, t_recup *recup);
+void				hex_to_lower(char **hex);
 
 /*
 **********************  Display  ***********************

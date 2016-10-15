@@ -62,6 +62,7 @@ int		check_instruct(char *line, char *name, t_data **data, int *current_oct)
 	ft_putstr("Check_instruction\n");
 	if ((recup.op_code = instruc_valid(name)) == -1)
 		return (0);
+	trad_name_instruct(recup.op_code, &recup);
 	make_args_tab(line, name, &recup);
 	if (!(check_args(recup.args_tab, recup.op_code, data)))
 	{
@@ -69,7 +70,7 @@ int		check_instruct(char *line, char *name, t_data **data, int *current_oct)
 		return (0);
 	}
 	ft_putstr("Before sum\n");
-	recup.sum = ft_strdup(sum_args(recup.args_tab));
+	sum_args(&recup);
 	ft_putstr("After sum\n");
 	// AJOUTER TRAD INSTRUCTIONS + SUM
 	trad_args(&recup);

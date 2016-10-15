@@ -43,3 +43,4 @@ void	ini_lab(t_lab *lab, t_data **data)
 		return ;
 	}
 }
+
