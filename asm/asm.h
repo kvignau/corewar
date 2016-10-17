@@ -106,7 +106,7 @@ int					exist_label(char *name, t_data **data);
 **********************  Transformation  ****************
 */
 
-int					trad(t_data **data);
+// int					trad(t_data **data);
 void				sum_args(t_recup *recup, char **hexa);
 void				trad_reg(char *arg, char **hexa, t_data **data);
 void				trad_ind(char *arg, char **hexa, t_data **data);
@@ -117,6 +117,8 @@ int					define_trad_fct(char *arg);
 void				trad_name_instruct(int op_code, char **hexa);
 void				hex_to_lower(char **hex);
 void				add_zero(char **str, int width);
+void				trad_to_str(t_data **data);
+char				*lsthexa_tostr(t_dbllist *lst);
 
 /*
 **********************  Display  ***********************

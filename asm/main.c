@@ -31,6 +31,8 @@ int			main(int argc, char **argv)
 		error(data, "Please provide a .s file");
 	//display_file(data);
 	recovery(data);
-	show_trad(data->lst_recup);
+	trad_to_str(&data);
+	// str de trad
+	// show_trad(data->lst_recup);
 	return (0);
 }

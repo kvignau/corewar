@@ -97,7 +97,7 @@ void	show_lst_recup(t_dbllist *lst)
 	ft_printf("\n");
 }
 
-static char	*lsthexa_tostr(t_dbllist *lst)
+char	*lsthexa_tostr(t_dbllist *lst)
 {
 	t_elem	*tmp;
 	char	*tmp2;

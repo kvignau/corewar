@@ -74,3 +74,50 @@ void	sum_args(t_recup *recup, char **hexa)
 	ft_strdel(hexa);
 	(*hexa) = ft_strjoin(tmp, ft_itoabase_imax(sum, 16));
 }
+
+void	trad_to_str(t_data **data)
+{
+	t_elem	*tmp;
+	char	*trad;
+	char	*tmp2;
+	char	*new;
+	char	*label;
+
+	tmp = ((*data)->lst_recup)->tail;
+	trad = NULL;
+	new = NULL;
+	label = NULL;
+	ft_printf(">>>>>> STR EN COURS :\n");
+	while (tmp != NULL)
+	{
+		ft_printf("\ntmp de trap debut boucle : %s\n", trad);
+
+		if (trad == NULL)
+			tmp2 = ft_strnew(sizeof(char *));
+		else
+		{
+			tmp2 = ft_strdup(trad);
+			ft_strdel(&trad);
+		}
+		if (((t_recup *)((tmp)->content))->lst_hexa)
+		{
+			new = lsthexa_tostr(((t_recup *)((tmp)->content))->lst_hexa);
+			// ft_printf("new : %s\n", new); //debug
+			trad = ft_strjoin(tmp2, new);
+		}
+		else
+		{
+			ft_putstr(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+			label = ft_strdup(((t_recup *)((tmp)->content))->label_name);
+			trad = ft_strjoin(tmp2, label);
+			ft_strdel(&label);
+			// trad = ft_strdup(tmp2);
+		}
+		// ft_printf("tmp de trap fin boucle : %s\n", trad); //debug
+		ft_strdel(&tmp2);
+		ft_strdel(&new);
+		tmp = tmp->prev;
+	}
+	ft_printf("\n FINAL TRAD : %s\n", trad);
+	ft_printf("\n");
+}

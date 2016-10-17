@@ -44,7 +44,6 @@ void	trad_label(char *name, char **hexa, t_data **data)
 	(*hexa) = ft_strjoin(tmp, unknw);
 	ft_strdel(&tmp);
 	ft_strdel(&unknw);
-
 }
 
 void	trad_dir(char *arg, char **hexa, t_data **data)
