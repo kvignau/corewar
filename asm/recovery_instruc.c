@@ -26,22 +26,6 @@ int		instruc_valid(char *name)
 	return (-1);
 }
 
-void	ft_strtrim_tab(char **args_tab)
-{
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	tmp = NULL;
-	while (args_tab[i])
-	{
-		tmp = ft_strtrim(args_tab[i]);
-		args_tab[i] = ft_strdup(tmp);
-		ft_strdel(&tmp);
-		i++;
-	}
-}
-
 static void	make_args_tab(char *line, char *name, t_recup *recup)
 {
 	char	*args;
@@ -72,12 +56,8 @@ int		check_instruct(char *line, char *name, t_data **data, int *current_oct)
 		free_tab_char(&recup.args_tab);
 		return (0);
 	}
-	// ft_putstr("Before sum\n");
 	sum_args(&recup, &hex.hexa);
-	// ft_putstr("After sum\n");
-	// AJOUTER TRAD INSTRUCTIONS + SUM
 	trad_args(&recup, &hex.hexa, data);
-	// ft_putstr("After trad\n");
 	ft_lstdbladd_head(recup.lst_hexa, &hex, sizeof(t_hexa));
 	ft_lstdbladd_head((*data)->lst_recup, &recup, sizeof(t_recup));
 	return (1);

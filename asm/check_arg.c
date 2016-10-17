@@ -12,16 +12,6 @@
 
 #include "asm.h"
 
-int		nb_arg(char **args_tab)
-{
-	int		i;
-
-	i = 0;
-	while (args_tab[i])
-		i++;
-	return (i);
-}
-
 int		recover_args(char **args_tab, int *to_check)
 {
 	int		i;
