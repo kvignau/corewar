@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "asm.h"
+#include <stdio.h>
 
 static void			comment_remover(t_data *data, int i, int j)
 {
@@ -100,6 +101,103 @@ static int			sharp_cleaner(t_data *data, int *nb_lines)
 	return (1);
 }
 
+int					label_check(int *nb_label, t_data *data, int i)
+{
+	int		k;
+
+	k = 0;
+	while (ft_isspace(data->file[i][k]) || ft_islabelchar(data->file[i][k]))
+	{
+		k++;
+		if (data->file[i][k] == ':')
+		{
+			*nb_label += 1;
+			break;
+		}
+	}
+}
+
+int					label_count(int *nb_label, t_data *data)
+{
+	int		i;
+	int		j;
+	int		k;
+
+	i = 0;
+	j = 0;
+	while (i < data->nb_lines)
+	{
+		while (data->file[i][j] != '\0')
+		{
+			if (data->file[i][j] == ':' && data->file[i][j + 1] != '\0')
+				label_check(nb_label, data, i);
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	return (1);
+}
+
+int					label_cleaner(t_data *data, int nb_label)
+{
+	int		i;
+	int		j;
+	int		k;
+	int		l;
+	int		toggle;
+	char	**label_cleaned;
+
+	i = 0;
+	j = 0;
+	l = 0;
+	toggle = 0;
+	if ((label_cleaned = (char **)ft_memalloc(sizeof(char *) * (data->nb_lines + nb_label))) == NULL)
+		error(data, "label_cleaned malloc error\n");
+	while (i < data->nb_lines)
+	{
+		while (data->file[i][j] != '\0')
+		{
+			if (data->file[i][j] == ':' && data->file[i][j + 1] != '\0')
+			{
+				k = 0;
+				while (ft_isspace(data->file[i][k]) || ft_islabelchar(data->file[i][k]))
+				{
+					k++;
+					if (data->file[i][k] == ':')
+					{
+						label_cleaned[l + 1] = ft_strdup(&data->file[i][k + 1]);
+						ft_bzero(&data->file[i][k + 1], ft_strlen(&data->file[i][k + 1]));
+						toggle = 1;
+						break;
+					}
+				}
+			}
+			j++;
+		}
+		j = 0;
+		label_cleaned[l] = ft_strdup(data->file[i]);
+		i++;
+		l += (1 + toggle);
+		toggle = 0;
+	}
+	ft_free2dtab((void **)data->file, data->nb_lines);
+	data->file = label_cleaned;
+	return (1);
+}
+
+int					label_manager(t_data *data)
+{
+	int		nb_label;
+	int i = 0;
+
+	nb_label = 0;
+	label_count(&nb_label, data);
+	label_cleaner(data, nb_label);
+	data->nb_lines = data->nb_lines + nb_label;
+	return (0);
+}
+
 int					file_manager(t_data *data, int nb_lines)
 {
 	int i;
@@ -112,7 +210,16 @@ int					file_manager(t_data *data, int nb_lines)
 	file_trimer(data, &data->nb_lines, i);
 	sharp_cleaner(data, &data->nb_lines);
 	comment_cleaner(data);
+	file_trimer(data, &data->nb_lines, 0);
+	display_file(data);
+	label_manager(data);
+	file_trimer(data, &data->nb_lines, 0);
 	i = 0;
-	file_trimer(data, &data->nb_lines, i);
+	printf("\n");
+	while (i < data->nb_lines)
+	{
+		printf("%s\n",data->file[i]);
+		i++;
+	}
 	return (1);
 }
