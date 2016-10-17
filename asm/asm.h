@@ -95,7 +95,7 @@ int					header_manager(t_data *data);
 int					label_manager(t_data *data);
 int					name_manager(t_data *data, int *i, int *j);
 int					comment_manager(t_data *data, int *i, int *j);
-void				error(t_data *data, char *str);
+int					error(t_data *data, char *str);
 
 /*
 **********************  Recovery  **********************
