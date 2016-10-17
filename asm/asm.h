@@ -80,6 +80,7 @@ void				ini_recup(t_recup **recup);
 int					store_file(char **argv, t_data *data, int *i);
 int					file_manager(t_data *data, int nb_lines);
 int					ft_iscomment(int c);
+int					ft_islabelchar(int c);
 int					header_manager(t_data *data);
 int					name_manager(t_data *data, int *i, int *j);
 int					comment_manager(t_data *data, int *i, int *j);

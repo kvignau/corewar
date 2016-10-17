@@ -115,6 +115,7 @@ int					label_check(int *nb_label, t_data *data, int i)
 			break;
 		}
 	}
+	return (1);
 }
 
 int					label_count(int *nb_label, t_data *data)
