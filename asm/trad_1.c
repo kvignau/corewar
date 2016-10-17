@@ -61,10 +61,23 @@ void	trad_reg(char *arg, char **hexa, t_data **data)
 	// ft_printf("n : %d\n", n);
 }
 
-void	trad_label(char *arg, char **hexa, t_data **data)
+void	trad_label(char *name, char **hexa, t_data **data)
 {
+	char	*tmp;
+	char	*unknw;
+
+	tmp = NULL;
+	unknw = NULL;
 	ft_printf("TRAD LABEL\n");
-	// if (label_known)
+	if (!(exist_label(name, data)))
+		return ;
+	unknw = ft_strdup("XXXX");
+	tmp = ft_strdup(*hexa);
+	ft_strdel(hexa);
+	(*hexa) = ft_strjoin(tmp, unknw);
+	ft_strdel(&tmp);
+	ft_strdel(&unknw);
+
 }
 
 void	trad_dir(char *arg, char **hexa, t_data **data)
@@ -74,9 +87,9 @@ void	trad_dir(char *arg, char **hexa, t_data **data)
 
 	i = 1;
 	if (arg[i] == ':')
-		trad_label(arg, hexa, data);
+		trad_label(ft_strsub(arg, 2, ft_strlen(arg)), hexa, data);
 	else
-		trad_ind(ft_strsub(arg, 2, ft_strlen(arg)), hexa, data);
+		trad_ind(ft_strsub(arg, 1, ft_strlen(arg)), hexa, data);
 }
 
 void	trad_ind(char *arg, char **hexa, t_data **data)

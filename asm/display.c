@@ -121,11 +121,11 @@ static char	*lsthexa_tostr(t_dbllist *lst)
 			new = ft_strjoin(tmp2, ((t_hexa *)((tmp)->content))->hexa);
 			ft_printf("%s\n",((t_hexa *)((tmp)->content))->hexa); //debug
 		}
-		else
-		{
-			new = ft_strjoin(tmp2, unkwn);
-			ft_printf("XX"); //debug
-		}
+		// else
+		// {
+		// 	new = ft_strjoin(tmp2, unkwn);
+		// 	ft_printf("XX"); //debug
+		// }
 		tmp = tmp->prev;
 	}
 	ft_strdel(&unkwn);
@@ -142,9 +142,11 @@ void	show_trad(t_dbllist *lst)
 	tmp = lst->tail;
 	trad = NULL;
 	new = NULL;
-	ft_printf("TRAD :\n");
+	ft_printf(">>>>>> TRAD EN COURS :\n");
 	while (tmp != NULL)
 	{
+		ft_printf("\ntmp de trap debut boucle : %s\n", trad);
+
 		if (trad == NULL)
 			tmp2 = ft_strnew(sizeof(char *));
 		else
@@ -155,15 +157,16 @@ void	show_trad(t_dbllist *lst)
 		if (((t_recup *)((tmp)->content))->lst_hexa)
 		{
 			new = lsthexa_tostr(((t_recup *)((tmp)->content))->lst_hexa);
-			// ft_printf("new : %s\n", new);
+			// ft_printf("new : %s\n", new); //debug
 			trad = ft_strjoin(tmp2, new);
 		}
-		//a voir quoi faire pour les dir label
-		ft_printf("TRAD : %s\n", trad);
+		else
+			trad = ft_strdup(tmp2);
+		// ft_printf("tmp de trap fin boucle : %s\n", trad); //debug
 		ft_strdel(&tmp2);
 		ft_strdel(&new);
 		tmp = tmp->prev;
 	}
-	ft_printf("TRAD : %s\n", trad);
+	ft_printf("\n FINAL TRAD : %s\n", trad);
 	ft_printf("\n");
 }
