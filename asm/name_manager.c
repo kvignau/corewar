@@ -30,7 +30,8 @@ int			name_manager(t_data *data, int *i, int *j)
 	int		name_size;
 
 	name_size = 0;
-	data->name = (char *)ft_memalloc(sizeof(char) * 129);
+	if ((data->name = (char *)ft_memalloc(sizeof(char) * 129)) == NULL)
+		error(data, "data->name malloc error\n");
 	while (data->file[*i][*j] == ' ' || data->file[*i][*j] == '\t')
 		*j += 1;
 	if (data->file[*i][*j] == '"')
@@ -48,6 +49,6 @@ int			name_manager(t_data *data, int *i, int *j)
 	else
 		return (0);
 	if (name_size > 128 || *i >= data->nb_lines)
-		return (0);
+		return (error(data, ".name is too long (MAX 128 chars)\n"));
 	return (1);
 }

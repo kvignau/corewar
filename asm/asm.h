@@ -63,6 +63,16 @@ typedef struct 		s_lab
 	int				oct;
 }					t_lab;
 
+typedef struct		s_var
+{
+	int 			i;
+	int 			j;
+	int 			k;
+	int 			l;
+	int 			toggle;
+	char 			**label_cleaned;
+}					t_var;
+
 typedef	void		(*t_trad)(char *, char **, t_data **);
 
 /*
@@ -82,9 +92,10 @@ int					file_manager(t_data *data, int nb_lines);
 int					ft_iscomment(int c);
 int					ft_islabelchar(int c);
 int					header_manager(t_data *data);
+int					label_manager(t_data *data);
 int					name_manager(t_data *data, int *i, int *j);
 int					comment_manager(t_data *data, int *i, int *j);
-void				error(t_data *data, char *str);
+int					error(t_data *data, char *str);
 
 /*
 **********************  Recovery  **********************

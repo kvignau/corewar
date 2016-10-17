@@ -12,9 +12,10 @@
 
 #include "asm.h"
 
-void		error(t_data *data, char *str)
+int		error(t_data *data, char *str)
 {
 	free_all_data(data);
 	ft_putstr_fd(str, 2);
 	exit(EXIT_FAILURE);
+	return (0);
 }

@@ -30,7 +30,8 @@ int			comment_manager(t_data *data, int *i, int *j)
 	int		comment_size;
 
 	comment_size = 0;
-	data->comment = (char *)ft_memalloc(sizeof(char) * 2049);
+	if ((data->comment = (char *)ft_memalloc(sizeof(char) * 2049)) == NULL)
+		error(data, "data->comment malloc error\n");
 	while (data->file[*i][*j] == ' ' || data->file[*i][*j] == '\t')
 		*j += 1;
 	if (data->file[*i][*j] == '"')
@@ -48,6 +49,6 @@ int			comment_manager(t_data *data, int *i, int *j)
 	else
 		return (0);
 	if (comment_size > 2048 || *i >= data->nb_lines)
-		return (0);
+		return (error(data, "comment is too long (2048 chars)\n"));
 	return (1);
 }
