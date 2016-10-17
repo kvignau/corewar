@@ -14,23 +14,14 @@
 
 void	trad_name_instruct(int op_code, char **hexa)
 {
-	char		*tmp;
-	char		*zero;
+	char		*new;
 
 	ft_putstr("trad_name_instruct\n");
-	tmp = ft_itoabase_imax(op_code, 16);
-	hex_to_lower(&tmp);
-	zero = ft_strdup("0");
-	if (ft_strlen(tmp) == 1)
-		(*hexa) = ft_strjoin(zero, tmp);
-	else
-		(*hexa) = ft_strdup(tmp);
-	ft_strdel(&zero);
-	ft_strdel(&tmp);
-	// ft_printf("(*hexa) %s\n", (*hexa));
-	// ft_lstdbladd_head(recup->lst_hexa, &hex, sizeof(t_hexa));
-	// show_lst_hexa(recup->lst_hexa);
-
+	new = ft_itoabase_imax(op_code, 16);
+	hex_to_lower(&new);
+	add_zero(&new, 2);
+	(*hexa) = ft_strdup(new);
+	ft_strdel(&new);
 }
 
 void	trad_args(t_recup *recup, char **hexa, t_data **data)

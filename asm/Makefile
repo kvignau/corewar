@@ -11,9 +11,9 @@
 # **************************************************************************** #
 
 NAME = asm
-#-fsanitize=address
+-fsanitize=address
 
-#FLAGS += -Wall -Wextra -Werror -fsanitize=address
+FLAGS += -Wall -Wextra -Werror -fsanitize=address
 
 SRC = main.c op.c store_file.c data_initializer.c file_manager.c \
 ft_iscomment.c recovery.c display.c header_manager.c name_manager.c\

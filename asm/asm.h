@@ -116,6 +116,7 @@ void				trad_label(char *arg, char **hexa, t_data **data);
 int					define_trad_fct(char *arg);
 void				trad_name_instruct(int op_code, char **hexa);
 void				hex_to_lower(char **hex);
+void				add_zero(char **str, int width);
 
 /*
 **********************  Display  ***********************
