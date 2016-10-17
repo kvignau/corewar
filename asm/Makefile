@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = asm
-#-fsanitize=address
+-fsanitize=address
 
 FLAGS += -Wall -Wextra -Werror -fsanitize=address
 
