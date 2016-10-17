@@ -62,6 +62,8 @@ void	sum_args(t_recup *recup, char **hexa)
 	type = 0;
 	sum = 0;
 	tmp = NULL;
+	if (op_tab[recup->op_code - 1].octcod != 1)
+		return ;
 	while (recup->args_tab[i])
 	{
 		type = 0;

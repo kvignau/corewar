@@ -25,8 +25,6 @@ void		data_initializer(t_data **data)
 		(*data)->name = NULL;
 		((((*data)->label_kw = ft_lstdblnew()) == NULL) ?
 			error(*data, "label_kw malloc error") : 0);
-		((((*data)->label_unkw = ft_lstdblnew()) == NULL) ?
-			error(*data, "label_unkw malloc error") : 0);
 		((((*data)->lst_recup = ft_lstdblnew()) == NULL) ?
 			error(*data, "lst_data malloc error") : 0);
 	}

@@ -75,7 +75,6 @@ int		check_args(char **args_tab, int op_code, t_data **data)
 
 	to_check = 0;
 	ft_putstr("Check arg\n");
-
 	if (nb_arg(args_tab) != op_tab[op_code - 1].nb_param)
 	{
 		error(*data, "Number of param for this instruction is wrong");

@@ -54,7 +54,6 @@ typedef struct 		s_data
 	char			*name;
 	int				nb_lines;
 	t_dbllist		*label_kw;
-	t_dbllist		*label_unkw;
 	t_dbllist		*lst_recup;
 }					t_data;
 
@@ -100,6 +99,7 @@ int					check_args(char **args_tab, int op_code, t_data **data); //maybe static
 int					define_type_args(char *arg);
 int					verif_type(int type, int op_code);
 int					nb_arg(char **args_tab);
+int					exist_label(char *name, t_data **data);
 
 /*
 **********************  Transformation  ****************
