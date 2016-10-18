@@ -36,7 +36,7 @@ static void	make_args_tab(char *line, char *name, t_recup *recup)
 	ft_strtrim_tab(recup->args_tab);
 }
 
-int		check_instruct(char *line, char *name, t_data **data, int *current_oct)
+int		check_instruct(char *line, char *name, t_data **data, t_data_line *dline)
 {
 	char	*args;
 	t_recup	recup;
@@ -57,7 +57,9 @@ int		check_instruct(char *line, char *name, t_data **data, int *current_oct)
 		return (0);
 	}
 	sum_args(&recup, &hex.hexa);
-	trad_args(&recup, &hex.hexa, data);
+	trad_args(&recup, &hex.hexa, data, recup.op_code);
+	dline->nb_oct = ft_strlen(hex.hexa) / 2;
+	label_called(dline, recup.args_tab);
 	ft_lstdbladd_head(recup.lst_hexa, &hex, sizeof(t_hexa));
 	ft_lstdbladd_head((*data)->lst_recup, &recup, sizeof(t_recup));
 	return (1);

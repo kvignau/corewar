@@ -24,7 +24,7 @@ void	trad_name_instruct(int op_code, char **hexa)
 	ft_strdel(&new);
 }
 
-void	trad_args(t_recup *recup, char **hexa, t_data **data)
+void	trad_args(t_recup *recup, char **hexa, t_data **data, int op_code)
 {
 	int						i;
 	static const t_trad		ft_trad[] = {trad_reg, trad_dir, trad_ind};
@@ -37,7 +37,7 @@ void	trad_args(t_recup *recup, char **hexa, t_data **data)
 	{
 		ft_printf("recup->args_tab[i] : %s\n", recup->args_tab[i]);
 		trad = ft_trad[define_trad_fct(recup->args_tab[i])];
-		trad(recup->args_tab[i], hexa, data);
+		trad(recup->args_tab[i], hexa, data, op_code);
 		i++;
 	}
 }
@@ -107,7 +107,7 @@ void	trad_to_str(t_data **data)
 		}
 		else
 		{
-			ft_putstr(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+			// ft_putstr(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
 			label = ft_strdup(((t_recup *)((tmp)->content))->label_name);
 			trad = ft_strjoin(tmp2, label);
 			ft_strdel(&label);

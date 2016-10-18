@@ -46,6 +46,14 @@ typedef struct 		s_recup
 	int				nb_oct;
 }					t_recup;
 
+typedef struct 		s_data_line
+{
+	int				index;
+	int				nb_oct;
+	char			*label_declared;
+	char			**label_called;
+}					t_data_line;
+
 typedef struct 		s_data
 {
 	char			**file;
@@ -53,8 +61,9 @@ typedef struct 		s_data
 	char			*comment;
 	char			*name;
 	int				nb_lines;
-	t_dbllist		*label_kw;
+	t_dbllist		*label_kw; //usefull ?
 	t_dbllist		*lst_recup;
+	t_dbllist		*lst_lines;
 }					t_data;
 
 typedef struct 		s_lab
@@ -73,7 +82,7 @@ typedef struct		s_var
 	char 			**label_cleaned;
 }					t_var;
 
-typedef	void		(*t_trad)(char *, char **, t_data **);
+typedef	void		(*t_trad)(char *, char **, t_data **, int);
 
 /*
 **********************  Initializer  *******************
@@ -104,14 +113,15 @@ int					error(t_data *data, char *str);
 void				recovery(t_data *data);
 int					check_line(char	*line, t_data **data); //maybe static
 int					label_valid(char *name); //maybe static
-int					check_label(char *name, t_data **data, int *current_oct);
-int					check_instruct(char *line, char *name, t_data **data, int *current_oct);
+int					check_label(char *name, t_data **data, t_data_line *line);
+int					check_instruct(char *line, char *name, t_data **data, t_data_line *dline);
 void				ft_strtrim_tab(char **args_tab);
 int					check_args(char **args_tab, int op_code, t_data **data); //maybe static
 int					define_type_args(char *arg);
 int					verif_type(int type, int op_code);
 int					nb_arg(char **args_tab);
 int					exist_label(char *name, t_data **data);
+int					is_dir(char *arg);
 
 /*
 **********************  Transformation  ****************
@@ -119,17 +129,20 @@ int					exist_label(char *name, t_data **data);
 
 // int					trad(t_data **data);
 void				sum_args(t_recup *recup, char **hexa);
-void				trad_reg(char *arg, char **hexa, t_data **data);
-void				trad_ind(char *arg, char **hexa, t_data **data);
-void				trad_dir(char *arg, char **hexa, t_data **data);
-void				trad_args(t_recup *recup, char **hexa, t_data **data);
-void				trad_label(char *arg, char **hexa, t_data **data);
+void				trad_reg(char *arg, char **hexa, t_data **data, int op_code);
+void				trad_ind(char *arg, char **hexa, t_data **data, int op_code);
+void				trad_dir(char *arg, char **hexa, t_data **data, int op_code);
+void				trad_args(t_recup *recup, char **hexa, t_data **data, int op_code);
+void				trad_label(char *arg, char **hexa, t_data **data, int op_code);
 int					define_trad_fct(char *arg);
 void				trad_name_instruct(int op_code, char **hexa);
 void				hex_to_lower(char **hex);
 void				add_zero(char **str, int width);
 void				trad_to_str(t_data **data);
 char				*lsthexa_tostr(t_dbllist *lst);
+void				label_called(t_data_line *dline, char **args_tab);
+void				trad_dir_without_label(char *arg, char **hexa, t_data **data, int op_code);
+
 
 /*
 **********************  Display  ***********************
@@ -141,7 +154,7 @@ void				show_lst_recup(t_dbllist *lst);
 void				show_tab_char(char **tab);
 void				show_trad(t_dbllist *lst);
 void				show_lst_hexa(t_dbllist *lst);
-
+void				show_dline(t_dbllist *lst);
 /*
 **********************  No leaks  **********************
 */

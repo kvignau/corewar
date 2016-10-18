@@ -32,6 +32,8 @@ int			main(int argc, char **argv)
 	//display_file(data);
 	recovery(data);
 	trad_to_str(&data);
+	show_dline(data->lst_lines);
+	// label_position();
 	// str de trad
 	// show_trad(data->lst_recup);
 	return (0);

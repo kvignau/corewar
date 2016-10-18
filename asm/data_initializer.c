@@ -27,6 +27,8 @@ void		data_initializer(t_data **data)
 			error(*data, "label_kw malloc error") : 0);
 		((((*data)->lst_recup = ft_lstdblnew()) == NULL) ?
 			error(*data, "lst_data malloc error") : 0);
+		((((*data)->lst_lines = ft_lstdblnew()) == NULL) ?
+			error(*data, "lst_lines malloc error") : 0);
 	}
 	else
 		error(*data, "Couldn't malloc data");

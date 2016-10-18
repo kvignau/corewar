@@ -51,7 +51,7 @@ int		label_valid(char *name)
 	return (1);
 }
 
-int		check_label(char *name, t_data **data, int *current_oct)
+int		check_label(char *name, t_data **data, t_data_line *dline)
 {
 	t_recup		recup;
 
@@ -63,33 +63,40 @@ int		check_label(char *name, t_data **data, int *current_oct)
 		return (0);
 	save_label(name, data); // a voir
 	recup.label_name = ft_strdup(name);
-	recup.pos_oct = *current_oct;
+	dline->label_declared = ft_strdup(name);
+	dline->nb_oct = 0;
 	ft_lstdbladd_head((*data)->lst_recup, &recup, sizeof(t_recup));
 	return (1);
 }
 
 int		check_line(char *line, t_data **data)
 {
-	int			i;
-	char		*name;
-	static int	current_oct = 0;
+	int				i;
+	char			*name;
+	t_data_line		dline;
+	static int		index_line = 0;
 
 	i = 0;
+	name = NULL;
+	ft_bzero(&dline, sizeof(t_data_line));
+	dline.index = index_line;
 	while (line[i] != ' ' && line[i] != '\t')
 		i++;
 	name = ft_strsub(line, 0, i);
-	// ft_printf("Op: %s\n",name); //debug
 	if (name[ft_strlen(name) - 1] == ':')
 	{
-		if (check_label(name, data, &current_oct) == 0)
+		if (check_label(name, data, &dline) == 0)
 			return (0);
 	}
 	else
 	{
-		if (check_instruct(line, name, data, &current_oct) == 0)
+		if (check_instruct(line, name, data, &dline) == 0)
 			return (0);
 	}
 	ft_strdel(&name);
+	show_dline((*data)->lst_lines);
+	ft_lstdbladd_head((*data)->lst_lines, &dline, sizeof(t_data_line));
+	index_line += 1;
 	return (1);
 }
 
@@ -104,16 +111,12 @@ void	recovery(t_data *data)
 	{
 		if (data->file[i][j] != '\0')
 		{
-			// ft_putstr("Line analysed :\n"); //debug
-			// ft_printf("%s\n",data->file[i]); //debug
 			if (!(check_line(data->file[i], &data)))
 				return ;
 			j++;
 		}
-		// ft_putchar('\n');
 		i++;
 		j = 0;
 	}
-	// show_label_lst(data->label_kw); // debug
 	show_lst_recup(data->lst_recup); // debug
 }
