@@ -66,6 +66,8 @@ typedef char	t_arg_type;
 **
 */
 
+# define PAD 16
+# define COR_MAX_VALUE			((PAD + PROG_NAME_LENGTH + COMMENT_LENGTH + CHAMP_MAX_SIZE) * 2)
 # define PROG_NAME_LENGTH		(128)
 # define COMMENT_LENGTH			(2048)
 # define COREWAR_EXEC_MAGIC		0xea83f3

@@ -18,13 +18,17 @@ int		main(int argc, char **argv)
 	t_options	options;
 	t_dbllist	*champ_list;
 
+	//char str[] = "00ea83f3";
+
+ft_printf("%#x\n", COREWAR_EXEC_MAGIC);
+ft_printf("%d\n",COR_MAX_VALUE);
 	ft_bzero(&core, sizeof(t_cor));
 	ft_bzero(&options, sizeof(t_options));
 	champ_list = ft_lstdblnew();
 	if (!corewar_usage(argc))
 		return (-1);
 	options_checkers(argc, argv, &options, champ_list);
-	ft_printf("dump: %d\ndump_N : %u\nchampnum: %d\nchamp_N: %d\nS: %d\n", options.dump, options.dump_N, options.number, options.number_N, options.stealth);
+	//ft_printf("dump: %d\ndump_N : %u\nchampnum: %d\nchamp_N: %d\nS: %d\n", options.dump, options.dump_N, options.number, options.number_N, options.stealth);
 	//champions_checkers();
 
 	return (0);
