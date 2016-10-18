@@ -30,16 +30,18 @@ typedef struct		s_cor
 typedef struct		s_options
 {
 	int				stealth;
-	int				dump;
-	intmax_t		dump_N;
-	int				number;
-	unsigned int	number_N;
+	int				bool_dump;
+	intmax_t		dump_number;
+	int				bool_vm_number;
+	unsigned int	vm_number;
 }					t_options;
 
 typedef struct		s_champ
 {
+	int				id;
 	char			*name;
-	unsigned int	*champ_id;
+	char			*comment;
+	unsigned int	*vm_number;
 }					t_champ;
 
 typedef struct		s_var
@@ -60,6 +62,17 @@ int					corewar_usage(int argc);
 */
 
 int					options_checkers(int argc, char **argv, t_options *options, t_dbllist *champ_list);
-int					champions_checkers(int bob);
+
+/*
+**********************  Checkers  **********************
+*/
+
+int					champions_maker(t_dbllist *champ_list, t_options *options, t_var *var);
+
+/*
+**********************  Utils  **********************
+*/
+
+uintmax_t			mini_hextoi(char *str);
 
 #endif

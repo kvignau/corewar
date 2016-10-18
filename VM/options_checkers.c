@@ -12,36 +12,28 @@
 
 #include "corewar.h"
 
-/*void		options_initializer(t_options **options)
-{
-	(*options) = (t_options *)ft_memalloc(sizeof(t_options));
-	(*options)->list = 0;
-	(*options)->printoff = 0;
-	(*options)->nbop = 0;
-	(*options)->color = 0;
-}*/
-
-int		valid_options(t_var *var, t_options *options, t_dbllist *champlist)
+int	valid_options(t_var *var, t_options *options, t_dbllist *champ_list)
 {
 	if (var->str[0] == 's')
 		options->stealth = 1;
 	else if (var->str[0] == 'd' || var->str[0] == 'n')
 	{
-		if (!var->argv[var->i + 1])
+		if (!var->argv[var->i + 1] || !var->argv[var->i + 2])
 			corewar_usage(0);
 		else if (var->str[0] == 'd')
 		{
-			options->dump = 1;
+			options->bool_dump = 1;
 			var->i += 1;
-			options->dump_N = ft_atoi(var->argv[var->i]);
+			options->dump_number = ft_atoi(var->argv[var->i]);
 		}
 		else if (var->str[0] == 'n')
 		{
 			var->i += 1;
-			options->number = 1;
-			options->number_N = ft_atoi(var->argv[var->i]);
-			champions_checkers(1);
-			options->number = 0;
+			options->bool_vm_number = 1;
+			options->vm_number = ft_atoi(var->argv[var->i]);
+			var->i += 1;
+			champions_maker(champ_list, options, var);
+			options->bool_vm_number = 0;
 		}
 	}
 	else if (var->str[0] != '\0')
@@ -49,7 +41,7 @@ int		valid_options(t_var *var, t_options *options, t_dbllist *champlist)
 	return (1);
 }
 
-int		options_checkers(int argc, char **argv, t_options *options, t_dbllist *champ_list)
+int	options_checkers(int argc, char **argv, t_options *options, t_dbllist *champ_list)
 {
 	t_var		var;
 
@@ -66,9 +58,8 @@ int		options_checkers(int argc, char **argv, t_options *options, t_dbllist *cham
 				return (0);
 		}
 		else
-			champions_checkers(2);
+			champions_maker(champ_list, options, &var);
 		var.i += 1;
-
 	}
 	return (1);
 }
