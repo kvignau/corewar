@@ -103,10 +103,15 @@ void	trad_dir_without_label(char *arg, char **hexa, t_data **data, int op_code)
 static void	tmp_trad_dir_label(char *arg, char **hexa)
 {
 	char	*tmp;
+	char	*tmp1;
+	char	*pourcent;
 
+	pourcent = ft_strdup("!");
+	ft_printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>%s\n", pourcent);
 	tmp = ft_strdup(*hexa);
 	ft_strdel(hexa);
-	(*hexa) = ft_strjoin(tmp, arg);
+	tmp1 = ft_strjoin(arg, pourcent);
+	(*hexa) = ft_strjoin(tmp, tmp1);
 }
 
 void	trad_dir(char *arg, char **hexa, t_data **data, int op_code)
