@@ -16,7 +16,6 @@ void	trad_name_instruct(int op_code, char **hexa)
 {
 	char		*new;
 
-	ft_putstr("trad_name_instruct\n");
 	new = ft_itoabase_imax(op_code, 16);
 	hex_to_lower(&new);
 	add_zero(&new, 2);
@@ -32,11 +31,11 @@ void	trad_args(t_recup *recup, char **hexa, t_data **data, int op_code)
 
 	recup->lst_hexa = ft_lstdblnew();
 	i = 0;
-	ft_putstr("Trad_args\n");
-	ft_printf("(*hexa) : %s\n", (*hexa));
+	// ft_putstr("Trad_args\n");
+	// ft_printf("(*hexa) : %s\n", (*hexa));
 	while (recup->args_tab[i])
 	{
-		ft_printf("recup->args_tab[i] : %s\n", recup->args_tab[i]);
+		// ft_printf("recup->args_tab[i] : %s\n", recup->args_tab[i]);
 		trad = ft_trad[define_trad_fct(recup->args_tab[i])];
 		trad(recup->args_tab[i], hexa, data, op_code);
 		i++;
@@ -109,5 +108,5 @@ void	tmp_trad_to_str(t_data **data)
 	(*data)->tmp_trad = ft_strdup(trad);
 	ft_strdel(&trad);
 	ft_printf("\n FINAL TRAD : %s\n", (*data)->tmp_trad);
-	ft_printf("\n");
+	// ft_printf("\n");
 }

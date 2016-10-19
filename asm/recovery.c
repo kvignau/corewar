@@ -21,7 +21,7 @@ int		exist_label(char *name, t_data **data)
 	{
 		if (ft_strcmp(((t_lab *)((tmp)->content))->name, name) == 0)
 			return (0);
-		tmp = tmp->next;
+		tmp = tmp->prev;
 	}
 	return (1);
 }
@@ -58,10 +58,10 @@ int		check_label(char *name, t_data **data, t_data_line *dline)
 	ft_bzero(&recup, sizeof(t_recup));
 	recup.label = 1;
 	name = ft_strsub(name, 0, ft_strlen(name) - 1);
-	// ft_printf("Op: %s\n",name); //debug
 	if (!(label_valid(name)))
 		return (0);
-	save_label(name, data); // a voir
+	if (!(save_label(name, data)))
+		return (1);
 	recup.label_name = ft_strdup(name);
 	dline->label_declared = ft_strdup(name);
 	dline->nb_oct = 0;
@@ -94,7 +94,7 @@ int		check_line(char *line, t_data **data)
 			return (0);
 	}
 	ft_strdel(&name);
-	show_dline((*data)->lst_lines);
+	// show_dline((*data)->lst_lines);
 	ft_lstdbladd_head((*data)->lst_lines, &dline, sizeof(t_data_line));
 	index_line += 1;
 	return (1);
@@ -118,5 +118,5 @@ void	recovery(t_data *data)
 		i++;
 		j = 0;
 	}
-	show_lst_recup(data->lst_recup); // debug
+	// show_lst_recup(data->lst_recup); // debug
 }

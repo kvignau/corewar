@@ -61,7 +61,7 @@ typedef struct 		s_data
 	char			*comment;
 	char			*name;
 	int				nb_lines;
-	t_dbllist		*label_kw; //usefull ?
+	t_dbllist		*label_kw;
 	t_dbllist		*lst_recup;
 	t_dbllist		*lst_lines;
 	char			*tmp_trad;
@@ -71,7 +71,7 @@ typedef struct 		s_data
 typedef struct 		s_lab
 {
 	char			*name;
-	int				oct;
+	int				oct; //useless ?
 }					t_lab;
 
 typedef struct		s_var

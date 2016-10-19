@@ -31,17 +31,12 @@ int		index_label_called(char *name, t_dbllist *lst_lines)
 	t_elem	*tmp;
 
 	tmp = lst_lines->tail;
-	ft_putstr("function index_label_called\n");
 	while (tmp != NULL)
 	{
-		ft_putstr("in boucle\n");
 		if (((t_data_line *)((tmp)->content))->label_called)
 		{
 			if (find_in_tb_char(name, ((t_data_line *)((tmp)->content))->label_called))
-			{
-				ft_putstr("find in tb\n");
 				return (((t_data_line *)((tmp)->content))->index);
-			}
 		}
 		tmp = tmp->prev;
 	}

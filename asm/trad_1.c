@@ -107,7 +107,6 @@ static void	tmp_trad_dir_label(char *arg, char **hexa)
 	char	*pourcent;
 
 	pourcent = ft_strdup("!");
-	ft_printf(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>%s\n", pourcent);
 	tmp = ft_strdup(*hexa);
 	ft_strdel(hexa);
 	tmp1 = ft_strjoin(arg, pourcent);
