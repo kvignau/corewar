@@ -80,3 +80,17 @@ void	add_zero(char **str, int width)
 		ft_strdel(&tmp);
 	}
 }
+
+int		find_in_tb_char(char *name, char **label_called)
+{
+	int		i;
+
+	i = 0;
+	while (label_called[i] != NULL)
+	{
+		if (ft_strcmp(label_called[i], name) == 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}

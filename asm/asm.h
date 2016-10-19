@@ -142,6 +142,12 @@ void				trad_to_str(t_data **data);
 char				*lsthexa_tostr(t_dbllist *lst);
 void				label_called(t_data_line *dline, char **args_tab);
 void				trad_dir_without_label(char *arg, char **hexa, t_data **data, int op_code);
+int					index_label_called(char *name, t_dbllist *lst_lines);
+int					index_label_declared(char *name, t_dbllist *lst_lines);
+int					find_in_tb_char(char *name, char **label_called);
+void				define_index(char *name, t_data **data, int *i_called, int *i_declared);
+int					front_decl(t_dbllist *lst_lines, int i_called, int i_declared);
+int					back_decl(t_dbllist *lst_lines, int i_called, int i_declared);
 
 
 /*

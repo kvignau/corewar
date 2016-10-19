@@ -29,23 +29,42 @@ void	trad_reg(char *arg, char **hexa, t_data **data, int op_code)
 	ft_strdel(&to_compete);
 }
 
+// void	trad_label(char *name, char **hexa, t_data **data, int op_code)
+// {
+// 	char	*tmp;
+// 	char	*unknw;
+
+// 	tmp = NULL;
+// 	unknw = NULL;
+// 	(void)op_code;
+// 	ft_printf("TRAD LABEL\n");
+// 	if (!(exist_label(name, data)))
+// 		return ;
+// 	unknw = ft_strdup("XXXX");
+// 	tmp = ft_strdup(*hexa);
+// 	ft_strdel(hexa);
+// 	(*hexa) = ft_strjoin(tmp, unknw);
+// 	ft_strdel(&tmp);
+// 	ft_strdel(&unknw);
+// }
+
 void	trad_label(char *name, char **hexa, t_data **data, int op_code)
 {
+	int		i_called;
+	int		i_declared;
 	char	*tmp;
-	char	*unknw;
 
+	i_called = 0;
+	i_declared = 0;
 	tmp = NULL;
-	unknw = NULL;
-	(void)op_code;
 	ft_printf("TRAD LABEL\n");
 	if (!(exist_label(name, data)))
 		return ;
-	unknw = ft_strdup("XXXX");
-	tmp = ft_strdup(*hexa);
-	ft_strdel(hexa);
-	(*hexa) = ft_strjoin(tmp, unknw);
-	ft_strdel(&tmp);
-	ft_strdel(&unknw);
+	define_index(name, data, &i_called, &i_declared);
+	if (i_called < i_declared)
+		tmp = ft_itoabase_imax(front_decl((*data)->lst_lines, i_called, i_declared), 16);
+	else
+		tmp = ft_itoabase_imax(back_decl((*data)->lst_lines, i_called, i_declared), 16);
 }
 
 void	trad_dir_size_2(char *arg, char **hexa, t_data **data, int op_code)
@@ -72,7 +91,6 @@ void	trad_dir_without_label(char *arg, char **hexa, t_data **data, int op_code)
 	int		size;
 
 	size = op_tab[op_code - 1].lbl_size;
-	ft_printf(">>>>>>>>> Size : %d\n", size);
 	if (size == 0)
 		trad_ind(arg, hexa, data, op_code);
 	else if (size == 4)
@@ -82,11 +100,20 @@ void	trad_dir_without_label(char *arg, char **hexa, t_data **data, int op_code)
 
 }
 
+static void	tmp_trad_dir_label(char *arg, char **hexa)
+{
+	char	*tmp;
+
+	tmp = ft_strdup(*hexa);
+	ft_strdel(hexa);
+	(*hexa) = ft_strjoin(tmp, arg);
+}
+
 void	trad_dir(char *arg, char **hexa, t_data **data, int op_code)
 {
 	ft_putstr("TRAD DIR\n");
 	if (arg[1] == ':')
-		trad_label(ft_strsub(arg, 2, ft_strlen(arg)), hexa, data, op_code);
+		tmp_trad_dir_label(arg, hexa);
 	else
 		trad_dir_without_label(ft_strsub(arg, 1, ft_strlen(arg)), hexa, data, op_code);
 }

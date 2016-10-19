@@ -62,5 +62,7 @@ int		check_instruct(char *line, char *name, t_data **data, t_data_line *dline)
 	label_called(dline, recup.args_tab);
 	ft_lstdbladd_head(recup.lst_hexa, &hex, sizeof(t_hexa));
 	ft_lstdbladd_head((*data)->lst_recup, &recup, sizeof(t_recup));
+	show_trad((*data)->lst_recup);
+
 	return (1);
 }

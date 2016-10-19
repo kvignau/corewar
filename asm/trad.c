@@ -33,6 +33,7 @@ void	trad_args(t_recup *recup, char **hexa, t_data **data, int op_code)
 	recup->lst_hexa = ft_lstdblnew();
 	i = 0;
 	ft_putstr("Trad_args\n");
+	ft_printf("(*hexa) : %s\n", (*hexa));
 	while (recup->args_tab[i])
 	{
 		ft_printf("recup->args_tab[i] : %s\n", recup->args_tab[i]);
@@ -90,7 +91,7 @@ void	trad_to_str(t_data **data)
 	ft_printf(">>>>>> STR EN COURS :\n");
 	while (tmp != NULL)
 	{
-		ft_printf("\ntmp de trap debut boucle : %s\n", trad);
+		// ft_printf("\ntmp de trap debut boucle : %s\n", trad);
 
 		if (trad == NULL)
 			tmp2 = ft_strnew(sizeof(char *));
@@ -107,11 +108,11 @@ void	trad_to_str(t_data **data)
 		}
 		else
 		{
-			// ft_putstr(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
-			label = ft_strdup(((t_recup *)((tmp)->content))->label_name);
-			trad = ft_strjoin(tmp2, label);
-			ft_strdel(&label);
-			// trad = ft_strdup(tmp2);
+			// // ft_putstr(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+			// label = ft_strdup(((t_recup *)((tmp)->content))->label_name);
+			// trad = ft_strjoin(tmp2, label);
+			// ft_strdel(&label);
+			trad = ft_strdup(tmp2);
 		}
 		// ft_printf("tmp de trap fin boucle : %s\n", trad); //debug
 		ft_strdel(&tmp2);
