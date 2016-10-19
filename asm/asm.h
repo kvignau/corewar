@@ -64,6 +64,8 @@ typedef struct 		s_data
 	t_dbllist		*label_kw; //usefull ?
 	t_dbllist		*lst_recup;
 	t_dbllist		*lst_lines;
+	char			*tmp_trad;
+	char			*trad;
 }					t_data;
 
 typedef struct 		s_lab
@@ -127,7 +129,6 @@ int					is_dir(char *arg);
 **********************  Transformation  ****************
 */
 
-// int					trad(t_data **data);
 void				sum_args(t_recup *recup, char **hexa);
 void				trad_reg(char *arg, char **hexa, t_data **data, int op_code);
 void				trad_ind(char *arg, char **hexa, t_data **data, int op_code);
@@ -148,7 +149,8 @@ int					find_in_tb_char(char *name, char **label_called);
 void				define_index(char *name, t_data **data, int *i_called, int *i_declared);
 int					front_decl(t_dbllist *lst_lines, int i_called, int i_declared);
 int					back_decl(t_dbllist *lst_lines, int i_called, int i_declared);
-
+void				trad_dir_label(t_data **data);
+void				tmp_trad_to_str(t_data **data);
 
 /*
 **********************  Display  ***********************
