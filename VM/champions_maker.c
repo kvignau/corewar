@@ -12,72 +12,125 @@
 
 #include "corewar.h"
 
-int	reverse_byte(int num)
+int		reverse_byte(int buf, int readv)
 {
-	if ((sizeof(num) * 8) == 32) // if 32bit
-		return (((num >> 24) & 0xff) | // move byte 3 to byte 0
-				((num << 8) & 0xff0000) | // move byte 1 to byte 2
-				((num >> 8) & 0xff00) | // move byte 2 to byte 1
-				((num << 24) & 0xff000000)); // byte 0 to byte 3
+	if (readv == (sizeof(int)))
+		return (((buf >> 24) & 0xff) |
+				((buf << 8) & 0xff0000) |
+				((buf >> 8) & 0xff00) |
+				((buf << 24) & 0xff000000));
+	else if (readv == 3)
+		return (((buf << 16) & 0xff0000)) |
+				((buf << 0) & 0xff00) |
+				((buf >> 16) & (0xff));
+	else if (readv == 2)
+		return (((buf << 8) & 0xff00) | (buf >> 8));
 	else
-		return (num >> 8) | (num << 8); // 16 bit
+		return(buf);
 }
 
-int	champion_validity_checker(t_var *var)
+int		filetotab(int **stock, int *file_size, t_var *var)
 {
-	ft_printf("champion_validity_checker\n");
-	int					fd;
-	int					readv;
-	int					buf;
-	int					max_v;
-	int					stock[COR_MAX_VALUE];
-	//ft_printf("argv[%d]: %s\n", var->i, var->argv[var->i]);
-	max_v = 0;
+	int	fd;
+	int	buf;
+	int	readv;
+
 	if ((fd = open(var->argv[var->i], O_RDONLY)) == -1)
 		return (0);
 	while ((readv = read(fd, &buf, sizeof(int))) != 0)
 	{
+		ft_printf("||file_size||: [%d]\n", *file_size);
 		if (readv == -1)
-			return (0);
-		else if (max_v > COR_MAX_VALUE)
-		{
-			ft_putstr_fd("File must be ",2);
-			ft_putnbr_fd(COR_MAX_VALUE, 2);
-			ft_putstr_fd("bytes or less to be a valid .cor\n", 2);
-			return (0);
-		}
+			return (-1);
+		else if ((*file_size + readv * 2) > COR_MAX_VALUE)
+			return (-2);
 		else
 		{
-			buf = reverse_byte(buf);
-			ft_memcpy(&stock[max_v], &buf, sizeof(int));
-			ft_printf("%.8x ||  ", stock[0]);
-			ft_printf("%.8x\n", stock[max_v]);
+			buf = reverse_byte(buf, readv);
+			ft_memcpy(&(*stock)[*file_size / sizeof(int)], &buf, sizeof(int));
 			buf = 0;
-			max_v += 1;
+			*file_size += readv * 2;
 		}
 	}
-	ft_printf("max_v %d\n", max_v);
-	ft_printf("readv : %d\n", readv);
-	int i = 0;
-	while (i < max_v)
-	{
-		ft_printf("%.8x\n", stock[i]);
-		i++;
-	}
-	//ft_printf("champ_byte: %s\n", champ_byte);
+	return (((*file_size) < COR_MIN_VALUE) ? -3 : 1);
+}
 
-	//write(1, champ_byte, 2269);
-	ft_printf("\n");
-	//ft_printf("%x\n", champ_byte);
-	/*while (i < readv/4)
+void	invalid_file(int error, t_var *var)
+{
+	if (error == 1)
 	{
-		ft_printf("%x",champ_byte[i]);
+		ft_putstr_fd("File ", 2);
+		ft_putstr_fd(var->argv[var->i], 2);
+		ft_putstr_fd(" must be at most ",2);
+		ft_putnbr_fd(COR_MAX_VALUE, 2);
+		ft_putstr_fd(" bytes to be a valid champion\n", 2);
+	}
+	else if (error == 2)
+	{
+		ft_putstr_fd("File ", 2);
+		ft_putstr_fd(var->argv[var->i], 2);
+		ft_putstr_fd("must be at least ", 2);
+		ft_putnbr_fd(COR_MIN_VALUE, 2);
+		ft_putstr_fd(" bytes to be a valid champion\n", 2);
+	}
+	else if (error == 3)
+	{
+		ft_putstr_fd("File ", 2);
+		ft_putstr_fd(var->argv[var->i], 2);
+		ft_putstr_fd(" has an invalid header\n", 2);
+	}
+}
+
+void	error_manager(int ret, t_var *var)
+{
+	ft_putstr_fd("Error: ", 2);
+	if (ret == 0)
+		ft_putstr_fd("Open error\n", 2);
+	else if (ret == -1)
+		ft_putstr_fd("Read error\n", 2);
+	else if (ret == -2)
+		invalid_file(1, var);
+	else if (ret == -3)
+		invalid_file(2, var);
+	else if (ret == -4)
+		invalid_file(3, var);
+}
+
+int		champion_validity_checker(t_var *var)
+{
+	ft_printf("champion_validity_checker\n");
+	int					file_size;
+	int					*stock;
+	int					ret;
+	int i = 0;
+
+	file_size = 0;
+	stock = (int *)ft_memalloc(COR_MAX_VALUE * 2);
+	if ((ret = filetotab(&stock, &file_size, var)) != 1)
+	{
+		error_manager(ret, var);
+		return (0);
+	}
+	ft_printf("ret: %d\n", ret);
+	if (COREWAR_EXEC_MAGIC != stock[0])
+	{
+		error_manager(-4, var);
+		return(0);
+	}
+	ft_printf("BOB :  %.8x\n", stock[PROG_NAME_LENGTH / 2 + EXEC_MAGIC_LENGTH]);
+	/*while (i < file_size)
+	{
+		ft_printf("%.8x\n",stock[i]);
 		i++;
 	}*/
+	ft_printf("COR_MAX_VALUE : %d\n", COR_MAX_VALUE);
+	ft_printf("file_size: %d\n", file_size);
+	ft_printf("%d\n", COR_MIN_VALUE);
+	ft_printf("%d\n", sizeof(&stock));
 	return (1);
 }
 
-int	set_champion(t_var *var, t_options *opt, t_champ *champ)
+int		set_champion(t_var *var, t_options *opt, t_champ *champ)
 {
 	ft_printf("set_champion\n");
 	static int			id = 1;
@@ -100,7 +153,7 @@ int	set_champion(t_var *var, t_options *opt, t_champ *champ)
 	return(1);
 }
 
-int	champions_maker(t_dbllist *champ_list, t_options *options, t_var *var)
+int		champions_maker(t_dbllist *champ_list, t_options *options, t_var *var)
 {
 	t_champ				champ;
 
