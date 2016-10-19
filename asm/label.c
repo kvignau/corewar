@@ -19,8 +19,11 @@ int		index_label_declared(char *name, t_dbllist *lst_lines)
 	tmp = lst_lines->tail;
 	while (tmp != NULL)
 	{
-		if (!(ft_strcmp(name, ((t_data_line *)((tmp)->content))->label_declared)))
-			return (((t_data_line *)((tmp)->content))->index);
+		if (((t_data_line *)((tmp)->content))->label_declared)
+		{
+			if (!(ft_strcmp(name, ((t_data_line *)((tmp)->content))->label_declared)))
+				return (((t_data_line *)((tmp)->content))->index);
+		}
 		tmp = tmp->prev;
 	}
 	return (-1);

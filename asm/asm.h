@@ -52,6 +52,7 @@ typedef struct 		s_data_line
 	int				nb_oct;
 	char			*label_declared;
 	char			**label_called;
+	int				trad;
 }					t_data_line;
 
 typedef struct 		s_data

@@ -36,6 +36,32 @@ static void	make_args_tab(char *line, char *name, t_recup *recup)
 	ft_strtrim_tab(recup->args_tab);
 }
 
+int		sum_nb_oct(char *hex)
+{
+	int		i;
+	int		nb_oct;
+	int		nb_dir_lbl;
+
+	i = 0;
+	nb_oct = 0;
+	nb_dir_lbl = 0;
+	while (hex[i])
+	{
+		if (hex[i] == '%')
+		{
+			while (hex[i] != '!')
+				i++;
+			nb_dir_lbl++;
+		}
+		else
+			nb_oct++;
+		i++;
+	}
+	ft_printf("nb_oct : %d\n",nb_oct);
+	ft_printf(">>>>>>>>>>>>>>>>>>>nb_oct : %d\n, nb_dir_lbl : %d\n",(nb_oct / 2) + (nb_dir_lbl * 2), nb_dir_lbl);
+	return ((nb_oct / 2) + (nb_dir_lbl * 2));
+}
+
 int		check_instruct(char *line, char *name, t_data **data, t_data_line *dline)
 {
 	char	*args;
@@ -58,11 +84,10 @@ int		check_instruct(char *line, char *name, t_data **data, t_data_line *dline)
 	}
 	sum_args(&recup, &hex.hexa);
 	trad_args(&recup, &hex.hexa, data, recup.op_code);
-	dline->nb_oct = ft_strlen(hex.hexa) / 2;
+	dline->nb_oct = sum_nb_oct(hex.hexa);
 	label_called(dline, recup.args_tab);
 	ft_lstdbladd_head(recup.lst_hexa, &hex, sizeof(t_hexa));
 	ft_lstdbladd_head((*data)->lst_recup, &recup, sizeof(t_recup));
 	show_trad((*data)->lst_recup);
-
 	return (1);
 }

@@ -88,6 +88,8 @@ int		find_in_tb_char(char *name, char **label_called)
 	i = 0;
 	while (label_called[i] != NULL)
 	{
+		ft_printf("label_called[i] : %s\n", label_called[i]);
+		ft_printf("name : %s\n", name);
 		if (ft_strcmp(label_called[i], name) == 0)
 			return (1);
 		i++;
