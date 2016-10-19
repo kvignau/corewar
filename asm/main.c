@@ -31,6 +31,12 @@ int			main(int argc, char **argv)
 		error(data, "Please provide a .s file");
 	//display_file(data);
 	recovery(data);
-	show_trad(data->lst_recup);
+	tmp_trad_to_str(&data); // debug
+	show_dline(data->lst_lines); // debug
+	trad_dir_label(&data);
+	show_label_lst(data->label_kw);
+	// label_position();
+	// str de trad
+	// show_trad(data->lst_recup);
 	return (0);
 }

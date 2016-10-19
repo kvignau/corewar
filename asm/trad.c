@@ -16,7 +16,6 @@ void	trad_name_instruct(int op_code, char **hexa)
 {
 	char		*new;
 
-	ft_putstr("trad_name_instruct\n");
 	new = ft_itoabase_imax(op_code, 16);
 	hex_to_lower(&new);
 	add_zero(&new, 2);
@@ -24,7 +23,7 @@ void	trad_name_instruct(int op_code, char **hexa)
 	ft_strdel(&new);
 }
 
-void	trad_args(t_recup *recup, char **hexa, t_data **data)
+void	trad_args(t_recup *recup, char **hexa, t_data **data, int op_code)
 {
 	int						i;
 	static const t_trad		ft_trad[] = {trad_reg, trad_dir, trad_ind};
@@ -32,12 +31,13 @@ void	trad_args(t_recup *recup, char **hexa, t_data **data)
 
 	recup->lst_hexa = ft_lstdblnew();
 	i = 0;
-	ft_putstr("Trad_args\n");
+	// ft_putstr("Trad_args\n");
+	// ft_printf("(*hexa) : %s\n", (*hexa));
 	while (recup->args_tab[i])
 	{
-		ft_printf("recup->args_tab[i] : %s\n", recup->args_tab[i]);
+		// ft_printf("recup->args_tab[i] : %s\n", recup->args_tab[i]);
 		trad = ft_trad[define_trad_fct(recup->args_tab[i])];
-		trad(recup->args_tab[i], hexa, data);
+		trad(recup->args_tab[i], hexa, data, op_code);
 		i++;
 	}
 }
@@ -73,4 +73,40 @@ void	sum_args(t_recup *recup, char **hexa)
 	tmp = ft_strdup(*hexa);
 	ft_strdel(hexa);
 	(*hexa) = ft_strjoin(tmp, ft_itoabase_imax(sum, 16));
+}
+
+void	tmp_trad_to_str(t_data **data)
+{
+	t_elem	*tmp;
+	char	*trad;
+	char	*tmp2;
+	char	*new;
+
+	tmp = ((*data)->lst_recup)->tail;
+	trad = NULL;
+	new = NULL;
+	while (tmp != NULL)
+	{
+		if (trad == NULL)
+			tmp2 = ft_strnew(sizeof(char *));
+		else
+		{
+			tmp2 = ft_strdup(trad);
+			ft_strdel(&trad);
+		}
+		if (((t_recup *)((tmp)->content))->lst_hexa)
+		{
+			new = lsthexa_tostr(((t_recup *)((tmp)->content))->lst_hexa);
+			trad = ft_strjoin(tmp2, new);
+		}
+		else
+			trad = ft_strdup(tmp2);
+		ft_strdel(&tmp2);
+		ft_strdel(&new);
+		tmp = tmp->prev;
+	}
+	(*data)->tmp_trad = ft_strdup(trad);
+	ft_strdel(&trad);
+	ft_printf("\n FINAL TRAD : %s\n", (*data)->tmp_trad);
+	// ft_printf("\n");
 }

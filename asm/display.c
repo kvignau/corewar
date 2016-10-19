@@ -97,7 +97,7 @@ void	show_lst_recup(t_dbllist *lst)
 	ft_printf("\n");
 }
 
-static char	*lsthexa_tostr(t_dbllist *lst)
+char	*lsthexa_tostr(t_dbllist *lst)
 {
 	t_elem	*tmp;
 	char	*tmp2;
@@ -142,11 +142,8 @@ void	show_trad(t_dbllist *lst)
 	tmp = lst->tail;
 	trad = NULL;
 	new = NULL;
-	ft_printf(">>>>>> TRAD EN COURS :\n");
 	while (tmp != NULL)
 	{
-		ft_printf("\ntmp de trap debut boucle : %s\n", trad);
-
 		if (trad == NULL)
 			tmp2 = ft_strnew(sizeof(char *));
 		else
@@ -157,16 +154,31 @@ void	show_trad(t_dbllist *lst)
 		if (((t_recup *)((tmp)->content))->lst_hexa)
 		{
 			new = lsthexa_tostr(((t_recup *)((tmp)->content))->lst_hexa);
-			// ft_printf("new : %s\n", new); //debug
 			trad = ft_strjoin(tmp2, new);
 		}
 		else
 			trad = ft_strdup(tmp2);
-		// ft_printf("tmp de trap fin boucle : %s\n", trad); //debug
 		ft_strdel(&tmp2);
 		ft_strdel(&new);
 		tmp = tmp->prev;
 	}
 	ft_printf("\n FINAL TRAD : %s\n", trad);
 	ft_printf("\n");
+}
+
+void	show_dline(t_dbllist *lst)
+{
+	t_elem *tmp;
+
+	tmp = lst->tail;
+	while (tmp != NULL)
+	{
+		ft_printf("Index : %d\n", (((t_data_line *)((tmp)->content))->index));
+		ft_printf("Nb_oct : %d\n", (((t_data_line *)((tmp)->content))->nb_oct));
+		if ((((t_data_line *)((tmp)->content))->label_declared))
+			ft_printf("Label_declared : %s\n", (((t_data_line *)((tmp)->content))->label_declared));
+		if ((((t_data_line *)((tmp)->content))->label_called))
+			show_tab_char((((t_data_line *)((tmp)->content))->label_called));
+		tmp = tmp->prev;
+	}
 }

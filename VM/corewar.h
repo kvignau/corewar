@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 14:49:16 by mchevall          #+#    #+#             */
-/*   Updated: 2016/10/11 16:46:55 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/10/19 16:21:22 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int			champions_maker(t_dbllist *champ_list, t_options *options, t_var *var);
 **********************  Utils  **********************
 */
 
-uintmax_t	ft_hextoi(char *str);
-
+uintmax_t			ft_hextoi(char *str);
+char				*memory();
+void				ft_print_memory(char *ptr, int memsize);
 #endif
