@@ -6,7 +6,7 @@
 #    By: kvignau <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/04 10:52:32 by kvignau           #+#    #+#              #
-#    Updated: 2016/10/10 14:47:30 by mchevall         ###   ########.fr        #
+#    Updated: 2016/10/19 16:20:18 by kvignau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = corewar
 
 FLAGS += -Wall -Wextra -Werror -fsanitize=address
 
-SRC = main.c op.c corewar_usage.c options_checkers.c champions_maker.c
+SRC = main.c op.c corewar_usage.c options_checkers.c champions_maker.c print_memory.c memory.c
 
 OBJ = $(SRC:%.c=%.o)
 
