@@ -129,7 +129,22 @@ char	*lsthexa_tostr(t_dbllist *lst)
 		tmp = tmp->prev;
 	}
 	ft_strdel(&unkwn);
+	// ft_printf(">>>>>>>>>>> lsthexa_tostr : %s  <<<<<<<<< \n", new);
 	return (new);
+}
+
+void	show_final_trad(char *trad)
+{
+	int		i;
+
+	i = 0;
+	while (trad[i])
+	{
+		if (i != 0 && ((i % 4) == 0))
+			ft_putchar(' ');
+		ft_putchar(trad[i]);
+		i++;
+	}
 }
 
 void	show_trad(t_dbllist *lst)
@@ -166,6 +181,20 @@ void	show_trad(t_dbllist *lst)
 	ft_printf("\n");
 }
 
+static void		show_called(t_dbllist *lst)
+{
+	t_elem	*tmp;
+
+	tmp = lst->tail;
+	ft_printf("Lliste label called : \n");
+	while (tmp != NULL)
+	{
+		ft_printf("%s\n", ((t_called *)((tmp)->content))->name);
+		tmp = tmp->prev;
+	}
+
+}
+
 void	show_dline(t_dbllist *lst)
 {
 	t_elem *tmp;
@@ -178,7 +207,7 @@ void	show_dline(t_dbllist *lst)
 		if ((((t_data_line *)((tmp)->content))->label_declared))
 			ft_printf("Label_declared : %s\n", (((t_data_line *)((tmp)->content))->label_declared));
 		if ((((t_data_line *)((tmp)->content))->label_called))
-			show_tab_char((((t_data_line *)((tmp)->content))->label_called));
+			show_called((((t_data_line *)((tmp)->content))->label_called));
 		tmp = tmp->prev;
 	}
 }

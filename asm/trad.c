@@ -31,11 +31,8 @@ void	trad_args(t_recup *recup, char **hexa, t_data **data, int op_code)
 
 	recup->lst_hexa = ft_lstdblnew();
 	i = 0;
-	// ft_putstr("Trad_args\n");
-	// ft_printf("(*hexa) : %s\n", (*hexa));
 	while (recup->args_tab[i])
 	{
-		// ft_printf("recup->args_tab[i] : %s\n", recup->args_tab[i]);
 		trad = ft_trad[define_trad_fct(recup->args_tab[i])];
 		trad(recup->args_tab[i], hexa, data, op_code);
 		i++;

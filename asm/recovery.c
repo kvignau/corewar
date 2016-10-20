@@ -79,6 +79,7 @@ int		check_line(char *line, t_data **data)
 	i = 0;
 	name = NULL;
 	ft_bzero(&dline, sizeof(t_data_line));
+	dline.label_called = ft_lstdblnew();
 	dline.index = index_line;
 	while (line[i] != ' ' && line[i] != '\t')
 		i++;

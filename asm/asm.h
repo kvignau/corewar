@@ -46,13 +46,18 @@ typedef struct 		s_recup
 	int				nb_oct;
 }					t_recup;
 
+typedef struct 		s_called
+{
+	char			*name;
+	int				trad;
+}					t_called;
+
 typedef struct 		s_data_line
 {
 	int				index;
 	int				nb_oct;
 	char			*label_declared;
-	char			**label_called;
-	int				trad;
+	t_dbllist		*label_called;
 }					t_data_line;
 
 typedef struct 		s_data
@@ -146,10 +151,11 @@ void				label_called(t_data_line *dline, char **args_tab);
 void				trad_dir_without_label(char *arg, char **hexa, t_data **data, int op_code);
 int					index_label_called(char *name, t_dbllist *lst_lines);
 int					index_label_declared(char *name, t_dbllist *lst_lines);
-int					find_in_tb_char(char *name, char **label_called);
+// int					find_in_tb_char(char *name, char **label_called);
+int					find_in_lst_called(char *name, t_dbllist *label_called);
 void				define_index(char *name, t_data **data, int *i_called, int *i_declared);
-int					front_decl(t_dbllist *lst_lines, int i_called, int i_declared);
-int					back_decl(t_dbllist *lst_lines, int i_called, int i_declared);
+int					front_decl(t_dbllist **lst_lines, int i_called, int i_declared);
+int					back_decl(char *lbl_called, t_dbllist **lst_lines, int i_called, int i_declared);
 void				trad_dir_label(t_data **data);
 void				tmp_trad_to_str(t_data **data);
 
@@ -164,6 +170,8 @@ void				show_tab_char(char **tab);
 void				show_trad(t_dbllist *lst);
 void				show_lst_hexa(t_dbllist *lst);
 void				show_dline(t_dbllist *lst);
+void				show_final_trad(char *trad);
+
 /*
 **********************  No leaks  **********************
 */

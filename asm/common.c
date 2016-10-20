@@ -81,18 +81,32 @@ void	add_zero(char **str, int width)
 	}
 }
 
-int		find_in_tb_char(char *name, char **label_called)
-{
-	int		i;
+// int		find_in_tb_char(char *name, char **label_called)
+// {
+// 	int		i;
 
-	i = 0;
-	while (label_called[i] != NULL)
+// 	i = 0;
+// 	while (label_called[i] != NULL)
+// 	{
+// 		ft_printf("label_called[i] : %s\n", label_called[i]);
+// 		ft_printf("name : %s\n", name);
+// 		if (ft_strcmp(label_called[i], name) == 0)
+// 			return (1);
+// 		i++;
+// 	}
+// 	return (0);
+// }
+
+int			find_in_lst_called(char *name, t_dbllist *label_called)
+{
+	t_elem	*tmp;
+
+	tmp = label_called->tail;
+	while (tmp != NULL)
 	{
-		ft_printf("label_called[i] : %s\n", label_called[i]);
-		ft_printf("name : %s\n", name);
-		if (ft_strcmp(label_called[i], name) == 0)
+		if (ft_strcmp(((t_called *)((tmp)->content))->name, name) == 0)
 			return (1);
-		i++;
+		tmp = tmp->prev;
 	}
 	return (0);
 }

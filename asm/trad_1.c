@@ -48,25 +48,6 @@ void	trad_reg(char *arg, char **hexa, t_data **data, int op_code)
 // 	ft_strdel(&unknw);
 // }
 
-void	trad_label(char *name, char **hexa, t_data **data, int op_code)
-{
-	int		i_called;
-	int		i_declared;
-	char	*tmp;
-
-	i_called = 0;
-	i_declared = 0;
-	tmp = NULL;
-	ft_printf("TRAD LABEL\n");
-	if (!(exist_label(name, data)))
-		return ;
-	define_index(name, data, &i_called, &i_declared);
-	if (i_called < i_declared)
-		tmp = ft_itoabase_imax(front_decl((*data)->lst_lines, i_called, i_declared), 16);
-	else
-		tmp = ft_itoabase_imax(back_decl((*data)->lst_lines, i_called, i_declared), 16);
-}
-
 void	trad_dir_size_2(char *arg, char **hexa, t_data **data, int op_code)
 {
 	char	*tmp;
@@ -91,9 +72,7 @@ void	trad_dir_without_label(char *arg, char **hexa, t_data **data, int op_code)
 	int		size;
 
 	size = op_tab[op_code - 1].lbl_size;
-	if (size == 0)
-		trad_ind(arg, hexa, data, op_code);
-	else if (size == 4)
+	if (size == 4)
 		trad_ind(arg, hexa, data, op_code);
 	else if (size == 2)
 		trad_dir_size_2(arg, hexa, data, op_code);
