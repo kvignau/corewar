@@ -96,7 +96,7 @@ void	error_manager(int ret, t_var *var)
 		invalid_file(3, var);
 }
 
-int		champion_validity_checker(t_var *var)
+int		champion_validity_checker(t_var *var, t_champ *champ)
 {
 	ft_printf("champion_validity_checker\n");
 	int					file_size;
@@ -117,6 +117,8 @@ int		champion_validity_checker(t_var *var)
 		error_manager(-4, var);
 		return(0);
 	}
+	ft_printf
+	ft_printf("Hello: %s\n", ft_hextoa(&stock[EXEC_MAGIC_LENGTH / 2], PROG_NAME_LENGTH / 8));
 	ft_printf("BOB :  %.8x\n", stock[PROG_NAME_LENGTH / 2 + EXEC_MAGIC_LENGTH]);
 	/*while (i < file_size)
 	{
@@ -148,7 +150,7 @@ int		set_champion(t_var *var, t_options *opt, t_champ *champ)
 		champ->vm_number = &vm_number;
 		vm_number--;
 	}
-	if (champion_validity_checker(var) == 0)
+	if (champion_validity_checker(var, champ) == 0)
 		return (0);
 	return(1);
 }

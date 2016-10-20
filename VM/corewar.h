@@ -41,6 +41,7 @@ typedef struct		s_champ
 	char			*name;
 	char			*comment;
 	unsigned int	*vm_number;
+	unsigned int	champ_size;
 }					t_champ;
 
 typedef struct		s_var
@@ -73,6 +74,7 @@ int			champions_maker(t_dbllist *champ_list, t_options *options, t_var *var);
 */
 
 uintmax_t			ft_hextoi(char *str);
+char				*ft_hextoa(int *str, int size);
 char				*memory();
 void				ft_print_memory(char *ptr, int memsize);
 #endif
