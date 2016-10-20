@@ -15,11 +15,21 @@
 char	*ft_hextoa(int *str, int size)
 {
 	int		i;
+	int		j;
+	char	*hex;
 
 	i = 0;
-	while (i < size)
+	j = 0;
+	hex = (char *)ft_memalloc(size + 1);
+	while (i <= size)
 	{
-		i++;
+		hex[j] = str[i] >> 24;
+		hex[j + 1] = str[i] >> 16;
+		hex[j + 2] = str[i] >> 8;
+		hex[j + 3] = str[i];
+		j += 4;
+		i += 2;
 	}
-	return (0);
+	hex[j] = '\0';
+	return (hex);
 }

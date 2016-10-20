@@ -52,7 +52,7 @@ int		filetotab(int **stock, int *file_size, t_var *var)
 			*file_size += readv * 2;
 		}
 	}
-	return (((*file_size) < COR_MIN_VALUE) ? -3 : 1);
+	return (((*file_size) <= COR_MIN_VALUE) ? -3 : 1);
 }
 
 void	invalid_file(int error, t_var *var)
@@ -70,7 +70,7 @@ void	invalid_file(int error, t_var *var)
 		ft_putstr_fd("File ", 2);
 		ft_putstr_fd(var->argv[var->i], 2);
 		ft_putstr_fd("must be at least ", 2);
-		ft_putnbr_fd(COR_MIN_VALUE, 2);
+		ft_putnbr_fd(COR_MIN_VALUE + 1, 2);
 		ft_putstr_fd(" bytes to be a valid champion\n", 2);
 	}
 	else if (error == 3)
@@ -124,21 +124,25 @@ int		champion_validity_checker(t_var *var, t_champ *champ)
 		ft_printf("[%d] : %.8x\n", i, stock[i + j]);
 		j += 2;
 	}
-	//champ->name = ft_hextoa(&stock[EXEC_MAGIC_LENGTH / 2], PROG_NAME_LENGTH / 2);
-	//champ->size = ft_hextoa(&stock[(PROG_NAME_LENGTH / 2 + EXEC_MAGIC_LENGTH], 1);
-	//champ->comment = ft_hextoa(&stock[EXEC_MAGIC_LENGTH + PROG_NAME_LENGTH / 2 + 2], COMMENT_LENGTH / 2);
+	champ->name = ft_hextoa(&stock[EXEC_MAGIC_LENGTH / 2], PROG_NAME_LENGTH);
+	champ->size = stock[PROG_NAME_LENGTH / 2 + EXEC_MAGIC_LENGTH];
+	champ->comment = ft_hextoa(&stock[EXEC_MAGIC_LENGTH + PROG_NAME_LENGTH / 2 + 2], COMMENT_LENGTH);
 
 	//ft_printf("Hello: %s\n", ft_hextoa(&stock[EXEC_MAGIC_LENGTH / 2], PROG_NAME_LENGTH / 8));
 	//ft_printf("BOB :  %.8x\n", stock[PROG_NAME_LENGTH / 2 + EXEC_MAGIC_LENGTH]);
-	/*while (i < file_size / 4)
+	i = 0;
+	while (i <= file_size / 4)
 	{
-		ft_printf("%.8x\n",stock[i]);
-		i++;
-	}*/
+		ft_printf("%.x\n",stock[i]);
+		i+= 2;
+	}
 	ft_printf("COR_MAX_VALUE : %d\n", COR_MAX_VALUE);
 	ft_printf("file_size: %d\n", file_size);
 	ft_printf("%d\n", COR_MIN_VALUE);
 	ft_printf("%d\n", sizeof(&stock));
+	ft_printf("yo : %d\n", champ->size);
+	ft_printf("%s\n", champ->name);
+	ft_printf("%s\n", champ->comment);
 	return (1);
 }
 
