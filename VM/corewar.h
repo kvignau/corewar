@@ -11,12 +11,11 @@
 /* ************************************************************************** */
 
 #ifndef COREWAR_H
-#define COREWAR_H
-
+# define COREWAR_H
 # include "op.h"
 # include "../libftprintf/includes/ft_printf.h"
+# define OPTIONS 		"dsn"
 
-# define OPTIONS "dsn"
 
 /*
 **********************  Structures  **********************
@@ -42,6 +41,7 @@ typedef struct		s_champ
 	char			*name;
 	char			*comment;
 	unsigned int	*vm_number;
+	unsigned int	size;
 }					t_champ;
 
 typedef struct		s_var
@@ -55,25 +55,26 @@ typedef struct		s_var
 **********************  Display  **********************
 */
 
-int					corewar_usage(int argc);
+int			corewar_usage(int argc);
 
 /*
 **********************  Options  **********************
 */
 
-int					options_checkers(int argc, char **argv, t_options *options, t_dbllist *champ_list);
+int			options_checkers(int argc, char **argv, t_options *options, t_dbllist *champ_list);
 
 /*
 **********************  Checkers  **********************
 */
 
-int					champions_maker(t_dbllist *champ_list, t_options *options, t_var *var);
+int			champions_maker(t_dbllist *champ_list, t_options *options, t_var *var);
 
 /*
 **********************  Utils  **********************
 */
 
-uintmax_t			mini_hextoi(char *str);
+uintmax_t			ft_hextoi(char *str);
+char				*ft_hextoa(int *str, int size);
 char				*memory();
 void				ft_print_memory(char *ptr, int memsize);
 #endif

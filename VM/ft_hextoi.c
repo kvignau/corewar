@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hextoi.c                                           :+:      :+:    :+:   */
+/*   ft_hextoi.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,9 +12,9 @@
 
 #include "corewar.h"
 
-static intmax_t	ft_mini_power(int nb, int power)
+static unsigned intmax_t	ft_mini_power(int nb, int power)
 {
-	int	value;
+	unsigned intmax_t	value;
 
 	value = 1;
 	if (power == 0)
@@ -29,12 +29,12 @@ static intmax_t	ft_mini_power(int nb, int power)
 	return (value);
 }
 
-uintmax_t		hextoi(char *str)
+unsigned intmax_t			ft_hextoi(char *str)
 {
-	int			i;
-	int			j;
-	int			len;
-	uintmax_t	value;
+	int					i;
+	int					j;
+	int					len;
+	uintmax_t			value;
 
 	len = ft_strlen(str) - 1;
 	i = 0;
