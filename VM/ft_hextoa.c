@@ -19,7 +19,7 @@ char	*ft_hextoa(int *str, int size)
 	i = 0;
 	while (i < size)
 	{
-
+		i++;
 	}
-
+	return (0);
 }

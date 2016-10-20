@@ -41,7 +41,7 @@ typedef struct		s_champ
 	char			*name;
 	char			*comment;
 	unsigned int	*vm_number;
-	unsigned int	champ_size;
+	unsigned int	size;
 }					t_champ;
 
 typedef struct		s_var
