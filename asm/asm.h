@@ -27,6 +27,16 @@
 **********************  Structures  **********************
 */
 
+typedef struct 		s_final_trad
+{
+	char			*magic;
+	char			*name;
+	char			*total_oct;
+	char			*comment;
+	char			*instruct;
+
+}					t_final_trad;
+
 typedef struct 		s_hexa
 {
 	char			*hexa;
@@ -159,7 +169,7 @@ int					back_decl(char *lbl_called, t_dbllist **lst_lines, int i_called, int i_d
 void				trad_dir_label(t_data **data);
 void				tmp_trad_to_str(t_data **data);
 
-void				begin_trad(t_data *data);
+void				begin_trad(t_data *data, int nb_oct);
 
 /*
 **********************  Display  ***********************

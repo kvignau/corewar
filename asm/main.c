@@ -32,7 +32,7 @@ int			main(int argc, char **argv)
 	recovery(data);
 	tmp_trad_to_str(&data); // debug
 	trad_dir_label(&data);
-	begin_trad(data);
+	begin_trad(data, ft_strlen(data->tmp_trad) / 2);
 	show_final_trad(data->tmp_trad);
 
 	return (0);

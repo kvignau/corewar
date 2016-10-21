@@ -24,7 +24,7 @@ void	string_to_hex(char *str, char **new)
 	while (str[i])
 	{
 		tmp = ft_itoabase_imax(str[i], 16);
-		ft_printf("tmp : %s\n", tmp);
+		// ft_printf("tmp : %s\n", tmp);
 		if (*new == NULL)
 			*new = ft_strdup(tmp);
 		else
@@ -46,24 +46,41 @@ void	add_zero_after(char **str, int nb)
 	i = 0;
 	tmp = ft_strdup("0");
 	new = NULL;
-	add_zero(&tmp, nb - 1);
+	add_zero(&tmp, nb - 1 - ft_strlen(*str));
 	new = ft_strjoin(*str, tmp);
 	ft_strdel(str);
 	*str = ft_strdup(new);
 	ft_strdel(&new);
 }
 
-void	begin_trad(t_data *data)
+void	concat_all_trad(t_data **data, t_final_trad all_trad)
 {
-	char	*name;
-	char	*comment;
-	char	*magic;
+	char	*tmp;
+	char	*tmp1;
 
-	name = NULL;
-	comment = NULL;
-	magic = ft_strdup("00ea83f3");
-	string_to_hex(data->name, &name);
-	add_zero_after(&name, 270);
-	string_to_hex(data->comment, &comment);
-	add_zero_after(&comment, 4106); // ajouter le nombre doctet total
+	tmp = ft_strjoin(all_trad.magic, all_trad.name);
+	tmp1 = ft_strjoin(tmp, all_trad.total_oct);
+	ft_strdel(&tmp);
+	tmp = ft_strjoin(tmp1, all_trad.comment);
+	ft_strdel(&tmp1);
+	tmp1 = ft_strjoin(tmp, (*data)->tmp_trad);
+	ft_strdel(&tmp);
+	ft_strdel(&(*data)->tmp_trad);
+	(*data)->tmp_trad = ft_strdup(tmp1);
+	ft_strdel(&tmp1);
+}
+
+void	begin_trad(t_data *data, int nb_oct)
+{
+	t_final_trad	all_trad;
+
+	ft_bzero(&all_trad, sizeof(t_final_trad));
+	all_trad.magic = ft_strdup("00ea83f3");
+	string_to_hex(data->name, &all_trad.name);
+	add_zero_after(&all_trad.name, 270);
+	all_trad.total_oct = ft_itoabase_imax(nb_oct, 16);
+	string_to_hex(data->comment, &all_trad.comment);
+	add_zero_after(&all_trad.comment, 4106);
+	concat_all_trad(&data, all_trad);
+	hex_to_lower(&(data->tmp_trad));
 }

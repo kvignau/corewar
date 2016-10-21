@@ -127,8 +127,10 @@ void	show_final_trad(char *trad)
 	i = 0;
 	while (trad[i])
 	{
-		if (i != 0 && ((i % 4) == 0))
+		if (i != 0 && ((i % 4) == 0) && (i % 32) != 0)
 			ft_putchar(' ');
+		else if ((i % 32) == 0)
+			ft_putchar('\n');
 		ft_putchar(trad[i]);
 		i++;
 	}
