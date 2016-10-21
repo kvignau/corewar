@@ -159,6 +159,8 @@ int					back_decl(char *lbl_called, t_dbllist **lst_lines, int i_called, int i_d
 void				trad_dir_label(t_data **data);
 void				tmp_trad_to_str(t_data **data);
 
+void				begin_trad(t_data *data);
+
 /*
 **********************  Display  ***********************
 */

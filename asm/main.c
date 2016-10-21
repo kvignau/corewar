@@ -29,12 +29,11 @@ int			main(int argc, char **argv)
 	}
 	else
 		error(data, "Please provide a .s file");
-	//display_file(data);
 	recovery(data);
 	tmp_trad_to_str(&data); // debug
-	// show_dline(data->lst_lines); // debug
-	// show_trad(data->lst_recup);
 	trad_dir_label(&data);
+	begin_trad(data);
 	show_final_trad(data->tmp_trad);
+
 	return (0);
 }
