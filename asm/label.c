@@ -87,16 +87,11 @@ void	label_called(t_data_line *dline, char **args_tab)
 	int				nb_called;
 	int				j;
 	t_called		info_called;
-	// char	*label_name;
 
 	i = 0;
 	j = 0;
 	nb_called = 0;
-	// label_name = NULL;
 	ft_bzero(&info_called, sizeof(t_called));
-	// nb_label_called(args_tab, &nb_called);
-	// if (nb_called != 0)
-	// 	dline->label_called = (char **)malloc(sizeof(char *) * nb_called);
 	while (args_tab[i])
 	{
 		if (is_dir_with_label(args_tab[i]))

@@ -104,6 +104,4 @@ void	tmp_trad_to_str(t_data **data)
 	}
 	(*data)->tmp_trad = ft_strdup(trad);
 	ft_strdel(&trad);
-	ft_printf("\n FINAL TRAD : %s\n", (*data)->tmp_trad);
-	// ft_printf("\n");
 }

@@ -29,25 +29,6 @@ void	trad_reg(char *arg, char **hexa, t_data **data, int op_code)
 	ft_strdel(&to_compete);
 }
 
-// void	trad_label(char *name, char **hexa, t_data **data, int op_code)
-// {
-// 	char	*tmp;
-// 	char	*unknw;
-
-// 	tmp = NULL;
-// 	unknw = NULL;
-// 	(void)op_code;
-// 	ft_printf("TRAD LABEL\n");
-// 	if (!(exist_label(name, data)))
-// 		return ;
-// 	unknw = ft_strdup("XXXX");
-// 	tmp = ft_strdup(*hexa);
-// 	ft_strdel(hexa);
-// 	(*hexa) = ft_strjoin(tmp, unknw);
-// 	ft_strdel(&tmp);
-// 	ft_strdel(&unknw);
-// }
-
 void	trad_dir_size_2(char *arg, char **hexa, t_data **data, int op_code)
 {
 	char	*tmp;
@@ -94,7 +75,6 @@ static void	tmp_trad_dir_label(char *arg, char **hexa)
 
 void	trad_dir(char *arg, char **hexa, t_data **data, int op_code)
 {
-	ft_putstr("TRAD DIR\n");
 	if (arg[1] == ':')
 		tmp_trad_dir_label(arg, hexa);
 	else

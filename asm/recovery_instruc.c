@@ -57,8 +57,6 @@ int		sum_nb_oct(char *hex)
 			nb_oct++;
 		i++;
 	}
-	ft_printf("nb_oct : %d\n",nb_oct);
-	ft_printf(">>>>>>>>>>>>>>>>>>>nb_oct : %d\n, nb_dir_lbl : %d\n",(nb_oct / 2) + (nb_dir_lbl * 2), nb_dir_lbl);
 	return ((nb_oct / 2) + (nb_dir_lbl * 2));
 }
 
@@ -72,7 +70,6 @@ int		check_instruct(char *line, char *name, t_data **data, t_data_line *dline)
 	ft_bzero(&recup, sizeof(t_recup));
 	ft_bzero(&hex, sizeof(t_hexa));
 	recup.lst_hexa = ft_lstdblnew();
-	// ft_putstr("Check_instruction\n");
 	if ((recup.op_code = instruc_valid(name)) == -1)
 		return (0);
 	trad_name_instruct(recup.op_code, &hex.hexa);
@@ -88,6 +85,5 @@ int		check_instruct(char *line, char *name, t_data **data, t_data_line *dline)
 	label_called(dline, recup.args_tab);
 	ft_lstdbladd_head(recup.lst_hexa, &hex, sizeof(t_hexa));
 	ft_lstdbladd_head((*data)->lst_recup, &recup, sizeof(t_recup));
-	show_trad((*data)->lst_recup);
 	return (1);
 }

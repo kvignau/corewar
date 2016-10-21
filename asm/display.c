@@ -102,13 +102,10 @@ char	*lsthexa_tostr(t_dbllist *lst)
 	t_elem	*tmp;
 	char	*tmp2;
 	char 	*new;
-	char	*unkwn;
 
 	tmp = lst->tail;
 	tmp2 = NULL;
 	new = NULL;
-	unkwn = ft_strdup("XX");
-	ft_putstr("LST_HEXA :\n");
 	while (tmp != NULL)
 	{
 		if (new == NULL)
@@ -117,19 +114,9 @@ char	*lsthexa_tostr(t_dbllist *lst)
 			tmp2 = ft_strdup(new);
 		ft_strdel(&new);
 		if (((t_hexa *)((tmp)->content))->hexa)
-		{
 			new = ft_strjoin(tmp2, ((t_hexa *)((tmp)->content))->hexa);
-			ft_printf("%s\n",((t_hexa *)((tmp)->content))->hexa); //debug
-		}
-		// else
-		// {
-		// 	new = ft_strjoin(tmp2, unkwn);
-		// 	ft_printf("XX"); //debug
-		// }
 		tmp = tmp->prev;
 	}
-	ft_strdel(&unkwn);
-	// ft_printf(">>>>>>>>>>> lsthexa_tostr : %s  <<<<<<<<< \n", new);
 	return (new);
 }
 
@@ -186,7 +173,6 @@ static void		show_called(t_dbllist *lst)
 	t_elem	*tmp;
 
 	tmp = lst->tail;
-	// ft_printf("Lliste label called : \n");
 	while (tmp != NULL)
 	{
 		ft_printf("name : %s\n", ((t_called *)((tmp)->content))->name);

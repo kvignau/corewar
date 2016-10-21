@@ -95,7 +95,6 @@ int		check_line(char *line, t_data **data)
 			return (0);
 	}
 	ft_strdel(&name);
-	// show_dline((*data)->lst_lines);
 	ft_lstdbladd_head((*data)->lst_lines, &dline, sizeof(t_data_line));
 	index_line += 1;
 	return (1);
@@ -119,5 +118,4 @@ void	recovery(t_data *data)
 		i++;
 		j = 0;
 	}
-	// show_lst_recup(data->lst_recup); // debug
 }

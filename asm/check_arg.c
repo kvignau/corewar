@@ -51,7 +51,6 @@ int		valid_args(char **args_tab, int op_code, int *to_check)
 
 	i = 0;
 	type = 0;
-	show_tab_char(args_tab);
 	if (!(type = recover_args(args_tab, to_check)))
 		return (0);
 	if (!(verif_type(type, op_code)))
