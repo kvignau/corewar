@@ -104,7 +104,8 @@ int			find_in_lst_called(char *name, t_dbllist *label_called)
 	tmp = label_called->tail;
 	while (tmp != NULL)
 	{
-		if (ft_strcmp(((t_called *)((tmp)->content))->name, name) == 0)
+		if (ft_strcmp(((t_called *)((tmp)->content))->name, name) == 0
+			&& ((t_called *)((tmp)->content))->trad == 0)
 			return (1);
 		tmp = tmp->prev;
 	}

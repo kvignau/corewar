@@ -186,10 +186,11 @@ static void		show_called(t_dbllist *lst)
 	t_elem	*tmp;
 
 	tmp = lst->tail;
-	ft_printf("Lliste label called : \n");
+	// ft_printf("Lliste label called : \n");
 	while (tmp != NULL)
 	{
-		ft_printf("%s\n", ((t_called *)((tmp)->content))->name);
+		ft_printf("name : %s\n", ((t_called *)((tmp)->content))->name);
+		ft_printf("trad faite : %d\n\n", ((t_called *)((tmp)->content))->trad);
 		tmp = tmp->prev;
 	}
 
@@ -202,8 +203,8 @@ void	show_dline(t_dbllist *lst)
 	tmp = lst->tail;
 	while (tmp != NULL)
 	{
-		ft_printf("Index : %d\n", (((t_data_line *)((tmp)->content))->index));
-		ft_printf("Nb_oct : %d\n", (((t_data_line *)((tmp)->content))->nb_oct));
+		// ft_printf("Index : %d\n", (((t_data_line *)((tmp)->content))->index));
+		// ft_printf("Nb_oct : %d\n", (((t_data_line *)((tmp)->content))->nb_oct));
 		if ((((t_data_line *)((tmp)->content))->label_declared))
 			ft_printf("Label_declared : %s\n", (((t_data_line *)((tmp)->content))->label_declared));
 		if ((((t_data_line *)((tmp)->content))->label_called))

@@ -154,7 +154,7 @@ int					index_label_declared(char *name, t_dbllist *lst_lines);
 // int					find_in_tb_char(char *name, char **label_called);
 int					find_in_lst_called(char *name, t_dbllist *label_called);
 void				define_index(char *name, t_data **data, int *i_called, int *i_declared);
-int					front_decl(t_dbllist **lst_lines, int i_called, int i_declared);
+int					front_decl(char *lbl_called, t_dbllist **lst_lines, int i_called, int i_declared);
 int					back_decl(char *lbl_called, t_dbllist **lst_lines, int i_called, int i_declared);
 void				trad_dir_label(t_data **data);
 void				tmp_trad_to_str(t_data **data);

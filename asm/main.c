@@ -35,6 +35,6 @@ int			main(int argc, char **argv)
 	// show_dline(data->lst_lines); // debug
 	// show_trad(data->lst_recup);
 	trad_dir_label(&data);
-	// show_final_trad(data->tmp_trad);
+	show_final_trad(data->tmp_trad);
 	return (0);
 }
