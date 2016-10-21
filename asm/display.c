@@ -129,7 +129,7 @@ void	show_final_trad(char *trad)
 	{
 		if (i != 0 && ((i % 4) == 0) && (i % 32) != 0)
 			ft_putchar(' ');
-		else if ((i % 32) == 0)
+		else if (i != 0 && (i % 32) == 0)
 			ft_putchar('\n');
 		ft_putchar(trad[i]);
 		i++;

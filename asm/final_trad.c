@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   begin.c                                            :+:      :+:    :+:   */
+/*   final_trad.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/29 15:59:53 by mchevall          #+#    #+#             */
-/*   Updated: 2016/09/29 16:14:55 by mchevall         ###   ########.fr       */
+/*   Created: 2016/09/29 15:59:53 by mpaincha          #+#    #+#             */
+/*   Updated: 2016/09/29 16:14:55 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	concat_all_trad(t_data **data, t_final_trad all_trad)
 	ft_strdel(&tmp1);
 }
 
-void	begin_trad(t_data *data, int nb_oct)
+void	final_trad(t_data *data, int nb_oct)
 {
 	t_final_trad	all_trad;
 

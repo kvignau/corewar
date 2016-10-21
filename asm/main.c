@@ -30,10 +30,10 @@ int			main(int argc, char **argv)
 	else
 		error(data, "Please provide a .s file");
 	recovery(data);
-	tmp_trad_to_str(&data); // debug
+	tmp_trad_to_str(&data);
 	trad_dir_label(&data);
-	begin_trad(data, ft_strlen(data->tmp_trad) / 2);
-	show_final_trad(data->tmp_trad);
-
+	final_trad(data, ft_strlen(data->tmp_trad) / 2);
+	// show_final_trad(data->tmp_trad); //debug
+	create_cor(data, argv[1]);
 	return (0);
 }
