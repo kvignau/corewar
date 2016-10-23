@@ -70,6 +70,9 @@ int		check_instruct(char *line, char *name, t_data **data, t_data_line *dline)
 	ft_bzero(&recup, sizeof(t_recup));
 	ft_bzero(&hex, sizeof(t_hexa));
 	recup.lst_hexa = ft_lstdblnew();
+	//
+	// ft_printf("Check instruction, line : %s\n", line);
+	//
 	if ((recup.op_code = instruc_valid(name)) == -1)
 		return (0);
 	trad_name_instruct(recup.op_code, &hex.hexa);

@@ -48,13 +48,32 @@ void	trad_dir_size_2(char *arg, char **hexa, t_data **data, int op_code)
 	ft_strdel(&to_compete);
 }
 
+void	trad_dir_size_4(char *arg, char **hexa, t_data **data, int op_code)
+{
+	char	*tmp;
+	char	*to_add;
+	char	*to_compete;
+
+	(void)data;
+	(void)op_code;
+	tmp = NULL;
+	to_add = ft_itoabase_imax(ft_atoi(arg), 16);
+	hex_to_lower(&to_add);
+	to_compete = ft_strdup(*hexa);
+	ft_strdel(hexa);
+	add_zero(&to_add, 8);
+	(*hexa) = ft_strjoin(to_compete, to_add);
+	ft_strdel(&to_add);
+	ft_strdel(&to_compete);
+}
+
 void	trad_dir_without_label(char *arg, char **hexa, t_data **data, int op_code)
 {
 	int		size;
 
 	size = op_tab[op_code - 1].lbl_size;
 	if (size == 4)
-		trad_ind(arg, hexa, data, op_code);
+		trad_dir_size_4(arg, hexa, data, op_code);
 	else if (size == 2)
 		trad_dir_size_2(arg, hexa, data, op_code);
 

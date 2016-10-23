@@ -47,9 +47,12 @@ int		is_dir(char *arg)
 	}
 	while (arg[i])
 	{
-		if (!(ft_isdigit(arg[i])))
+		if (i == 1 && arg[i] == '-')
+			i++;
+		else if (!(ft_isdigit(arg[i])))
 			return (0);
-		i++;
+		else
+			i++;
 	}
 	return (T_DIR);
 }
