@@ -29,7 +29,11 @@ int			main(int argc, char **argv)
 	}
 	else
 		error(data, "Please provide a .s file");
-	recovery(data);
+	if (!(recovery(data)))
+	{
+		//free
+		return (0);
+	}
 	tmp_trad_to_str(&data);
 	trad_dir_label(&data);
 	final_trad(data, ft_strlen(data->tmp_trad) / 2);

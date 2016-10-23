@@ -128,7 +128,7 @@ int					error(t_data *data, char *str);
 **********************  Recovery  **********************
 */
 
-void				recovery(t_data *data);
+int					recovery(t_data *data);
 int					check_line(char	*line, t_data **data); //maybe static
 int					label_valid(char *name); //maybe static
 int					check_label(char *name, t_data **data, t_data_line *line);

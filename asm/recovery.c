@@ -100,7 +100,7 @@ int		check_line(char *line, t_data **data)
 	return (1);
 }
 
-void	recovery(t_data *data)
+int		recovery(t_data *data)
 {
 	int		i;
 	int 	j;
@@ -109,13 +109,11 @@ void	recovery(t_data *data)
 	j = 0;
 	while (i < data->nb_lines)
 	{
-		if (data->file[i][j] != '\0')
-		{
-			if (!(check_line(data->file[i], &data)))
-				return ;
-			j++;
-		}
+		if (data->file[i] == NULL)
+			return (1);
+		if (!(check_line(data->file[i], &data)))
+			return (0);
 		i++;
-		j = 0;
 	}
+	return (1);
 }
