@@ -19,9 +19,12 @@ int		is_ind(char *arg)
 	i = 0;
 	while (arg[i])
 	{
-		if (!(ft_isdigit(arg[i])))
+		if (i == 0 && arg[i] == '-')
+			i++;
+		else if (!(ft_isdigit(arg[i])))
 			return (0);
-		i++;
+		else
+			i++;
 	}
 	return (T_IND);
 }
