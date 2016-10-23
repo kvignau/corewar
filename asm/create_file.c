@@ -39,6 +39,25 @@ char	*recup_only_name(char *file_name)
 	return (tmp);
 }
 
+void	ft_putstr_fd_trad(char const *trad, int fd)
+{
+	int		i;
+
+	i = 0;
+	if (trad)
+	{
+		while (trad[i] != '\0')
+		{
+			if (i != 0 && ((i % 4) == 0) && (i % 32) != 0)
+				ft_putchar_fd(' ', fd);
+			else if (i != 0 && (i % 32) == 0)
+				ft_putchar_fd('\n', fd);
+			ft_putchar_fd(trad[i], fd);
+			i++;
+		}
+	}
+}
+
 void	create_cor(t_data *data, char *file_name)
 {
 	int		fd;
@@ -51,11 +70,9 @@ void	create_cor(t_data *data, char *file_name)
 		return ;
 	tmp = recup_only_name(file_name);
 	name = ft_strsub(tmp, 0, ft_strlen(tmp) - 2);
-	fd = open(ft_strcat(name, ".cor"), O_CREAT, S_IRWXU);
-	ft_putnbr(fd);
-	if (fd != NULL)
-	{
-		ft_putstr_fd(data->tmp_trad, fd);
-		close(fd);
-	}
+	fd = open(ft_strjoin(name, ".cor"), O_CREAT, S_IRWXU);
+	close(fd);
+	open(ft_strjoin(name, ".cor"), O_WRONLY);
+	ft_putstr_fd_trad(data->tmp_trad, fd);
+	close(fd);
 }
