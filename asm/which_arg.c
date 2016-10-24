@@ -19,7 +19,7 @@ int		is_ind(char *arg)
 	i = 0;
 	while (arg[i])
 	{
-		if (i == 0 && arg[i] == '-')
+		if (i == 0 && (arg[i] == '-' || arg[i] == '+'))
 			i++;
 		else if (!(ft_isdigit(arg[i])))
 			return (0);
@@ -29,28 +29,32 @@ int		is_ind(char *arg)
 	return (T_IND);
 }
 
+static int		is_dir_label(char *arg, char **label)
+{
+	int		ret;
+
+	ret = 0;
+	*label = ft_strsub(arg, 2, ft_strlen(arg));
+	if (label_valid(*label))
+		ret = 2;
+	ft_strdel(label);
+	return (ret);
+}
+
 int		is_dir(char *arg)
 {
 	int		i;
 	char	*label;
-	int		ret;
 
 	i = 0;
 	label = NULL;
-	ret = 0;
 	if (arg[i] != '%')
 		return (0);
 	if (arg[++i] == ':')
-	{
-		label = ft_strsub(arg, i + 1, ft_strlen(arg));
-		if (label_valid(label))
-			ret = 2;
-		ft_strdel(&label);
-		return (ret);
-	}
+		return (is_dir_label(arg, &label) == 2 ? 2 : 0);
 	while (arg[i])
 	{
-		if (i == 1 && arg[i] == '-')
+		if (i == 1 && (arg[i] == '-' || arg[i] == '+'))
 			i++;
 		else if (!(ft_isdigit(arg[i])))
 			return (0);

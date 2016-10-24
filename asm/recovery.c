@@ -78,21 +78,25 @@ int		check_line(char *line, t_data **data)
 
 	i = 0;
 	name = NULL;
-	ft_bzero(&dline, sizeof(t_data_line));
-	dline.label_called = ft_lstdblnew();
-	dline.index = index_line;
+	ini_data_line(&dline, index_line);
 	while (line[i] != ' ' && line[i] != '\t')
 		i++;
 	name = ft_strsub(line, 0, i);
 	if (name[ft_strlen(name) - 1] == ':')
 	{
 		if (check_label(name, data, &dline) == 0)
+		{
+			ft_strdel(&name);
 			return (0);
+		}
 	}
 	else
 	{
 		if (check_instruct(line, name, data, &dline) == 0)
+		{
+			ft_strdel(&name);
 			return (0);
+		}
 	}
 	ft_strdel(&name);
 	ft_lstdbladd_head((*data)->lst_lines, &dline, sizeof(t_data_line));

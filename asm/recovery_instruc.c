@@ -76,10 +76,11 @@ int		check_instruct(char *line, char *name, t_data **data, t_data_line *dline)
 	make_args_tab(line, name, &recup);
 	if (!(check_args(recup.args_tab, recup.op_code, data)))
 	{
-		free_tab_char(&recup.args_tab);
+		free_t_recup(&recup);
 		return (0);
 	}
-	sum_args(&recup, &hex.hexa);
+	if (op_tab[recup.op_code - 1].octcod == 1)
+		sum_args(&recup, &hex.hexa);
 	trad_args(&recup, &hex.hexa, data, recup.op_code);
 	dline->nb_oct = sum_nb_oct(hex.hexa);
 	label_called(dline, recup.args_tab);

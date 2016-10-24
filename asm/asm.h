@@ -43,6 +43,25 @@ typedef struct 		s_hexa
 	char			*lbl_name;
 }					t_hexa;
 
+typedef struct 		s_sum_args
+{
+	int				type;
+	int				sum;
+}					t_sum_args;
+
+typedef struct 		s_tmp1
+{
+	char			*trad;
+	char			*tmp2;
+	char			*nw;
+}					t_tmp1;
+
+typedef struct 		s_tmp2
+{
+	char			*trad;
+	char			*to_trad;
+}					t_tmp2;
+
 typedef struct 		s_recup
 {
 	int				label;
@@ -109,6 +128,10 @@ typedef	void		(*t_trad)(char *, char **, t_data **, int);
 void				data_initializer(t_data **data);
 void				ini_lab(t_lab *lab, t_data **data);
 void				ini_recup(t_recup **recup);
+void				ini_data_line(t_data_line *dline, int index_line);
+void				ini_sum_args(t_sum_args *data);
+void				ini_tmp1(t_tmp1 *tmp1);
+void				ini_tmp2(t_tmp2 *tmp2);
 
 /*
 **********************  File Cleaning  *****************
@@ -196,5 +219,6 @@ void				show_final_trad(char *trad);
 
 void				free_all_data(t_data *data);
 void				free_tab_char(char ***tab);
+void				free_t_recup(t_recup *recup);
 
 #endif

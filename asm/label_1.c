@@ -45,7 +45,8 @@ int		already_trad(t_elem *elem, t_dbllist **lst_lines, char *lbl_called)
 	return (1);
 }
 
-static t_elem	*find_elem_caller(char *lbl_called, t_dbllist **lst_lines, int i_called)
+static t_elem	*find_elem_caller(char *lbl_called, t_dbllist **lst_lines,
+				int i_called)
 {
 	t_elem	*tmp;
 
@@ -81,7 +82,8 @@ static void	trad_to_ok(t_dbllist **lst_lines, char *lbl_called, int i_called)
 	}
 }
 
-int		front_decl(char *lbl_called, t_dbllist **lst_lines, int i_called, int i_declared)
+int		front_decl(char *lbl_called, t_dbllist **lst_lines, int i_called,
+		int i_declared)
 {
 	t_elem	*tmp;
 	int		nb_oct;
@@ -105,7 +107,8 @@ int		front_decl(char *lbl_called, t_dbllist **lst_lines, int i_called, int i_dec
 	return (nb_oct);
 }
 
-int		back_decl(char *lbl_called, t_dbllist **lst_lines, int i_called, int i_declared)
+int		back_decl(char *lbl_called, t_dbllist **lst_lines, int i_called,
+		int i_declared)
 {
 	t_elem	*tmp;
 	int		nb_oct;
@@ -167,24 +170,19 @@ void	modif_trad(int i, int j, char *trad, char **tmp_trad)
 	first = ft_strsub(*tmp_trad, 0, i);
 	last = ft_strsub(*tmp_trad, j + 1, ft_strlen(*tmp_trad) - j);
 	ft_strdel(tmp_trad);
-	tmp = ft_strjoin(first, trad);
-	ft_strdel(&first);
-	*tmp_trad = ft_strjoin(tmp, last);
-	ft_strdel(&tmp);
-	ft_strdel(&last);
+	tmp = ft_strjoinandfree(first, trad, 1);
+	*tmp_trad = ft_strjoinandfree(tmp, last, 3);
 }
 
 void	trad_dir_label(t_data **data)
 {
 	int		i;
 	int		j;
-	char	*to_trad;
-	char	*trad;
+	t_tmp2	temp;
 
 	i = 0;
 	j = 0;
-	to_trad = NULL;
-	trad = NULL;
+	ini_tmp2(&temp);
 	while ((*data)->tmp_trad[i])
 	{
 		if ((*data)->tmp_trad[i] == '%')
@@ -192,13 +190,12 @@ void	trad_dir_label(t_data **data)
 			j = i + 1;
 			while ((*data)->tmp_trad[j] != '!')
 				j++;
-			to_trad = ft_strsub((*data)->tmp_trad, i + 2, j - (i + 2));
-			if ((trad = trad_label_called(to_trad, &((*data)->tmp_trad), data)) == NULL)
+			temp.to_trad = ft_strsub((*data)->tmp_trad, i + 2, j - (i + 2));
+			if ((temp.trad = trad_label_called(temp.to_trad, &((*data)->tmp_trad), data)) == NULL)
 				break ;
-
-			modif_trad(i, j, trad, &((*data)->tmp_trad));
-			ft_strdel(&trad);
-			ft_strdel(&to_trad);
+			modif_trad(i, j, temp.trad, &((*data)->tmp_trad));
+			ft_strdel(&temp.trad);
+			ft_strdel(&temp.to_trad);
 		}
 		j = 0;
 		i++;

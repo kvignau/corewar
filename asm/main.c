@@ -20,7 +20,6 @@ int			main(int argc, char **argv)
 
 	i = 0;
 	j = -1;
-
 	data_initializer(&data);
 	if (argc != 1)
 	{
@@ -37,7 +36,7 @@ int			main(int argc, char **argv)
 	tmp_trad_to_str(&data);
 	trad_dir_label(&data);
 	final_trad(data, ft_strlen(data->tmp_trad) / 2);
-	// show_final_trad(data->tmp_trad); //debug
 	create_cor(data, argv[1]);
+	// while (1);
 	return (0);
 }

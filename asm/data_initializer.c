@@ -13,6 +13,30 @@
 #include "asm.h"
 #include "op.h"
 
+void		ini_tmp2(t_tmp2 *tmp2)
+{
+	tmp2->trad = NULL;
+	tmp2->to_trad = NULL;
+}
+void		ini_tmp1(t_tmp1 *tmp1)
+{
+	tmp1->tmp2 = NULL;
+	tmp1->nw = NULL;
+}
+
+void		ini_sum_args(t_sum_args *data)
+{
+	data->type = 0;
+	data->sum = 0;
+}
+
+void		ini_data_line(t_data_line *dline, int index_line)
+{
+	ft_bzero(dline, sizeof(t_data_line));
+	dline->label_called = ft_lstdblnew();
+	dline->index = index_line;
+}
+
 void		data_initializer(t_data **data)
 {
 	*data = (t_data *)ft_memalloc(sizeof(t_data));
