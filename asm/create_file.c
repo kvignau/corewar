@@ -56,7 +56,6 @@ void	ft_putstr_fd_trad(char const *trad, int fd)
 			i++;
 		}
 	}
-	ft_printf("len trad : %d\ni:%d",ft_strlen(trad),i);
 }
 
 void	create_cor(t_data *data, char *file_name)
@@ -74,9 +73,6 @@ void	create_cor(t_data *data, char *file_name)
 	fd = open(ft_strjoin(name, ".cor"), O_CREAT, S_IRWXU);
 	close(fd);
 	open(ft_strjoin(name, ".cor"), O_WRONLY);
-	//
-	// ft_putstr(data->tmp_trad);
-	//
 	ft_putstr_fd_trad(data->tmp_trad, fd);
 	close(fd);
 }
