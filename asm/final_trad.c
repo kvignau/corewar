@@ -77,10 +77,11 @@ void	final_trad(t_data *data, int nb_oct)
 	ft_bzero(&all_trad, sizeof(t_final_trad));
 	all_trad.magic = ft_strdup("00ea83f3");
 	string_to_hex(data->name, &all_trad.name);
-	add_zero_after(&all_trad.name, 270);
+	add_zero_after(&all_trad.name, 269);
 	all_trad.total_oct = ft_itoabase_imax(nb_oct, 16);
+	add_zero(&all_trad.total_oct, 4);
 	string_to_hex(data->comment, &all_trad.comment);
-	add_zero_after(&all_trad.comment, 4106);
+	add_zero_after(&all_trad.comment, 4105);
 	concat_all_trad(&data, all_trad);
 	hex_to_lower(&(data->tmp_trad));
 }

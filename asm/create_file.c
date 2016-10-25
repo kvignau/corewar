@@ -46,9 +46,9 @@ void	ft_putstr_fd_trad(char const *trad, int fd)
 	i = 0;
 	if (trad)
 	{
-		while (i < ft_strlen(trad))
+		while (trad[i] != '\0')
 		{
-			if (i != 0 && ((i % 4) == 0) && (i % 32) != 0)
+			if (i != 0 && (i % 4) == 0 && (i % 32) != 0)
 				ft_putchar_fd(' ', fd);
 			else if (i != 0 && (i % 32) == 0)
 				ft_putchar_fd('\n', fd);
@@ -73,7 +73,6 @@ void	create_cor(t_data *data, char *file_name)
 	fd = open(ft_strjoin(name, ".cor"), O_CREAT, S_IRWXU);
 	close(fd);
 	open(ft_strjoin(name, ".cor"), O_WRONLY);
-	ft_putstr(data->tmp_trad);
 	ft_putstr_fd_trad(data->tmp_trad, fd);
 	close(fd);
 }

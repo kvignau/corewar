@@ -62,21 +62,18 @@ void	hex_to_lower(char **hex)
 
 void	add_zero(char **str, int width)
 {
-	char	*zero;
 	char	*tmp;
 	char	i;
 
-	zero = NULL;
 	tmp = NULL;
 	i = 0;
 	if (ft_strlen(*str) == width)
 		return ;
-	zero = ft_strdup("0");
 	while (ft_strlen(*str) < width)
 	{
 		tmp = ft_strdup(*str);
 		ft_strdel(str);
-		*str = ft_strjoin(zero, tmp);
+		*str = ft_strjoin("0", tmp);
 		ft_strdel(&tmp);
 	}
 }
