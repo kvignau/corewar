@@ -191,7 +191,7 @@ int					front_decl(char *lbl_called, t_dbllist **lst_lines, int i_called, int i_
 int					back_decl(char *lbl_called, t_dbllist **lst_lines, int i_called, int i_declared);
 void				trad_dir_label(t_data **data);
 void				tmp_trad_to_str(t_data **data);
-
+int					args_for_sum(char *arg);
 void				final_trad(t_data *data, int nb_oct);
 
 /*

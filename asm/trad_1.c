@@ -34,12 +34,22 @@ void	trad_dir_size_2(char *arg, char **hexa, t_data **data, int op_code)
 
 	(void)data;
 	(void)op_code;
-	to_add = ft_itoabase_imax(ft_atoi(arg), 16);
+	to_add = ft_itoabase_uimax(ft_atoi(arg), 16);
 	hex_to_lower(&to_add);
 	to_compete = ft_strdup(*hexa);
 	ft_strdel(hexa);
 	add_zero(&to_add, 4);
 	(*hexa) = ft_strjoinandfree(to_compete, to_add, 3);
+}
+
+void	reduce_hex(char **to_add)
+{
+	char	*tmp;
+
+	tmp = ft_strsub(*to_add, ft_strlen(*to_add) - 8,ft_strlen(*to_add));
+	ft_strdel(to_add);
+	*to_add = ft_strdup(tmp);
+	ft_strdel(&tmp);
 }
 
 void	trad_dir_size_4(char *arg, char **hexa, t_data **data, int op_code)
@@ -49,8 +59,13 @@ void	trad_dir_size_4(char *arg, char **hexa, t_data **data, int op_code)
 
 	(void)data;
 	(void)op_code;
-	to_add = ft_itoabase_imax(ft_atoi(arg), 16);
+	to_add = ft_itoabase_uimax(ft_atoi(arg), 16);
+	// ft_printf("arg : %s, atoi de arg %d\n", arg, ft_atoi(arg));
 	hex_to_lower(&to_add);
+	// ft_printf("strlen : %d\n",ft_strlen(to_add));
+	if (ft_strlen(to_add) > 8)
+		reduce_hex(&to_add);
+	// ft_printf("to_add : %s\n", to_add);
 	to_compete = ft_strdup(*hexa);
 	ft_strdel(hexa);
 	add_zero(&to_add, 8);
@@ -99,8 +114,8 @@ void	trad_ind(char *arg, char **hexa, t_data **data, int op_code)
 	(void)data;
 	(void)op_code;
 	tmp = NULL;
-	ft_putstr("TRAD IND\n");
-	ft_printf("arg : %s\n", arg);
+	// ft_putstr("TRAD IND\n");
+	// ft_printf("arg : %s\n", arg);
 	if (arg[0] == '-')
 	{
 		tmp = ft_strsub(arg, 1, ft_strlen(arg) - 1);
@@ -108,14 +123,14 @@ void	trad_ind(char *arg, char **hexa, t_data **data, int op_code)
 		arg = ft_strdup(tmp);
 		ft_strdel(&tmp);
 	}
-	to_add = ft_itoabase_imax(ft_atoi(arg), 16);
+	to_add = ft_itoabase_uimax(ft_atoi(arg), 16);
 	hex_to_lower(&to_add);
-	ft_printf("to_add : %s\n", to_add);
+	// ft_printf("to_add : %s\n", to_add);
 	to_compete = ft_strdup(*hexa);
 	ft_strdel(hexa);
-	add_zero(&to_add, 8);
-	ft_printf("to_add : %s\n", to_add);
+	add_zero(&to_add, 4);
+	// ft_printf("to_add : %s\n", to_add);
 	(*hexa) = ft_strjoinandfree(to_compete, to_add, 3);
-	ft_printf("(*hexa) : %s\n", (*hexa));
+	// ft_printf("(*hexa) : %s\n", (*hexa));
 
 }
