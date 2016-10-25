@@ -12,6 +12,17 @@
 
 #include "asm.h"
 
+void	trad_neg(char *arg, char **to_add)
+{
+	int		n;
+	char	*tmp;
+
+	tmp = ft_strsub(arg, 1, ft_strlen(arg) - 1);
+	n = ft_atoi(tmp);
+	ft_strdel(&tmp);
+	*to_add = ft_strdup(ft_itoabase_uimax(65536 - n, 16));
+}
+
 void	trad_reg(char *arg, char **hexa, t_data **data, int op_code)
 {
 	char	*to_add;
@@ -34,7 +45,10 @@ void	trad_dir_size_2(char *arg, char **hexa, t_data **data, int op_code)
 
 	(void)data;
 	(void)op_code;
-	to_add = ft_itoabase_uimax(ft_atoi(arg), 16);
+	if (arg[0] == '-')
+		trad_neg(arg, &to_add);
+	else
+		to_add = ft_itoabase_uimax(ft_atoi(arg), 16);
 	hex_to_lower(&to_add);
 	to_compete = ft_strdup(*hexa);
 	ft_strdel(hexa);
@@ -59,7 +73,10 @@ void	trad_dir_size_4(char *arg, char **hexa, t_data **data, int op_code)
 
 	(void)data;
 	(void)op_code;
-	to_add = ft_itoabase_uimax(ft_atoi(arg), 16);
+	if (arg[0] == '-')
+		trad_neg(arg, &to_add);
+	else
+		to_add = ft_itoabase_uimax(ft_atoi(arg), 16);
 	// ft_printf("arg : %s, atoi de arg %d\n", arg, ft_atoi(arg));
 	hex_to_lower(&to_add);
 	// ft_printf("strlen : %d\n",ft_strlen(to_add));
@@ -117,13 +134,9 @@ void	trad_ind(char *arg, char **hexa, t_data **data, int op_code)
 	// ft_putstr("TRAD IND\n");
 	// ft_printf("arg : %s\n", arg);
 	if (arg[0] == '-')
-	{
-		tmp = ft_strsub(arg, 1, ft_strlen(arg) - 1);
-		ft_strdel(&arg);
-		arg = ft_strdup(tmp);
-		ft_strdel(&tmp);
-	}
-	to_add = ft_itoabase_uimax(ft_atoi(arg), 16);
+		trad_neg(arg, &to_add);
+	else
+		to_add = ft_itoabase_uimax(ft_atoi(arg), 16);
 	hex_to_lower(&to_add);
 	// ft_printf("to_add : %s\n", to_add);
 	to_compete = ft_strdup(*hexa);
