@@ -51,19 +51,22 @@ int		label_valid(char *name)
 	return (1);
 }
 
-int		check_label(char *name, t_data **data, t_data_line *dline)
+int		check_label(char **name, t_data **data, t_data_line *dline)
 {
 	t_recup		recup;
 
 	ft_bzero(&recup, sizeof(t_recup));
 	recup.label = 1;
-	name = ft_strsub(name, 0, ft_strlen(name) - 1);
-	if (!(label_valid(name)))
+	*name = ft_strsub(*name, 0, ft_strlen(*name) - 1);
+	if (!(label_valid(*name)))
+	{
+		ft_strdel(name);
 		return (0);
-	if (!(save_label(name, data)))
+	}
+	if (!(save_label(*name, data)))
 		return (1);
-	recup.label_name = ft_strdup(name);
-	dline->label_declared = ft_strdup(name);
+	recup.label_name = ft_strdup(*name);
+	dline->label_declared = ft_strdup(*name);
 	dline->nb_oct = 0;
 	ft_lstdbladd_head((*data)->lst_recup, &recup, sizeof(t_recup));
 	return (1);
@@ -84,19 +87,13 @@ int		check_line(char *line, t_data **data)
 	name = ft_strsub(line, 0, i);
 	if (name[ft_strlen(name) - 1] == ':')
 	{
-		if (check_label(name, data, &dline) == 0)
-		{
-			ft_strdel(&name);
+		if (check_label(&name, data, &dline) == 0)
 			return (0);
-		}
 	}
 	else
 	{
-		if (check_instruct(line, name, data, &dline) == 0)
-		{
-			ft_strdel(&name);
+		if (check_instruct(line, &name, data, &dline) == 0)
 			return (0);
-		}
 	}
 	ft_strdel(&name);
 	ft_lstdbladd_head((*data)->lst_lines, &dline, sizeof(t_data_line));

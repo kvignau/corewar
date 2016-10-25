@@ -154,8 +154,8 @@ int					error(t_data *data, char *str);
 int					recovery(t_data *data);
 int					check_line(char	*line, t_data **data); //maybe static
 int					label_valid(char *name); //maybe static
-int					check_label(char *name, t_data **data, t_data_line *line);
-int					check_instruct(char *line, char *name, t_data **data, t_data_line *dline);
+int					check_label(char **name, t_data **data, t_data_line *line);
+int					check_instruct(char *line, char **name, t_data **data, t_data_line *dline);
 void				ft_strtrim_tab(char **args_tab);
 int					check_args(char **args_tab, int op_code, t_data **data); //maybe static
 int					define_type_args(char *arg);

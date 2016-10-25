@@ -70,19 +70,6 @@ int		is_dir_with_label(char *arg)
 	return (ret);
 }
 
-// void	nb_label_called(char **args_tab, int *nb_called)
-// {
-// 	int		i;
-
-// 	i = 0;
-// 	while (args_tab[i])
-// 	{
-// 		if (is_dir_with_label(args_tab[i]))
-// 			*nb_called = *nb_called + 1;
-// 		i++;
-// 	}
-// }
-
 void	label_called(t_data_line *dline, char **args_tab)
 {
 	int				i;

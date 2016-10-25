@@ -77,12 +77,9 @@ void	trad_dir_size_4(char *arg, char **hexa, t_data **data, int op_code)
 		trad_neg(arg, &to_add);
 	else
 		to_add = ft_itoabase_uimax(ft_atoi(arg), 16);
-	// ft_printf("arg : %s, atoi de arg %d\n", arg, ft_atoi(arg));
 	hex_to_lower(&to_add);
-	// ft_printf("strlen : %d\n",ft_strlen(to_add));
 	if (ft_strlen(to_add) > 8)
 		reduce_hex(&to_add);
-	// ft_printf("to_add : %s\n", to_add);
 	to_compete = ft_strdup(*hexa);
 	ft_strdel(hexa);
 	add_zero(&to_add, 8);
@@ -131,19 +128,13 @@ void	trad_ind(char *arg, char **hexa, t_data **data, int op_code)
 	(void)data;
 	(void)op_code;
 	tmp = NULL;
-	// ft_putstr("TRAD IND\n");
-	// ft_printf("arg : %s\n", arg);
 	if (arg[0] == '-')
 		trad_neg(arg, &to_add);
 	else
 		to_add = ft_itoabase_uimax(ft_atoi(arg), 16);
 	hex_to_lower(&to_add);
-	// ft_printf("to_add : %s\n", to_add);
 	to_compete = ft_strdup(*hexa);
 	ft_strdel(hexa);
 	add_zero(&to_add, 4);
-	// ft_printf("to_add : %s\n", to_add);
 	(*hexa) = ft_strjoinandfree(to_compete, to_add, 3);
-	// ft_printf("(*hexa) : %s\n", (*hexa));
-
 }

@@ -30,7 +30,7 @@ int			main(int argc, char **argv)
 		error(data, "Please provide a .s file");
 	if (!(recovery(data)))
 	{
-		//free
+		free_all_data(data);
 		return (0);
 	}
 	tmp_trad_to_str(&data);

@@ -56,10 +56,6 @@ void	hex_to_lower(char **hex)
 	}
 }
 
-//faire fonction de remplissage de 0
-// %label sur 2
-// %nb sur 4
-
 void	add_zero(char **str, int width)
 {
 	char	*tmp;

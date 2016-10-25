@@ -24,7 +24,6 @@ void	string_to_hex(char *str, char **new)
 	while (str[i])
 	{
 		tmp = ft_itoabase_imax(str[i], 16);
-		// ft_printf("tmp : %s\n", tmp);
 		if (*new == NULL)
 			*new = ft_strdup(tmp);
 		else

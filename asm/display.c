@@ -12,6 +12,29 @@
 
 #include "asm.h"
 
+char	*lsthexa_tostr(t_dbllist *lst)
+{
+	t_elem	*tmp;
+	char	*tmp2;
+	char 	*new;
+
+	tmp = lst->tail;
+	tmp2 = NULL;
+	new = NULL;
+	while (tmp != NULL)
+	{
+		if (new == NULL)
+			tmp2 = ft_strnew(sizeof(char *));
+		else
+			tmp2 = ft_strdup(new);
+		ft_strdel(&new);
+		if (((t_hexa *)((tmp)->content))->hexa)
+			new = ft_strjoin(tmp2, ((t_hexa *)((tmp)->content))->hexa);
+		tmp = tmp->prev;
+	}
+	return (new);
+}
+
 void	display_file(t_data *data)
 {
 	int		i;
@@ -95,29 +118,6 @@ void	show_lst_recup(t_dbllist *lst)
 		ft_printf("\n");
 	}
 	ft_printf("\n");
-}
-
-char	*lsthexa_tostr(t_dbllist *lst)
-{
-	t_elem	*tmp;
-	char	*tmp2;
-	char 	*new;
-
-	tmp = lst->tail;
-	tmp2 = NULL;
-	new = NULL;
-	while (tmp != NULL)
-	{
-		if (new == NULL)
-			tmp2 = ft_strnew(sizeof(char *));
-		else
-			tmp2 = ft_strdup(new);
-		ft_strdel(&new);
-		if (((t_hexa *)((tmp)->content))->hexa)
-			new = ft_strjoin(tmp2, ((t_hexa *)((tmp)->content))->hexa);
-		tmp = tmp->prev;
-	}
-	return (new);
 }
 
 void	show_final_trad(char *trad)

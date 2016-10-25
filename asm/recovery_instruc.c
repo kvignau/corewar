@@ -12,17 +12,18 @@
 
 #include "asm.h"
 
-int		instruc_valid(char *name)
+int		instruc_valid(char **name)
 {
 	int		i;
 
 	i = 0;
 	while (i < 16)
 	{
-		if (ft_strcmp(op_tab[i].name, name) == 0)
+		if (ft_strcmp(op_tab[i].name, *name) == 0)
 			return (op_tab[i].op_code);
 		i++;
 	}
+	ft_strdel(name);
 	return (-1);
 }
 
@@ -60,7 +61,7 @@ int		sum_nb_oct(char *hex)
 	return ((nb_oct / 2) + (nb_dir_lbl * 2));
 }
 
-int		check_instruct(char *line, char *name, t_data **data, t_data_line *dline)
+int		check_instruct(char *line, char **name, t_data **data, t_data_line *dline)
 {
 	char	*args;
 	t_recup	recup;
@@ -73,7 +74,7 @@ int		check_instruct(char *line, char *name, t_data **data, t_data_line *dline)
 	if ((recup.op_code = instruc_valid(name)) == -1)
 		return (0);
 	trad_name_instruct(recup.op_code, &hex.hexa);
-	make_args_tab(line, name, &recup);
+	make_args_tab(line, *name, &recup);
 	if (!(check_args(recup.args_tab, recup.op_code, data)))
 	{
 		free_t_recup(&recup);
