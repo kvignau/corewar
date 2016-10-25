@@ -32,11 +32,11 @@ int	valid_options(t_var *var, t_options *options, t_dbllist *champ_list)
 			options->bool_vm_number = 1;
 			options->vm_number = ft_atoi(var->argv[var->i]);
 			var->i += 1;
-			champions_maker(champ_list, options, var);
+			var->error = champions_maker(champ_list, options, var);
 			options->bool_vm_number = 0;
 		}
 	}
-	else if (var->str[0] != '\0')
+	else if (var->str[0] != '\0' || var->error == 0)
 		return (0);
 	return (1);
 }
@@ -49,8 +49,11 @@ int	options_checkers(int argc, char **argv, t_options *options, t_dbllist *champ
 
 	var.i = 1;
 	var.argv = argv;
+	var.error = -1;
 	while (var.i < argc)
 	{
+		if (var.error == 0)
+			return (0);
 		if ((argv[var.i][0] == '-' && argv[var.i][1] && !argv[var.i][2]) &&
 			((var.str = ft_strchr(OPTIONS, argv[var.i][1])) != NULL))
 		{
@@ -58,8 +61,13 @@ int	options_checkers(int argc, char **argv, t_options *options, t_dbllist *champ
 				return (0);
 		}
 		else
-			champions_maker(champ_list, options, &var);
+			var.error = champions_maker(champ_list, options, &var);
 		var.i += 1;
 	}
+	/*ft_printf("size : %d\n",(t_champ *)(champ_list->length));
+	ft_printf("champ 1 nb: %d\n\n", (((t_champ *)(champ_list->head->content))->vm_number));
+	ft_printf("champ 2 nb: %d\n\n", (((t_champ *)(champ_list->head->next->content))->vm_number));
+	ft_printf("champ 3 nb: %d\n\n", (((t_champ *)(champ_list->head->next->next->content))->vm_number));
+	ft_printf("champ 4 nb: %d\n\n", (((t_champ *)(champ_list->head->next->next->next->content))->vm_number));*/
 	return (1);
 }

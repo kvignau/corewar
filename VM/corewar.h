@@ -14,7 +14,7 @@
 # define COREWAR_H
 # include "op.h"
 # include "../libftprintf/includes/ft_printf.h"
-# define OPTIONS 		"dsn"
+# define OPTIONS	"dsn"
 
 
 /*
@@ -40,8 +40,11 @@ typedef struct		s_champ
 	int				id;
 	char			*name;
 	char			*comment;
-	unsigned int	*vm_number;
+	char			*content;
+	unsigned int	vm_number;
 	unsigned int	size;
+
+
 }					t_champ;
 
 typedef struct		s_var
@@ -49,6 +52,7 @@ typedef struct		s_var
 	char			*str;
 	int				i;
 	char			**argv;
+	int				error;
 }					t_var;
 
 /*
@@ -77,4 +81,5 @@ uintmax_t			ft_hextoi(char *str);
 char				*ft_hextoa(int *str, int size);
 char				*memory();
 void				ft_print_memory(char *ptr, int memsize);
+char				*get_content(int *str, int size);
 #endif
