@@ -51,7 +51,7 @@ void	sum_args(t_recup *recup, char **hexa)
 	while (recup->args_tab[i])
 	{
 		data.type = 0;
-		if ((data.type = define_type_args(recup->args_tab[i])) == 0)
+		if ((data.type = args_for_sum(recup->args_tab[i])) == 0)
 			return ;
 		if (i == 0)
 			data.sum = data.type << 6;

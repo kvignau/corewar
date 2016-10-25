@@ -83,6 +83,22 @@ int		is_reg(char *arg)
 	return (T_REG);
 }
 
+int		args_for_sum(char *arg)
+{
+	int		type;
+	int		i;
+
+	type = 0;
+	i = 0;
+	if (is_reg(arg))
+		return (1);
+	if (is_dir(arg))
+		return (2);
+	if (is_ind(arg))
+		return (3);
+	return (0);
+}
+
 int		define_type_args(char *arg)
 {
 	int		type;
