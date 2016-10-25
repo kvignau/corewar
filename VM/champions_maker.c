@@ -39,7 +39,6 @@ int		filetotab(int **stock, int *file_size, t_var *var)
 		return (0);
 	while ((readv = read(fd, &buf, sizeof(int))) != 0)
 	{
-		ft_printf("||file_size||: [%d]\n", *file_size);
 		if (readv == -1)
 			return (-1);
 		else if ((*file_size + readv * 2) > COR_MAX_VALUE)
@@ -96,6 +95,24 @@ void	error_manager(int ret, t_var *var)
 		invalid_file(3, var);
 }
 
+char		*get_content(int *str, int size)
+{
+	char	*content;
+	int		i;
+	int		j;
+
+	content = (char *)ft_memalloc(1);
+	i = 0;
+	ft_printf("hex: %.x\n", str[i]);
+	ft_printf("\n\n|str| : [%s]\n", ft_itoabase_imax(str[i], 16));
+	while (i < size / 2)
+	{
+		content = ft_strjoinandfree(content, ft_itoabase_imax(str[i], 16), 3);
+		i += 2;
+	}
+	return (content);
+}
+
 int		champion_validity_checker(t_var *var, t_champ *champ)
 {
 	ft_printf("champion_validity_checker\n");
@@ -119,23 +136,27 @@ int		champion_validity_checker(t_var *var, t_champ *champ)
 	}
 	int j = 0;
 	i = EXEC_MAGIC_LENGTH + PROG_NAME_LENGTH / 2 + 2;
-	while (j <= (COMMENT_LENGTH / 2))
+	/*while (j <= (COMMENT_LENGTH / 2))
 	{
 		ft_printf("[%d] : %.8x\n", i, stock[i + j]);
 		j += 2;
-	}
+	}*/
 	champ->name = ft_hextoa(&stock[EXEC_MAGIC_LENGTH / 2], PROG_NAME_LENGTH);
-	champ->size = stock[PROG_NAME_LENGTH / 2 + EXEC_MAGIC_LENGTH];
-	champ->comment = ft_hextoa(&stock[EXEC_MAGIC_LENGTH + PROG_NAME_LENGTH / 2 + 2], COMMENT_LENGTH);
+	if ((champ->size = stock[PROG_NAME_LENGTH / 2 + EXEC_MAGIC_LENGTH]) != (file_size - COR_MIN_VALUE - 1))
+	{
+		ft_putstr("sdfgsdfgsdgsdfg");
+	}
+	champ->comment = ft_hextoa(&stock[(EXEC_MAGIC_LENGTH + PROG_NAME_LENGTH / 2) + PAD], COMMENT_LENGTH);
+	champ->content = get_content(&stock[(COR_MIN_VALUE / 4)], champ->size);
 
 	//ft_printf("Hello: %s\n", ft_hextoa(&stock[EXEC_MAGIC_LENGTH / 2], PROG_NAME_LENGTH / 8));
 	//ft_printf("BOB :  %.8x\n", stock[PROG_NAME_LENGTH / 2 + EXEC_MAGIC_LENGTH]);
 	i = 0;
-	while (i <= file_size / 4)
+	/*while (i <= file_size / 4)
 	{
 		ft_printf("%.x\n",stock[i]);
 		i+= 2;
-	}
+	}*/
 	ft_printf("COR_MAX_VALUE : %d\n", COR_MAX_VALUE);
 	ft_printf("file_size: %d\n", file_size);
 	ft_printf("%d\n", COR_MIN_VALUE);
@@ -143,6 +164,9 @@ int		champion_validity_checker(t_var *var, t_champ *champ)
 	ft_printf("yo : %d\n", champ->size);
 	ft_printf("%s\n", champ->name);
 	ft_printf("%s\n", champ->comment);
+	ft_printf("%.8x\n", stock[COR_MIN_VALUE /4]);
+	ft_printf("%d\n", EXEC_MAGIC_LENGTH + (PROG_NAME_LENGTH + COMMENT_LENGTH)/ 2 + PAD);
+	ft_printf("\n%s\n", champ->content);
 	return (1);
 }
 
