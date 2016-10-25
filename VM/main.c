@@ -27,7 +27,7 @@ ft_printf("%d\n",COR_MAX_VALUE);
 	champ_list = ft_lstdblnew();
 	if (!corewar_usage(argc))
 		return (-1);
-	options_checkers(argc, argv, &options, champ_list);
+	ft_printf("\n%d\n",options_checkers(argc, argv, &options, champ_list));
 	//ft_printf("dump: %d\ndump_N : %u\nchampnum: %d\nchamp_N: %d\nS: %d\n", options.dump, options.dump_N, options.number, options.number_N, options.stealth);
 	//champions_checkers();
 

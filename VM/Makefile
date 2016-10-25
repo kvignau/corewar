@@ -16,7 +16,7 @@ NAME = corewar
 FLAGS += -Wall -Wextra -Werror -fsanitize=address
 
 SRC = main.c op.c corewar_usage.c options_checkers.c champions_maker.c \
-print_memory.c memory.c ft_hextoa.c
+print_memory.c memory.c ft_hextoa.c get_content.c
 
 OBJ = $(SRC:%.c=%.o)
 
