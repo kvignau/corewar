@@ -21,13 +21,18 @@ static void		trad_dir_size_2(char *arg, char **hexa, t_data **data,
 	(void)data;
 	(void)op_code;
 	if (arg[0] == '-')
+	{
 		trad_neg(arg, &to_add);
+		add_f(&to_add, 4);
+	}
 	else
+	{
 		to_add = ft_itoabase_uimax(ft_atoi(arg), 16);
+		add_zero(&to_add, 4);
+	}
 	hex_to_lower(&to_add);
 	to_compete = ft_strdup(*hexa);
 	ft_strdel(hexa);
-	add_zero(&to_add, 4);
 	(*hexa) = ft_strjoinandfree(to_compete, to_add, 3);
 }
 
@@ -40,15 +45,20 @@ static void		trad_dir_size_4(char *arg, char **hexa, t_data **data,
 	(void)data;
 	(void)op_code;
 	if (arg[0] == '-')
+	{
 		trad_neg(arg, &to_add);
+		add_f(&to_add, 8);
+	}
 	else
+	{
 		to_add = ft_itoabase_uimax(ft_atoi(arg), 16);
+		add_zero(&to_add, 8);
+	}
 	hex_to_lower(&to_add);
 	if (ft_strlen(to_add) > 8)
 		reduce_hex(&to_add);
 	to_compete = ft_strdup(*hexa);
 	ft_strdel(hexa);
-	add_zero(&to_add, 8);
 	(*hexa) = ft_strjoinandfree(to_compete, to_add, 3);
 }
 

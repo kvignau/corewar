@@ -12,6 +12,24 @@
 
 #include "asm.h"
 
+void	add_f(char **str, int width)
+{
+	char	*tmp;
+	char	i;
+
+	tmp = NULL;
+	i = 0;
+	if (ft_strlen(*str) == width)
+		return ;
+	while (ft_strlen(*str) < width)
+	{
+		tmp = ft_strdup(*str);
+		ft_strdel(str);
+		*str = ft_strjoin("f", tmp);
+		ft_strdel(&tmp);
+	}
+}
+
 void	trad_neg(char *arg, char **to_add)
 {
 	int		n;
@@ -58,12 +76,17 @@ void	trad_ind(char *arg, char **hexa, t_data **data, int op_code)
 	(void)op_code;
 	tmp = NULL;
 	if (arg[0] == '-')
+	{
 		trad_neg(arg, &to_add);
+		add_f(&to_add, 4);
+	}
 	else
+	{
 		to_add = ft_itoabase_uimax(ft_atoi(arg), 16);
+		add_zero(&to_add, 4);
+	}
 	hex_to_lower(&to_add);
 	to_compete = ft_strdup(*hexa);
 	ft_strdel(hexa);
-	add_zero(&to_add, 4);
 	(*hexa) = ft_strjoinandfree(to_compete, to_add, 3);
 }
