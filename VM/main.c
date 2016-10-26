@@ -22,7 +22,8 @@ void	intro(t_dbllist *champ_list)
 	ft_printf("Introducing contestants...\n");
 	while (tmp != NULL)
 	{
-		ft_printf("* Player %d, weighing %u bytes, \"%s\" (\"%s\") !\n", i,
+		ft_printf("* Player %d, weighing %u bytes, \"%s\" (\"%s\") !\n",
+			(((t_champ *)(tmp->content))->id),
 			(((t_champ *)(tmp->content))->size),
 			(((t_champ *)(tmp->content))->name),
 			(((t_champ *)(tmp->content))->comment));
@@ -39,8 +40,6 @@ int		main(int argc, char **argv)
 	char		*board;
 	t_elem		*tmp;
 
-	//char str[] = "00ea83f3";
-
 	ft_bzero(&core, sizeof(t_cor));
 	ft_bzero(&options, sizeof(t_options));
 	champ_list = ft_lstdblnew();
@@ -51,12 +50,12 @@ int		main(int argc, char **argv)
 	tmp = champ_list->head;
 	int i = 1;
 	ft_printf("size : %d\n",(t_champ *)(champ_list->length));
-	while (tmp != NULL)
+	/*while (tmp != NULL)
 	{
 		ft_printf("champ:[%d], name:[%s] nb: [%d]\n", i, (((t_champ *)(tmp->content))->name),(((t_champ *)(tmp->content))->vm_number));
 		i++;
 		tmp= tmp->next;
-	}
+	}*/
 	intro(champ_list);
 	board = memory();
 	//set_champion_on_board(champ_list);

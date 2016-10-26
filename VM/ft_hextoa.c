@@ -30,6 +30,5 @@ char	*ft_hextoa(int *str, int size)
 		j += 4;
 		i += 2;
 	}
-	hex[j] = '\0';
 	return (hex);
 }
