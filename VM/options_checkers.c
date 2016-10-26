@@ -41,12 +41,12 @@ int	valid_options(t_var *var, t_options *options, t_dbllist *champ_list)
 	return (1);
 }
 
-int	options_checkers(int argc, char **argv, t_options *options, t_dbllist *champ_list)
+int	options_checkers(int argc, char **argv, t_options *options,
+	t_dbllist *champ_list)
 {
 	t_var		var;
 
 	ft_bzero(&var, sizeof(t_var));
-
 	var.i = 1;
 	var.argv = argv;
 	var.error = -1;
@@ -64,10 +64,7 @@ int	options_checkers(int argc, char **argv, t_options *options, t_dbllist *champ
 			var.error = champions_maker(champ_list, options, &var);
 		var.i += 1;
 	}
-	/*ft_printf("size : %d\n",(t_champ *)(champ_list->length));
-	ft_printf("champ 1 nb: %d\n\n", (((t_champ *)(champ_list->head->content))->vm_number));
-	ft_printf("champ 2 nb: %d\n\n", (((t_champ *)(champ_list->head->next->content))->vm_number));
-	ft_printf("champ 3 nb: %d\n\n", (((t_champ *)(champ_list->head->next->next->content))->vm_number));
-	ft_printf("champ 4 nb: %d\n\n", (((t_champ *)(champ_list->head->next->next->next->content))->vm_number));*/
+	if (var.error == 0)
+		return (0);
 	return (1);
 }

@@ -12,8 +12,9 @@
 
 #include "asm.h"
 
-static void	gotonextline(int *i, int *j)
+static void	gotonextline(int *i, int *j, t_data *data, int *name_size)
 {
+	data->comment[*comment_size] = '\n';
 	*i += 1;
 	*j = 0;
 }
@@ -41,7 +42,7 @@ int			comment_manager(t_data *data, int *i, int *j)
 			*i <= data->nb_lines)
 		{
 			if (data->file[*i][*j] == '\0')
-				gotonextline(i, j);
+				gotonextline(i, j, data, &comment_size);
 			else
 				savecomment(data, &comment_size, i, j);
 		}

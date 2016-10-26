@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-char		*recup_memory()
+char		*memory()
 {
 	char	*plateau;
 	int		i;

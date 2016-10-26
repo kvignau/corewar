@@ -160,10 +160,7 @@ int		champions_maker(t_dbllist *champ_list, t_options *options, t_var *var)
 
 	bzero(&champ, sizeof(t_champ));
 	if (set_champion(var, options, &champ) == 0)
-	{
-		ft_printf("set_champion return (0)\n");
 		return (0);
-	}
 	ft_lstdbladd_tail(champ_list, &champ, sizeof(t_champ));
 	return (1);
 }
