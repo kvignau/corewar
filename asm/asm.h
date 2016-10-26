@@ -181,6 +181,7 @@ int					define_trad_fct(char *arg);
 void				trad_name_instruct(int op_code, char **hexa);
 void				hex_to_lower(char **hex);
 void				add_zero(char **str, int width);
+void				add_f(char **str, int width);
 void				trad_to_str(t_data **data);
 char				*lsthexa_tostr(t_dbllist *lst);
 void				label_called(t_data_line *dline, char **args_tab);
