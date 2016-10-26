@@ -12,8 +12,6 @@
 
 #include "asm.h"
 
-// SECURISER LES MALLOCS
-
 static void	free_lst_called(t_dbllist **lst)
 {
 	t_elem	*tmp;
@@ -108,7 +106,8 @@ void		free_all_data(t_data *data)
 {
 	if (data != NULL)
 	{
-		((data->file != NULL) ? ft_free2dtab((void **)data->file, data->nb_lines) : 0);
+		((data->file != NULL)
+			? ft_free2dtab((void **)data->file, data->nb_lines) : 0);
 		((data->line != NULL) ? ft_memdel((void **)&data->line) : 0);
 		((data->comment != NULL) ? ft_memdel((void **)&data->comment) : 0);
 		((data->name != NULL) ? ft_memdel((void **)&data->name) : 0);

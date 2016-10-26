@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-void	string_to_hex(char *str, char **new)
+static	void	string_to_hex(char *str, char **new)
 {
 	int		i;
 	char	*tmp;
@@ -36,7 +36,7 @@ void	string_to_hex(char *str, char **new)
 	}
 }
 
-void	add_zero_after(char **str, int nb)
+static	void	add_zero_after(char **str, int nb)
 {
 	int		i;
 	char	*tmp;
@@ -52,7 +52,7 @@ void	add_zero_after(char **str, int nb)
 	ft_strdel(&new);
 }
 
-void	concat_all_trad(t_data **data, t_final_trad all_trad)
+static	void	concat_all_trad(t_data **data, t_final_trad all_trad)
 {
 	char	*tmp;
 	char	*tmp1;
@@ -69,7 +69,7 @@ void	concat_all_trad(t_data **data, t_final_trad all_trad)
 	ft_strdel(&tmp1);
 }
 
-void	final_trad(t_data *data, int nb_oct)
+void			final_trad(t_data *data, int nb_oct)
 {
 	t_final_trad	all_trad;
 

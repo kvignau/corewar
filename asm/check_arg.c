@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_arg.c                                 :+:      :+:    :+:   */
+/*   check_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,21 @@
 
 #include "asm.h"
 
-int		recover_args(char **args_tab, int *to_check)
+static int	valid_args(char **args_tab, int op_code, int *to_check)
+{
+	int		i;
+	int		type;
+
+	i = 0;
+	type = 0;
+	if (!(type = recover_args(args_tab, to_check)))
+		return (0);
+	if (!(verif_type(type, op_code)))
+		return (0);
+	return (1);
+}
+
+int			recover_args(char **args_tab, int *to_check)
 {
 	int		i;
 	int		type;
@@ -38,27 +52,13 @@ int		recover_args(char **args_tab, int *to_check)
 }
 
 /*
-Explanation (int)type :
-sti	r1, %:live, %1
-type :   0010  0010  0001
-		T_DIR T_DIR T_REG
+**** Explanation (int)type :
+**** sti	r1, %:live, %1
+**** type :   0010  0010  0001
+**** 		T_DIR T_DIR T_REG
 */
 
-int		valid_args(char **args_tab, int op_code, int *to_check)
-{
-	int		i;
-	int		type;
-
-	i = 0;
-	type = 0;
-	if (!(type = recover_args(args_tab, to_check)))
-		return (0);
-	if (!(verif_type(type, op_code)))
-		return (0);
-	return (1);
-}
-
-int		check_args(char **args_tab, int op_code, t_data **data)
+int			check_args(char **args_tab, int op_code, t_data **data)
 {
 	int		to_check;
 

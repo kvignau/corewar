@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "asm.h"
-#include <stdio.h>
 
 static void			comment_remover(t_data *data, int i, int j)
 {
@@ -100,8 +99,6 @@ static int			sharp_cleaner(t_data *data, int *nb_lines)
 	data->file = sharp_cleaned;
 	return (1);
 }
-
-
 
 int					file_manager(t_data *data, int nb_lines)
 {

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   recovery.c                                         :+:      :+:    :+:   */
+/*   which_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,49 +12,73 @@
 
 #include "asm.h"
 
-static int		check_line(char *line, t_data **data)
-{
-	int				i;
-	char			*name;
-	t_data_line		dline;
-	static int		index_line = 0;
-
-	i = 0;
-	name = NULL;
-	ini_data_line(&dline, index_line);
-	while (line[i] != ' ' && line[i] != '\t')
-		i++;
-	name = ft_strsub(line, 0, i);
-	if (name[ft_strlen(name) - 1] == ':')
-	{
-		if (check_label(&name, data, &dline) == 0)
-			return (0);
-	}
-	else
-	{
-		if (check_instruct(line, &name, data, &dline) == 0)
-			return (0);
-	}
-	ft_strdel(&name);
-	ft_lstdbladd_head((*data)->lst_lines, &dline, sizeof(t_data_line));
-	index_line += 1;
-	return (1);
-}
-
-int				recovery(t_data *data)
+int		is_ind(char *arg)
 {
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
-	while (i < data->nb_lines)
+	while (arg[i])
 	{
-		if (data->file[i] == NULL)
-			return (1);
-		if (!(check_line(data->file[i], &data)))
+		if (i == 0 && (arg[i] == '-' || arg[i] == '+'))
+			i++;
+		else if (!(ft_isdigit(arg[i])))
+			return (0);
+		else
+			i++;
+	}
+	return (T_IND);
+}
+
+int		is_dir_label(char *arg, char **label)
+{
+	int		ret;
+
+	ret = 0;
+	*label = ft_strsub(arg, 2, ft_strlen(arg));
+	if (label_valid(*label))
+		ret = 2;
+	ft_strdel(label);
+	return (ret);
+}
+
+int		is_dir(char *arg)
+{
+	int		i;
+	char	*label;
+
+	i = 0;
+	label = NULL;
+	if (arg[i] != '%')
+		return (0);
+	if (arg[++i] == ':')
+		return (is_dir_label(arg, &label) == 2 ? 2 : 0);
+	while (arg[i])
+	{
+		if (i == 1 && (arg[i] == '-' || arg[i] == '+'))
+			i++;
+		else if (!(ft_isdigit(arg[i])))
+			return (0);
+		else
+			i++;
+	}
+	return (T_DIR);
+}
+
+int		is_reg(char *arg)
+{
+	int		i;
+
+	i = 0;
+	if (arg[i] != 'r')
+		return (0);
+	i++;
+	while (arg[i])
+	{
+		if (!(ft_isdigit(arg[i])))
 			return (0);
 		i++;
 	}
-	return (1);
+	if (i > 3)
+		return (0);
+	return (T_REG);
 }

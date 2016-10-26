@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-int		recover_valid_type(int op_code, int *type)
+static int		recover_valid_type(int op_code, int *type)
 {
 	int		i;
 	int		tmp;
@@ -34,7 +34,8 @@ int		recover_valid_type(int op_code, int *type)
 	}
 	return (*type);
 }
-int		verif_type(int type, int op_code)
+
+int				verif_type(int type, int op_code)
 {
 	int		i;
 	int		valid_type;

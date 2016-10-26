@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-int		index_label_declared(char *name, t_dbllist *lst_lines)
+int				index_label_declared(char *name, t_dbllist *lst_lines)
 {
 	t_elem	*tmp;
 
@@ -30,7 +30,7 @@ int		index_label_declared(char *name, t_dbllist *lst_lines)
 	return (-1);
 }
 
-int		index_label_called(char *name, t_dbllist *lst_lines)
+int				index_label_called(char *name, t_dbllist *lst_lines)
 {
 	t_elem	*tmp;
 
@@ -48,7 +48,7 @@ int		index_label_called(char *name, t_dbllist *lst_lines)
 	return (-1);
 }
 
-int		is_dir_with_label(char *arg)
+static	int		is_dir_with_label(char *arg)
 {
 	int		i;
 	char	*label;
@@ -70,7 +70,7 @@ int		is_dir_with_label(char *arg)
 	return (ret);
 }
 
-void	label_called(t_data_line *dline, char **args_tab)
+void			label_called(t_data_line *dline, char **args_tab)
 {
 	int				i;
 	int				nb_called;

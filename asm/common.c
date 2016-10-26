@@ -74,7 +74,7 @@ void	add_zero(char **str, int width)
 	}
 }
 
-int			find_in_lst_called(char *name, t_dbllist *label_called)
+int		find_in_lst_called(char *name, t_dbllist *label_called)
 {
 	t_elem	*tmp;
 

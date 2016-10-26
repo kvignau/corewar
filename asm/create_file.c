@@ -12,17 +12,18 @@
 
 #include "asm.h"
 
-int		check_s_file(char *name)
+static int		check_s_file(char *name)
 {
 	if (name)
 	{
-		if (name[ft_strlen(name) - 1] == 's' && name[ft_strlen(name) - 2] == '.')
+		if (name[ft_strlen(name) - 1] == 's'
+			&& name[ft_strlen(name) - 2] == '.')
 			return (1);
 	}
 	return (0);
 }
 
-char	*recup_only_name(char *file_name)
+static char		*recup_only_name(char *file_name)
 {
 	int		i;
 	char	*tmp;
@@ -39,7 +40,7 @@ char	*recup_only_name(char *file_name)
 	return (tmp);
 }
 
-void	ft_putstr_fd_trad(char const *trad, int fd)
+static void		ft_putstr_fd_trad(char const *trad, int fd)
 {
 	int		i;
 
@@ -58,7 +59,7 @@ void	ft_putstr_fd_trad(char const *trad, int fd)
 	}
 }
 
-void	create_cor(t_data *data, char *file_name)
+void			create_cor(t_data *data, char *file_name)
 {
 	int		fd;
 	char	*tmp;

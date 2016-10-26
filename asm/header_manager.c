@@ -31,6 +31,7 @@ static void	name_found(t_data *data, int *i, int *j, int *name)
 	*name = name_manager(data, i, j);
 	*j += 1;
 }
+
 static void	error_manager(t_data *data, int comment, int name)
 {
 	if (comment == 1)

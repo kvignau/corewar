@@ -37,6 +37,5 @@ int			main(int argc, char **argv)
 	trad_dir_label(&data);
 	final_trad(data, ft_strlen(data->tmp_trad) / 2);
 	create_cor(data, argv[1]);
-	// while (1);
 	return (0);
 }

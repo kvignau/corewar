@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-int		instruc_valid(char **name)
+static int	instruc_valid(char **name)
 {
 	int		i;
 
@@ -37,7 +37,7 @@ static void	make_args_tab(char *line, char *name, t_recup *recup)
 	ft_strtrim_tab(recup->args_tab);
 }
 
-int		sum_nb_oct(char *hex)
+static int	sum_nb_oct(char *hex)
 {
 	int		i;
 	int		nb_oct;
@@ -61,7 +61,8 @@ int		sum_nb_oct(char *hex)
 	return ((nb_oct / 2) + (nb_dir_lbl * 2));
 }
 
-int		check_instruct(char *line, char **name, t_data **data, t_data_line *dline)
+int			check_instruct(char *line, char **name, t_data **data,
+			t_data_line *dline)
 {
 	char	*args;
 	t_recup	recup;

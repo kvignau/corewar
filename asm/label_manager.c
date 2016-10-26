@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-static int					label_check(int *nb_label, t_data *data, int i)
+static int		label_check(int *nb_label, t_data *data, int i)
 {
 	int		k;
 
@@ -23,13 +23,13 @@ static int					label_check(int *nb_label, t_data *data, int i)
 		if (data->file[i][k] == ':')
 		{
 			*nb_label += 1;
-			break;
+			break ;
 		}
 	}
 	return (1);
 }
 
-static int					label_count(int *nb_label, t_data *data)
+static int		label_count(int *nb_label, t_data *data)
 {
 	int		i;
 	int		j;
@@ -51,7 +51,7 @@ static int					label_count(int *nb_label, t_data *data)
 	return (1);
 }
 
-static int					label_to_line(t_var *var, t_data *data)
+static int		label_to_line(t_var *var, t_data *data)
 {
 	var->k = 0;
 	while (ft_isspace(data->file[var->i][var->k]) ||
@@ -65,13 +65,13 @@ static int					label_to_line(t_var *var, t_data *data)
 			ft_bzero(&data->file[var->i][var->k + 1],
 				ft_strlen(&data->file[var->i][var->k + 1]));
 			var->toggle = 1;
-			break;
+			break ;
 		}
 	}
 	return (1);
 }
 
-static int					label_cleaner(t_data *data, int nb_label)
+static int		label_cleaner(t_data *data, int nb_label)
 {
 	t_var	var;
 
@@ -90,7 +90,7 @@ static int					label_cleaner(t_data *data, int nb_label)
 		}
 		var.j = 0;
 		var.label_cleaned[var.l] = ft_strdup(data->file[var.i]);
-		var.i++;
+		var.i = var.i + 1;
 		var.l += (1 + var.toggle);
 		var.toggle = 0;
 	}
@@ -99,12 +99,13 @@ static int					label_cleaner(t_data *data, int nb_label)
 	return (1);
 }
 
-int					label_manager(t_data *data)
+int				label_manager(t_data *data)
 {
 	int		nb_label;
-	int i = 0;
+	int		i;
 
 	nb_label = 0;
+	i = 0;
 	label_count(&nb_label, data);
 	label_cleaner(data, nb_label);
 	data->nb_lines = data->nb_lines + nb_label;

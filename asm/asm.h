@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/29 16:41:25 by mchevall          #+#    #+#             */
-/*   Updated: 2016/10/04 16:25:01 by mchevall         ###   ########.fr       */
+/*   Created: 2016/09/29 16:41:25 by mpaincha          #+#    #+#             */
+/*   Updated: 2016/10/04 16:25:01 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@
 # include "op.h"
 # include <fcntl.h>
 # define BUFF 1024
-
-/*
-**********************  Typedef  **********************
-*/
-
-
 
 /*
 **********************  Structures  **********************
@@ -70,7 +64,6 @@ typedef struct 		s_recup
 	int				op_code;
 	char			**args_tab;
 	int				nb_arg;
-	// char			*sum;
 	t_dbllist		*lst_hexa;
 	int				nb_oct;
 }					t_recup;
@@ -106,7 +99,7 @@ typedef struct 		s_data
 typedef struct 		s_lab
 {
 	char			*name;
-	int				oct; //useless ?
+	int				oct;
 }					t_lab;
 
 typedef struct		s_var
@@ -152,28 +145,38 @@ int					error(t_data *data, char *str);
 */
 
 int					recovery(t_data *data);
-int					check_line(char	*line, t_data **data); //maybe static
-int					label_valid(char *name); //maybe static
+int					recover_args(char **args_tab, int *to_check);
+int					label_valid(char *name);
 int					check_label(char **name, t_data **data, t_data_line *line);
-int					check_instruct(char *line, char **name, t_data **data, t_data_line *dline);
+int					check_instruct(char *line, char **name, t_data **data,
+					t_data_line *dline);
 void				ft_strtrim_tab(char **args_tab);
-int					check_args(char **args_tab, int op_code, t_data **data); //maybe static
+int					check_args(char **args_tab, int op_code, t_data **data);
 int					define_type_args(char *arg);
 int					verif_type(int type, int op_code);
 int					nb_arg(char **args_tab);
 int					exist_label(char *name, t_data **data);
 int					is_dir(char *arg);
+int					is_reg(char *arg);
+int					is_ind(char *arg);
 
 /*
 **********************  Transformation  ****************
 */
 
 void				sum_args(t_recup *recup, char **hexa);
-void				trad_reg(char *arg, char **hexa, t_data **data, int op_code);
-void				trad_ind(char *arg, char **hexa, t_data **data, int op_code);
-void				trad_dir(char *arg, char **hexa, t_data **data, int op_code);
-void				trad_args(t_recup *recup, char **hexa, t_data **data, int op_code);
-void				trad_label(char *arg, char **hexa, t_data **data, int op_code);
+void				trad_reg(char *arg, char **hexa, t_data **data,
+					int op_code);
+void				trad_ind(char *arg, char **hexa, t_data **data,
+					int op_code);
+void				trad_dir(char *arg, char **hexa, t_data **data,
+					int op_code);
+void				trad_args(t_recup *recup, char **hexa, t_data **data,
+					int op_code);
+void				trad_label(char *arg, char **hexa, t_data **data,
+					int op_code);
+void				trad_neg(char *arg, char **to_add);
+void				reduce_hex(char **to_add);
 int					define_trad_fct(char *arg);
 void				trad_name_instruct(int op_code, char **hexa);
 void				hex_to_lower(char **hex);
@@ -181,18 +184,18 @@ void				add_zero(char **str, int width);
 void				trad_to_str(t_data **data);
 char				*lsthexa_tostr(t_dbllist *lst);
 void				label_called(t_data_line *dline, char **args_tab);
-void				trad_dir_without_label(char *arg, char **hexa, t_data **data, int op_code);
 int					index_label_called(char *name, t_dbllist *lst_lines);
 int					index_label_declared(char *name, t_dbllist *lst_lines);
-// int					find_in_tb_char(char *name, char **label_called);
 int					find_in_lst_called(char *name, t_dbllist *label_called);
-void				define_index(char *name, t_data **data, int *i_called, int *i_declared);
-int					front_decl(char *lbl_called, t_dbllist **lst_lines, int i_called, int i_declared);
-int					back_decl(char *lbl_called, t_dbllist **lst_lines, int i_called, int i_declared);
+void				define_index(char *name, t_data **data, int *i_called,
+					int *i_declared);
 void				trad_dir_label(t_data **data);
 void				tmp_trad_to_str(t_data **data);
 int					args_for_sum(char *arg);
 void				final_trad(t_data *data, int nb_oct);
+void				trad_to_ok(t_dbllist **lst_lines, char *lbl_called,
+					int i_called);
+void				modif_trad(int i, int j, char *trad, char **tmp_trad);
 
 /*
 **********************  Output  ***********************
