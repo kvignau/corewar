@@ -12,11 +12,12 @@
 
 #include "asm.h"
 
-static void	gotonextline(int *i, int *j, t_data *data, int *name_size)
+static void	gotonextline(int *i, int *j, t_data *data, int *comment_size)
 {
 	data->comment[*comment_size] = '\n';
 	*i += 1;
 	*j = 0;
+	*comment_size += 1;
 }
 
 static void	savecomment(t_data *data, int *comment_size, int *i, int *j)

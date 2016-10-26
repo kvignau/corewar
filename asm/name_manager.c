@@ -17,6 +17,7 @@ static void	gotonextline(int *i, int *j, t_data *data, int *name_size)
 	data->name[*name_size] = '\n';
 	*i += 1;
 	*j = 0;
+	*name_size += 1;
 }
 
 static void	savename(t_data *data, int *name_size, int *i, int *j)
