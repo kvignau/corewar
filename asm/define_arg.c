@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   which_arg.c                                        :+:      :+:    :+:   */
+/*   define_arg.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-int		is_ind(char *arg)
+int			is_ind(char *arg)
 {
 	int		i;
 
@@ -29,7 +29,7 @@ int		is_ind(char *arg)
 	return (T_IND);
 }
 
-int		is_dir_label(char *arg, char **label)
+int			is_dir_label(char *arg, char **label)
 {
 	int		ret;
 
@@ -41,7 +41,7 @@ int		is_dir_label(char *arg, char **label)
 	return (ret);
 }
 
-int		is_dir(char *arg)
+int			is_dir(char *arg)
 {
 	int		i;
 	char	*label;
@@ -64,7 +64,7 @@ int		is_dir(char *arg)
 	return (T_DIR);
 }
 
-int		is_reg(char *arg)
+int			is_reg(char *arg)
 {
 	int		i;
 

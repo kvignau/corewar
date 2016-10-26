@@ -38,9 +38,12 @@ void	free_lst_hexa(t_dbllist **lst_hexa)
 
 void	free_t_recup(t_recup *recup)
 {
-	ft_strdel(&recup->label_name);
-	free_tab_char(&(recup->args_tab));
-	free_lst_hexa(&(recup->lst_hexa));
+	if (recup->label_name)
+		ft_strdel(&(recup->label_name));
+	if (recup->args_tab)
+		free_tab_char(&(recup->args_tab));
+	if (recup->lst_hexa)
+		free_lst_hexa(&(recup->lst_hexa));
 }
 
 void	free_tab_char(char ***tab)
