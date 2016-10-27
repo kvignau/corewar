@@ -12,9 +12,9 @@
 
 #include "corewar.h"
 
-static unsigned intmax_t	ft_mini_power(int nb, int power)
+static uintmax_t	ft_mini_power(int nb, int power)
 {
-	unsigned intmax_t	value;
+	uintmax_t	value;
 
 	value = 1;
 	if (power == 0)
@@ -29,14 +29,14 @@ static unsigned intmax_t	ft_mini_power(int nb, int power)
 	return (value);
 }
 
-unsigned intmax_t			ft_hextoi(char *str)
+uintmax_t			ft_hextoi(unsigned char *str)
 {
 	int					i;
 	int					j;
 	int					len;
 	uintmax_t			value;
 
-	len = ft_strlen(str) - 1;
+	len = ft_strlen((char *)str) - 1;
 	i = 0;
 	j = 0;
 	value = 0;

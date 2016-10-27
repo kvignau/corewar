@@ -12,17 +12,12 @@
 
 #include "corewar.h"
 
-char		*memory()
+unsigned char		*memory()
 {
-	char	*plateau;
-	int		i;
+	unsigned char	*plateau;
+	int				i;
 
 	i = 0;
-	plateau = (char *)malloc(sizeof(char) * (MEM_SIZE * 2));
-	while (i < (MEM_SIZE * 2))
-	{
-		plateau[i] = '0';
-		i++;
-	}
+	plateau = (unsigned char *)ft_memalloc(sizeof(unsigned char) * (MEM_SIZE));
 	return (plateau);
 }

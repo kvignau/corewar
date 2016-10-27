@@ -12,33 +12,15 @@
 
 #include "corewar.h"
 
-void	intro(t_dbllist *champ_list)
-{
-	t_elem	*tmp;
-	int		i;
 
-	i = 1;
-	tmp = champ_list->head;
-	ft_printf("Introducing contestants...\n");
-	while (tmp != NULL)
-	{
-		ft_printf("* Player %d, weighing %u bytes, \"%s\" (\"%s\") !\n",
-			(((t_champ *)(tmp->content))->id),
-			(((t_champ *)(tmp->content))->size),
-			(((t_champ *)(tmp->content))->name),
-			(((t_champ *)(tmp->content))->comment));
-		tmp= tmp->next;
-		i++;
-	}
-}
 
 int		main(int argc, char **argv)
 {
-	t_cor		core;
-	t_options	options;
-	t_dbllist	*champ_list;
-	char		*board;
-	t_elem		*tmp;
+	t_cor			core;
+	t_options		options;
+	t_dbllist		*champ_list;
+	unsigned char	*board;
+	t_elem			*tmp;
 
 	ft_bzero(&core, sizeof(t_cor));
 	ft_bzero(&options, sizeof(t_options));
@@ -49,7 +31,7 @@ int		main(int argc, char **argv)
 		return (0);
 	tmp = champ_list->head;
 	int i = 1;
-	ft_printf("size : %d\n",(t_champ *)(champ_list->length));
+	ft_printf("size : %d\n",(champ_list->length));
 	/*while (tmp != NULL)
 	{
 		ft_printf("champ:[%d], name:[%s] nb: [%d]\n", i, (((t_champ *)(tmp->content))->name),(((t_champ *)(tmp->content))->vm_number));
@@ -58,6 +40,7 @@ int		main(int argc, char **argv)
 	}*/
 	intro(champ_list);
 	board = memory();
-	//set_champion_on_board(champ_list);
+	set_champions_on_board(champ_list, &board);
+	ft_print_memory(board, MEM_SIZE);
 	return (0);
 }

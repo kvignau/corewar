@@ -38,7 +38,7 @@ typedef struct		s_champ
 	int				id;
 	char			*name;
 	char			*comment;
-	char			*content;
+	unsigned char	*content;
 	unsigned int	vm_number;
 	unsigned int	size;
 }					t_champ;
@@ -61,6 +61,8 @@ typedef struct		s_process
 */
 
 int			corewar_usage(int argc);
+void		ft_print_memory(unsigned char *ptr, int memsize);
+void		intro(t_dbllist *champ_list);
 
 /*
 **********************  Options  **********************
@@ -80,15 +82,14 @@ int			champions_maker(t_dbllist *champ_list, t_options *options,
 **********************  Utils  **********************
 */
 
-uintmax_t			ft_hextoi(char *str);
+uintmax_t			ft_hextoi(unsigned char *str);
 char				*ft_hextoa(int *str, int size);
-char				*memory();
-void				ft_print_memory(char *ptr, int memsize);
-char				*get_content(int *str, int size);
+unsigned char		*get_content(int *str, int size);
 
 /*
 **********************  Memory Setter  **********************
 */
 
-char				*memory();
+unsigned char		*memory();
+void		set_champions_on_board(t_dbllist *ch_list, unsigned char **board);
 #endif

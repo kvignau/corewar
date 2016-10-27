@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_memory.c                                     :+:      :+:    :+:   */
+/*   ft_print_memory.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kvignau <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,25 +12,21 @@
 
 #include "corewar.h"
 
-void	ft_print_memory(char *ptr, int memsize)
+void	ft_print_memory(unsigned char *ptr, int memsize)
 {
-	int	i;
-	int	j;
+	int		i;
 
 	i = 0;
-	j = 0;
-	while (j < (memsize * 2))
+	while (i < memsize)
 	{
-		if (i == 128)
+		if (i % 64 == 0)
 		{
-			write(1, "\n", 1);
-			i = 0;
+			if (i != 0)
+				write(1, "\n", 1);
+			ft_printf("0x%.4x : ", i);
 		}
-		else if (i != 0 && i % 2 == 0)
-			write(1, " ", 1);
-		write(1, &ptr[j], 1);
+		ft_printf("%.2x ", ptr[i]);
 		i++;
-		j++;
 	}
-	write(1, "\n", 1);
+	ft_putchar('\n');
 }

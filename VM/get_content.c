@@ -12,28 +12,42 @@
 
 #include "corewar.h"
 
-static char	*addzero(char *str, int len)
+static unsigned char	*addzero(unsigned char *str, int len)
 {
-	int		size;
+	int				size;
 
-	size = len - ft_strlen(str);
+	size = len - ft_strlen((char *)str);
 	while (size > 0)
 	{
-		str = ft_strjoinandfree("0", str, 2);
+		str = (unsigned char *)ft_strjoinandfree("0", (char *)str, 2);
 		size--;
 	}
 	return (str);
 }
 
-char		*get_content(int *str, int size)
+static void	tolower(unsigned char *content, int tmp)
 {
-	char	*content;
-	char	*nb;
-	int		i;
-	int		len;
+	int				i;
 
-	content = (char *)ft_memalloc(1);
 	i = 0;
+	while (i < tmp)
+	{
+		content[i] = ft_tolower(content[i]);
+		i++;
+	}
+}
+
+unsigned char			*get_content(int *str, int size)
+{
+	unsigned char	*content;
+	unsigned char	*nb;
+	int				i;
+	int				len;
+	int				tmp;
+
+	content = (unsigned char *)ft_memalloc(1);
+	i = 0;
+	tmp = size;
 
 	while (size > 0)
 	{
@@ -41,10 +55,11 @@ char		*get_content(int *str, int size)
 			len = 8;
 		else
 			len = size;
-		nb = addzero(ft_itoabase_uimax((unsigned int)str[i], 16), len);
-		content = ft_strjoinandfree(content, nb, 3);
+		nb = addzero((unsigned char *)ft_itoabase_uimax((unsigned int)str[i], 16), len);
+		content = (unsigned char *)ft_strjoinandfree((char *)content, (char *)nb, 3);
 		i += 2;
 		size -= 8;
 	}
+	tolower(content, tmp);
 	return (content);
 }
