@@ -31,6 +31,8 @@ static void		trad_dir_size_2(char *arg, char **hexa, t_data **data,
 		add_zero(&to_add, 4);
 	}
 	hex_to_lower(&to_add);
+	if (ft_strlen(to_add) > 4)
+		reduce_hex(&to_add, 4);
 	to_compete = ft_strdup(*hexa);
 	ft_strdel(hexa);
 	(*hexa) = ft_strjoinandfree(to_compete, to_add, 3);
@@ -56,7 +58,7 @@ static void		trad_dir_size_4(char *arg, char **hexa, t_data **data,
 	}
 	hex_to_lower(&to_add);
 	if (ft_strlen(to_add) > 8)
-		reduce_hex(&to_add);
+		reduce_hex(&to_add, 8);
 	to_compete = ft_strdup(*hexa);
 	ft_strdel(hexa);
 	(*hexa) = ft_strjoinandfree(to_compete, to_add, 3);

@@ -56,11 +56,11 @@ void	trad_reg(char *arg, char **hexa, t_data **data, int op_code)
 	(*hexa) = ft_strjoinandfree(to_compete, to_add, 3);
 }
 
-void	reduce_hex(char **to_add)
+void	reduce_hex(char **to_add, int size)
 {
 	char	*tmp;
 
-	tmp = ft_strsub(*to_add, ft_strlen(*to_add) - 8, ft_strlen(*to_add));
+	tmp = ft_strsub(*to_add, ft_strlen(*to_add) - size, ft_strlen(*to_add));
 	ft_strdel(to_add);
 	*to_add = ft_strdup(tmp);
 	ft_strdel(&tmp);

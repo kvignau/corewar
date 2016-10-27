@@ -176,7 +176,7 @@ void				trad_args(t_recup *recup, char **hexa, t_data **data,
 void				trad_label(char *arg, char **hexa, t_data **data,
 					int op_code);
 void				trad_neg(char *arg, char **to_add);
-void				reduce_hex(char **to_add);
+void				reduce_hex(char **to_add, int size);
 int					define_trad_fct(char *arg);
 void				trad_name_instruct(int op_code, char **hexa);
 void				hex_to_lower(char **hex);
@@ -203,19 +203,6 @@ void				modif_trad(int i, int j, char *trad, char **tmp_trad);
 */
 
 void				create_cor(t_data *data, char *file_name);
-
-/*
-**********************  Display  ***********************
-*/
-
-void				display_file(t_data *data);
-void				show_label_lst(t_dbllist *lst);
-void				show_lst_recup(t_dbllist *lst);
-void				show_tab_char(char **tab);
-void				show_trad(t_dbllist *lst);
-void				show_lst_hexa(t_dbllist *lst);
-void				show_dline(t_dbllist *lst);
-void				show_final_trad(char *trad);
 
 /*
 **********************  No leaks  **********************
