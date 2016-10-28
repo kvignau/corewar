@@ -49,12 +49,12 @@ typedef struct		s_var
 	char			**argv;
 	int				error;
 }					t_var;
-typedef struct		s_process
+typedef struct		s_proc
 {
 	int				r[REG_NUMBER];
-	unsigned int	*pc;
 	int				carry;
-}					t_process;
+	unsigned char	*pc;
+}					t_proc;
 
 /*
 **********************  Display  **********************
@@ -90,6 +90,7 @@ unsigned char		*get_content(int *str, int size);
 **********************  Memory Setter  **********************
 */
 
-unsigned char		*memory();
-void		set_champions_on_board(t_dbllist *ch_list, unsigned char **board);
+unsigned char		*memory(void);
+void				init_board(t_dbllist *ch_list, t_dbllist *pr_list,
+	unsigned char **board);
 #endif

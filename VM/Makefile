@@ -17,7 +17,7 @@ FLAGS += -Wall -Wextra -Werror -fsanitize=address
 
 SRC = main.c op.c corewar_usage.c options_checkers.c champions_maker.c \
 ft_print_memory.c memory.c ft_hextoa.c get_content.c ft_hextoi.c\
-set_champions_on_board.c intro.c
+init_board.c intro.c
 
 OBJ = $(SRC:%.c=%.o)
 

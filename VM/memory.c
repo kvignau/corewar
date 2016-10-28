@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-unsigned char		*memory()
+unsigned char		*memory(void)
 {
 	unsigned char	*plateau;
 	int				i;

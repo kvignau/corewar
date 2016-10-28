@@ -20,11 +20,13 @@ int		main(int argc, char **argv)
 	t_options		options;
 	t_dbllist		*champ_list;
 	unsigned char	*board;
+	t_dbllist		*process_list;
 	t_elem			*tmp;
 
 	ft_bzero(&core, sizeof(t_cor));
 	ft_bzero(&options, sizeof(t_options));
 	champ_list = ft_lstdblnew();
+	process_list = ft_lstdblnew();
 	if (!corewar_usage(argc))
 		return (-1);
 	if (options_checkers(argc, argv, &options, champ_list) == 0)
@@ -40,7 +42,7 @@ int		main(int argc, char **argv)
 	}*/
 	intro(champ_list);
 	board = memory();
-	set_champions_on_board(champ_list, &board);
+	set_champions_on_board(champ_list, process_list, &board);
 	ft_print_memory(board, MEM_SIZE);
 	return (0);
 }
