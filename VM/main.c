@@ -42,7 +42,7 @@ int		main(int argc, char **argv)
 	}*/
 	intro(champ_list);
 	board = memory();
-	set_champions_on_board(champ_list, process_list, &board);
+	init_board(champ_list, process_list, &board);
 	ft_print_memory(board, MEM_SIZE);
 	return (0);
 }
