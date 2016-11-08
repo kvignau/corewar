@@ -82,7 +82,7 @@ void	invalid_file(int error, t_var *var)
 	{
 		ft_putstr_fd("File ", 2);
 		ft_putstr_fd(var->argv[var->i], 2);
-		ft_putstr_fd("is not the size specified in header.\n", 2);
+		ft_putstr_fd(" is not the size specified in header.\n", 2);
 	}
 }
 
