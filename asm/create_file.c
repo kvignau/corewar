@@ -54,7 +54,7 @@ void			create_cor(t_data *data, char *file_name)
 	name = ft_strsub(tmp, 0, ft_strlen(tmp) - 2);
 	fd = open(ft_strjoin(name, ".cor"),
 		O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-	gclose(fd);
+	close(fd);
 	open(ft_strjoin(name, ".cor"), O_WRONLY);
 	reverse_hexdump(data->tmp_trad, fd);
 	close(fd);
