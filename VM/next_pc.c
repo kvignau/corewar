@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_aff.c                                          :+:      :+:    :+:   */
+/*   next_pc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/30 13:55:32 by mchevall          #+#    #+#             */
-/*   Updated: 2016/11/07 11:31:02 by mchevall         ###   ########.fr       */
+/*   Created: 2016/11/08 16:04:00 by mchevall          #+#    #+#             */
+/*   Updated: 2016/11/08 16:04:07 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	cmd_aff(unsigned char *board, t_proc *c_proc)
+void	next_pc(int counter_offset, t_proc *c_proc, unsigned char *board)
 {
-	if (board[(c_proc->i + 1) % MEM_SIZE] == 0x40)
-		write(1, (int *)&board[(c_proc->i + 2) % MEM_SIZE], 1);
-	next_pc(3, c_proc, board);
+	c_proc->pc = &board[(c_proc->i + counter_offset) % MEM_SIZE];
+	c_proc->i += counter_offset;
 }

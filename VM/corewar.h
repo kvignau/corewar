@@ -99,8 +99,8 @@ void				init_board(t_dbllist *ch_list, t_dbllist *pr_list,
 **********************  Commands **********************
 */
 
-void	cmd_aff(unsigned char *board, t_proc *c_proc);
+void	next_pc(int counter_offset, t_proc *c_proc, unsigned char *board);
 int		cmd_fork(unsigned char *board, t_proc *c_proc);
-
+void	cmd_aff(unsigned char *board, t_proc *c_proc);
 
 #endif
