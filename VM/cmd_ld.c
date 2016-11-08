@@ -16,26 +16,29 @@ void	cmd_ld(unsigned char *board, t_proc *c_proc)
 {
 	unsigned int	id;
 
-	// ft_printf("COUCOU HEXTOI => %u", bit_cat(board, c_proc, 2, 4));
-	// next_pc(7, c_proc, board);
-	// ft_printf("COUCOU HEXTOI 2 => %x", board[c_proc->i % MEM_SIZE]);
-	if (board[(c_proc->i + 1) % MEM_SIZE] == 0x90)
+	if (c_proc->ctp == 5)
 	{
-			id = bit_cat(board, c_proc, 2, 4);
-			c_proc->r[(int)(board[c_proc->i + 6 % MEM_SIZE]) - 1] = (int)(c_proc->pc + (id % IDX_MOD));
-			ft_printf("indirect %d\n", c_proc->pc);
-			ft_printf("TEST DE OUF indirect %x\n", c_proc->pc + (id % IDX_MOD));
-			next_pc(7, c_proc, board);
+		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x90)
+		{
+				id = bit_cat(board, c_proc, 2, 4);
+				c_proc->r[(int)(board[c_proc->i + 6 % MEM_SIZE]) - 1] = (int)(c_proc->pc + (id % IDX_MOD));
+				// ft_printf("indirect %d\n", c_proc->pc);
+				// ft_printf("TEST DE OUF indirect %x\n", c_proc->pc + (id % IDX_MOD));
+				next_pc(7, c_proc, board);
+		}
+		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0xd0)
+		{
+				id = bit_cat(board, c_proc, 2, 2);
+				c_proc->r[(int)(board[c_proc->i + 4 % MEM_SIZE] - 1)] = (int)(c_proc->pc + (id % IDX_MOD));
+				// ft_printf("direct %d\n", c_proc->pc);
+				// ft_printf("TEST DE OUF direct %x\n", c_proc->pc + (id % IDX_MOD));
+				next_pc(5, c_proc, board);
+		}
+		//ajout modif carry
+		c_proc->ctp += 1;
 	}
-	if (board[(c_proc->i + 1) % MEM_SIZE] == 0xd0)
-	{
-			id = bit_cat(board, c_proc, 2, 2);
-			c_proc->r[(int)(board[c_proc->i + 4 % MEM_SIZE] - 1)] = (int)(c_proc->pc + (id % IDX_MOD));
-			ft_printf("direct %d\n", c_proc->pc);
-			ft_printf("TEST DE OUF direct %x\n", c_proc->pc + (id % IDX_MOD));
-			next_pc(5, c_proc, board);
-	}
-	c_proc->carry = 1;
+	else
+		c_proc->ctp += 1;
 }
 
 unsigned int		bit_cat(unsigned char *board, t_proc *c_proc, int start, int size)
