@@ -197,6 +197,8 @@ void				final_trad(t_data *data, int nb_oct);
 void				trad_to_ok(t_dbllist **lst_lines, char *lbl_called,
 					int i_called);
 void				modif_trad(int i, int j, char *trad, char **tmp_trad);
+uintmax_t			ft_hextoi(unsigned char *str);
+void				reverse_hexdump(char const *trad, int fd);
 
 /*
 **********************  Output  ***********************

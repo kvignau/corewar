@@ -20,7 +20,8 @@ ft_iscomment.c recovery.c header_manager.c name_manager.c \
 comment_manager.c error.c free_all_data.c recovery_instruc.c noleaks.c \
 check_arg.c check_type.c which_arg.c trad.c trad_reg_ind.c ft_islabelchar.c \
 common.c label_manager.c label.c label_1.c final_trad.c create_file.c \
-data_initializer_1.c recovery_label.c define_arg.c trad_dir.c label_2.c
+data_initializer_1.c recovery_label.c define_arg.c trad_dir.c label_2.c \
+ft_hextoi.c reverse_hexdump.c
 
 OBJ = $(SRC:%.c=%.o)
 
