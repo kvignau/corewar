@@ -40,25 +40,6 @@ static char		*recup_only_name(char *file_name)
 	return (tmp);
 }
 
-static void		ft_putstr_fd_trad(char const *trad, int fd)
-{
-	int		i;
-
-	i = 0;
-	if (trad)
-	{
-		while (trad[i] != '\0')
-		{
-			if (i != 0 && (i % 4) == 0 && (i % 32) != 0)
-				ft_putchar_fd(' ', fd);
-			else if (i != 0 && (i % 32) == 0)
-				ft_putchar_fd('\n', fd);
-			write(fd, &trad[i], 1);
-			i++;
-		}
-	}
-}
-
 void			create_cor(t_data *data, char *file_name)
 {
 	int		fd;
@@ -71,10 +52,10 @@ void			create_cor(t_data *data, char *file_name)
 		return ;
 	tmp = recup_only_name(file_name);
 	name = ft_strsub(tmp, 0, ft_strlen(tmp) - 2);
-	fd = open(ft_strjoin(name, ".cor"), O_CREAT, S_IRWXU);
+	fd = open(ft_strjoin(name, ".cor"),
+		O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	close(fd);
 	open(ft_strjoin(name, ".cor"), O_WRONLY);
 	reverse_hexdump(data->tmp_trad, fd);
-	// ft_putstr_fd_trad(data->tmp_trad, fd);
 	close(fd);
 }
