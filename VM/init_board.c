@@ -12,15 +12,17 @@
 
 #include "corewar.h"
 
-static void	content_to_board(t_elem *champ, unsigned char *board,
+static int	content_to_board(t_elem *champ, unsigned char *board,
 	t_dbllist *ch_list, t_proc *proc)
 {
 	int		i;
 	int		j;
+	int		k;
 	unsigned char *str;
 
 	i = (((MEM_SIZE) / ch_list->length) *
 		((((t_champ *)(champ->content))->id) - 1));
+	k = i;
 	j = 0;
 	str =(unsigned char *)ft_memalloc(3);
 	proc->pc = &board[i];
@@ -33,6 +35,7 @@ static void	content_to_board(t_elem *champ, unsigned char *board,
 		i += 1;
 	}
 	proc->r[1] = (((t_champ *)(champ->content))->vm_number);
+	return (k);
 }
 
 void		init_board(t_dbllist *ch_list, t_dbllist *pr_list,
@@ -45,8 +48,8 @@ void		init_board(t_dbllist *ch_list, t_dbllist *pr_list,
 	bzero(&proc, sizeof(t_proc));
 	while (champ != NULL)
 	{
-		content_to_board(champ, *board, ch_list, &proc);
-		ft_lstdbladd_head(pr_list, &proc, sizeof(t_champ));
+		proc.i = content_to_board(champ, *board, ch_list, &proc);
+		ft_lstdbladd_head(pr_list, (t_proc *)&proc, sizeof(t_proc));
 		champ = champ->next;
 	}
 }

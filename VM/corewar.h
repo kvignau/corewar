@@ -54,6 +54,7 @@ typedef struct		s_proc
 	int				r[REG_NUMBER];
 	int				carry;
 	unsigned char	*pc;
+	int				i;
 }					t_proc;
 
 /*
@@ -93,4 +94,13 @@ unsigned char		*get_content(int *str, int size);
 unsigned char		*memory(void);
 void				init_board(t_dbllist *ch_list, t_dbllist *pr_list,
 	unsigned char **board);
+
+/*
+**********************  Commands **********************
+*/
+
+void	cmd_aff(unsigned char *board, t_proc *c_proc);
+int		cmd_fork(unsigned char *board, t_proc *c_proc);
+
+
 #endif

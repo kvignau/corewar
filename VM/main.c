@@ -12,8 +12,6 @@
 
 #include "corewar.h"
 
-
-
 int		main(int argc, char **argv)
 {
 	t_cor			core;
@@ -22,6 +20,7 @@ int		main(int argc, char **argv)
 	unsigned char	*board;
 	t_dbllist		*process_list;
 	t_elem			*tmp;
+	t_elem			*tmp2;
 
 	ft_bzero(&core, sizeof(t_cor));
 	ft_bzero(&options, sizeof(t_options));
@@ -34,15 +33,21 @@ int		main(int argc, char **argv)
 	tmp = champ_list->head;
 	int i = 1;
 	ft_printf("size : %d\n",(champ_list->length));
-	/*while (tmp != NULL)
-	{
-		ft_printf("champ:[%d], name:[%s] nb: [%d]\n", i, (((t_champ *)(tmp->content))->name),(((t_champ *)(tmp->content))->vm_number));
-		i++;
-		tmp= tmp->next;
-	}*/
+
 	intro(champ_list);
 	board = memory();
 	init_board(champ_list, process_list, &board);
+	tmp2 = process_list->head;
 	ft_print_memory(board, MEM_SIZE);
+	/*while (tmp != NULL && tmp2 != NULL)
+	{
+		ft_printf("champ:[%d], name:[%s] nb: [%d]\n", i, (((t_champ *)(tmp->content))->name),(((t_champ *)(tmp->content))->vm_number));
+		ft_printf("champ:[%d], i:[%d] pc: [%x]\n", i, (((t_proc *)(tmp2->content))->i),(((t_proc *)(tmp2->content))->pc));
+		i++;
+		cmd_aff(board, tmp2->content);
+		tmp = tmp->next;
+		tmp2 = tmp2->next;
+	}*/
+	//cmd_fork()
 	return (0);
 }
