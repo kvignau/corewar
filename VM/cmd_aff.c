@@ -16,6 +16,5 @@ void	cmd_aff(unsigned char *board, t_proc *c_proc)
 {
 	if (board[(c_proc->i + 1) % MEM_SIZE] == 0x40)
 		write(1, (int *)&board[(c_proc->i + 2) % MEM_SIZE], 1);
-	c_proc->pc = &board[(c_proc->i + 3) % MEM_SIZE];
-	c_proc->i += 3;
+	//next_pc(3, c_proc);
 }
