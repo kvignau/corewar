@@ -55,6 +55,7 @@ typedef struct		s_proc
 	int				carry;
 	unsigned char	*pc;
 	int				i;
+	int				ctp;
 }					t_proc;
 
 /*
@@ -83,33 +84,25 @@ int			champions_maker(t_dbllist *champ_list, t_options *options,
 **********************  Utils  **********************
 */
 
-uintmax_t			ft_hextoi(unsigned char *str);
-char				*ft_hextoa(int *str, int size);
-unsigned char		*get_content(int *str, int size);
+uintmax_t		ft_hextoi(unsigned char *str);
+char			*ft_hextoa(int *str, int size);
+unsigned char	*get_content(int *str, int size);
 
 /*
 **********************  Memory Setter  **********************
 */
 
-unsigned char		*memory(void);
-void				init_board(t_dbllist *ch_list, t_dbllist *pr_list,
+unsigned char	*memory(void);
+void			init_board(t_dbllist *ch_list, t_dbllist *pr_list,
 	unsigned char **board);
 
 /*
 **********************  Commands **********************
 */
 
-<<<<<<< HEAD
-unsigned int		bit_cat(unsigned char *board, t_proc *c_proc, int start, int size);
-void				next_pc(int counter_offset, t_proc *c_proc, unsigned char *board);
-void				cmd_ld(unsigned char *board, t_proc *c_proc);
-void				cmd_aff(unsigned char *board, t_proc *c_proc);
-int					cmd_fork(unsigned char *board, t_proc *c_proc);
-
-=======
-void	next_pc(int counter_offset, t_proc *c_proc, unsigned char *board);
-int		cmd_fork(unsigned char *board, t_proc *c_proc);
-void	cmd_aff(unsigned char *board, t_proc *c_proc);
->>>>>>> 7ab0bd1d7a56a16d60fcecc2aa4ad19e85db9a44
-
+unsigned int	bit_cat(unsigned char *board, t_proc *c_proc, int start, int size);
+void			next_pc(int counter_offset, t_proc *c_proc, unsigned char *board);
+void			cmd_ld(unsigned char *board, t_proc *c_proc);
+void			cmd_fork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list);
+void			cmd_aff(unsigned char *board, t_proc *c_proc);
 #endif
