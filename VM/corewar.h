@@ -100,10 +100,12 @@ void			init_board(t_dbllist *ch_list, t_dbllist *pr_list,
 **********************  Commands **********************
 */
 
-unsigned int	bit_cat(unsigned char *board, t_proc *c_proc, int start, int size);
+int				bit_cat(unsigned char *board, t_proc *c_proc, int start, int size);
 void			next_pc(int counter_offset, t_proc *c_proc, unsigned char *board);
 void			cmd_ld(unsigned char *board, t_proc *c_proc);
+void			cmd_ldi(unsigned char *board, t_proc *c_proc);
 void			cmd_fork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list);
+void			cmd_lfork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list);
 void			cmd_aff(unsigned char *board, t_proc *c_proc);
 
 #endif

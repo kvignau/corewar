@@ -6,7 +6,7 @@
 #    By: kvignau <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/04 10:52:32 by kvignau           #+#    #+#              #
-#    Updated: 2016/10/19 16:20:18 by kvignau          ###   ########.fr        #
+#    Updated: 2016/11/09 13:37:59 by kvignau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ FLAGS += -Wall -Wextra -Werror -fsanitize=address
 
 SRC = main.c op.c corewar_usage.c options_checkers.c champions_maker.c \
 ft_print_memory.c memory.c ft_hextoa.c get_content.c ft_hextoi.c\
-init_board.c intro.c cmd_aff.c cmd_fork.c next_pc.c cmd_ld.c
+init_board.c intro.c cmd_aff.c cmd_fork.c next_pc.c cmd_ld.c cmd_lfork.c\
+bit_cat.c cmd_ldi.c
 
 OBJ = $(SRC:%.c=%.o)
 
