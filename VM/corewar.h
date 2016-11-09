@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 14:49:16 by mchevall          #+#    #+#             */
-/*   Updated: 2016/10/19 16:21:22 by kvignau          ###   ########.fr       */
+/*   Updated: 2016/11/09 15:09:58 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void			init_board(t_dbllist *ch_list, t_dbllist *pr_list,
 int				bit_cat(unsigned char *board, t_proc *c_proc, int start, int size);
 void			next_pc(int counter_offset, t_proc *c_proc, unsigned char *board);
 void			cmd_ld(unsigned char *board, t_proc *c_proc);
+void			cmd_st(unsigned char *board, t_proc *c_proc);
 void			cmd_ldi(unsigned char *board, t_proc *c_proc);
 void			cmd_fork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list);
 void			cmd_lfork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list);

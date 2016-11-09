@@ -23,7 +23,7 @@ int		bit_cat(unsigned char *board, t_proc *c_proc, int start, int size)
 	result = 0;
 	while (i < size)
 	{
-		nb = board[(c_proc->i + (start + i)) % MEM_SIZE];
+		nb = board[c_proc->i + ((start + i) % MEM_SIZE)];
 		result = result | nb;
 		if (i < size - 1)
 			result = result << 8;
