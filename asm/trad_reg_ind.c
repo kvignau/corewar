@@ -85,6 +85,8 @@ void	trad_ind(char *arg, char **hexa, t_data **data, int op_code)
 		to_add = ft_itoabase_uimax(ft_atoi(arg), 16);
 		add_zero(&to_add, 4);
 	}
+	if (ft_strlen(to_add) > 4)
+		reduce_hex(&to_add, 4);
 	hex_to_lower(&to_add);
 	to_compete = ft_strdup(*hexa);
 	ft_strdel(hexa);
