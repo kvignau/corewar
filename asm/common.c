@@ -65,6 +65,13 @@ void	add_zero(char **str, int width)
 	i = 0;
 	if (ft_strlen(*str) == width)
 		return ;
+	while (ft_strlen(*str) > width)
+	{
+		tmp = ft_strdup(*str);
+		ft_strdel(str);
+		*str = ft_strsub(tmp, 0, ft_strlen(tmp) - 1);
+		ft_strdel(&tmp);
+	}
 	while (ft_strlen(*str) < width)
 	{
 		tmp = ft_strdup(*str);

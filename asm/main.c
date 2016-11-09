@@ -35,6 +35,9 @@ int			main(int argc, char **argv)
 	}
 	tmp_trad_to_str(&data);
 	trad_dir_label(&data);
+	//
+	ft_printf("trad : %s\nlen trad : %d\n", data->tmp_trad, ft_strlen(data->tmp_trad) / 2);
+	//
 	final_trad(data, ft_strlen(data->tmp_trad) / 2);
 	create_cor(data, argv[1]);
 	free_all_data(data);

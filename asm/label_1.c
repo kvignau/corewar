@@ -63,6 +63,7 @@ static	int		back_decl(char *lbl_called, t_dbllist **lst_lines, int i_called,
 		tmp = tmp->prev;
 	}
 	nb_oct--;
+	ft_printf("nb_oct %d\n, itobase : %s\n", 65535 - nb_oct, ft_itoabase_imax(65535 - nb_oct, 16));
 	return (65535 - nb_oct);
 }
 
@@ -88,6 +89,7 @@ static char		*trad_label_called(char *lbl_called, char **tmp_trad,
 	trad_to_ok(&((*data)->lst_lines), lbl_called, i_called);
 	hex_to_lower(&tmp);
 	add_zero(&tmp, 4);
+	ft_printf("tmp : %s\n", tmp);
 	return (tmp);
 }
 
