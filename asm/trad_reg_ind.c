@@ -66,6 +66,16 @@ void	reduce_hex(char **to_add, int size)
 	ft_strdel(&tmp);
 }
 
+void	reduce_hex_ind(char **to_add, int size)
+{
+	char	*tmp;
+
+	tmp = ft_strsub(*to_add, 0, size);
+	ft_strdel(to_add);
+	*to_add = ft_strdup(tmp);
+	ft_strdel(&tmp);
+}
+
 void	trad_ind(char *arg, char **hexa, t_data **data, int op_code)
 {
 	char	*tmp;
@@ -86,7 +96,7 @@ void	trad_ind(char *arg, char **hexa, t_data **data, int op_code)
 		add_zero(&to_add, 4);
 	}
 	if (ft_strlen(to_add) > 4)
-		reduce_hex(&to_add, 4);
+		reduce_hex_ind(&to_add, 4);
 	hex_to_lower(&to_add);
 	to_compete = ft_strdup(*hexa);
 	ft_strdel(hexa);
