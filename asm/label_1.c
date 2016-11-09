@@ -63,8 +63,16 @@ static	int		back_decl(char *lbl_called, t_dbllist **lst_lines, int i_called,
 		tmp = tmp->prev;
 	}
 	nb_oct--;
-	ft_printf("nb_oct %d\n, itobase : %s\n", 65535 - nb_oct, ft_itoabase_imax(65535 - nb_oct, 16));
 	return (65535 - nb_oct);
+}
+
+static void		check_if_minus_one(char **str)
+{
+	if (ft_strcmp(*str, "10000") == 0)
+	{
+		ft_strdel(str);
+		*str = ft_strdup("0");
+	}
 }
 
 static char		*trad_label_called(char *lbl_called, char **tmp_trad,
@@ -86,10 +94,10 @@ static char		*trad_label_called(char *lbl_called, char **tmp_trad,
 	else
 		tmp = ft_itoabase_imax(back_decl(lbl_called, &((*data)->lst_lines),
 								i_called, i_declared), 16);
+	check_if_minus_one(&tmp);
 	trad_to_ok(&((*data)->lst_lines), lbl_called, i_called);
 	hex_to_lower(&tmp);
 	add_zero(&tmp, 4);
-	ft_printf("tmp : %s\n", tmp);
 	return (tmp);
 }
 
