@@ -14,7 +14,7 @@
 
 void	cmd_ld(unsigned char *board, t_proc *c_proc)
 {
-	unsigned int	id;
+	int	id;
 
 	if (c_proc->ctp == 5)
 	{
