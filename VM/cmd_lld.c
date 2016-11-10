@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-void	cmd_ld(unsigned char *board, t_proc *c_proc)
+void	cmd_lld(unsigned char *board, t_proc *c_proc)
 {
 	int	id;
 
