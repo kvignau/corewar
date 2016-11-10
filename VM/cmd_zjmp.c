@@ -18,9 +18,14 @@ void	cmd_zjmp(unsigned char *board, t_proc *c_proc)
 
 	if (c_proc->ctp == 20)
 	{
-		id = bit_cat(board, c_proc, 1, 2);
-		c_proc->i = c_proc->i + (id % IDX_MOD);
-		c_proc->pc = &board[c_proc->i];
+		if (c_proc->carry == 1)
+		{
+			id = bit_cat(board, c_proc, 1, 2);
+			c_proc->i = c_proc->i + (id % IDX_MOD);
+			c_proc->pc = &board[c_proc->i];
+		}
+		else
+			next_pc(3, c_proc, board);
 		c_proc->ctp = 0;
 	}
 	else
