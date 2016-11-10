@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/10 14:49:16 by mchevall          #+#    #+#             */
-/*   Updated: 2016/11/09 15:09:58 by kvignau          ###   ########.fr       */
+/*   Updated: 2016/11/10 11:10:08 by kvignau          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void			cmd_ld(unsigned char *board, t_proc *c_proc);
 void			cmd_st(unsigned char *board, t_proc *c_proc);
 void			cmd_add(unsigned char *board, t_proc *c_proc);
 void			cmd_sub(unsigned char *board, t_proc *c_proc);
+void			cmd_zjump(unsigned char *board, t_proc *c_proc);
 void			cmd_ldi(unsigned char *board, t_proc *c_proc);
 void			cmd_fork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list);
 void			cmd_lfork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list);
