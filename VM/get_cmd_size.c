@@ -16,7 +16,7 @@ int		get_cmd_size(int *type, int label_size)
 {
 	int		size;
 
-	size = 0;
+	size = 2;
 	if (type[0] == REG)
 		size += 1;
 	else if (type[0] == DIR)
