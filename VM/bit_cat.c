@@ -12,11 +12,11 @@
 
 #include "corewar.h"
 
-int		bit_cat(unsigned char *board, t_proc *c_proc, int start, int size)
+unsigned int		bit_cat(unsigned char *board, t_proc *c_proc, int start, int size)
 {
-	int	result;
-	int	nb;
-	int	i;
+	unsigned int	result;
+	unsigned int	nb;
+	int				i;
 
 	i = 0;
 	nb = 0;
