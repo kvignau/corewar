@@ -25,7 +25,7 @@ void	cmd_st(unsigned char *board, t_proc *c_proc)
 		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x70)
 		{
 				id = bit_cat(board, c_proc, 3, 2);
-				result = c_proc->r[(int)(board[(c_proc->i + 2) % MEM_SIZE]) - 1] >> 24;
+				result = c_proc->r[(board[(c_proc->i + 2) % MEM_SIZE]) - 1] >> 24;
 				while (i < REG_SIZE)
 				{
 					board[(c_proc->i + ((id + i) % IDX_MOD)) % MEM_SIZE] = (unsigned char)result;

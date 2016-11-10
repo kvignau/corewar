@@ -14,7 +14,7 @@
 
 void	cmd_zjmp(unsigned char *board, t_proc *c_proc)
 {
-	int	id;
+	unsigned int	id;
 
 	if (c_proc->ctp == 20)
 	{
