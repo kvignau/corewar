@@ -12,46 +12,107 @@
 
 #include "corewar.h"
 
-void	cmd_ldi(unsigned char *board, t_proc *c_proc)
+unsigned int		isreg(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
 {
-	int		result;
-	int		ind_value;
-	int		start;
-	int		*type;
+	unsigned int		result;
+	unsigned int		reg_nb;
 
-	type = (int *)ft_memalloc(sizeof(int) * 3);
+	result = 0;
+	reg_nb = 0;
+	if (arg_nb == 2)
+	{
+		if (type[0] == REG)
+			reg_nb = bit_cat(board, c_proc, 3, 1);
+		else
+			reg_nb = bit_cat(board, c_proc, 4, 1);
+		if (reg_nb > 16)
+				return (0);
+		result = (unsigned int)c_proc->r[reg_nb];
+	}
+	else
+	{
+		reg_nb = bit_cat(board, c_proc, 1, 1);
+		if (reg_nb > 16)
+				return (0);
+		result = (unsigned int)c_proc->r[reg_nb];
+	}
+	return (result);
+}
+
+unsigned int		isdir(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
+{
+	unsigned int		result;
+
+	result = 0;
+	if (arg_nb == 2)
+	{
+		if (type[0] == REG)
+			result = (bit_cat(board, c_proc, 3, 2));
+		else
+			result = bit_cat(board, c_proc, 4, 2);
+	}
+	else
+		result = (bit_cat(board, c_proc, 2, 2));
+	return (result);
+}
+
+unsigned int		isind(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
+{
+	unsigned int		result;
+	unsigned int		start;
+
 	result = 0;
 	start = 0;
-	ind_value = 0;
+	start = bit_cat(board, c_proc, 2, 2);
+	result = ((bit_cat(board, c_proc, start, IND_SIZE)) % IDX_MOD);
+	return (result);
+}
+
+unsigned int		get_arg_value(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
+{
+	if (type[arg_nb - 1] == REG)
+	{
+		return(isreg(board, c_proc, type, arg_nb));
+	}
+	else if (type[arg_nb - 1] == DIR)
+	{
+		return (isdir(board, c_proc, type, arg_nb));
+	}
+	else if (type[arg_nb - 1] == IND)
+	{
+		return (isind(board, c_proc, type, arg_nb));
+	}
+	else
+		return (0);
+}
+
+void	cmd_ldi(unsigned char *board, t_proc *c_proc)
+{
+	unsigned int		result;
+	unsigned int		reg_nb;
+	int					*type;
+	int					first_arg;
+
+
+	result = 0;
+	reg_nb = 0;
 	// if (c_proc->ctp == 25)
-	type = get_type(board, c_proc, type);
-	ft_printf("YOLO%d, %d\n", type[0], type[1]);
-	/*{
-		if (board[(c_proc->i + 1) % MEM_SIZE] == 0xe4)
-		{
-
-			start = bit_cat(board, c_proc, 2, 2);
-			ind_value = bit_cat(board, c_proc, start, IND_SIZE) % (IDX_MOD);
-
-
-			// if (((bit_cat(board, c_proc, ((bit_cat(board, c_proc, 2, 2)) % IDX_MOD), IND_SIZE) + 1)) % IDX_MOD == 1)
-			// 	ind_value = ((bit_cat(board, c_proc, ((bit_cat(board, c_proc, 2, 2)) % IDX_MOD), IND_SIZE) + 1)) / IDX_MOD;
-			// else
-			// 	ind_value = ((bit_cat(board, c_proc, ((bit_cat(board, c_proc, 2, 2)) % IDX_MOD), IND_SIZE) + 1)) % IDX_MOD;
-			ft_printf("Value: %d\n", ind_value);
-			ft_printf("Value: %x\n", bit_cat(board, c_proc, 4, 2));
-
-			result = ind_value + bit_cat(board, c_proc, 4, 2);
-			c_proc->r[(board[c_proc->i + 6] - 1)] = bit_cat(board, c_proc, (result % IDX_MOD), REG_SIZE);
-		}
-		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0xa4)
-		{
-			result = bit_cat(board, c_proc, 2, IND_SIZE) + bit_cat(board, c_proc, 4, 2);
-			c_proc->r[(board[c_proc->i + 6] - 1)] = bit_cat(board, c_proc, (result % IDX_MOD), REG_SIZE);
-		}
-		next_pc(7, c_proc, board);
+	{
+		type = get_type(board, c_proc);
+		ft_printf("get_arg_value {%u}\n",get_arg_value(board, c_proc, type, 1));
+		ft_printf("get_arg_value {%u}\n",get_arg_value(board, c_proc, type, 2));
+		ft_printf("get_size {%d}\n", get_cmd_size(type, 2));
+		result = get_arg_value(board, c_proc, type, 1) + get_arg_value(board, c_proc, type, 2);
+		ft_printf("result : %u\n", result);
+		reg_nb = bit_cat(board, c_proc, get_cmd_size(type, 2) - 1, 1);
+		ft_printf("reg_nb : %u\n", reg_nb);
+		if (reg_nb > 16)
+			return ;
+		c_proc->r[(unsigned int)reg_nb] = bit_cat(board, c_proc, (result % IDX_MOD), REG_SIZE);
+		ft_printf("c_proc->r[reg_nb] = %u\n", c_proc->r[reg_nb]);
+		next_pc(get_cmd_size(type, 2), c_proc, board);
 		c_proc->ctp = 0;
 	}
 	// else
-		c_proc->ctp += 1;*/
+		c_proc->ctp += 1;
 }
