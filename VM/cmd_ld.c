@@ -32,6 +32,8 @@ void	cmd_ld(unsigned char *board, t_proc *c_proc)
 		}
 		if (c_proc->pc + (id % IDX_MOD) == 0)
 			c_proc->carry = 1;
+		else
+			c_proc->carry = 0;
 		c_proc->ctp = 0;
 	}
 	else
