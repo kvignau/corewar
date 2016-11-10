@@ -14,14 +14,14 @@
 
 void	cmd_ld(unsigned char *board, t_proc *c_proc)
 {
-	int	id;
+	unsigned int	id;
 
 	if (c_proc->ctp == 5)
 	{
 		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x90)
 		{
 			id = bit_cat(board, c_proc, 2, 4);
-			c_proc->r[(int)(board[(c_proc->i + 6) % MEM_SIZE]) - 1] = (id % IDX_MOD);
+			c_proc->r[(int)(board[(c_proc->i + 6) % MEM_SIZE]) - 1] = id;
 			next_pc(7, c_proc, board);
 		}
 		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0xd0)

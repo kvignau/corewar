@@ -104,7 +104,7 @@ void			init_board(t_dbllist *ch_list, t_dbllist *pr_list,
 */
 
 int				*get_type(unsigned char *board, t_proc *c_proc, int *type);
-int				bit_cat(unsigned char *board, t_proc *c_proc, int start, int size);
+unsigned int	bit_cat(unsigned char *board, t_proc *c_proc, int start, int size);
 void			next_pc(int counter_offset, t_proc *c_proc, unsigned char *board);
 void			cmd_ld(unsigned char *board, t_proc *c_proc);
 void			cmd_st(unsigned char *board, t_proc *c_proc);
