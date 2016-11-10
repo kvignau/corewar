@@ -54,7 +54,7 @@ typedef struct		s_var
 }					t_var;
 typedef struct		s_proc
 {
-	int				r[REG_NUMBER];
+	int	r[REG_NUMBER];
 	int				carry;
 	unsigned char	*pc;
 	int				i;
