@@ -15,6 +15,9 @@
 # include "op.h"
 # include "../libftprintf/includes/ft_printf.h"
 # define OPTIONS	"dsn"
+# define REG 1
+# define DIR 2
+# define IND 3
 
 
 /*
