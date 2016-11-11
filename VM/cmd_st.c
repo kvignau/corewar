@@ -14,7 +14,7 @@
 
 void	cmd_st(unsigned char *board, t_proc *c_proc)
 {
-	int				id;
+	unsigned int	id;
 	unsigned int	result;
 	int				i;
 	int				reg_nb;
