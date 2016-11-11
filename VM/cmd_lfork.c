@@ -17,7 +17,7 @@ void		cmd_lfork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list)
 	int		value;
 	t_elem				*tmp;
 
-	if (c_proc->ctp == 100000000)
+	// if (c_proc->ctp == 1000)
 	{
 		value = bit_cat(board, c_proc, 1, 2);
 		ft_lstdbladd_head(pr_list, (t_proc *)c_proc, sizeof(t_proc));
@@ -27,6 +27,6 @@ void		cmd_lfork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list)
 		((t_proc *)(tmp->content))->i = (c_proc->i + (value));
 		c_proc->ctp = 0;
 	}
-	else
+	// else
 		c_proc->ctp += 1;
 }

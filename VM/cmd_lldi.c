@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_ldi.c                                          :+:      :+:    :+:   */
+/*   cmd_lldi.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/09 13:42:37 by mchevall          #+#    #+#             */
-/*   Updated: 2016/11/09 13:42:48 by mchevall         ###   ########.fr       */
+/*   Created: 2016/11/10 19:22:14 by mchevall          #+#    #+#             */
+/*   Updated: 2016/11/10 19:23:13 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static unsigned int		isind(unsigned char *board, t_proc *c_proc, int *type, int 
 	result = 0;
 	start = 0;
 	start = bit_cat(board, c_proc, 2, 2);
-	result = ((bit_cat(board, c_proc, start + 2, IND_SIZE)) % IDX_MOD);
+	result = ((bit_cat(board, c_proc, start + 2, IND_SIZE)));
 	return (result);
 }
 
@@ -80,7 +80,7 @@ static unsigned int		get_arg_value(unsigned char *board, t_proc *c_proc, int *ty
 		return (0);
 }
 
-void					cmd_ldi(unsigned char *board, t_proc *c_proc)
+void					cmd_lldi(unsigned char *board, t_proc *c_proc)
 {
 	unsigned int		result;
 	unsigned int		reg_nb;
@@ -97,7 +97,7 @@ void					cmd_ldi(unsigned char *board, t_proc *c_proc)
 		reg_nb = bit_cat(board, c_proc, get_cmd_size(type, 2) - 1, 1);
 		if (reg_nb > 15)
 			return ;
-		c_proc->r[reg_nb - 1] = bit_cat(board, c_proc, (result) % IDX_MOD, REG_SIZE);
+		c_proc->r[reg_nb - 1] = bit_cat(board, c_proc, (result) % MEM_SIZE, REG_SIZE);
 		next_pc(get_cmd_size(type, 2), c_proc, board);
 		c_proc->ctp = 0;
 	}

@@ -14,13 +14,13 @@
 
 void	cmd_aff(unsigned char *board, t_proc *c_proc)
 {
-	if (c_proc->ctp == 2)
+	// if (c_proc->ctp == 2)
 	{
 		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x40)
 			write(1, (int *)&board[(c_proc->i + 2) % MEM_SIZE], 1);
 		next_pc(3, c_proc, board);
 		c_proc->ctp = 0;
 	}
-	else
+	// else
 		c_proc->ctp += 1;
 }
