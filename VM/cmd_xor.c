@@ -12,47 +12,6 @@
 
 #include "corewar.h"
 
-int			get_register_name(unsigned char *board, t_proc *c_proc, int i[])
-{
-	int		r_dest;
-
-	r_dest = bit_cat(board, c_proc, i[0], 1);
-	i[0] += 1;
-	if (r_dest <= 0 || r_dest > REG_NUMBER)
-	{
-		i[1] = -1;
-	}
-	return (r_dest);
-}
-
-int			get_arg_val(int oc_trunc, unsigned char *board, t_proc *c_proc, int i[])
-{
-	int		arg;
-
-	arg = 0;
-	if (oc_trunc == 0b10)
-	{
-		arg = bit_cat(board, c_proc, i[0], 4);
-		i[0] += 4;
-		return (arg);
-	}
-	else if (oc_trunc == 0b11)
-	{
-		arg = bit_cat(board, c_proc, i[0], 2);
-		arg = bit_cat(board, c_proc, arg, 4);
-		i[0] += 2;
-		return (arg);
-	}
-	if (oc_trunc == 0b01)
-	{
-		arg = get_register_name(board, c_proc, i);
-		if (i[1] == 0)
-			arg = c_proc->r[arg - 1];
-		return (arg);
-	}
-	return (0);
-}
-
 void		cmd_xor(unsigned char *board, t_proc *c_proc)
 {
 	int		o_code;
@@ -74,7 +33,7 @@ void		cmd_xor(unsigned char *board, t_proc *c_proc)
 			c_proc->ctp = 0;
 			return ;
 		}
-		c_proc->r[r_dest - 1] = arg1 | arg2;
+		c_proc->r[r_dest - 1] = arg1 ^ arg2;
 		c_proc->carry = c_proc->r[r_dest - 1] == 0 ? 0 : 1;
 		next_pc(i[0], c_proc, board);
 		c_proc->ctp = 0;

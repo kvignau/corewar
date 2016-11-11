@@ -19,7 +19,8 @@ SRC = main.c op.c corewar_usage.c options_checkers.c champions_maker.c \
 ft_print_memory.c memory.c ft_hextoa.c get_content.c ft_hextoi.c\
 init_board.c intro.c cmd_aff.c cmd_fork.c next_pc.c cmd_ld.c cmd_lfork.c\
 bit_cat.c cmd_ldi.c cmd_st.c cmd_add.c cmd_sub.c cmd_zjmp.c get_type.c\
-cmd_lld.c get_cmd_size.c cmd_lldi.c
+cmd_lld.c get_cmd_size.c cmd_lldi.c cmd_and.c cmd_or.c cmd_xor.c\
+get_arg_val.c get_register_name.c
 
 OBJ = $(SRC:%.c=%.o)
 
