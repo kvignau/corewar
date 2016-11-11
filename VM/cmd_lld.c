@@ -34,7 +34,10 @@ void	cmd_lld(unsigned char *board, t_proc *c_proc)
 			reg_nb = (int)((board[(c_proc->i + 4) % MEM_SIZE] - 1));
 			if (reg_nb > 15)
 				return ;
-			c_proc->r[reg_nb] = bit_cat(board, c_proc, (id) - 2, 4);
+			if (id % MEM_SIZE == 1)
+				c_proc->r[reg_nb] = (bit_cat(board, c_proc, (id), 2) | 0xffff0000);
+			else
+				c_proc->r[reg_nb] = bit_cat(board, c_proc, (id), 2);
 			next_pc(5, c_proc, board);
 		}
 		if ((c_proc->i + id) % MEM_SIZE == 0)
