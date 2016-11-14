@@ -15,7 +15,7 @@
 unsigned int		isreg(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
 {
 	unsigned int		result;
-	unsigned int		reg_nb;
+	int					reg_nb;
 
 	result = 0;
 	reg_nb = 0;
@@ -25,14 +25,14 @@ unsigned int		isreg(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
 			reg_nb = bit_cat(board, c_proc, 3, 1);
 		else
 			reg_nb = bit_cat(board, c_proc, 4, 1);
-		if (reg_nb > 15)
+		if (reg_nb > 15 || reg_nb < 0)
 				return (0);
 		result = (unsigned int)c_proc->r[reg_nb - 1];
 	}
 	else
 	{
 		reg_nb = bit_cat(board, c_proc, 2, 1);
-		if (reg_nb > 15)
+		if (reg_nb > 15 || reg_nb < 0)
 				return (0);
 		result = (unsigned int)c_proc->r[reg_nb - 1];
 	}

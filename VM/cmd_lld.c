@@ -23,7 +23,7 @@ void	cmd_lld(unsigned char *board, t_proc *c_proc)
 		{
 			id = bit_cat(board, c_proc, 2, 4);
 			reg_nb = (int)((board[(c_proc->i + 6) % MEM_SIZE] - 1));
-			if (reg_nb > 15)
+			if (reg_nb > 15 || reg_nb < 0)
 				return ;
 			c_proc->r[reg_nb] = id;
 		}
@@ -31,7 +31,7 @@ void	cmd_lld(unsigned char *board, t_proc *c_proc)
 		{
 			id = bit_cat(board, c_proc, 2, 2);
 			reg_nb = (int)((board[(c_proc->i + 4) % MEM_SIZE] - 1));
-			if (reg_nb > 15)
+			if (reg_nb > 15 || reg_nb < 0)
 				return ;
 			if (id % MEM_SIZE == 1)
 				c_proc->r[reg_nb] = (bit_cat(board, c_proc, id, 2) | 0xffff0000);

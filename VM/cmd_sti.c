@@ -38,10 +38,9 @@ static int				valid_opc(unsigned char *board, t_proc *c_proc)
 void					cmd_sti(unsigned char *board, t_proc *c_proc)
 {
 	unsigned int		result;
-	unsigned int		reg_nb;
+	int					reg_nb;
 	int					*type;
 	int					first_arg;
-
 
 	result = 0;
 	reg_nb = 0;
@@ -50,11 +49,6 @@ void					cmd_sti(unsigned char *board, t_proc *c_proc)
 		type = get_type(board, c_proc);
 		if (valid_opc(board, c_proc) == 1)
 		{
-			result = get_arg_value(board, c_proc, type, 1) + get_arg_value(board, c_proc, type, 2);
-			reg_nb = bit_cat(board, c_proc, get_cmd_size(type, 2, 3) - 1, 1);
-			if (reg_nb > 15)
-				return ;
-			c_proc->r[reg_nb - 1] = bit_cat(board, c_proc, (result) % MEM_SIZE, REG_SIZE);
 		}
 		next_pc(get_cmd_size(type, 2, 3), c_proc, board);
 		c_proc->ctp = 0;

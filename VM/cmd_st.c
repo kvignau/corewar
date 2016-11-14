@@ -28,7 +28,7 @@ void	cmd_st(unsigned char *board, t_proc *c_proc)
 		{
 			id = bit_cat(board, c_proc, 3, 2);
 			reg_nb = (int)((board[(c_proc->i + 2) % MEM_SIZE] - 1));
-			if (reg_nb > 15)
+			if (reg_nb > 15 || reg_nb < 0)
 				return ;
 			result = c_proc->r[reg_nb] >> 24;
 			while (i < REG_SIZE)
@@ -42,7 +42,7 @@ void	cmd_st(unsigned char *board, t_proc *c_proc)
 		{
 			reg_nb = (int)(board[(c_proc->i + 3) % MEM_SIZE]) - 1;
 			reg_nb2 = (int)(board[(c_proc->i + 2) % MEM_SIZE]) - 1;
-			if (reg_nb > 15 || reg_nb2 > 15)
+			if (reg_nb > 15 || reg_nb < 0 || reg_nb2 > 15)
 				return ;
 			c_proc->r[reg_nb] = c_proc->r[reg_nb2];
 		}
