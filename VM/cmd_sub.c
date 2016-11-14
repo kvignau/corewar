@@ -35,7 +35,7 @@ void		cmd_sub(unsigned char *board, t_proc *c_proc)
 				c_proc->carry = c_proc->r[r_dest - 1] == 0 ? 0 : 1;
 			}
 		}
-		next_pc(5, c_proc, board);
+		next_pc(get_cmd_size(get_type(board, c_proc), 4, 3), c_proc, board);
 		c_proc->ctp = 0;
 	}
 	// else

@@ -16,9 +16,11 @@ void	cmd_ld(unsigned char *board, t_proc *c_proc)
 {
 	unsigned int	id;
 	int				reg_nb;
+	int				*type;
 
 	// if (c_proc->ctp == 5)
 	{
+		type = get_type(board, c_proc);
 		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x90)
 		{
 			id = bit_cat(board, c_proc, 2, 4);
@@ -26,7 +28,6 @@ void	cmd_ld(unsigned char *board, t_proc *c_proc)
 			if (reg_nb > 15)
 				return ;
 			c_proc->r[reg_nb] = id;
-			next_pc(7, c_proc, board);
 		}
 		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0xd0)
 		{
@@ -35,13 +36,13 @@ void	cmd_ld(unsigned char *board, t_proc *c_proc)
 			if (reg_nb > 15)
 				return ;
 			c_proc->r[reg_nb] = bit_cat(board, c_proc, (id % IDX_MOD), 4);
-			next_pc(5, c_proc, board);
 		}
 		if ((c_proc->i + (id % IDX_MOD)) % MEM_SIZE == 0)
 			c_proc->carry = 1;
 		else
 			c_proc->carry = 0;
 		c_proc->ctp = 0;
+		next_pc(get_cmd_size(get_type(board, c_proc), 4, 1), c_proc, board);
 	}
 	// else
 		c_proc->ctp += 1;

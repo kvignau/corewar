@@ -28,7 +28,8 @@ void		cmd_and(unsigned char *board, t_proc *c_proc)
 		arg1 = get_arg_val((o_code & 0b11000000) >> 6, board, c_proc, i);
 		arg2 = get_arg_val((o_code & 0b00110000) >> 4, board, c_proc, i);
 		r_dest = get_register_name(board, c_proc, i);
-		if (i[1] == -1){
+		if (i[1] == -1)
+		{
 			next_pc(i[0], c_proc, board);
 			c_proc->ctp = 0;
 			return ;

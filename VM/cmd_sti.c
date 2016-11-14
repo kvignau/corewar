@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_lldi.c                                         :+:      :+:    :+:   */
+/*   cmd_sti.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/10 19:22:14 by mchevall          #+#    #+#             */
-/*   Updated: 2016/11/10 19:23:13 by mchevall         ###   ########.fr       */
+/*   Created: 2016/11/14 16:27:08 by mchevall          #+#    #+#             */
+/*   Updated: 2016/11/14 16:27:21 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ static int				valid_opc(unsigned char *board, t_proc *c_proc)
 	int		cmp;
 
 	cmp = board[(c_proc->i + 1) % MEM_SIZE];
-	if (cmp == 0x64 || cmp == 0x54 || cmp == 0xa4 || cmp == 0x94 ||
-		cmp == 0xe4 || cmp == 0xd4)
+	if (cmp == 0x54 || cmp == 0x58 || cmp == 0x64 || cmp == 0x68 ||
+		cmp == 0x74 || cmp == 0x78)
 		return (1);
 	return (0);
 }
 
-void					cmd_lldi(unsigned char *board, t_proc *c_proc)
+void					cmd_sti(unsigned char *board, t_proc *c_proc)
 {
 	unsigned int		result;
 	unsigned int		reg_nb;
@@ -56,10 +56,6 @@ void					cmd_lldi(unsigned char *board, t_proc *c_proc)
 				return ;
 			c_proc->r[reg_nb - 1] = bit_cat(board, c_proc, (result) % MEM_SIZE, REG_SIZE);
 		}
-		if (c_proc->r[reg_nb - 1] == 0)
-			c_proc->carry = 1;
-		else
-			c_proc->carry = 0;
 		next_pc(get_cmd_size(type, 2, 3), c_proc, board);
 		c_proc->ctp = 0;
 	}

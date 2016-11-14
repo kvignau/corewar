@@ -59,6 +59,7 @@ typedef struct		s_proc
 	unsigned char	*pc;
 	int				i;
 	int				ctp;
+	int				**v_types;
 }					t_proc;
 
 /*
@@ -90,6 +91,10 @@ int			champions_maker(t_dbllist *champ_list, t_options *options,
 uintmax_t		ft_hextoi(unsigned char *str);
 char			*ft_hextoa(int *str, int size);
 unsigned char	*get_content(int *str, int size);
+int				reverse_byte(int buf, int readv);
+unsigned int	isreg(unsigned char *board, t_proc *c_proc, int *type, int arg_nb);
+unsigned int	isdir(unsigned char *board, t_proc *c_proc, int *type, int arg_nb);
+unsigned int	isind(unsigned char *board, t_proc *c_proc, int *type, int arg_nb);
 
 /*
 **********************  Memory Setter  **********************
@@ -103,7 +108,7 @@ void			init_board(t_dbllist *ch_list, t_dbllist *pr_list,
 **********************  Commands **********************
 */
 
-int				get_cmd_size(int *type, int label_size);
+int				get_cmd_size(int *type, int label_size, int nb_param);
 int				*get_type(unsigned char *board, t_proc *c_proc);
 int				get_register_name(unsigned char *board, t_proc *c_proc, int i[]);
 int				get_arg_val(int oc_trunc, unsigned char *board, t_proc *c_proc, int i[]);
@@ -118,6 +123,7 @@ void			cmd_or(unsigned char *board, t_proc *c_proc);
 void			cmd_xor(unsigned char *board, t_proc *c_proc);
 void			cmd_zjmp(unsigned char *board, t_proc *c_proc);
 void			cmd_ldi(unsigned char *board, t_proc *c_proc);
+void			cmd_sti(unsigned char *board, t_proc *c_proc);
 void			cmd_fork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list);
 void			cmd_lld(unsigned char *board, t_proc *c_proc);
 void			cmd_lldi(unsigned char *board, t_proc *c_proc);

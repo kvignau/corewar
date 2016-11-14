@@ -12,24 +12,30 @@
 
 #include "corewar.h"
 
-int		get_cmd_size(int *type, int label_size)
+int		get_cmd_size(int *type, int label_size, int nb_param)
 {
 	int		size;
 
 	size = 2;
-	if (type[0] == REG)
-		size += 1;
-	else if (type[0] == DIR)
-		size += label_size;
-	else if (type[0] == IND)
-		size += 2;
-	if (type[1] == REG)
-		size += 1;
-	else if (type[1] == DIR)
-		size += label_size;
-	else if (type[1] == IND)
-		size += 2;
-	if (type[2])
+	if (nb_param >= 1)
+	{
+		if (type[0] == REG)
+			size += 1;
+		else if (type[0] == DIR)
+			size += label_size;
+		else if (type[0] == IND)
+			size += 2;
+	}
+	if (nb_param >= 2)
+	{
+		if (type[1] == REG)
+			size += 1;
+		else if (type[1] == DIR)
+			size += label_size;
+		else if (type[1] == IND)
+			size += 2;
+	}
+	if (nb_param == 3)
 	{
 		if (type[2] == REG)
 			size += 1;
@@ -38,6 +44,7 @@ int		get_cmd_size(int *type, int label_size)
 		else if (type[2] == IND)
 			size += 2;
 	}
+	ft_printf("size get_cmd_size : %d\n", size);
 	return (size);
 }
 

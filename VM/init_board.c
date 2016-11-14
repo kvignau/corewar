@@ -34,7 +34,7 @@ static void	content_to_board(t_elem *champ, unsigned char *board,
 		j += 2;
 		i += 1;
 	}
-	proc->r[1] = (((t_champ *)(champ->content))->vm_number);
+	proc->r[0] = (((t_champ *)(champ->content))->vm_number);
 }
 
 void		init_board(t_dbllist *ch_list, t_dbllist *pr_list,

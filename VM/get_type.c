@@ -14,7 +14,6 @@
 
 static int		get_arg_type(char *arg)
 {
-	ft_printf("%s\n", arg);
 	if (ft_strcmp((char *)arg, "01") == 0)
 		return (REG);
 	else if (ft_strcmp((char *)arg, "10") == 0)

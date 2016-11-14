@@ -12,62 +12,6 @@
 
 #include "corewar.h"
 
-static unsigned int		isreg(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
-{
-	unsigned int		result;
-	unsigned int		reg_nb;
-
-	result = 0;
-	reg_nb = 0;
-	if (arg_nb == 2)
-	{
-		if (type[0] == REG)
-			reg_nb = bit_cat(board, c_proc, 3, 1);
-		else
-			reg_nb = bit_cat(board, c_proc, 4, 1);
-		if (reg_nb > 15)
-				return (0);
-		result = (unsigned int)c_proc->r[reg_nb - 1];
-	}
-	else
-	{
-		reg_nb = bit_cat(board, c_proc, 2, 1);
-		if (reg_nb > 15)
-				return (0);
-		result = (unsigned int)c_proc->r[reg_nb - 1];
-	}
-	return (result);
-}
-
-static unsigned int		isdir(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
-{
-	unsigned int		result;
-
-	result = 0;
-	if (arg_nb == 2)
-	{
-		if (type[0] == REG)
-			result = (bit_cat(board, c_proc, 3, 2));
-		else
-			result = bit_cat(board, c_proc, 4, 2);
-	}
-	else
-		result = (bit_cat(board, c_proc, 2, 2));
-	return (result);
-}
-
-static unsigned int		isind(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
-{
-	unsigned int		result;
-	unsigned int		start;
-
-	result = 0;
-	start = 0;
-	start = bit_cat(board, c_proc, 2, 2);
-	result = ((bit_cat(board, c_proc, start + 2, IND_SIZE)) % IDX_MOD);
-	return (result);
-}
-
 static unsigned int		get_arg_value(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
 {
 	if (type[arg_nb - 1] == REG)
@@ -75,9 +19,20 @@ static unsigned int		get_arg_value(unsigned char *board, t_proc *c_proc, int *ty
 	else if (type[arg_nb - 1] == DIR)
 		return (isdir(board, c_proc, type, arg_nb));
 	else if (type[arg_nb - 1] == IND)
-		return (isind(board, c_proc, type, arg_nb));
+		return (isind(board, c_proc, type, arg_nb) % IDX_MOD);
 	else
 		return (0);
+}
+
+static int				valid_opc(unsigned char *board, t_proc *c_proc)
+{
+	int		cmp;
+
+	cmp = board[(c_proc->i + 1) % MEM_SIZE];
+	if (cmp == 0x64 || cmp == 0x54 || cmp == 0xa4 || cmp == 0x94 ||
+		cmp == 0xe4 || cmp == 0xd4)
+		return (1);
+	return (0);
 }
 
 void					cmd_ldi(unsigned char *board, t_proc *c_proc)
@@ -93,12 +48,15 @@ void					cmd_ldi(unsigned char *board, t_proc *c_proc)
 	// if (c_proc->ctp == 25)
 	{
 		type = get_type(board, c_proc);
-		result = get_arg_value(board, c_proc, type, 1) + get_arg_value(board, c_proc, type, 2);
-		reg_nb = bit_cat(board, c_proc, get_cmd_size(type, 2) - 1, 1);
-		if (reg_nb > 15)
-			return ;
-		c_proc->r[reg_nb - 1] = bit_cat(board, c_proc, (result) % IDX_MOD, REG_SIZE);
-		next_pc(get_cmd_size(type, 2), c_proc, board);
+		if (valid_opc(board, c_proc) == 1)
+		{
+			result = get_arg_value(board, c_proc, type, 1) + get_arg_value(board, c_proc, type, 2);
+			reg_nb = bit_cat(board, c_proc, get_cmd_size(type, 2, 3) - 1, 1);
+			if (reg_nb > 15)
+				return ;
+			c_proc->r[reg_nb - 1] = bit_cat(board, c_proc, (result) % IDX_MOD, REG_SIZE);
+		}
+		next_pc(get_cmd_size(get_type(board, c_proc), 2, 3), c_proc, board);
 		c_proc->ctp = 0;
 	}
 	// else

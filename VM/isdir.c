@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmd_aff.c                                          :+:      :+:    :+:   */
+/*   isdir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/10/30 13:55:32 by mchevall          #+#    #+#             */
-/*   Updated: 2016/11/07 11:31:02 by mchevall         ###   ########.fr       */
+/*   Created: 2016/11/14 10:51:19 by mchevall          #+#    #+#             */
+/*   Updated: 2016/11/14 10:51:26 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	cmd_aff(unsigned char *board, t_proc *c_proc)
+unsigned int		isdir(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
 {
-	// if (c_proc->ctp == 2)
+	unsigned int		result;
+
+	result = 0;
+	if (arg_nb == 2)
 	{
-		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x40)
-			write(1, (int *)&board[(c_proc->i + 2) % MEM_SIZE], 1);
-		next_pc(get_cmd_size(get_type(board, c_proc), 4, 1), c_proc, board);
-		c_proc->ctp = 0;
+		if (type[0] == REG)
+			result = (bit_cat(board, c_proc, 3, 2));
+		else
+			result = bit_cat(board, c_proc, 4, 2);
 	}
-	// else
-		c_proc->ctp += 1;
+	else
+		result = (bit_cat(board, c_proc, 2, 2));
+	return (result);
 }
