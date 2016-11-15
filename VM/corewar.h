@@ -38,6 +38,9 @@ typedef struct		s_cor
 	unsigned int	current_lives_counter;
 	unsigned int	last_live;
 	unsigned int	cycles_to_die;
+	intmax_t		cycles;
+	unsigned int	champion;
+	unsigned char	*board;
 	t_options		options;
 }					t_cor;
 typedef struct		s_champ
