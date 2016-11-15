@@ -15,7 +15,7 @@
 void	cmd_st(unsigned char *board, t_proc *c_proc)
 {
 	unsigned int	id;
-	unsigned int	result;
+	unsigned char	result;
 	int				i;
 	int				reg_nb;
 	int				reg_nb2;
@@ -33,7 +33,7 @@ void	cmd_st(unsigned char *board, t_proc *c_proc)
 			result = c_proc->r[reg_nb] >> 24;
 			while (i < REG_SIZE)
 			{
-				board[(c_proc->i + ((id + i) % IDX_MOD)) % MEM_SIZE] = (unsigned char)result;
+				board[(c_proc->i + ((id + i) % IDX_MOD)) % MEM_SIZE] = result;
 				result = c_proc->r[reg_nb] >> (24 - (8 * (i + 1)));
 				i++;
 			}
