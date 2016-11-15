@@ -22,8 +22,8 @@ int		corewar_usage(int argc)
 		ft_putstr(" <champion1.cor>] <...>\n");
 		ft_putstr("There can be a max of only 4 champions\n");
 		ft_putstr("-d N    : Dumps memory after N cycles then exits\n");
-		ft_putstr("-s      : stealth mode does not print 'alive' \n");
-		ft_putstr("-n      : choose champion id\n");
+		ft_putstr("-s      : Stealth mode, does not print 'live' message\n");
+		ft_putstr("-n      : Choose champion id\n");
 		exit(EXIT_FAILURE);
 	}
 	return (1);
