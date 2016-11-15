@@ -32,7 +32,7 @@ void		cmd_sub(unsigned char *board, t_proc *c_proc)
 				&& r_dest <= REG_NUMBER && r1 > 0 && r2 > 0 && r_dest > 0)
 			{
 				c_proc->r[r_dest - 1] = c_proc->r[r1 - 1] - c_proc->r[r2 - 1];
-				c_proc->carry = c_proc->r[r_dest - 1] == 0 ? 0 : 1;
+				c_proc->carry = c_proc->r[r_dest - 1] == 0 ? 1 : 0;
 			}
 		}
 		next_pc(get_cmd_size(get_type(board, c_proc), 4, 3), c_proc, board);
