@@ -36,7 +36,7 @@ int				*get_type(unsigned char *board, t_proc *c_proc)
 	third_arg = (char *)ft_memalloc(sizeof(char) * 4);
 	type = (int *)ft_memalloc(sizeof(int) * 3);
 	bitcode = ft_itoabase_imax(board[(c_proc->i + 1) % MEM_SIZE], 2);
-	if (ft_strlen(bitcode) != 8)
+	while (ft_strlen(bitcode) < 8)
 		bitcode = ft_strjoinandfree("0", bitcode, 2);
 	first_arg[0] = bitcode[0];
 	first_arg[1] = bitcode[1];
