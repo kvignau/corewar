@@ -24,10 +24,6 @@
 **********************  Structures  **********************
 */
 
-typedef struct		s_cor
-{
-	int				nb_champ;
-}					t_cor;
 typedef struct		s_options
 {
 	int				stealth;
@@ -36,6 +32,14 @@ typedef struct		s_options
 	int				bool_vm_number;
 	unsigned int	vm_number;
 }					t_options;
+typedef struct		s_cor
+{
+	int				nb_champ;
+	unsigned int	current_lives_counter;
+	unsigned int	last_live;
+	unsigned int	cycles_to_die;
+	t_options		options;
+}					t_cor;
 typedef struct		s_champ
 {
 	int				id;
@@ -59,7 +63,7 @@ typedef struct		s_proc
 	unsigned char	*pc;
 	int				i;
 	int				ctp;
-	int				**v_types;
+	int				live;
 }					t_proc;
 
 /*
@@ -114,6 +118,8 @@ int				get_register_name(unsigned char *board, t_proc *c_proc, int i[]);
 int				get_arg_val(int oc_trunc, unsigned char *board, t_proc *c_proc, int i[]);
 unsigned int	bit_cat(unsigned char *board, t_proc *c_proc, int start, int size);
 void			next_pc(int counter_offset, t_proc *c_proc, unsigned char *board);
+void			cmd_live(unsigned char *board, t_proc *c_proc, t_cor *core,
+	t_dbllist *ch_list);
 void			cmd_ld(unsigned char *board, t_proc *c_proc);
 void			cmd_st(unsigned char *board, t_proc *c_proc);
 void			cmd_add(unsigned char *board, t_proc *c_proc);
