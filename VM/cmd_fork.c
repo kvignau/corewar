@@ -17,7 +17,7 @@ void		cmd_fork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list)
 	int					value;
 	t_elem				*tmp;
 
-	// if (c_proc->ctp == 800)
+	if (c_proc->ctp == 800)
 	{
 		value = bit_cat(board, c_proc, 1, 2);
 		ft_lstdbladd_head(pr_list, (t_proc *)c_proc, sizeof(t_proc));
@@ -25,8 +25,8 @@ void		cmd_fork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list)
 		next_pc(3, c_proc, board);
 		((t_proc *)(tmp->content))->pc = (c_proc->pc + (value % IDX_MOD));
 		((t_proc *)(tmp->content))->i = (c_proc->i + (value % IDX_MOD));
-		c_proc->ctp = 0;
+		c_proc->ctp = 1;
 	}
-	// else
+	else
 		c_proc->ctp += 1;
 }

@@ -27,6 +27,7 @@ static void	content_to_board(t_elem *champ, unsigned char *board,
 	str =(unsigned char *)ft_memalloc(3);
 	proc->pc = &board[i];
 	proc->live = 1;
+	proc->ctp = 1;
 	while (j < (((t_champ *)(champ->content))->size) * 2)
 	{
 		str[0] = (((t_champ *)(champ->content))->content[j]);

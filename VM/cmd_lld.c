@@ -17,7 +17,7 @@ void	cmd_lld(unsigned char *board, t_proc *c_proc)
 	unsigned int	id;
 	int				reg_nb;
 
-	// if (c_proc->ctp == 5)
+	if (c_proc->ctp == 5)
 	{
 		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x90)
 		{
@@ -42,9 +42,9 @@ void	cmd_lld(unsigned char *board, t_proc *c_proc)
 			c_proc->carry = 1;
 		else
 			c_proc->carry = 0;
-		c_proc->ctp = 0;
+		c_proc->ctp = 1;
 		next_pc(get_cmd_size(get_type(board, c_proc), 4, 3), c_proc, board);
 	}
-	// else
+	else
 		c_proc->ctp += 1;
 }

@@ -26,7 +26,7 @@ void	cmd_zjmp(unsigned char *board, t_proc *c_proc)
 		}
 		else
 			next_pc(3, c_proc, board);
-		c_proc->ctp = 0;
+		c_proc->ctp = 1;
 	}
 	else
 		c_proc->ctp += 1;

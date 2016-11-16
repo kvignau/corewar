@@ -45,7 +45,7 @@ void					cmd_ldi(unsigned char *board, t_proc *c_proc)
 
 	result = 0;
 	reg_nb = 0;
-	// if (c_proc->ctp == 25)
+	if (c_proc->ctp == 25)
 	{
 		type = get_type(board, c_proc);
 		if (valid_opc(board, c_proc) == 1)
@@ -57,8 +57,8 @@ void					cmd_ldi(unsigned char *board, t_proc *c_proc)
 			c_proc->r[reg_nb - 1] = bit_cat(board, c_proc, (result) % IDX_MOD, REG_SIZE);
 		}
 		next_pc(get_cmd_size(get_type(board, c_proc), 2, 3), c_proc, board);
-		c_proc->ctp = 0;
+		c_proc->ctp = 1;
 	}
-	// else
+	else
 		c_proc->ctp += 1;
 }

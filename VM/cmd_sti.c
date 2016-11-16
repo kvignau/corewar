@@ -90,7 +90,7 @@ void					cmd_sti(unsigned char *board, t_proc *c_proc)
 			add_dir_ind(board, c_proc);
 		ft_printf("ADV %d\n", get_cmd_size(get_type(board, c_proc), 2, 3));
 		next_pc(get_cmd_size(get_type(board, c_proc), 2, 3), c_proc, board);
-		c_proc->ctp = 0;
+		c_proc->ctp = 1;
 	}
 	// else
 		c_proc->ctp += 1;

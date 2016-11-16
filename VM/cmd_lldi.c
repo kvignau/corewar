@@ -45,7 +45,7 @@ void					cmd_lldi(unsigned char *board, t_proc *c_proc)
 
 	result = 0;
 	reg_nb = 0;
-	// if (c_proc->ctp == 25)
+	if (c_proc->ctp == 25)
 	{
 		type = get_type(board, c_proc);
 		if (valid_opc(board, c_proc) == 1)
@@ -61,8 +61,8 @@ void					cmd_lldi(unsigned char *board, t_proc *c_proc)
 		else
 			c_proc->carry = 0;
 		next_pc(get_cmd_size(type, 2, 3), c_proc, board);
-		c_proc->ctp = 0;
+		c_proc->ctp = 1;
 	}
-	// else
+	else
 		c_proc->ctp += 1;
 }

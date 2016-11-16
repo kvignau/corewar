@@ -47,7 +47,7 @@ void			cmd_live(unsigned char *board, t_proc *c_proc, t_cor *core,
 		if (check_vm_number_exist(tmp, vm_num_live, core) == 1)
 			core->last_live = vm_num_live;
 		next_pc(5 ,c_proc, board);
-		c_proc->ctp = 0;
+		c_proc->ctp = 1;
 	}
 	else
 		c_proc->ctp += 1;

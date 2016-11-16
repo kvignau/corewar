@@ -21,7 +21,7 @@ void		cmd_sub(unsigned char *board, t_proc *c_proc)
 	r1 = 0;
 	r2 = 0;
 	r_dest = 0;
-	// if (c_proc->ctp == 10)
+	if (c_proc->ctp == 10)
 	{
 		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x54)
 		{
@@ -36,8 +36,8 @@ void		cmd_sub(unsigned char *board, t_proc *c_proc)
 			}
 		}
 		next_pc(get_cmd_size(get_type(board, c_proc), 4, 3), c_proc, board);
-		c_proc->ctp = 0;
+		c_proc->ctp = 1;
 	}
-	// else
+	else
 		c_proc->ctp += 1;
 }

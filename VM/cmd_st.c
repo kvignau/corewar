@@ -47,7 +47,7 @@ void	cmd_st(unsigned char *board, t_proc *c_proc)
 			c_proc->r[reg_nb] = c_proc->r[reg_nb2];
 		}
 		next_pc(get_cmd_size(get_type(board, c_proc), 4, 2), c_proc, board);
-		c_proc->ctp = 0;
+		c_proc->ctp = 1;
 	}
 	else
 		c_proc->ctp += 1;
