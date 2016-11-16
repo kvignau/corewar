@@ -116,29 +116,29 @@ void					cmd_sti(unsigned char *board, t_proc *c_proc)
 		}
 		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0x74)
 		{
-
-
-			// reg_nb = board[(c_proc->i + 2) % MEM_SIZE] - 1;
-			
-			// reg_nb2 = board[(c_proc->i + 5) % MEM_SIZE] - 1;
-			
-			// i = c_proc->i + bit_cat(board, c_proc, 3, 2);
-
-			// add = c_proc->r[reg_nb2] + bit_cat(board, c_proc, board[i % MEM_SIZE], 2);
-
-
-
-
-
 			reg_nb = board[(c_proc->i + 2) % MEM_SIZE] - 1;
-			
 			reg_nb2 = board[(c_proc->i + 5) % MEM_SIZE] - 1;
 
 			id = bit_cat(board, c_proc, 3, 2);
 			
-			add = c_proc->r[reg_nb2] + bit_cat(board, c_proc, id, 2);
+			add = (c_proc->r[reg_nb2] + bit_cat(board, c_proc, id + 2, 2)) % IDX_MOD;
 
-			ft_printf("%x\n", bit_cat(board, c_proc, id, 2));
+			result = c_proc->r[reg_nb] >> (8 * (REG_SIZE - 1));
+			while (i < REG_SIZE)
+			{
+				board[(c_proc->i + (add + i)) % MEM_SIZE] = result;
+				result = c_proc->r[reg_nb] >> ((8 * (REG_SIZE - 1)) - (8 * (i + 1)));
+				i++;
+			}
+		}
+		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0x78)
+		{
+			reg_nb = board[(c_proc->i + 2) % MEM_SIZE] - 1;
+
+			id = bit_cat(board, c_proc, 3, 2);
+			
+			add = (bit_cat(board, c_proc, 5, 2) + bit_cat(board, c_proc, id + 2, 2)) % IDX_MOD;
+
 			result = c_proc->r[reg_nb] >> (8 * (REG_SIZE - 1));
 			while (i < REG_SIZE)
 			{
