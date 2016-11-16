@@ -60,6 +60,8 @@ void					cmd_lldi(unsigned char *board, t_proc *c_proc)
 			c_proc->carry = 1;
 		else
 			c_proc->carry = 0;
+		// if (opt_verbose == 1)
+			cmd_verbose(board, c_proc, 4, 2);
 		next_pc(get_cmd_size(type, 2, 3), c_proc, board);
 		c_proc->ctp = 1;
 	}

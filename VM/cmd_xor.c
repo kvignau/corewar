@@ -33,6 +33,8 @@ void		cmd_xor(unsigned char *board, t_proc *c_proc)
 			c_proc->r[r_dest - 1] = arg1 ^ arg2;
 			c_proc->carry = c_proc->r[r_dest - 1] == 0 ? 1 : 0;
 		}
+		// if (opt_verbose == 1)
+			cmd_verbose(board, c_proc, 4, 2);
 		next_pc(get_cmd_size(get_type(board, c_proc), 4, 3), c_proc, board);
 		c_proc->ctp = 1;
 	}

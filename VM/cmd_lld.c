@@ -43,6 +43,8 @@ void	cmd_lld(unsigned char *board, t_proc *c_proc)
 		else
 			c_proc->carry = 0;
 		c_proc->ctp = 1;
+		// if (opt_verbose == 1)
+			cmd_verbose(board, c_proc, 4, 2);
 		next_pc(get_cmd_size(get_type(board, c_proc), 4, 3), c_proc, board);
 	}
 	else
