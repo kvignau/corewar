@@ -36,7 +36,7 @@ void		cmd_add(unsigned char *board, t_proc *c_proc)
 			}
 		}
 		next_pc(get_cmd_size(get_type(board, c_proc), 4, 3), c_proc, board);
-		c_proc->ctp = 0;
+		c_proc->ctp = 1;
 	}
 	else
 		c_proc->ctp += 1;

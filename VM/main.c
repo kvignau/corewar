@@ -39,6 +39,8 @@ int		main(int argc, char **argv)
 	t_dbllist		*process_list;
 	t_elem			*tmp;
 
+	t_elem			*tmp2;
+
 	ft_bzero(&core, sizeof(t_cor));
 	ft_bzero(&options, sizeof(t_options));
 	champ_list = ft_lstdblnew();
@@ -53,7 +55,9 @@ int		main(int argc, char **argv)
 	core.cycles = 0;
 	intro(champ_list);
 	init_board(champ_list, process_list, &(core.board));
-	while (core.winner_nb == 0)
+	// tmp2 = champ_list->head;
+	// ft_printf("champ:[0], name:[%s] nb: [%d]\n", (((t_champ *)(tmp2->content))->name),(((t_champ *)(tmp2->content))->vm_number));
+	while (1)
 	{
 		ft_printf("core_cycles [%d]  ", core.cycles);
 		if (options.bool_dump == 1 && core.cycles == options.dump_number)
@@ -64,8 +68,11 @@ int		main(int argc, char **argv)
 		}
 		if(core.cycles_to_die == 0 || (core.era_cycles % core.cycles_to_die) == 0)
 		{
-			execute_dead_process(process_list, &core);
-			if (core.era_lives_counter >= NBR_LIVE || core.check == MAX_CHECKS)
+			execute_dead_process(&process_list, &core);
+			ft_printf("process_list size :  %d\n", process_list->length);
+			if (process_list->length == 0)
+				break ;
+			if (core.era_lives_counter >= NBR_LIVE || (core.check + 1) == MAX_CHECKS)
 			{
 				ft_printf("OLD ERA era_lives_counter: [%d]   core.check: [%d]   core.era_to_die [%d] core.cycles_to_die [%d]\n",
 					core.era_lives_counter, core.check, core.cycles_to_die, core.cycles_to_die);
@@ -74,7 +81,11 @@ int		main(int argc, char **argv)
 					core.era_lives_counter, core.check, core.cycles_to_die, core.cycles_to_die);
 			}
 			else
+			{
+				ft_printf("NOPE    ERA era_lives_counter: [%d]   core.check: [%d]   core.era_to_die [%d] core.cycles_to_die [%d]\n",
+					core.era_lives_counter, core.check, core.cycles_to_die, core.cycles_to_die);
 				core.check += 1;
+			}
 			core.era_lives_counter = 0;
 		}
 		tmp = process_list->head;

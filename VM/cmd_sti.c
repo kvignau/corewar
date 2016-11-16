@@ -89,7 +89,7 @@ void					cmd_sti(unsigned char *board, t_proc *c_proc)
 		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0x78)
 			add_dir_ind(board, c_proc);
 		next_pc(get_cmd_size(get_type(board, c_proc), 2, 3), c_proc, board);
-		c_proc->ctp = 0;
+		c_proc->ctp = 1;
 	}
 	else
 		c_proc->ctp += 1;

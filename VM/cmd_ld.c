@@ -41,7 +41,7 @@ void	cmd_ld(unsigned char *board, t_proc *c_proc)
 			c_proc->carry = 1;
 		else
 			c_proc->carry = 0;
-		c_proc->ctp = 0;
+		c_proc->ctp = 1;
 		next_pc(get_cmd_size(get_type(board, c_proc), 4, 2), c_proc, board);
 	}
 	else
