@@ -77,7 +77,7 @@ int		main(int argc, char **argv)
 	// ft_printf("champ:[0], name:[%s] nb: [%d]\n", (((t_champ *)(tmp2->content))->name),(((t_champ *)(tmp2->content))->vm_number));
 	while (1)
 	{
-		// ft_printf("core_cycles [%d]  ", core.cycles);
+		ft_printf("core_cycles [%d]  ", core.cycles);
 		if (options.bool_dump == 1 && core.cycles == options.dump_number)
 		{
 			ft_printf("\n");
@@ -114,6 +114,8 @@ int		main(int argc, char **argv)
 			tmp = tmp->next;
 		}
 		core.cycles += 1;
+		// if (opt_verbose == 1)
+			ft_printf("It is now cycle %d\n", core.cycles);
 		core.era_cycles += 1;
 	}
 	check_winner(&core, champ_list);
