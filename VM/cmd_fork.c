@@ -22,6 +22,8 @@ void		cmd_fork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list)
 		value = bit_cat(board, c_proc, 1, 2);
 		ft_lstdbladd_head(pr_list, (t_proc *)c_proc, sizeof(t_proc));
 		tmp = pr_list->head;
+		// if (opt_verbose == 1)
+			cmd_verbose(board, c_proc, 3);
 		next_pc(3, c_proc, board);
 		((t_proc *)(tmp->content))->pc = (c_proc->pc + (value % IDX_MOD));
 		((t_proc *)(tmp->content))->i = (c_proc->i + (value % IDX_MOD));

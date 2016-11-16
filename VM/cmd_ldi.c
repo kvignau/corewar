@@ -57,7 +57,7 @@ void					cmd_ldi(unsigned char *board, t_proc *c_proc)
 			c_proc->r[reg_nb - 1] = bit_cat(board, c_proc, (result) % IDX_MOD, REG_SIZE);
 		}
 		// if (opt_verbose == 1)
-			cmd_verbose(board, c_proc, 4, 2);
+			cmd_verbose(board, c_proc, get_cmd_size(get_type(board, c_proc), 2, 3));
 		next_pc(get_cmd_size(get_type(board, c_proc), 2, 3), c_proc, board);
 		c_proc->ctp = 1;
 	}

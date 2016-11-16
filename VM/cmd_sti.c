@@ -74,7 +74,7 @@ static void				add_reg_ind(unsigned char *board, t_proc *c_proc)
 
 void					cmd_sti(unsigned char *board, t_proc *c_proc)
 {
-	// if (c_proc->ctp == 25)
+	if (c_proc->ctp == 25)
 	{
 		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x68)
 			add_ind_ind(board, c_proc);
@@ -89,10 +89,10 @@ void					cmd_sti(unsigned char *board, t_proc *c_proc)
 		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0x78)
 			add_dir_ind(board, c_proc);
 		// if (opt_verbose == 1)
-			cmd_verbose(board, c_proc, 2, 3);
+			cmd_verbose(board, c_proc, (get_cmd_size(get_type(board, c_proc), 2, 3)));
 		next_pc(get_cmd_size(get_type(board, c_proc), 2, 3), c_proc, board);
 		c_proc->ctp = 1;
 	}
-	// else
+	else
 		c_proc->ctp += 1;
 }

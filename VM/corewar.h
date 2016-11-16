@@ -85,6 +85,7 @@ void		intro(t_dbllist *champ_list);
 
 int			options_checkers(int argc, char **argv, t_options *options,
 	t_dbllist *champ_list);
+void			cmd_verbose(unsigned char *board, t_proc *c_proc, int offset);
 
 /*
 **********************  Checkers  **********************
@@ -111,7 +112,7 @@ unsigned int	isind(unsigned char *board, t_proc *c_proc, int *type, int arg_nb);
 
 unsigned char	*memory(void);
 void			init_board(t_dbllist *ch_list, t_dbllist *pr_list,
-	unsigned char **board);
+	unsigned char **board, t_cor *core);
 
 /*
 **********************  Commands **********************

@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-void	set_new_era(t_cor *core, t_dbllist *pr_list)
+static void	set_new_era(t_cor *core, t_dbllist *pr_list)
 {
 	t_elem			*tmp;
 
@@ -28,7 +28,25 @@ void	set_new_era(t_cor *core, t_dbllist *pr_list)
 		((t_proc *)(tmp->content))->live = 0;
 		tmp = tmp->next;
 	}
-	ft_printf("***************************NEW ERA SET***************************\n");
+	// ft_printf("***************************NEW ERA SET***************************\n");
+}
+
+static void	check_winner(t_cor *core, t_dbllist *ch_list)
+{
+	char			*name;
+	t_elem			*tmp;
+
+	tmp = ch_list->head;
+	while(tmp != NULL)
+	{
+		if (core->winner_nb == ((t_champ *)(tmp->content))->vm_number)
+		{
+			ft_printf("le joueur %d(%s) a gagne\n",
+				((t_champ *)(tmp->content))->id,
+				((t_champ *)(tmp->content))->name);
+		}
+		tmp = tmp->next;
+	}
 }
 
 int		main(int argc, char **argv)
@@ -54,12 +72,12 @@ int		main(int argc, char **argv)
 	core.cycles_to_die = CYCLE_TO_DIE;
 	core.cycles = 0;
 	intro(champ_list);
-	init_board(champ_list, process_list, &(core.board));
+	init_board(champ_list, process_list, &(core.board), &core);
 	// tmp2 = champ_list->head;
 	// ft_printf("champ:[0], name:[%s] nb: [%d]\n", (((t_champ *)(tmp2->content))->name),(((t_champ *)(tmp2->content))->vm_number));
 	while (1)
 	{
-		ft_printf("core_cycles [%d]  ", core.cycles);
+		// ft_printf("core_cycles [%d]  ", core.cycles);
 		if (options.bool_dump == 1 && core.cycles == options.dump_number)
 		{
 			ft_printf("\n");
@@ -69,21 +87,21 @@ int		main(int argc, char **argv)
 		if(core.cycles_to_die == 0 || (core.era_cycles % core.cycles_to_die) == 0)
 		{
 			execute_dead_process(&process_list, &core);
-			ft_printf("process_list size :  %d\n", process_list->length);
+			// ft_printf("process_list size :  %d\n", process_list->length);
 			if (process_list->length == 0)
 				break ;
 			if (core.era_lives_counter >= NBR_LIVE || (core.check + 1) == MAX_CHECKS)
 			{
-				ft_printf("OLD ERA era_lives_counter: [%d]   core.check: [%d]   core.era_to_die [%d] core.cycles_to_die [%d]\n",
-					core.era_lives_counter, core.check, core.cycles_to_die, core.cycles_to_die);
+				// ft_printf("OLD ERA era_lives_counter: [%d]   core.check: [%d]   core.era_to_die [%d] core.cycles_to_die [%d]\n",
+					// core.era_lives_counter, core.check, core.cycles_to_die, core.cycles_to_die);
 				set_new_era(&core, process_list);
-				ft_printf("NEW ERA era_lives_counter: [%d]   core.check: [%d]   core.era_to_die [%d] core.cycles_to_die [%d]\n",
-					core.era_lives_counter, core.check, core.cycles_to_die, core.cycles_to_die);
+				// ft_printf("NEW ERA era_lives_counter: [%d]   core.check: [%d]   core.era_to_die [%d] core.cycles_to_die [%d]\n",
+					// core.era_lives_counter, core.check, core.cycles_to_die, core.cycles_to_die);
 			}
 			else
 			{
-				ft_printf("NOPE    ERA era_lives_counter: [%d]   core.check: [%d]   core.era_to_die [%d] core.cycles_to_die [%d]\n",
-					core.era_lives_counter, core.check, core.cycles_to_die, core.cycles_to_die);
+				// ft_printf("NOPE    ERA era_lives_counter: [%d]   core.check: [%d]   core.era_to_die [%d] core.cycles_to_die [%d]\n",
+					// core.era_lives_counter, core.check, core.cycles_to_die, core.cycles_to_die);
 				core.check += 1;
 			}
 			core.era_lives_counter = 0;
@@ -98,7 +116,7 @@ int		main(int argc, char **argv)
 		core.cycles += 1;
 		core.era_cycles += 1;
 	}
-	ft_printf("And the winner is %u\n", core.winner_nb);
+	check_winner(&core, champ_list);
 	// ft_print_memory(core.board, MEM_SIZE);
 	/*while (tmp != NULL && tmp2 != NULL)
 	{

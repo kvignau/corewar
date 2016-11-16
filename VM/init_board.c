@@ -40,7 +40,7 @@ static void	content_to_board(t_elem *champ, unsigned char *board,
 }
 
 void		init_board(t_dbllist *ch_list, t_dbllist *pr_list,
-	unsigned char **board)
+	unsigned char **board, t_cor *core)
 {
 	t_elem	*champ;
 	t_proc	proc;
@@ -51,6 +51,7 @@ void		init_board(t_dbllist *ch_list, t_dbllist *pr_list,
 	{
 		content_to_board(champ, *board, ch_list, &proc);
 		ft_lstdbladd_head(pr_list, (t_proc *)&proc, sizeof(t_proc));
+		core->last_live = ((t_champ *)champ->content)->vm_number;
 		champ = champ->next;
 	}
 }

@@ -12,14 +12,14 @@
 
 #include "corewar.h"
 
-void			cmd_verbose(unsigned char *board, t_proc *c_proc, int label_size, int nb_param)
+void			cmd_verbose(unsigned char *board, t_proc *c_proc, int offset)
 {
 	int				i;
 
 	i = 0;
-	ft_printf("ADV %d", get_cmd_size(get_type(board, c_proc), label_size, nb_param));
-	ft_printf(" (0x%.4x -> 0x%.4x) ", c_proc->i, c_proc->i + get_cmd_size(get_type(board, c_proc), label_size, nb_param));
-	while (i < get_cmd_size(get_type(board, c_proc), label_size, nb_param))
+	ft_printf("ADV %d", offset);
+	ft_printf(" (0x%.4x -> 0x%.4x) ", c_proc->i, c_proc->i + offset);
+	while (i < offset)
 	{
 		ft_printf("%.2x ", board[c_proc->i + i]);
 		i++;
