@@ -16,7 +16,7 @@ void	cmd_zjmp(unsigned char *board, t_proc *c_proc)
 {
 	unsigned int	id;
 
-	// if (c_proc->ctp == 20)
+	if (c_proc->ctp == 20)
 	{
 		if (c_proc->carry == 1)
 		{
@@ -28,6 +28,6 @@ void	cmd_zjmp(unsigned char *board, t_proc *c_proc)
 			next_pc(3, c_proc, board);
 		c_proc->ctp = 0;
 	}
-	// else
+	else
 		c_proc->ctp += 1;
 }

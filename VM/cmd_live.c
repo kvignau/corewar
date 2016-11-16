@@ -38,17 +38,17 @@ void			cmd_live(unsigned char *board, t_proc *c_proc, t_cor *core,
 	t_elem			*tmp;
 	unsigned int	vm_num_live;
 
-// if (c_proc->ctp == 5)
+ if (c_proc->ctp == 10)
 	{
 		tmp = ch_list->head;
 		c_proc->live = 1;
-		core->current_lives_counter += 1;
+		core->era_lives_counter += 1;
 		vm_num_live = bit_cat(board, c_proc, 1, 4);
 		if (check_vm_number_exist(tmp, vm_num_live, core) == 1)
 			core->last_live = vm_num_live;
 		next_pc(5 ,c_proc, board);
 		c_proc->ctp = 0;
 	}
-	// else
+	else
 		c_proc->ctp += 1;
 }

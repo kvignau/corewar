@@ -18,7 +18,7 @@ void	cmd_ld(unsigned char *board, t_proc *c_proc)
 	int				reg_nb;
 	int				*type;
 
-	// if (c_proc->ctp == 5)
+	if (c_proc->ctp == 5)
 	{
 		type = get_type(board, c_proc);
 		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x90)
@@ -44,6 +44,6 @@ void	cmd_ld(unsigned char *board, t_proc *c_proc)
 		c_proc->ctp = 0;
 		next_pc(get_cmd_size(get_type(board, c_proc), 4, 2), c_proc, board);
 	}
-	// else
+	else
 		c_proc->ctp += 1;
 }

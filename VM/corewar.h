@@ -35,11 +35,13 @@ typedef struct		s_options
 typedef struct		s_cor
 {
 	int				nb_champ;
-	unsigned int	current_lives_counter;
 	unsigned int	last_live;
-	unsigned int	cycles_to_die;
+	int				cycles_to_die;
+	unsigned int	era_lives_counter;
+	int				check;
 	intmax_t		cycles;
-	unsigned int	champion;
+	int				era_cycles;
+	unsigned int	winner_nb;
 	unsigned char	*board;
 	t_options		options;
 }					t_cor;
@@ -115,6 +117,8 @@ void			init_board(t_dbllist *ch_list, t_dbllist *pr_list,
 **********************  Commands **********************
 */
 
+void			execute_dead_process(t_dbllist *pr_list, t_cor *core);
+int				iscmd(t_proc *c_proc, t_cor *core, t_dbllist *champ_list, t_dbllist *pr_list);
 int				get_cmd_size(int *type, int label_size, int nb_param);
 int				*get_type(unsigned char *board, t_proc *c_proc);
 int				get_register_name(unsigned char *board, t_proc *c_proc, int i[]);

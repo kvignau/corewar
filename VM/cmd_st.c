@@ -20,7 +20,7 @@ void	cmd_st(unsigned char *board, t_proc *c_proc)
 	int				reg_nb;
 	int				reg_nb2;
 
-	// if (c_proc->ctp == 5)
+	if (c_proc->ctp == 5)
 	{
 		i = 0;
 		result = 0;
@@ -49,6 +49,6 @@ void	cmd_st(unsigned char *board, t_proc *c_proc)
 		next_pc(get_cmd_size(get_type(board, c_proc), 4, 2), c_proc, board);
 		c_proc->ctp = 0;
 	}
-	// else
+	else
 		c_proc->ctp += 1;
 }
