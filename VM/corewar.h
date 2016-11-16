@@ -118,7 +118,7 @@ void			init_board(t_dbllist *ch_list, t_dbllist *pr_list,
 **********************  Commands **********************
 */
 
-void			execute_dead_process(t_dbllist **pr_list, t_cor *core);
+int				execute_dead_process(t_dbllist *pr_list, t_cor *core);
 int				iscmd(t_proc *c_proc, t_cor *core, t_dbllist *champ_list, t_dbllist *pr_list);
 int				get_cmd_size(int *type, int label_size, int nb_param);
 int				*get_type(unsigned char *board, t_proc *c_proc);

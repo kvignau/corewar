@@ -18,6 +18,8 @@ static void	set_new_era(t_cor *core, t_dbllist *pr_list)
 
 	tmp = pr_list->head;
 	core->cycles_to_die -= CYCLE_DELTA;
+	// if (opt_verbose == 1)
+			ft_printf("Cycle to die is now %d\n", core->cycles_to_die);
 	core->era_cycles = 0;
 	core->era_lives_counter = 0;
 	if (core->cycles_to_die < 0)
@@ -70,26 +72,27 @@ int		main(int argc, char **argv)
 	core.options = options;
 	core.board = memory();
 	core.cycles_to_die = CYCLE_TO_DIE;
-	core.cycles = 0;
+	core.era_cycles = 0;
+	core.cycles = 1;
 	intro(champ_list);
 	init_board(champ_list, process_list, &(core.board), &core);
 	// tmp2 = champ_list->head;
 	// ft_printf("champ:[0], name:[%s] nb: [%d]\n", (((t_champ *)(tmp2->content))->name),(((t_champ *)(tmp2->content))->vm_number));
 	while (1)
 	{
-		ft_printf("core_cycles [%d]  ", core.cycles);
+		// ft_printf("core_cycles [%d]  ", core.cycles);
 		if (options.bool_dump == 1 && core.cycles == options.dump_number)
 		{
 			ft_printf("\n");
 			ft_print_memory(core.board, MEM_SIZE);
 			break ;
 		}
-		if(core.cycles_to_die == 0 || (core.era_cycles % core.cycles_to_die) == 0)
+		// ft_printf("TEST: %d\n", (core.era_cycles % core.cycles_to_die));
+		if(core.cycles_to_die == 0 || (((core.era_cycles % core.cycles_to_die) == 0) && core.cycles != 1))
 		{
-			execute_dead_process(&process_list, &core);
+			if (execute_dead_process(process_list, &core) == 0)
+				break;
 			// ft_printf("process_list size :  %d\n", process_list->length);
-			if (process_list->length == 0)
-				break ;
 			if (core.era_lives_counter >= NBR_LIVE || (core.check + 1) == MAX_CHECKS)
 			{
 				// ft_printf("OLD ERA era_lives_counter: [%d]   core.check: [%d]   core.era_to_die [%d] core.cycles_to_die [%d]\n",
@@ -113,9 +116,9 @@ int		main(int argc, char **argv)
 				next_pc(1, tmp->content, core.board);
 			tmp = tmp->next;
 		}
-		core.cycles += 1;
 		// if (opt_verbose == 1)
 			ft_printf("It is now cycle %d\n", core.cycles);
+		core.cycles += 1;
 		core.era_cycles += 1;
 	}
 	check_winner(&core, champ_list);
