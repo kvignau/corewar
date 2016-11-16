@@ -23,6 +23,8 @@ int		execute_dead_process(t_dbllist *pr_list, t_cor *core)
 	{
 		if (((t_proc *)(tmp->content))->live == 0)
 			ft_lstdbldelone(&(pr_list), tmp);
+		else
+			((t_proc *)(tmp->content))->live = 0;
 		tmp = tmp->next;
 	}
 	if (pr_list->length == 0)
