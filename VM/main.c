@@ -87,8 +87,7 @@ int		main(int argc, char **argv)
 			ft_print_memory(core.board, MEM_SIZE);
 			break ;
 		}
-		// ft_printf("TEST: %d\n", (core.era_cycles % core.cycles_to_die));
-		if(core.cycles_to_die == 0 || (((core.era_cycles % core.cycles_to_die) == 0) && core.cycles != 1))
+		if(core.cycles_to_die == 0 || ((core.era_cycles % core.cycles_to_die) == 0 && (core.cycles != 1)))
 		{
 			if (execute_dead_process(process_list, &core) == 0)
 				break;
