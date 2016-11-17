@@ -35,7 +35,7 @@ static int				valid_opc(unsigned char *board, t_proc *c_proc)
 	return (0);
 }
 
-void					cmd_lldi(unsigned char *board, t_proc *c_proc)
+void					cmd_lldi(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
 	unsigned int		result;
 	int					reg_nb;
@@ -60,7 +60,7 @@ void					cmd_lldi(unsigned char *board, t_proc *c_proc)
 			c_proc->carry = 1;
 		else
 			c_proc->carry = 0;
-		// if (opt_verbose == 1)
+		if (core->options.verbose == 1)
 			cmd_verbose(board, c_proc, get_cmd_size(type, 2, 3));
 		next_pc(get_cmd_size(type, 2, 3), c_proc, board);
 		c_proc->ctp = 1;

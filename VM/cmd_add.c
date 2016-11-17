@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-void		cmd_add(unsigned char *board, t_proc *c_proc)
+void		cmd_add(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
 	int		r1;
 	int		r2;
@@ -35,7 +35,7 @@ void		cmd_add(unsigned char *board, t_proc *c_proc)
 				c_proc->carry = c_proc->r[r_dest - 1] == 0 ? 1 : 0;
 			}
 		}
-		// if (opt_verbose == 1)
+		if (core->options.verbose == 1)
 			cmd_verbose(board, c_proc, get_cmd_size(get_type(board, c_proc), 4, 3));
 		next_pc(get_cmd_size(get_type(board, c_proc), 4, 3), c_proc, board);
 		c_proc->ctp = 1;

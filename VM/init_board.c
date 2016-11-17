@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-static void	content_to_board(t_elem *champ, unsigned char *board,
+static void	content_to_board(t_elem *champ, t_cor *core,
 	t_dbllist *ch_list, t_proc *proc)
 {
 	int		i;
@@ -25,22 +25,22 @@ static void	content_to_board(t_elem *champ, unsigned char *board,
 	proc->i = i;
 	j = 0;
 	str =(unsigned char *)ft_memalloc(3);
-	proc->pc = &board[i];
+	proc->pc = &(core->board[i]);
 	proc->live = 0;
 	proc->ctp = 0;
 	while (j < (((t_champ *)(champ->content))->size) * 2)
 	{
 		str[0] = (((t_champ *)(champ->content))->content[j]);
 		str[1] = (((t_champ *)(champ->content))->content[j + 1]);
-		board[i] = (unsigned char)ft_hextoi(str);
+		core->board[i] = (unsigned char)ft_hextoi(str);
 		j += 2;
 		i += 1;
 	}
 	proc->r[0] = (((t_champ *)(champ->content))->vm_number);
+	proc->pid = core->pid;
 }
 
-void		init_board(t_dbllist *ch_list, t_dbllist *pr_list,
-	unsigned char **board, t_cor *core)
+void		init_board(t_dbllist *ch_list, t_dbllist *pr_list, t_cor *core)
 {
 	t_elem	*champ;
 	t_proc	proc;
@@ -49,7 +49,8 @@ void		init_board(t_dbllist *ch_list, t_dbllist *pr_list,
 	bzero(&proc, sizeof(t_proc));
 	while (champ != NULL)
 	{
-		content_to_board(champ, *board, ch_list, &proc);
+		core->pid += 1;
+		content_to_board(champ, core, ch_list, &proc);
 		ft_lstdbladd_head(pr_list, (t_proc *)&proc, sizeof(t_proc));
 		core->last_live = ((t_champ *)champ->content)->vm_number;
 		champ = champ->next;

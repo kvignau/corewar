@@ -46,7 +46,7 @@ void			cmd_live(unsigned char *board, t_proc *c_proc, t_cor *core,
 		vm_num_live = bit_cat(board, c_proc, 1, 4);
 		if (check_vm_number_exist(tmp, vm_num_live, core) == 1)
 			core->last_live = vm_num_live;
-		// if (opt_verbose == 1)
+		if (core->options.verbose == 1)
 			cmd_verbose(board, c_proc, 5);
 		next_pc(5 ,c_proc, board);
 		c_proc->ctp = 1;

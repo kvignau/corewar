@@ -14,7 +14,7 @@
 # define COREWAR_H
 # include "op.h"
 # include "../libftprintf/includes/ft_printf.h"
-# define OPTIONS	"dsn"
+# define OPTIONS	"dsnv"
 # define REG 1
 # define DIR 2
 # define IND 3
@@ -31,9 +31,11 @@ typedef struct		s_options
 	intmax_t		dump_number;
 	int				bool_vm_number;
 	unsigned int	vm_number;
+	int				verbose;
 }					t_options;
 typedef struct		s_cor
 {
+	int				pid;
 	int				nb_champ;
 	unsigned int	last_live;
 	int				cycles_to_die;
@@ -69,6 +71,7 @@ typedef struct		s_proc
 	int				i;
 	int				ctp;
 	int				live;
+	int				pid;
 }					t_proc;
 
 /*
@@ -85,7 +88,7 @@ void		intro(t_dbllist *champ_list);
 
 int			options_checkers(int argc, char **argv, t_options *options,
 	t_dbllist *champ_list);
-void			cmd_verbose(unsigned char *board, t_proc *c_proc, int offset);
+void		cmd_verbose(unsigned char *board, t_proc *c_proc, int offset);
 
 /*
 **********************  Checkers  **********************
@@ -111,8 +114,7 @@ unsigned int	isind(unsigned char *board, t_proc *c_proc, int *type, int arg_nb);
 */
 
 unsigned char	*memory(void);
-void			init_board(t_dbllist *ch_list, t_dbllist *pr_list,
-	unsigned char **board, t_cor *core);
+void			init_board(t_dbllist *ch_list, t_dbllist *pr_list, t_cor *core);
 
 /*
 **********************  Commands **********************
@@ -128,23 +130,23 @@ unsigned int	bit_cat(unsigned char *board, t_proc *c_proc, int start, int size);
 void			next_pc(int counter_offset, t_proc *c_proc, unsigned char *board);
 void			cmd_live(unsigned char *board, t_proc *c_proc, t_cor *core,
 	t_dbllist *ch_list);
-void			cmd_ld(unsigned char *board, t_proc *c_proc);
-void			cmd_st(unsigned char *board, t_proc *c_proc);
-void			cmd_add(unsigned char *board, t_proc *c_proc);
-void			cmd_sub(unsigned char *board, t_proc *c_proc);
-void			cmd_and(unsigned char *board, t_proc *c_proc);
-void			cmd_or(unsigned char *board, t_proc *c_proc);
-void			cmd_xor(unsigned char *board, t_proc *c_proc);
-void			cmd_zjmp(unsigned char *board, t_proc *c_proc);
-void			cmd_ldi(unsigned char *board, t_proc *c_proc);
-void			cmd_sti(unsigned char *board, t_proc *c_proc);
+void			cmd_ld(unsigned char *board, t_proc *c_proc, t_cor *core);
+void			cmd_st(unsigned char *board, t_proc *c_proc, t_cor *core);
+void			cmd_add(unsigned char *board, t_proc *c_proc, t_cor *core);
+void			cmd_sub(unsigned char *board, t_proc *c_proc, t_cor *core);
+void			cmd_and(unsigned char *board, t_proc *c_proc, t_cor *core);
+void			cmd_or(unsigned char *board, t_proc *c_proc, t_cor *core);
+void			cmd_xor(unsigned char *board, t_proc *c_proc, t_cor *core);
+void			cmd_zjmp(unsigned char *board, t_proc *c_proc, t_cor *core);
+void			cmd_ldi(unsigned char *board, t_proc *c_proc, t_cor *core);
+void			cmd_sti(unsigned char *board, t_proc *c_proc, t_cor *core);
 void			sti_result(unsigned char *board, t_proc *c_proc, int reg_nb, unsigned int result);
 void			add_ind_reg(unsigned char *board, t_proc *c_proc);
 void			add_reg_reg(unsigned char *board, t_proc *c_proc);
-void			cmd_fork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list);
-void			cmd_lld(unsigned char *board, t_proc *c_proc);
-void			cmd_lldi(unsigned char *board, t_proc *c_proc);
-void			cmd_lfork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list);
-void			cmd_aff(unsigned char *board, t_proc *c_proc);
+void			cmd_fork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list, t_cor *core);
+void			cmd_lld(unsigned char *board, t_proc *c_proc, t_cor *core);
+void			cmd_lldi(unsigned char *board, t_proc *c_proc, t_cor *core);
+void			cmd_lfork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list, t_cor *core);
+void			cmd_aff(unsigned char *board, t_proc *c_proc, t_cor *core);
 
 #endif

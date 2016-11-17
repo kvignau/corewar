@@ -18,7 +18,7 @@ static void	set_new_era(t_cor *core, t_dbllist *pr_list)
 
 	tmp = pr_list->head;
 	core->cycles_to_die -= CYCLE_DELTA;
-	// if (opt_verbose == 1)
+	if (core->options.verbose == 1)
 			ft_printf("Cycle to die is now %d\n", core->cycles_to_die);
 	core->era_cycles = 0;
 	core->era_lives_counter = 0;
@@ -75,13 +75,15 @@ int		main(int argc, char **argv)
 	core.era_cycles = 0;
 	core.cycles = 1;
 	intro(champ_list);
-	init_board(champ_list, process_list, &(core.board), &core);
+	init_board(champ_list, process_list, &core);
 	// tmp2 = champ_list->head;
 	// ft_printf("champ:[0], name:[%s] nb: [%d]\n", (((t_champ *)(tmp2->content))->name),(((t_champ *)(tmp2->content))->vm_number));
 	while (1)
 	{
+
+
 		// ft_printf("core_cycles [%d]  ", core.cycles);
-		if (options.bool_dump == 1 && core.cycles == options.dump_number)
+		if (options.bool_dump == 1 && core.cycles == options.dump_number + 1)
 		{
 			ft_printf("\n");
 			ft_print_memory(core.board, MEM_SIZE);
@@ -111,11 +113,16 @@ int		main(int argc, char **argv)
 		tmp = process_list->head;
 		while (tmp != NULL)
 		{
+			// if (core.cycles > 900)
+		{
+			// ft_printf("process_list_nb:%d\n", process_list->length);
+			// ft_printf("i:[%%] pc: [%p]\n" /*(((t_proc *)(tmp->content))->i)*/,(((t_proc *)(tmp->content))->pc));
+		}
 			if (iscmd(tmp->content, &core, champ_list, process_list) == 0)
 				next_pc(1, tmp->content, core.board);
 			tmp = tmp->next;
 		}
-		// if (opt_verbose == 1)
+		if (core.options.verbose == 1)
 			ft_printf("It is now cycle %d\n", core.cycles);
 		core.cycles += 1;
 		core.era_cycles += 1;

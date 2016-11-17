@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-void	cmd_zjmp(unsigned char *board, t_proc *c_proc)
+void	cmd_zjmp(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
 	unsigned int	id;
 
