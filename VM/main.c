@@ -113,16 +113,15 @@ int		main(int argc, char **argv)
 		tmp = process_list->head;
 		while (tmp != NULL)
 		{
+
 			// if (core.cycles > 900)
-		{
 			// ft_printf("process_list_nb:%d\n", process_list->length);
 			// ft_printf("i:[%%] pc: [%p]\n" /*(((t_proc *)(tmp->content))->i)*/,(((t_proc *)(tmp->content))->pc));
-		}
 			if (iscmd(tmp->content, &core, champ_list, process_list) == 0)
 				next_pc(1, tmp->content, core.board);
 			tmp = tmp->next;
 		}
-		if (core.options.verbose == 1)
+		if (core.options.cycle == 1)
 			ft_printf("It is now cycle %d\n", core.cycles);
 		core.cycles += 1;
 		core.era_cycles += 1;

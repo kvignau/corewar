@@ -42,7 +42,7 @@ int		iscmd(t_proc *c_proc, t_cor *core, t_dbllist *champ_list, t_dbllist *pr_lis
 	else if (core->board[c_proc->i] == 13)
 		cmd_lld(core->board, c_proc, core);
 	else if (core->board[c_proc->i] == 14)
-		cmd_ldi(core->board, c_proc, core);
+		cmd_lldi(core->board, c_proc, core);
 	else if (core->board[c_proc->i] == 15)
 		cmd_lfork(core->board, c_proc, pr_list, core);
 	else if (core->board[c_proc->i] == 16)

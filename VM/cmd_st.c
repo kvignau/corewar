@@ -42,10 +42,17 @@ void	cmd_st(unsigned char *board, t_proc *c_proc, t_cor *core)
 		{
 			reg_nb = (int)(board[(c_proc->i + 3) % MEM_SIZE]) - 1;
 			reg_nb2 = (int)(board[(c_proc->i + 2) % MEM_SIZE]) - 1;
-			if (reg_nb > 15 || reg_nb < 0 || reg_nb2 > 15)
+			if (reg_nb > 15 || reg_nb < 0 || reg_nb2 > 15 || reg_nb2 < 0)
 				return ;
 			c_proc->r[reg_nb] = c_proc->r[reg_nb2];
 		}
+		if (core->options.verbose == 1 &&
+			((board[(c_proc->i + 1) % MEM_SIZE] == 0x70)))
+			ft_printf("P% 5d | st r%d %d\n", c_proc->pid, reg_nb + 1, id);
+		else if (core->options.verbose == 1 &&
+			(board[(c_proc->i + 1) % MEM_SIZE] == 0x50))
+			ft_printf("P% 5d | st r%d %d\n", c_proc->pid, reg_nb2 + 1,
+				reg_nb + 1);
 		if (core->options.verbose == 1)
 			cmd_verbose(board, c_proc, (get_cmd_size(get_type(board, c_proc), 4, 2)));
 		next_pc(get_cmd_size(get_type(board, c_proc), 4, 2), c_proc, board);

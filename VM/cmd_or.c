@@ -30,6 +30,11 @@ void		cmd_or(unsigned char *board, t_proc *c_proc, t_cor *core)
 		r_dest = get_register_name(board, c_proc, i);
 		if (i[1] == 0)
 		{
+			if (core->options.verbose == 1)
+			{
+				ft_printf("P% 5d | or %d %d r%d\n", c_proc->pid, arg1, arg2,
+					r_dest);
+			}
 			c_proc->r[r_dest - 1] = arg1 | arg2;
 			c_proc->carry = c_proc->r[r_dest - 1] == 0 ? 1 : 0;
 		}

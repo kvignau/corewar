@@ -37,32 +37,35 @@ static int				valid_opc(unsigned char *board, t_proc *c_proc)
 
 void					cmd_lldi(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
-	unsigned int		result;
 	int					reg_nb;
 	int					*type;
-	int					first_arg;
+	int					arg_1;
+	int					arg_2;
+	int					v_opc;
 
-
-	result = 0;
 	reg_nb = 0;
+	v_opc = 0;
 	if (c_proc->ctp == 25)
 	{
 		type = get_type(board, c_proc);
-		if (valid_opc(board, c_proc) == 1)
+		if ((v_opc = valid_opc(board, c_proc)) == 1)
 		{
-			result = get_arg_value(board, c_proc, type, 1) + get_arg_value(board, c_proc, type, 2);
+			arg_1 = get_arg_value(board, c_proc, type, 1);
+			arg_2 = get_arg_value(board, c_proc, type, 2);
 			reg_nb = bit_cat(board, c_proc, get_cmd_size(type, 2, 3) - 1, 1);
-			if (reg_nb > 15 || reg_nb < 0)
+			if (reg_nb > 16 || reg_nb < 1)
 				return ;
-			c_proc->r[reg_nb - 1] = bit_cat(board, c_proc, (result) % MEM_SIZE, REG_SIZE);
+			c_proc->r[reg_nb - 1] = bit_cat(board, c_proc, (arg_1 + arg_2), REG_SIZE);
 		}
-		if (c_proc->r[reg_nb - 1] == 0)
-			c_proc->carry = 1;
-		else
-			c_proc->carry = 0;
+		if (core->options.verbose == 1 && v_opc == 1)
+		{
+			ft_printf("P% 5d | lldi %d %d r%d\n", c_proc->pid, arg_1, arg_2, reg_nb);
+			ft_printf("       | -> load from %u + %u = %d (with pc and mod %d)\n",
+				arg_1, arg_2, arg_1, arg_2, arg_1 + arg_2);
+		}
 		if (core->options.verbose == 1)
-			cmd_verbose(board, c_proc, get_cmd_size(type, 2, 3));
-		next_pc(get_cmd_size(type, 2, 3), c_proc, board);
+			cmd_verbose(board, c_proc, get_cmd_size(get_type(board, c_proc), 2, 3));
+		next_pc(get_cmd_size(get_type(board, c_proc), 2, 3), c_proc, board);
 		c_proc->ctp = 1;
 	}
 	else

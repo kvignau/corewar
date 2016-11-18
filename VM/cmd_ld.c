@@ -42,6 +42,13 @@ void	cmd_ld(unsigned char *board, t_proc *c_proc, t_cor *core)
 		else
 			c_proc->carry = 0;
 		c_proc->ctp = 1;
+		if (core->options.verbose == 1 &&
+			((board[(c_proc->i + 1) % MEM_SIZE] == 0xd0) ||
+			(board[(c_proc->i + 1) % MEM_SIZE] == 0x90)))
+		{
+			ft_printf("P% 5d | ld %d r%d\n", c_proc->pid, c_proc->r[reg_nb],
+				reg_nb + 1);
+		}
 		if (core->options.verbose == 1)
 			cmd_verbose(board, c_proc, get_cmd_size(get_type(board, c_proc), 4, 2));
 		next_pc(get_cmd_size(get_type(board, c_proc), 4, 2), c_proc, board);

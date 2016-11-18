@@ -14,7 +14,7 @@
 # define COREWAR_H
 # include "op.h"
 # include "../libftprintf/includes/ft_printf.h"
-# define OPTIONS	"dsnv"
+# define OPTIONS	"dsnvc"
 # define REG 1
 # define DIR 2
 # define IND 3
@@ -32,6 +32,7 @@ typedef struct		s_options
 	int				bool_vm_number;
 	unsigned int	vm_number;
 	int				verbose;
+	int				cycle;
 }					t_options;
 typedef struct		s_cor
 {
