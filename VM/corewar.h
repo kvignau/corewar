@@ -47,6 +47,7 @@ typedef struct		s_cor
 	unsigned int	winner_nb;
 	unsigned char	*board;
 	t_options		options;
+	int				new_era;
 }					t_cor;
 typedef struct		s_champ
 {
