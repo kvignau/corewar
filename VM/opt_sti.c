@@ -39,7 +39,9 @@ void					add_ind_reg(unsigned char *board, t_proc *c_proc)
 	reg_nb2 = 0;
 	reg_nb = board[(c_proc->i + 2) % MEM_SIZE] - 1;
 	reg_nb2 = board[(c_proc->i + 5) % MEM_SIZE] - 1;
-	add = c_proc->r[reg_nb2] + bit_cat(board, c_proc, 3, 2);
+	add = (c_proc->r[reg_nb2] + bit_cat(board, c_proc, 3, 2) + c_proc->i) % IDX_MOD;
+	if (core->options.verbose == 1)
+		cmd_verbose_sti(board, c_proc, bit_cat(board, c_proc, 3, 2), c_proc->r[reg_nb2]);
 	sti_result(board, c_proc, reg_nb, add);
 }
 
@@ -57,6 +59,8 @@ void					add_reg_reg(unsigned char *board, t_proc *c_proc)
 	reg_nb = board[(c_proc->i + 2) % MEM_SIZE] - 1;
 	reg_nb2 = board[(c_proc->i + 3) % MEM_SIZE] - 1;
 	reg_nb3 = board[(c_proc->i + 4) % MEM_SIZE] - 1;
-	add = c_proc->r[reg_nb2] + c_proc->r[reg_nb3];
+	add = (c_proc->r[reg_nb2] + c_proc->r[reg_nb3] + c_proc->i) % IDX_MOD;
+	if (core->options.verbose == 1)
+		cmd_verbose_sti(board, c_proc, c_proc->r[reg_nb2], c_proc->r[reg_nb3]);
 	sti_result(board, c_proc, reg_nb, add);
 }

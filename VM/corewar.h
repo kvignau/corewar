@@ -90,6 +90,7 @@ void		intro(t_dbllist *champ_list);
 int			options_checkers(int argc, char **argv, t_options *options,
 	t_dbllist *champ_list);
 void		cmd_verbose(unsigned char *board, t_proc *c_proc, int offset);
+void		cmd_verbose_sti(unsigned char *board, t_proc *c_proc, int p1, int p2);
 
 /*
 **********************  Checkers  **********************
@@ -128,6 +129,7 @@ int				*get_type(unsigned char *board, t_proc *c_proc);
 int				get_register_name(unsigned char *board, t_proc *c_proc, int i[]);
 int				get_arg_val(int oc_trunc, unsigned char *board, t_proc *c_proc, int i[]);
 unsigned int	bit_cat(unsigned char *board, t_proc *c_proc, int start, int size);
+
 void			next_pc(int counter_offset, t_proc *c_proc, unsigned char *board);
 void			cmd_live(unsigned char *board, t_proc *c_proc, t_cor *core,
 	t_dbllist *ch_list);
