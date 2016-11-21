@@ -19,7 +19,7 @@ static unsigned int		get_arg_value(unsigned char *board, t_proc *c_proc, int *ty
 	else if (type[arg_nb - 1] == DIR)
 		return (isdir(board, c_proc, type, arg_nb));
 	else if (type[arg_nb - 1] == IND)
-		return (isind(board, c_proc, type, arg_nb) % IDX_MOD);
+		return (isind(board, c_proc, type, arg_nb));
 	else
 		return (0);
 }
@@ -61,7 +61,7 @@ void					cmd_ldi(unsigned char *board, t_proc *c_proc, t_cor *core)
 		{
 			ft_printf("P% 5d | ldi %d %d r%d\n", c_proc->pid, arg_1, arg_2, reg_nb);
 			ft_printf("       | -> load from %u + %u = %d (with pc and mod %d)\n",
-				arg_1, arg_2, arg_1, arg_2, arg_1 + arg_2);
+				arg_1, arg_2, arg_1 + arg_2, ((arg_1 + arg_2) % IDX_MOD + c_proc->i) % MEM_SIZE);
 		}
 		if (core->options.verbose == 1)
 			cmd_verbose(board, c_proc, get_cmd_size(get_type(board, c_proc), 2, 3));

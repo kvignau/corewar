@@ -15,11 +15,26 @@
 unsigned int		isind(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
 {
 	unsigned int		result;
-	unsigned int		start;
+	unsigned int		id;
 
 	result = 0;
-	start = 0;
-	start = bit_cat(board, c_proc, 2, 2);
-	result = ((bit_cat(board, c_proc, start + 2, IND_SIZE)));
+	if (arg_nb == 2)
+	{
+		if (type[0] == REG)
+		{
+			id = bit_cat(board, c_proc, 3, 4);
+			result = bit_cat(board, c_proc, id, 4);
+		}
+		else
+		{
+			id = bit_cat(board, c_proc, 4, 4);
+			result = bit_cat(board, c_proc, id, 4);
+		}
+	}
+	else	
+	{
+		id = bit_cat(board, c_proc, 2, 2);
+		result = bit_cat(board, c_proc, id, 4);
+	}
 	return (result);
 }
