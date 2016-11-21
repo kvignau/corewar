@@ -18,6 +18,7 @@
 # define REG 1
 # define DIR 2
 # define IND 3
+# include <ncurses.h>
 
 
 /*
@@ -151,5 +152,10 @@ void			cmd_lld(unsigned char *board, t_proc *c_proc, t_cor *core);
 void			cmd_lldi(unsigned char *board, t_proc *c_proc, t_cor *core);
 void			cmd_lfork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list, t_cor *core);
 void			cmd_aff(unsigned char *board, t_proc *c_proc, t_cor *core);
+
+int				set_up_ncurses(WINDOW *windows[]);
+int 			print_board(WINDOW *gauche, t_dbllist *process_list, unsigned char *board);
+int				ncurs_finish(WINDOW *windows[]);
+
 
 #endif
