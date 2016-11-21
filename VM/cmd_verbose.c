@@ -30,6 +30,6 @@ void			cmd_verbose(unsigned char *board, t_proc *c_proc, int offset)
 void			cmd_verbose_sti(unsigned char *board, t_proc *c_proc, int p1, int p2)
 {
 	ft_printf("P% 5d | sti r%d %d %d\n", c_proc->pid, board[c_proc->i + 2], p1, p2);
-	ft_printf("% 6c | -> store to %d + %d = %d (with pc and mod %d)\n", ' ',p1, p2, p1 + p2, (p1 + p2 + c_proc->i) % IDX_MOD);
+	ft_printf("% 6c | -> store to %d + %d = %d (with pc and mod %d)\n", ' ',p1, p2, p1 + p2, (((p1 + p2) % IDX_MOD) + c_proc->i) % MEM_SIZE);
 
 }
