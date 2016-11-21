@@ -20,7 +20,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # define BUFF_SIZE 4096
-# define LINES (((t_lines *)(tmp->content))->lines)
+# define LINESS (((t_lines *)(tmp->content))->lines)
 
 typedef	struct		s_list
 {
