@@ -37,7 +37,7 @@ void	cmd_ld(unsigned char *board, t_proc *c_proc, t_cor *core)
 				return ;
 			c_proc->r[reg_nb] = bit_cat(board, c_proc, (id % IDX_MOD), 4);
 		}
-		if ((c_proc->i + (id % IDX_MOD)) % MEM_SIZE == 0)
+		if (((id % IDX_MOD)) % MEM_SIZE == 0)
 			c_proc->carry = 1;
 		else
 			c_proc->carry = 0;

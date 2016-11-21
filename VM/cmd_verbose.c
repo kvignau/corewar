@@ -18,10 +18,10 @@ void			cmd_verbose(unsigned char *board, t_proc *c_proc, int offset)
 
 	i = 0;
 	ft_printf("ADV %d", offset);
-	ft_printf(" (0x%.4x -> 0x%.4x) ", c_proc->i, c_proc->i + offset);
+	ft_printf(" (0x%.4x -> 0x%.4x) ", c_proc->i, (c_proc->i + offset) % MEM_SIZE);
 	while (i < offset)
 	{
-		ft_printf("%.2x ", board[c_proc->i + i]);
+		ft_printf("%.2x ", board[(c_proc->i + i) % MEM_SIZE]);
 		i++;
 	}
 	write(1, "\n", 1);

@@ -20,7 +20,6 @@
 # define IND 3
 # include <ncurses.h>
 
-
 /*
 **********************  Structures  **********************
 */
@@ -49,6 +48,7 @@ typedef struct		s_cor
 	unsigned char	*board;
 	t_options		options;
 	int				new_era;
+	int				end;
 }					t_cor;
 typedef struct		s_champ
 {
@@ -75,6 +75,7 @@ typedef struct		s_proc
 	int				ctp;
 	int				live;
 	int				pid;
+	int				last_lived;
 }					t_proc;
 
 /*
@@ -153,6 +154,10 @@ void			cmd_lld(unsigned char *board, t_proc *c_proc, t_cor *core);
 void			cmd_lldi(unsigned char *board, t_proc *c_proc, t_cor *core);
 void			cmd_lfork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list, t_cor *core);
 void			cmd_aff(unsigned char *board, t_proc *c_proc, t_cor *core);
+
+/*
+**********************  Ncurses **********************
+*/
 
 int				set_up_ncurses(WINDOW *windows[]);
 int 			print_board(WINDOW *gauche, t_dbllist *process_list, unsigned char *board);

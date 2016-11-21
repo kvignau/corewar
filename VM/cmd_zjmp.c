@@ -21,11 +21,19 @@ void	cmd_zjmp(unsigned char *board, t_proc *c_proc, t_cor *core)
 		if (c_proc->carry == 1)
 		{
 			id = bit_cat(board, c_proc, 1, 2);
-			c_proc->i = (c_proc->i + (id % IDX_MOD)) % IDX_MOD;
+			c_proc->i = (c_proc->i + ((short int)id % IDX_MOD)) % MEM_SIZE;
 			c_proc->pc = &board[c_proc->i];
 		}
 		else
 			next_pc(3, c_proc, board);
+		if (core->options.verbose == 1)
+		{
+			ft_printf("P% 5d | zjmp %d", c_proc->pid, (short int)id);
+			if (c_proc->carry == 1)
+				ft_printf(" OK\n");
+			else
+				ft_printf(" FAILED\n");
+		}
 		c_proc->ctp = 1;
 	}
 	else

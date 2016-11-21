@@ -14,7 +14,7 @@
 
 void		cmd_lfork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list, t_cor *core)
 {
-	int		value;
+	short int		value;
 	t_elem				*tmp;
 
 	if (c_proc->ctp == 1000)
