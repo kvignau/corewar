@@ -27,7 +27,10 @@ void		cmd_xor(unsigned char *board, t_proc *c_proc, t_cor *core)
 	{
 		arg1 = get_arg_val((o_code & 0b11000000) >> 6, board, c_proc, i);
 		arg2 = get_arg_val((o_code & 0b00110000) >> 4, board, c_proc, i);
-		r_dest = get_register_name(board, c_proc, i);
+		if ((o_code & 0b00001100) >> 2 == 0b01 && (o_code & 0b00000011) == 0)
+			r_dest = get_register_name(board, c_proc, i);
+		else
+			i[1] = -1;
 		if (i[1] == 0)
 		{
 			if (core->options.verbose == 1)
