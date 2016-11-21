@@ -14,7 +14,7 @@
 
 void	cmd_st(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
-	unsigned int	id;
+	short int		id;
 	unsigned char	result;
 	int				i;
 	int				reg_nb;
@@ -26,7 +26,7 @@ void	cmd_st(unsigned char *board, t_proc *c_proc, t_cor *core)
 		result = 0;
 		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x70)
 		{
-			id = bit_cat(board, c_proc, 3, 2);
+			id = (short int)bit_cat(board, c_proc, 3, 2);
 			reg_nb = (int)((board[(c_proc->i + 2) % MEM_SIZE] - 1));
 			if (reg_nb > 15 || reg_nb < 0)
 				return ;
@@ -48,7 +48,7 @@ void	cmd_st(unsigned char *board, t_proc *c_proc, t_cor *core)
 		}
 		if (core->options.verbose == 1 &&
 			((board[(c_proc->i + 1) % MEM_SIZE] == 0x70)))
-			ft_printf("P% 5d | st r%d %d\n", c_proc->pid, reg_nb + 1, id);
+			ft_printf("P% 5d | st r%d %d\n", c_proc->pid, reg_nb + 1, (short int)id);
 		else if (core->options.verbose == 1 &&
 			(board[(c_proc->i + 1) % MEM_SIZE] == 0x50))
 			ft_printf("P% 5d | st r%d %d\n", c_proc->pid, reg_nb2 + 1,
