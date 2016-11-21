@@ -29,6 +29,20 @@ typedef struct		s_proc
 	int				live;
 }					t_proc;
 
+void	*ft_bzero(void *s, size_t n)
+{
+	size_t			i;
+	unsigned char	*str;
+
+	i = 0;
+	str = (unsigned char *)s;
+	if (n == 0)
+		return (0);
+	while (i < n)
+		str[i++] = 0;
+	return (s);
+}
+
 
 int		create_array_process_map(t_dbllist *process_list, int process_map[])
 {
@@ -36,15 +50,16 @@ int		create_array_process_map(t_dbllist *process_list, int process_map[])
 	t_proc		*node_proc;
 	int			i;
 
-	i = -1;
-	if (!process_list || !(process_list->head))
-		return (-1);
+	// ft_bzero(process_map, 16384); pas compris pk 16384 et pas 4096 comme si dessous
 	while (++i < 4096)
 	{
 		process_map[i] = 0;
 	}
+	i = -1;
+	if (!process_list || !(process_list->head))
+		return (-1);
+
 	current_node = process_list->head;
-	
 	i = -1;
 	while (current_node)
 	{
@@ -77,6 +92,8 @@ int 	print_board(WINDOW *gauche, t_dbllist *process_list, unsigned char *board)
 		}
 	}
 	wrefresh(gauche);
+
+	getch();// stop le programme et attend un input user pour continuer
 
 	return (0);
 }
@@ -121,10 +138,15 @@ int main(void) {
 	int					i;
 	t_dbllist			*process_list;
 	t_proc				*prank_proc;
+	t_proc				*prank_proc2;
+	t_elem				*prank_elem;
+	t_elem				*prank_elem2;
 
 
 	prank_proc = (t_proc *)malloc(sizeof(t_proc));
-	prank_proc->i = 1;
+	prank_proc2 = (t_proc *)malloc(sizeof(t_proc));
+	prank_proc->i = 2;
+	prank_proc2->i = 134;
 
 
 	set_up_ncurses(windows);
@@ -138,54 +160,23 @@ int main(void) {
 	while (++i < 4092){
 		board[4 + i] = 0;
 	}
+
+	process_list = (t_dbllist *)malloc(sizeof(t_dbllist));
+
+	prank_elem = (t_elem *)malloc(sizeof(t_elem));
+	prank_elem2 = (t_elem *)malloc(sizeof(t_elem));
+
+	prank_elem->content = prank_proc;
+	prank_elem2->content = prank_proc2;
+
+	process_list->head = prank_elem;
+	prank_elem->next = prank_elem2;
+
 	print_board(windows[0], process_list, board);
 
-	getch();
 
 	endwin();
 	free(windows[0]);
 	free(windows[1]);
 	return 0;
 }
-
-// int main(void)
-// {
-//     initscr();
-
-    // attron(A_NORMAL);
-//     printw("Texte sans mise en forme\n");
-
-//     attron(A_STANDOUT);
-//     printw("Texte en meilleur surlignement\n");
-//     attroff(A_STANDOUT);
-
-//     attron(A_REVERSE);
-//     printw("Texte en inversion video\n");
-//     attroff(A_REVERSE);
-
-//     attron(A_DIM);
-//     printw("Texte a moitie brillant\n");
-//     attroff(A_DIM);
-
-//     attron(A_BOLD);
-//     printw("Texte en gras\n");
-//     attroff(A_BOLD);
-
-//     attron(A_UNDERLINE);
-//     printw("Texte en souligne\n");
-//     attroff(A_UNDERLINE);
-
-//     attron(A_INVIS);
-//     printw("Texte invisible\n");
-//     attroff(A_INVIS);
-
-//     attron(A_UNDERLINE | A_BOLD); // Pour appliquer plusieurs type de mises en forme, on utilise l'opérateur unaire |
-//     printw("Texte en gras souligne\n");
-    
-//     attron(A_NORMAL);
-//     refresh();
-//     getch();
-//     endwin();
-    
-//     return 0;
-// }
