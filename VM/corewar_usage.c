@@ -24,6 +24,11 @@ int		corewar_usage(int argc)
 		ft_putstr("-d N    : Dumps memory after N cycles then exits\n");
 		ft_putstr("-s      : Stealth mode, does not print 'live' message\n");
 		ft_putstr("-n      : Choose champion id\n");
+		ft_putstr("-v      : Verbose\n");
+		ft_putstr("-c      : Show cycles counter\n");
+		ft_putstr("-N      : Ncurses layout, automatically disable other");
+		ft_putstr("other options will automatically be disable and");
+		ft_putstr(" stealth mode is automatically activated\n");
 		exit(EXIT_FAILURE);
 	}
 	return (1);
