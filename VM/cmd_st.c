@@ -36,7 +36,10 @@ void	cmd_st(unsigned char *board, t_proc *c_proc, t_cor *core)
 			id = (short int)bit_cat(board, c_proc, 3, 2);
 			reg_nb = (int)((board[(c_proc->i + 2) % MEM_SIZE] - 1));
 			if (reg_nb > 15 || reg_nb < 0)
+			{
+				next(board, c_proc, get_cmd_size(get_type(board, c_proc), 4, 2), core->options.verbose);
 				return ;
+			}
 			if (core->options.verbose == 1)
 				ft_printf("P% 5d | st r%d %d\n", c_proc->pid, reg_nb + 1, (short int)id);
 		}
