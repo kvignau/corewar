@@ -78,8 +78,7 @@ int		main(int argc, char **argv)
 	intro(champ_list);
 	init_board(champ_list, process_list, &core);
 	if (options.ncurse == 1){
-		ft_printf("YOLO\n");
-		set_up_ncurses(core.windows);
+		set_up_ncurses(&core);
 	}
 	// tmp2 = champ_list->head;
 	// ft_printf("champ:[0], name:[%s] nb: [%d]\n", (((t_champ *)(tmp2->content))->name),(((t_champ *)(tmp2->content))->vm_number));
@@ -123,8 +122,12 @@ int		main(int argc, char **argv)
 		}
 		core.cycles += 1;
 		core.era_cycles += 1;
-		if (options.ncurse == 1)
-			print_board(core.windows[0], process_list, core.board);
+		if (options.ncurse == 1){
+			print_board(&core, process_list, core.board);
+			mvwprintw(core.windows[1], 1, 2, "nb proc: %d   :)", process_list->length);	
+			mvwprintw(core.windows[1], 2, 2, "delay_cycle: %d   :D", core.delay_cycle);	
+			wrefresh(core.windows[1]);
+		}
 		if (core.end == 0)
 			break ;
 	}
@@ -160,6 +163,6 @@ int		main(int argc, char **argv)
 	ft_printf("size after : %d\n", process_list->length);*/
 	// ft_print_memory(core.board, MEM_SIZE);
 	if (options.ncurse == 1)
-		ncurs_finish(core.windows);
+		ncurs_finish(&core);
 	return (0);
 }
