@@ -30,13 +30,8 @@ void	cmd_st(unsigned char *board, t_proc *c_proc, t_cor *core)
 			reg_nb = (int)((board[(c_proc->i + 2) % MEM_SIZE] - 1));
 			if (reg_nb > 15 || reg_nb < 0)
 				return ;
-			result = c_proc->r[reg_nb] >> 24;
-			while (i < REG_SIZE)
-			{
-				board[(c_proc->i + ((id + i) % IDX_MOD)) % MEM_SIZE] = result;
-				result = c_proc->r[reg_nb] >> (24 - (8 * (i + 1)));
-				i++;
-			}
+			if (core->options.verbose == 1)
+				ft_printf("P% 5d | st r%d %d\n", c_proc->pid, reg_nb + 1, (short int)id);
 		}
 		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0x50)
 		{
@@ -44,18 +39,27 @@ void	cmd_st(unsigned char *board, t_proc *c_proc, t_cor *core)
 			reg_nb2 = (int)(board[(c_proc->i + 2) % MEM_SIZE]) - 1;
 			if (reg_nb > 15 || reg_nb < 0 || reg_nb2 > 15 || reg_nb2 < 0)
 				return ;
+			if (core->options.verbose == 1)
+				ft_printf("P% 5d | st r%d %d\n", c_proc->pid, reg_nb2 + 1,
+					reg_nb + 1);
 			c_proc->r[reg_nb] = c_proc->r[reg_nb2];
 		}
-		if (core->options.verbose == 1 &&
-			((board[(c_proc->i + 1) % MEM_SIZE] == 0x70)))
-			ft_printf("P% 5d | st r%d %d\n", c_proc->pid, reg_nb + 1, (short int)id);
-		else if (core->options.verbose == 1 &&
-			(board[(c_proc->i + 1) % MEM_SIZE] == 0x50))
-			ft_printf("P% 5d | st r%d %d\n", c_proc->pid, reg_nb2 + 1,
-				reg_nb + 1);
-		if (core->options.verbose == 1)
-			cmd_verbose(board, c_proc, (get_cmd_size(get_type(board, c_proc), 4, 2)));
-		next_pc(get_cmd_size(get_type(board, c_proc), 4, 2), c_proc, board);
+		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x70)
+		{
+			reg_nb2 = get_cmd_size(get_type(board, c_proc), 4, 2);
+			result = c_proc->r[reg_nb] >> 24;
+			while (i < REG_SIZE)
+			{
+				board[(c_proc->i + ((id + i) % IDX_MOD)) % MEM_SIZE] = result;
+				result = c_proc->r[reg_nb] >> (24 - (8 * (i + 1)));
+				i++;
+			}
+			if (core->options.verbose == 1)
+				cmd_verbose(board, c_proc, reg_nb2);
+			next_pc(reg_nb2, c_proc, board);
+		}
+		else
+			next_pc(get_cmd_size(get_type(board, c_proc), 4, 2), c_proc, board);
 		c_proc->ctp = 1;
 	}
 	else
