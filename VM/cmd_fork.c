@@ -31,7 +31,6 @@ void		cmd_fork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list, t_cor *
 		((t_proc *)(tmp->content))->pc = (c_proc->pc + (value % IDX_MOD));
 		((t_proc *)(tmp->content))->i = (c_proc->i + (value % IDX_MOD));
 		((t_proc *)(tmp->content))->ctp = 1;
-		((t_proc *)(tmp->content))->live = 0;
 		core->pid += 1;
 		((t_proc *)(tmp->content))->pid = core->pid;
 		next_pc(3, c_proc, board);

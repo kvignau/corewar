@@ -22,7 +22,11 @@ int		execute_dead_process(t_dbllist *pr_list, t_cor *core)
 	while (tmp != NULL)
 	{
 		if (((t_proc *)(tmp->content))->live == 0)
+		{
+			if (core->options.verbose == 1)
+				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n", ((t_proc *)(tmp->content))->pid, ((t_proc *)(tmp->content))->last_lived, core->cycles_to_die);
 			ft_lstdbldelone(&(pr_list), tmp);
+		}
 		else
 			((t_proc *)(tmp->content))->live = 0;
 		tmp = tmp->next;
