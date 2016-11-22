@@ -39,7 +39,7 @@ static int		create_array_process_map(t_dbllist *process_list, int process_map[])
 	return (0);
 }
 
-int 	print_board(WINDOW *gauche, t_dbllist *process_list, unsigned char *board)
+int		print_board(WINDOW *gauche, t_dbllist *process_list, unsigned char *board)
 {
 	int		i;
 	int		j;
