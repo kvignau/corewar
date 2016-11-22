@@ -20,6 +20,10 @@ int	valid_options(t_var *var, t_options *options, t_dbllist *champ_list)
 		options->verbose = 1;
 	else if (var->str[0] == 'c')
 		options->cycle = 1;
+	else if (var->str[0] == 'a')
+		options->aff = 1;
+	else if (var->str[0] == 'N')
+		options->ncurse = 1;
 	else if (var->str[0] == 'd' || var->str[0] == 'n')
 	{
 		if (!var->argv[var->i + 1] || !var->argv[var->i + 2])
@@ -40,15 +44,7 @@ int	valid_options(t_var *var, t_options *options, t_dbllist *champ_list)
 			options->bool_vm_number = 0;
 		}
 	}
-	else if (var->str[0] == 'N')
-	{
-		options->ncurse = 1;
-		options->stealth = 1;
-		options->verbose = 1;
-		options->cycle = 0;
-		options->bool_dump = 0;
-		options->bool_vm_number = 0;
-	}
+
 	else if (var->str[0] != '\0' || var->error == 0)
 		return (0);
 	return (1);

@@ -77,7 +77,14 @@ int		main(int argc, char **argv)
 	core.end = -1;
 	intro(champ_list);
 	init_board(champ_list, process_list, &core);
-	if (options.ncurse == 1){
+	if (options.ncurse == 1)
+	{
+		core.options.stealth = 1;
+		core.options.aff = 1;
+		core.options.verbose = 0;
+		core.options.cycle = 0;
+		core.options.bool_dump = 0;
+		core.options.bool_vm_number = 0;
 		set_up_ncurses(&core);
 	}
 	// tmp2 = champ_list->head;
@@ -124,8 +131,8 @@ int		main(int argc, char **argv)
 		core.era_cycles += 1;
 		if (options.ncurse == 1){
 			print_board(&core, process_list, core.board);
-			mvwprintw(core.windows[1], 1, 2, "nb proc: %d   :)", process_list->length);	
-			mvwprintw(core.windows[1], 2, 2, "delay_cycle: %d   :D", core.delay_cycle);	
+			mvwprintw(core.windows[1], 1, 2, "nb proc: %d   :)", process_list->length);
+			mvwprintw(core.windows[1], 2, 2, "delay_cycle: %d   :D", core.delay_cycle);
 			wrefresh(core.windows[1]);
 		}
 		if (core.end == 0)
