@@ -20,6 +20,8 @@ int	valid_options(t_var *var, t_options *options, t_dbllist *champ_list)
 			options->verbose = 1;
 	else if (var->str[0] == 'c')
 			options->cycle = 1;
+	else if (var->str[0] == 'N')
+			options->ncurse = 1;
 	else if (var->str[0] == 'd' || var->str[0] == 'n')
 	{
 		if (!var->argv[var->i + 1] || !var->argv[var->i + 2])
