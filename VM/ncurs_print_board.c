@@ -19,11 +19,11 @@ static int		create_array_process_map(t_dbllist *process_list, int process_map[])
 	int			i;
 
 	// ft_bzero(process_map, 16384); pas compris pk 16384 et pas 4096 comme si dessous
+	i = -1;
 	while (++i < 4096)
 	{
 		process_map[i] = 0;
 	}
-	i = -1;
 	if (!process_list || !(process_list->head))
 		return (-1);
 
@@ -39,13 +39,15 @@ static int		create_array_process_map(t_dbllist *process_list, int process_map[])
 	return (0);
 }
 
-int		print_board(WINDOW *gauche, t_dbllist *process_list, unsigned char *board)
+int		print_board(t_cor *core, t_dbllist *process_list, unsigned char *board)
 {
 	int		i;
 	int		j;
 	int		process_map[4096];
 	int		nb_process_to_diplay;
+	WINDOW	*gauche;
 
+	gauche = core->windows[0];
 	create_array_process_map(process_list, process_map);
 	i = -1;
 	while (++i < 64)
@@ -61,7 +63,25 @@ int		print_board(WINDOW *gauche, t_dbllist *process_list, unsigned char *board)
 	}
 	wrefresh(gauche);
 
-	getch();// stop le programme et attend un input user pour continuer
+	if (getch() == ' ')// stop le programme et attend un input user pour continuer
+	{
+		timeout(-1);
+		while (getch() != ' ')
+			;
+		timeout(core->delay_cycle);
+	}
+	else if (getch() == 'r')
+	{
+		mvwprintw(core->windows[1], 3, 2, "bonjour");
+		core->delay_cycle += 10;
+	}
+	else if (getch() == 'q' && core->delay_cycle > 0)
+	{
+		core->delay_cycle -= 10;
+		if (core->delay_cycle < 0)
+			core->delay_cycle = 0;
+	}
+
 
 	return (0);
 }

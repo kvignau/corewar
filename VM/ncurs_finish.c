@@ -12,10 +12,10 @@
 
 #include "corewar.h"
 
-int		ncurs_finish(WINDOW *windows[])
+int		ncurs_finish(t_cor *core)
 {
 	endwin();
-	free(windows[0]);
-	free(windows[1]);
+	free(core->windows[0]);
+	free(core->windows[1]);
 	return (0);
 }

@@ -51,6 +51,7 @@ typedef struct		s_cor
 	int				new_era;
 	int				end;
 	WINDOW			*windows[2];
+	int				delay_cycle;
 }					t_cor;
 typedef struct		s_champ
 {
@@ -161,9 +162,9 @@ void			cmd_aff(unsigned char *board, t_proc *c_proc, t_cor *core);
 **********************  Ncurses **********************
 */
 
-int				set_up_ncurses(WINDOW *windows[]);
-int 			print_board(WINDOW *gauche, t_dbllist *process_list, unsigned char *board);
-int				ncurs_finish(WINDOW *windows[]);
+int				set_up_ncurses(t_cor *core);
+int 			print_board(t_cor *core, t_dbllist *process_list, unsigned char *board);
+int				ncurs_finish(t_cor *core);
 
 
 #endif
