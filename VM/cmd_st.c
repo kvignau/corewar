@@ -34,7 +34,7 @@ static void		reg_ind(unsigned char *board, t_proc *c_proc, int verbose)
 
 	id = bit_cat(board, c_proc, 3, 2);
 	reg_nb = (int)((board[(c_proc->i + 2) % MEM_SIZE] - 1));
-	if (reg_nb <= REG_NUMBER || reg_nb >= 0)
+	if (reg_nb < REG_NUMBER || reg_nb >= 0)
 	{
 		if (verbose == 1)
 			cmd_verbose_st(c_proc->pid, reg_nb + 1, (short int)id);
@@ -49,7 +49,7 @@ static void		reg_reg(unsigned char *board, t_proc *c_proc, int verbose)
 
 	reg_nb = (int)(board[(c_proc->i + 3) % MEM_SIZE]) - 1;
 	reg_nb2 = (int)(board[(c_proc->i + 2) % MEM_SIZE]) - 1;
-	if (reg_nb <= REG_NUMBER || reg_nb >= 0 || reg_nb2 <= REG_NUMBER || reg_nb2 >= 0)
+	if (reg_nb < REG_NUMBER || reg_nb >= 0 || reg_nb2 < REG_NUMBER || reg_nb2 >= 0)
 	{
 		if (verbose == 1)
 			cmd_verbose_st(c_proc->pid, reg_nb2 + 1, reg_nb + 1);

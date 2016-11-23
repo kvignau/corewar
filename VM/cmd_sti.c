@@ -95,6 +95,7 @@ void					cmd_sti(unsigned char *board, t_proc *c_proc, t_cor *core)
 	cmd_size = 0;
 	if (c_proc->ctp == 25)
 	{
+		cmd_size = get_cmd_size(get_type(board, c_proc), 2, 3);
 		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x68)
 			add = add_ind_ind(board, c_proc, core->options.verbose, &reg_nb);
 		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0x58)
@@ -108,15 +109,10 @@ void					cmd_sti(unsigned char *board, t_proc *c_proc, t_cor *core)
 		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0x78)
 			add = add_dir_ind(board, c_proc, core->options.verbose, &reg_nb);
 		if (oct_codageok(board, c_proc))
-		{
-			cmd_size = get_cmd_size(get_type(board, c_proc), 2, 3);
 			sti_result(board, c_proc, reg_nb, add);
-			if (core->options.verbose == 1)
-				cmd_verbose(board, c_proc, cmd_size);
-			next_pc(cmd_size, c_proc, board);
-		}
-		else
-			next_pc(get_cmd_size(get_type(board, c_proc), 2, 3), c_proc, board);
+		if (core->options.verbose == 1)
+			cmd_verbose(board, c_proc, cmd_size);
+		next_pc(cmd_size, c_proc, board);
 		c_proc->ctp = 1;
 	}
 	else
