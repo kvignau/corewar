@@ -80,6 +80,7 @@ typedef struct		s_proc
 	int				live;
 	int				pid;
 	int				last_lived;
+	unsigned char	c_cmd;
 }					t_proc;
 
 /*
