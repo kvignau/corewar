@@ -28,7 +28,10 @@ static void	set_new_era(t_cor *core, t_dbllist *pr_list)
 	}
 		if (core->options.verbose == 1)
 	{
-		ft_printf("Cycle to die is now %d\n", core->cycles_to_die);
+		write(1, "Cycle to die is now ", 20);
+		ft_putnbr(core->cycles_to_die);
+		write(1, "\n", 1);
+		// ft_printf("Cycle to die is now %d\n", core->cycles_to_die);
 	}
 }
 
@@ -92,7 +95,12 @@ int		main(int argc, char **argv)
 	while (1)
 	{
 		if (core.options.cycle == 1 && core.cycles != 0)
-			ft_printf("It is now cycle %d\n", core.cycles);
+		{
+			write(1, "It is now cycle ", 16);
+			ft_putnbr(core.cycles);
+			write(1, "\n", 1);
+			// ft_printf("It is now cycle %d\n", core.cycles);
+		}
 		// ft_printf("core_cycles [%d]  ", core.cycles);
 		tmp = process_list->head;
 		while (tmp != NULL)

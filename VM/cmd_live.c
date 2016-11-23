@@ -51,7 +51,9 @@ void			cmd_live(unsigned char *board, t_proc *c_proc, t_cor *core,
 		}
 		if (core->options.verbose == 1)
 		{
-			ft_printf("P% 5d | live %d\n", c_proc->pid, vm_num_live);
+			cmd_verbose_zjmp_live("live", c_proc->pid, vm_num_live);
+			write(1, "\n", 1);
+			// ft_printf("P% 5d | live %d\n", c_proc->pid, vm_num_live);
 			cmd_verbose(board, c_proc, 5);
 		}
 		next_pc(5 ,c_proc, board);

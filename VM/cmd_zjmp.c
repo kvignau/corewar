@@ -14,26 +14,30 @@
 
 void	cmd_zjmp(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
-	unsigned int	id;
+	short int	id;
 
 	if (c_proc->ctp == 20)
 	{
+		id = bit_cat(board, c_proc, 1, 2);
 		if (c_proc->carry == 1)
 		{
-			id = bit_cat(board, c_proc, 1, 2);
-			c_proc->i = (c_proc->i + ((short int)id % IDX_MOD)) % MEM_SIZE;
+			c_proc->i = (c_proc->i + (id % IDX_MOD)) % MEM_SIZE;
 			c_proc->pc = &board[c_proc->i];
 		}
-		else
-			next_pc(3, c_proc, board);
 		if (core->options.verbose == 1)
 		{
-			ft_printf("P% 5d | zjmp %d", c_proc->pid, (short int)id);
+			cmd_verbose_zjmp_live("zjmp", c_proc->pid, id);
 			if (c_proc->carry == 1)
-				ft_printf(" OK\n");
+				write(1, " OK\n", 4);
 			else
-				ft_printf(" FAILED\n");
+				write(1, " FAILED\n", 8);
 		}
+		if (c_proc->carry == 0)
+		{
+			cmd_verbose(board, c_proc, 3);
+			next_pc(3, c_proc, board);
+		}
+
 		c_proc->ctp = 1;
 	}
 	else

@@ -98,6 +98,9 @@ int			options_checkers(int argc, char **argv, t_options *options,
 	t_dbllist *champ_list);
 void		cmd_verbose(unsigned char *board, t_proc *c_proc, int offset);
 void		cmd_verbose_sti(unsigned char *board, t_proc *c_proc, int p1, int p2);
+void		cmd_verbose_st(int pid, int reg_nb, int id);
+void		cmd_verbose_ld(int pid, int reg_nb, int id);
+void		cmd_verbose_zjmp_live(char *cmd, int pid, int id);
 
 /*
 **********************  Checkers  **********************

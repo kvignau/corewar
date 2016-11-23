@@ -37,8 +37,7 @@ static void		reg_ind(unsigned char *board, t_proc *c_proc, int verbose)
 	if (reg_nb <= REG_NUMBER || reg_nb >= 0)
 	{
 		if (verbose == 1)
-			ft_printf("P% 5d | st r%d %d\n", c_proc->pid, reg_nb + 1,
-				(short int)id);
+			cmd_verbose_st(c_proc->pid, reg_nb + 1, (short int)id);
 		result_st(board, c_proc, reg_nb, id);
 	}
 }
@@ -53,8 +52,7 @@ static void		reg_reg(unsigned char *board, t_proc *c_proc, int verbose)
 	if (reg_nb <= REG_NUMBER || reg_nb >= 0 || reg_nb2 <= REG_NUMBER || reg_nb2 >= 0)
 	{
 		if (verbose == 1)
-		ft_printf("P% 5d | st r%d %d\n", c_proc->pid, reg_nb2 + 1,
-			reg_nb + 1);
+			cmd_verbose_st(c_proc->pid, reg_nb2 + 1, reg_nb + 1);
 		c_proc->r[reg_nb] = c_proc->r[reg_nb2];
 	}
 }
