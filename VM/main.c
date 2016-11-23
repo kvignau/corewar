@@ -139,9 +139,6 @@ int		main(int argc, char **argv)
 		core.era_cycles += 1;
 		if (options.ncurse == 1){
 			print_board(&core, process_list, core.board);
-			mvwprintw(core.windows[1], 1, 2, "nb proc: %d   :)", process_list->length);
-			mvwprintw(core.windows[1], 2, 2, "delay_cycle: %d   :D", core.delay_cycle);
-			wrefresh(core.windows[1]);
 		}
 		if (core.end == 0)
 			break ;

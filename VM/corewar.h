@@ -52,7 +52,8 @@ typedef struct		s_cor
 	int				new_era;
 	int				end;
 	WINDOW			*windows[2];
-	int				delay_cycle;
+	int				cycle_frequency;
+	int				u_delta_sleep;
 }					t_cor;
 typedef struct		s_champ
 {

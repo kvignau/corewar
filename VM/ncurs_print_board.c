@@ -12,13 +12,47 @@
 
 #include "corewar.h"
 
+static int		print_menu(t_cor *core, t_dbllist *process_list)
+{
+	mvwprintw(core->windows[1], 1, 2, "nb proc: %d   :)", process_list->length);
+	mvwprintw(core->windows[1], 2, 2, "cycle_frequency: %d   :D", core->cycle_frequency);
+	wrefresh(core->windows[1]);
+	return (0);
+}
+
+static int		handle_cycle_celerity(char c_input, t_cor *core)
+{
+	if (c_input == 'r')
+	{
+		core->cycle_frequency += 10;
+	}
+	else if (c_input == 'e')
+	{
+		core->cycle_frequency += 1;
+	}
+	else if (c_input == 'w' && core->cycle_frequency > 1)
+	{
+		core->cycle_frequency -= 1;
+		if (core->cycle_frequency < 1)
+			core->cycle_frequency = 1;
+	}
+	else if (c_input == 'q' && core->cycle_frequency > 1)
+	{
+		core->cycle_frequency -= 10;
+		if (core->cycle_frequency < 1)
+			core->cycle_frequency = 1;
+	}
+	core->u_delta_sleep = 1000000 / core->cycle_frequency;
+	flushinp();
+	return (0);
+}
+
 static int		create_array_process_map(t_dbllist *process_list, int process_map[])
 {
 	t_elem		*current_node;
 	t_proc		*node_proc;
 	int			i;
 
-	// ft_bzero(process_map, 16384); pas compris pk 16384 et pas 4096 comme si dessous
 	i = -1;
 	while (++i < 4096)
 	{
@@ -67,23 +101,22 @@ int		print_board(t_cor *core, t_dbllist *process_list, unsigned char *board)
 	if ((c = getch()) == ' ')
 	{
 		timeout(-1);
-		while (getch() != ' ')
-			;
-		timeout(core->delay_cycle);
+		while ((c = getch()) != ' ')
+		{
+			handle_cycle_celerity(c, core);
+			print_menu(core, process_list);
+		}
+		timeout(0);
 	}
-	else if (c == 'r')
-	{
-		core->delay_cycle += 10;
-		timeout(core->delay_cycle);
-	}
-	else if (c == 'q' && core->delay_cycle > 0)
-	{
-		core->delay_cycle -= 10;
-		if (core->delay_cycle < 0)
-			core->delay_cycle = 0;
-		timeout(core->delay_cycle);
-	}
+	else
+		handle_cycle_celerity(c, core);
+	print_menu(core, process_list);
 
-
+	usleep(core->u_delta_sleep);
 	return (0);
 }
+
+
+
+
+
