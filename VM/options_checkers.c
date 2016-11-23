@@ -44,7 +44,6 @@ int	valid_options(t_var *var, t_options *options, t_dbllist *champ_list)
 			options->bool_vm_number = 0;
 		}
 	}
-
 	else if (var->str[0] != '\0' || var->error == 0)
 		return (0);
 	return (1);

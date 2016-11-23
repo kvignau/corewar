@@ -45,10 +45,8 @@ void			cmd_live(unsigned char *board, t_proc *c_proc, t_cor *core,
 		core->era_lives_counter += 1;
 		vm_num_live = bit_cat(board, c_proc, 1, 4);
 		if (check_vm_number_exist(tmp, vm_num_live, core) == 1)
-		{
 			core->last_live = vm_num_live;
-			c_proc->last_lived = 0;
-		}
+		c_proc->last_lived = 0;
 		if (core->options.verbose == 1)
 		{
 			cmd_verbose_zjmp_live("live", c_proc->pid, vm_num_live);
