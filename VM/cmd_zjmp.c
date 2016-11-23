@@ -37,7 +37,7 @@ void	cmd_zjmp(unsigned char *board, t_proc *c_proc, t_cor *core)
 			cmd_verbose(board, c_proc, 3);
 			next_pc(3, c_proc, board);
 		}
-
+		c_proc->c_cmd = 0;
 		c_proc->ctp = 1;
 	}
 	else

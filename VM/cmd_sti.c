@@ -112,6 +112,7 @@ void					cmd_sti(unsigned char *board, t_proc *c_proc, t_cor *core)
 			sti_result(board, c_proc, reg_nb, add);
 		if (core->options.verbose == 1)
 			cmd_verbose(board, c_proc, cmd_size);
+		c_proc->c_cmd = 0;
 		next_pc(cmd_size, c_proc, board);
 		c_proc->ctp = 1;
 	}

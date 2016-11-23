@@ -30,6 +30,7 @@ void	cmd_aff(unsigned char *board, t_proc *c_proc, t_cor *core)
 			if (core->options.aff == 0)
 				write(1, &c_proc->r[reg_nb], 1);
 		}
+		c_proc->c_cmd = 0;
 		next_pc(get_cmd_size(get_type(board, c_proc), 4, 1), c_proc, board);
 		c_proc->ctp = 1;
 	}

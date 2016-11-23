@@ -38,7 +38,7 @@ void			cmd_live(unsigned char *board, t_proc *c_proc, t_cor *core,
 	t_elem			*tmp;
 	unsigned int	vm_num_live;
 
- if (c_proc->ctp == 10)
+	if (c_proc->ctp == 10)
 	{
 		tmp = ch_list->head;
 		c_proc->live = 1;
@@ -54,6 +54,7 @@ void			cmd_live(unsigned char *board, t_proc *c_proc, t_cor *core,
 			// ft_printf("P% 5d | live %d\n", c_proc->pid, vm_num_live);
 			cmd_verbose(board, c_proc, 5);
 		}
+		c_proc->c_cmd = 0;
 		next_pc(5 ,c_proc, board);
 		c_proc->ctp = 1;
 	}
