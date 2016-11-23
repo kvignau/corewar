@@ -16,6 +16,7 @@ static int		print_menu(t_cor *core, t_dbllist *process_list)
 {
 	mvwprintw(core->windows[1], 1, 2, "nb proc: %d   :)", process_list->length);
 	mvwprintw(core->windows[1], 2, 2, "cycle_frequency: %d   :D", core->cycle_frequency);
+	mvwprintw(core->windows[1], 3, 2, "nb_cycles_achieved: %d  :X", core->nb_cycles_achieved);
 	wrefresh(core->windows[1]);
 	return (0);
 }
@@ -111,7 +112,7 @@ int		print_board(t_cor *core, t_dbllist *process_list, unsigned char *board)
 	else
 		handle_cycle_celerity(c, core);
 	print_menu(core, process_list);
-
+	core->nb_cycles_achieved += 1;
 	usleep(core->u_delta_sleep);
 	return (0);
 }

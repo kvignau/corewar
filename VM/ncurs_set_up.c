@@ -38,5 +38,6 @@ int		set_up_ncurses(t_cor *core)
 	core->windows[1] = droite;
 	core->u_delta_sleep = 0;
 	core->cycle_frequency = 1;
+	core->nb_cycles_achieved = 0;
 	return (0);
 }
