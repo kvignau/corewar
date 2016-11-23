@@ -46,6 +46,7 @@ int		print_board(t_cor *core, t_dbllist *process_list, unsigned char *board)
 	int		process_map[4096];
 	int		nb_process_to_diplay;
 	WINDOW	*gauche;
+	char	c;
 
 	gauche = core->windows[0];
 	create_array_process_map(process_list, process_map);
@@ -63,23 +64,24 @@ int		print_board(t_cor *core, t_dbllist *process_list, unsigned char *board)
 	}
 	wrefresh(gauche);
 
-	if (getch() == ' ')// stop le programme et attend un input user pour continuer
+	if ((c = getch()) == ' ')
 	{
 		timeout(-1);
 		while (getch() != ' ')
 			;
 		timeout(core->delay_cycle);
 	}
-	else if (getch() == 'r')
+	else if (c == 'r')
 	{
-		mvwprintw(core->windows[1], 3, 2, "bonjour");
 		core->delay_cycle += 10;
+		timeout(core->delay_cycle);
 	}
-	else if (getch() == 'q' && core->delay_cycle > 0)
+	else if (c == 'q' && core->delay_cycle > 0)
 	{
 		core->delay_cycle -= 10;
 		if (core->delay_cycle < 0)
 			core->delay_cycle = 0;
+		timeout(core->delay_cycle);
 	}
 
 

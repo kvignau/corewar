@@ -27,6 +27,7 @@ int		set_up_ncurses(t_cor *core)
 
 	initscr();
 	noecho();
+	cbreak();
 	curs_set(0);
 	timeout(0);
 	core->delay_cycle = 0;//rend le getch non bloquant si si
