@@ -60,9 +60,8 @@ int		main(int argc, char **argv)
 	t_dbllist		*champ_list;
 	t_dbllist		*process_list;
 	t_elem			*tmp;
-
-
 	t_elem			*tmp2;
+	int				i;
 
 	ft_bzero(&core, sizeof(t_cor));
 	ft_bzero(&options, sizeof(t_options));
@@ -78,6 +77,9 @@ int		main(int argc, char **argv)
 	core.era_cycles = 0;
 	core.cycles = 0;
 	core.end = -1;
+	i = -1;
+	while (++i < 4096)
+		core.color_map[i] = 0;
 	intro(champ_list);
 	init_board(champ_list, process_list, &core);
 	if (options.ncurse == 1)
@@ -92,6 +94,7 @@ int		main(int argc, char **argv)
 	}
 	// tmp2 = champ_list->head;
 	// ft_printf("champ:[0], name:[%s] nb: [%d]\n", (((t_champ *)(tmp2->content))->name),(((t_champ *)(tmp2->content))->vm_number));
+	
 	while (1)
 	{
 		if (core.options.cycle == 1 && core.cycles != 0)

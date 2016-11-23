@@ -55,6 +55,8 @@ typedef struct		s_cor
 	int				cycle_frequency;
 	int				u_delta_sleep;
 	int				nb_cycles_achieved;
+	int				process_map[4096];
+	int				color_map[4096];
 }					t_cor;
 typedef struct		s_champ
 {
@@ -83,6 +85,7 @@ typedef struct		s_proc
 	int				pid;
 	int				last_lived;
 	unsigned char	c_cmd;
+	int				color;
 }					t_proc;
 
 /*
@@ -156,7 +159,7 @@ void			cmd_xor(unsigned char *board, t_proc *c_proc, t_cor *core);
 void			cmd_zjmp(unsigned char *board, t_proc *c_proc, t_cor *core);
 void			cmd_ldi(unsigned char *board, t_proc *c_proc, t_cor *core);
 void			cmd_sti(unsigned char *board, t_proc *c_proc, t_cor *core);
-void			sti_result(unsigned char *board, t_proc *c_proc, int reg_nb, unsigned int result);
+void			sti_result(unsigned char *board, t_proc *c_proc, int reg_nb, unsigned int result, t_cor *core);
 int				add_ind_reg(unsigned char *board, t_proc *c_proc, int v, int *reg_nb);
 int				add_reg_reg(unsigned char *board, t_proc *c_proc, int v, int *reg_nb);
 void			cmd_fork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list, t_cor *core);

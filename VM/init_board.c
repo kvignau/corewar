@@ -33,11 +33,13 @@ static void	content_to_board(t_elem *champ, t_cor *core,
 		str[0] = (((t_champ *)(champ->content))->content[j]);
 		str[1] = (((t_champ *)(champ->content))->content[j + 1]);
 		core->board[i] = (unsigned char)ft_hextoi(str);
+		core->color_map[i] = ((t_champ *)(champ->content))->id;
 		j += 2;
 		i += 1;
 	}
 	proc->r[0] = (((t_champ *)(champ->content))->vm_number);
 	proc->pid = core->pid;
+	proc->color = ((t_champ *)(champ->content))->id;
 }
 
 void		init_board(t_dbllist *ch_list, t_dbllist *pr_list, t_cor *core)

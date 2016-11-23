@@ -32,6 +32,7 @@ void		cmd_lfork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list, t_cor 
 		((t_proc *)(tmp->content))->i = (c_proc->i + (value));
 		((t_proc *)(tmp->content))->ctp = 1;
 		((t_proc *)(tmp->content))->c_cmd = 0;
+		((t_proc *)(tmp->content))->color = c_proc->color;
 		core->pid += 1;
 		((t_proc *)(tmp->content))->pid = core->pid;
 		c_proc->c_cmd = 0;
