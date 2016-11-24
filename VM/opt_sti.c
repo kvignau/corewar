@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-void					sti_result(unsigned char *board, t_proc *c_proc, int reg_nb, unsigned int add)
+void					sti_result(unsigned char *board, t_proc *c_proc, int reg_nb, unsigned int add, t_cor *core)
 {
 	int					i;
 	unsigned int		result;
@@ -23,6 +23,7 @@ void					sti_result(unsigned char *board, t_proc *c_proc, int reg_nb, unsigned i
 	while (i < REG_SIZE)
 	{
 		board[(c_proc->i + (add + i)) % MEM_SIZE] = result;
+		core->color_map[(c_proc->i + (add + i)) % MEM_SIZE] = c_proc->color;
 		result = c_proc->r[reg_nb] >> ((8 * (REG_SIZE - 1)) - (8 * (i + 1)));
 		i++;
 	}

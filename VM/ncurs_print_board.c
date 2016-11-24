@@ -14,10 +14,13 @@
 
 static int		print_menu(t_cor *core, t_dbllist *process_list)
 {
+	// attron(A_NORMAL);
+	wattron(core->windows[1], A_BOLD);
 	mvwprintw(core->windows[1], 1, 2, "nb proc: %d   :)", process_list->length);
 	mvwprintw(core->windows[1], 2, 2, "cycle_frequency: %d   :D", core->cycle_frequency);
 	mvwprintw(core->windows[1], 3, 2, "nb_cycles_achieved: %d  :X", core->nb_cycles_achieved);
 	wrefresh(core->windows[1]);
+	wattroff(core->windows[1], A_BOLD);
 	return (0);
 }
 
@@ -64,11 +67,11 @@ static int		create_array_process_map(t_dbllist *process_list, int process_map[])
 
 	current_node = process_list->head;
 	i = -1;
-	while (current_node)
+	while (current_node != NULL)
 	{
-		if (!(node_proc = current_node->content))
+		if ((node_proc = current_node->content) == NULL)
 			return (-1);
-		process_map[node_proc->i] = 1;
+		process_map[node_proc->i % 4096] = 1;
 		current_node = current_node->next;
 	}
 	return (0);
@@ -78,23 +81,27 @@ int		print_board(t_cor *core, t_dbllist *process_list, unsigned char *board)
 {
 	int		i;
 	int		j;
-	int		process_map[4096];
+	// int		process_map[4096];
 	int		nb_process_to_diplay;
 	WINDOW	*gauche;
 	char	c;
 
 	gauche = core->windows[0];
-	create_array_process_map(process_list, process_map);
+	create_array_process_map(process_list, core->process_map);
 	i = -1;
 	while (++i < 64)
 	{
 		j = -1;
 		while (++j < 64)
 		{
-			if (process_map[i * 64 + j])
+			if (core->process_map[i * 64 + j])
 				wattron(gauche, A_STANDOUT);
+			if (core->color_map[i * 64 + j])
+				wattron(gauche, COLOR_PAIR(core->color_map[i * 64 + j]));
 			mvwprintw(gauche, 1 + i, 2 + (j * 3), "%.2x", board[i * 64 + j]);
 			wattroff(gauche, A_STANDOUT);
+			wattroff(gauche, COLOR_PAIR(core->color_map[i * 64 + j]));
+			attron(A_NORMAL);
 		}
 	}
 	wrefresh(gauche);

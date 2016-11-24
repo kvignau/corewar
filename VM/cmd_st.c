@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-static void		result_st(unsigned char *board, t_proc *c_proc, int reg_nb, short int id)
+static void		result_st(unsigned char *board, t_proc *c_proc, int reg_nb, short int id, t_cor *core)
 {
 	int				i;
 	unsigned int	result;
@@ -22,12 +22,13 @@ static void		result_st(unsigned char *board, t_proc *c_proc, int reg_nb, short i
 	while (i < REG_SIZE)
 	{
 		board[(c_proc->i + ((unsigned int)(id % IDX_MOD) + i)) % MEM_SIZE] = result;
+		core->color_map[(c_proc->i + ((unsigned int)(id % IDX_MOD) + i)) % MEM_SIZE] = c_proc->color;
 		result = c_proc->r[reg_nb] >> (24 - (8 * (i + 1)));
 		i++;
 	}
 }
 
-static void		reg_ind(unsigned char *board, t_proc *c_proc, int verbose)
+static void		reg_ind(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
 	short int		id;
 	int				reg_nb;
@@ -36,9 +37,9 @@ static void		reg_ind(unsigned char *board, t_proc *c_proc, int verbose)
 	reg_nb = (int)((board[(c_proc->i + 2) % MEM_SIZE] - 1));
 	if (reg_nb < REG_NUMBER && reg_nb >= 0)
 	{
-		if (verbose == 1)
+		if (core->options.verbose == 1)
 			cmd_verbose_st(c_proc->pid, reg_nb + 1, id);
-		result_st(board, c_proc, reg_nb, id);
+		result_st(board, c_proc, reg_nb, id, core);
 	}
 }
 
@@ -65,7 +66,7 @@ void	cmd_st(unsigned char *board, t_proc *c_proc, t_cor *core)
 	{
 		cmd_size = get_cmd_size(get_type(board, c_proc), 4, 2);
 		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x70)
-			reg_ind(board, c_proc, core->options.verbose);
+			reg_ind(board, c_proc, core);
 		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0x50)
 			reg_reg(board, c_proc, core->options.verbose);
 		c_proc->c_cmd = 0;
