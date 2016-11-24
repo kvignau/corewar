@@ -149,6 +149,8 @@ int		main(int argc, char **argv)
 		if (core.end == 0)
 			break ;
 	}
+	if (options.ncurse == 1)
+		ncurs_finish(&core);
 	check_winner(&core, champ_list);
 	// ft_print_memory(core.board, MEM_SIZE);
 	/*while (tmp != NULL && tmp2 != NULL)
@@ -180,7 +182,6 @@ int		main(int argc, char **argv)
 	tmp2 = process_list->head->next;
 	ft_printf("size after : %d\n", process_list->length);*/
 	// ft_print_memory(core.board, MEM_SIZE);
-	if (options.ncurse == 1)
-		ncurs_finish(&core);
+
 	return (0);
 }
