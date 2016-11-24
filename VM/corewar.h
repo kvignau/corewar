@@ -159,7 +159,7 @@ void			cmd_xor(unsigned char *board, t_proc *c_proc, t_cor *core);
 void			cmd_zjmp(unsigned char *board, t_proc *c_proc, t_cor *core);
 void			cmd_ldi(unsigned char *board, t_proc *c_proc, t_cor *core);
 void			cmd_sti(unsigned char *board, t_proc *c_proc, t_cor *core);
-void			sti_result(unsigned char *board, t_proc *c_proc, int reg_nb, unsigned int result, t_cor *core);
+void			sti_result(t_cor *core, t_proc *c_proc, int reg_nb, unsigned int add);
 int				add_ind_reg(unsigned char *board, t_proc *c_proc, int v, int *reg_nb);
 int				add_reg_reg(unsigned char *board, t_proc *c_proc, int v, int *reg_nb);
 void			cmd_fork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list, t_cor *core);

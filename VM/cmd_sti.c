@@ -109,7 +109,7 @@ void					cmd_sti(unsigned char *board, t_proc *c_proc, t_cor *core)
 		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0x78)
 			add = add_dir_ind(board, c_proc, core->options.verbose, &reg_nb);
 		if (oct_codageok(board, c_proc))
-			sti_result(board, c_proc, reg_nb, add, core);
+			sti_result(core, c_proc, reg_nb, add);
 		if (core->options.verbose == 1)
 			cmd_verbose(board, c_proc, cmd_size);
 		c_proc->c_cmd = 0;

@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-static void		result_st(unsigned char *board, t_proc *c_proc, int reg_nb, short int id, t_cor *core)
+static void		result_st(t_cor *core, t_proc *c_proc, int reg_nb, short int id)
 {
 	int				i;
 	unsigned int	result;
@@ -21,7 +21,7 @@ static void		result_st(unsigned char *board, t_proc *c_proc, int reg_nb, short i
 	result = c_proc->r[reg_nb] >> 24;
 	while (i < REG_SIZE)
 	{
-		board[(c_proc->i + ((unsigned int)(id % IDX_MOD) + i)) % MEM_SIZE] = result;
+		core->board[(c_proc->i + ((unsigned int)(id % IDX_MOD) + i)) % MEM_SIZE] = result;
 		core->color_map[(c_proc->i + ((unsigned int)(id % IDX_MOD) + i)) % MEM_SIZE] = c_proc->color;
 		result = c_proc->r[reg_nb] >> (24 - (8 * (i + 1)));
 		i++;
@@ -39,7 +39,7 @@ static void		reg_ind(unsigned char *board, t_proc *c_proc, t_cor *core)
 	{
 		if (core->options.verbose == 1)
 			cmd_verbose_st(c_proc->pid, reg_nb + 1, id);
-		result_st(board, c_proc, reg_nb, id, core);
+		result_st(core, c_proc, reg_nb, id);
 	}
 }
 
