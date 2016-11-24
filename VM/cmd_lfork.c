@@ -15,7 +15,7 @@
 void		cmd_lfork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list, t_cor *core)
 {
 	short int		value;
-	t_elem				*tmp;
+	t_elem			*tmp;
 
 	if (c_proc->ctp == 1000)
 	{
@@ -25,7 +25,7 @@ void		cmd_lfork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list, t_cor 
 		if (core->options.verbose == 1)
 		{
 			ft_printf("P% 5d | lfork %d (%d)\n", c_proc->pid, value,
-				(c_proc->i + value) % MEM_SIZE);
+				(c_proc->i + value));
 			cmd_verbose(board, c_proc, 3);
 		}
 		((t_proc *)(tmp->content))->pc = (c_proc->pc + (value));

@@ -61,7 +61,7 @@ static void		reg_reg(unsigned char *board, t_proc *c_proc, int verbose)
 void	cmd_st(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
 	int				cmd_size;
-	
+
 	if (c_proc->ctp == 5)
 	{
 		cmd_size = get_cmd_size(get_type(board, c_proc), 4, 2);

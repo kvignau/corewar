@@ -12,40 +12,60 @@
 
 #include "corewar.h"
 
-void	cmd_lld(unsigned char *board, t_proc *c_proc, t_cor *core)
+static int	dir_reg(t_cor *core, unsigned char *board, t_proc *c_proc)
 {
 	unsigned int	id;
+	int				reg_nb;
+
+	id = bit_cat(board, c_proc, 2, 4);
+	reg_nb = (int)((board[(c_proc->i + 6) % MEM_SIZE] - 1));
+	if (reg_nb <= 15 && reg_nb >= 0)
+	{
+		c_proc->r[reg_nb] = id;
+		if (id % MEM_SIZE == 0)
+			c_proc->carry = 1;
+		else
+			c_proc->carry = 0;
+	}
+	return(reg_nb);
+}
+
+static int	ind_reg(t_cor *core, unsigned char *board, t_proc *c_proc)
+{
+	unsigned int	id;
+	int				reg_nb;
+
+	id = bit_cat(board, c_proc, 2, 2);
+	reg_nb = (int)((board[(c_proc->i + 4) % MEM_SIZE] - 1));
+	if (reg_nb <= 15 && reg_nb >= 0)
+	{
+		if (id % MEM_SIZE == 1)
+			c_proc->r[reg_nb] = (bit_cat(board, c_proc, id, 2) | 0xffff0000);
+		else
+			c_proc->r[reg_nb] = bit_cat(board, c_proc, id, 2);
+		if (id % MEM_SIZE == 0)
+			c_proc->carry = 1;
+		else
+			c_proc->carry = 0;
+	}
+	return(reg_nb);
+}
+
+void	cmd_lld(unsigned char *board, t_proc *c_proc, t_cor *core)
+{
 	int				reg_nb;
 
 	if (c_proc->ctp == 5)
 	{
 		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x90)
-		{
-			id = bit_cat(board, c_proc, 2, 4);
-			reg_nb = (int)((board[(c_proc->i + 6) % MEM_SIZE] - 1));
-			if (reg_nb > 15 || reg_nb < 0)
-				return ;
-			c_proc->r[reg_nb] = id;
-		}
+			reg_nb = dir_reg(core, board, c_proc);
 		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0xd0)
-		{
-			id = bit_cat(board, c_proc, 2, 2);
-			reg_nb = (int)((board[(c_proc->i + 4) % MEM_SIZE] - 1));
-			if (reg_nb > 15 || reg_nb < 0)
-				return ;
-			if (id % MEM_SIZE == 1)
-				c_proc->r[reg_nb] = (bit_cat(board, c_proc, id, 2) | 0xffff0000);
-			else
-				c_proc->r[reg_nb] = bit_cat(board, c_proc, id, 2);
-		}
-		if ((c_proc->i + id) % MEM_SIZE == 0)
-			c_proc->carry = 1;
-		else
-			c_proc->carry = 0;
+			reg_nb = ind_reg(core, board, c_proc);
 		c_proc->ctp = 1;
 		if (core->options.verbose == 1 &&
 			((board[(c_proc->i + 1) % MEM_SIZE] == 0xd0) ||
-			(board[(c_proc->i + 1) % MEM_SIZE] == 0x90)))
+			(board[(c_proc->i + 1) % MEM_SIZE] == 0x90)) &&
+			(reg_nb <= 15 && reg_nb >= 0))
 		{
 			ft_printf("P% 5d | lld %d r%d\n", c_proc->pid, c_proc->r[reg_nb],
 				reg_nb + 1);

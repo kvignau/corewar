@@ -15,14 +15,46 @@
 void			cmd_verbose(unsigned char *board, t_proc *c_proc, int offset)
 {
 	int				i;
+	int				j;
+	char			*hex1;
+	char			*hex2;
+	char			*hex3;
 
 	i = 0;
 	write(1, "ADV ", 4);
 	ft_putnbr(offset);
-	ft_printf(" (0x%.4x -> 0x%.4x) ", c_proc->i, (c_proc->i + offset));
+	write(1, " (0x", 4);
+	hex1 = ft_strtolower(ft_itoabase_imax(c_proc->i, 16));
+	hex2 = ft_strtolower(ft_itoabase_imax(c_proc->i + offset, 16));
+	while(i + ft_strlen(hex1) < 4)
+	{
+		write(1, "0", 1);
+		i++;
+	}
+	ft_putstr(hex1);
+	i = 0;
+	write(1, " -> 0x", 6);
+	while(i + ft_strlen(hex2) < 4)
+	{
+		write(1, "0", 1);
+		i++;
+	}
+	ft_putstr(hex2);
+	write(1, ") ", 2);
+	// ft_printf("%.4x -> 0x%.4x) ", c_proc->i, (c_proc->i + offset));
+	i = 0;
 	while (i < offset)
 	{
-		ft_printf("%.2x ", board[(c_proc->i + i) % MEM_SIZE]);
+		hex3 = ft_strtolower(ft_itoabase_imax(board[(c_proc->i + i) % MEM_SIZE], 16));
+		j = 0;
+		while (j + ft_strlen(hex3) < 2)
+		{
+			write(1, "0", 1);
+			j++;
+		}
+		ft_putstr(hex3);
+		write(1, " ", 1);
+		// ft_printf("%.2x ", board[(c_proc->i + i) % MEM_SIZE]);
 		i++;
 	}
 	write(1, "\n", 1);
@@ -52,7 +84,15 @@ void			cmd_verbose_sti(unsigned char *board, t_proc *c_proc, int p1, int p2)
 void			cmd_verbose_st(int pid, int reg_nb, int id)
 {
 	write(1, "P", 1);
-	ft_printf("% 5d", pid);
+	if (pid < 10)
+		write(1, " ", 1);
+	if (pid < 100)
+		write(1, " ", 1);
+	if (pid < 1000)
+		write(1, " ", 1);
+	if (pid < 10000)
+		write(1, " ", 1);
+	ft_putnbr(pid);
 	write(1, " | st r", 7);
 	ft_putnbr(reg_nb);
 	write(1, " ", 1);
@@ -73,14 +113,20 @@ void			cmd_verbose_ld(int pid, int reg_nb, int id)
 
 void			cmd_verbose_zjmp_live(char *cmd, int pid, int id)
 {
-	if (cmd)
-	{
 		write(1, "P", 1);
-		ft_printf("% 5d", pid);
+		if (pid < 10)
+			write(1, " ", 1);
+		if (pid < 100)
+			write(1, " ", 1);
+		if (pid < 1000)
+			write(1, " ", 1);
+		if (pid < 10000)
+			write(1, " ", 1);
+		ft_putnbr(pid);
+			// ft_printf("% 5d", pid);
 		write(1, " | ", 3);
 		write(1, cmd, 4);
 		write(1, " ", 1);
 		ft_putnbr(id);
-	}
 	// ft_printf("P% 5d | zjmp %d", c_proc->pid, (short int)id);
 }

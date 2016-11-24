@@ -14,8 +14,8 @@
 
 void		cmd_fork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list, t_cor *core)
 {
-	short int					value;
-	t_elem				*tmp;
+	short int	value;
+	t_elem		*tmp;
 
 	if (c_proc->ctp == 800)
 	{

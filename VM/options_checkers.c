@@ -60,6 +60,11 @@ int	options_checkers(int argc, char **argv, t_options *options,
 	var.error = -1;
 	while (var.i < argc)
 	{
+		if (champ_list->length >= 4)
+		{
+			ft_putstr("Please input a maximum of four champions.\n");
+			var.error = 0;
+		}
 		if (var.error == 0)
 			return (0);
 		if ((argv[var.i][0] == '-' && argv[var.i][1] && !argv[var.i][2]) &&

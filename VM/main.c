@@ -26,7 +26,7 @@ static void	set_new_era(t_cor *core, t_dbllist *pr_list)
 		((t_proc *)(tmp->content))->live = 0;
 		tmp = tmp->next;
 	}
-		if (core->options.verbose == 1)
+		if (core->options.cycle == 1)
 	{
 		write(1, "Cycle to die is now ", 20);
 		ft_putnbr(core->cycles_to_die);
@@ -94,7 +94,7 @@ int		main(int argc, char **argv)
 	}
 	// tmp2 = champ_list->head;
 	// ft_printf("champ:[0], name:[%s] nb: [%d]\n", (((t_champ *)(tmp2->content))->name),(((t_champ *)(tmp2->content))->vm_number));
-	
+
 	while (1)
 	{
 		if (core.options.cycle == 1 && core.cycles != 0)
