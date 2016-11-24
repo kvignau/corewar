@@ -14,11 +14,13 @@
 
 static int		print_menu(t_cor *core, t_dbllist *process_list)
 {
-	// attron(A_NORMAL);
 	wattron(core->windows[1], A_BOLD);
-	mvwprintw(core->windows[1], 1, 2, "nb proc: %d   :)", process_list->length);
-	mvwprintw(core->windows[1], 2, 2, "cycle_frequency: %d   :D", core->cycle_frequency);
-	mvwprintw(core->windows[1], 3, 2, "nb_cycles_achieved: %d  :X", core->nb_cycles_achieved);
+	mvwprintw(core->windows[1], 1, 2, "nb proc: %d   :) ", process_list->length);
+	if (core->cycle_frequency == 1000)
+		mvwprintw(core->windows[1], 2, 2, "cycle_frequency: MAX   :D   ");
+	else
+		mvwprintw(core->windows[1], 2, 2, "cycle_frequency: %d   :D ", core->cycle_frequency);
+	mvwprintw(core->windows[1], 3, 2, "nb_cycles_achieved: %d  :X ", core->nb_cycles_achieved);
 	wrefresh(core->windows[1]);
 	wattroff(core->windows[1], A_BOLD);
 	return (0);
@@ -26,13 +28,17 @@ static int		print_menu(t_cor *core, t_dbllist *process_list)
 
 static int		handle_cycle_celerity(char c_input, t_cor *core)
 {
-	if (c_input == 'r')
+	if (c_input == 'r' && core->cycle_frequency < 1000)
 	{
 		core->cycle_frequency += 10;
+		if (core->cycle_frequency > 1000)
+			core->cycle_frequency = 1000;
 	}
-	else if (c_input == 'e')
+	else if (c_input == 'e' && core->cycle_frequency < 1000)
 	{
 		core->cycle_frequency += 1;
+		if (core->cycle_frequency > 1000)
+			core->cycle_frequency = 1000;
 	}
 	else if (c_input == 'w' && core->cycle_frequency > 1)
 	{
@@ -51,7 +57,7 @@ static int		handle_cycle_celerity(char c_input, t_cor *core)
 	return (0);
 }
 
-static int		create_array_process_map(t_dbllist *process_list, int process_map[])
+static int		create_array_process_map(t_dbllist *process_list, int process_map[], t_cor *core)
 {
 	t_elem		*current_node;
 	t_proc		*node_proc;
@@ -59,19 +65,19 @@ static int		create_array_process_map(t_dbllist *process_list, int process_map[])
 
 	i = -1;
 	while (++i < 4096)
-	{
 		process_map[i] = 0;
-	}
 	if (!process_list || !(process_list->head))
 		return (-1);
 
-	current_node = process_list->head;
-	i = -1;
+	current_node = ((t_elem *)process_list->head);
 	while (current_node != NULL)
 	{
 		if ((node_proc = current_node->content) == NULL)
 			return (-1);
-		process_map[node_proc->i % 4096] = 1;
+		i = node_proc->i % 4096;
+		while (i < 0)
+			i += 4096;
+		process_map[i] = 1;
 		current_node = current_node->next;
 	}
 	return (0);
@@ -81,13 +87,12 @@ int		print_board(t_cor *core, t_dbllist *process_list, unsigned char *board)
 {
 	int		i;
 	int		j;
-	// int		process_map[4096];
 	int		nb_process_to_diplay;
 	WINDOW	*gauche;
 	char	c;
 
 	gauche = core->windows[0];
-	create_array_process_map(process_list, core->process_map);
+	create_array_process_map(process_list, core->process_map, core);
 	i = -1;
 	while (++i < 64)
 	{
@@ -120,7 +125,8 @@ int		print_board(t_cor *core, t_dbllist *process_list, unsigned char *board)
 		handle_cycle_celerity(c, core);
 	print_menu(core, process_list);
 	core->nb_cycles_achieved += 1;
-	usleep(core->u_delta_sleep);
+	if (core->cycle_frequency < 1000)
+		usleep(core->u_delta_sleep);
 	return (0);
 }
 
