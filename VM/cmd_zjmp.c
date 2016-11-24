@@ -34,7 +34,8 @@ void	cmd_zjmp(unsigned char *board, t_proc *c_proc, t_cor *core)
 		}
 		if (c_proc->carry == 0)
 		{
-			cmd_verbose(board, c_proc, 3);
+			if (core->options.verbose == 1)
+				cmd_verbose(board, c_proc, 3);
 			next_pc(3, c_proc, board);
 		}
 		c_proc->c_cmd = 0;
