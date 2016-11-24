@@ -15,7 +15,7 @@
 int		iscmd(t_proc *c_proc, t_cor *core, t_dbllist *champ_list, t_dbllist *pr_list)
 {
 	c_proc->i = c_proc->i % MEM_SIZE;
-	if (c_proc->c_cmd == 0)
+	if (c_proc->c_cmd == 0 && (core->board[c_proc->i] <= 16 && core->board[c_proc->i] > 0))
 		c_proc->c_cmd = core->board[c_proc->i];
 	if (c_proc->c_cmd == 1)
 		cmd_live(core->board, c_proc, core, champ_list);

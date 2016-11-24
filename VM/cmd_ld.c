@@ -20,6 +20,7 @@ void	cmd_ld(unsigned char *board, t_proc *c_proc, t_cor *core)
 
 	if (c_proc->ctp == 5)
 	{
+		id = 1;
 		type = get_type(board, c_proc);
 		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x90)
 		{
@@ -28,6 +29,10 @@ void	cmd_ld(unsigned char *board, t_proc *c_proc, t_cor *core)
 			if (reg_nb > 15 || reg_nb < 0)
 				return ;
 			c_proc->r[reg_nb] = id;
+			if ((id % IDX_MOD) % MEM_SIZE == 0)
+				c_proc->carry = 1;
+			else
+				c_proc->carry = 0;
 		}
 		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0xd0)
 		{
@@ -36,11 +41,15 @@ void	cmd_ld(unsigned char *board, t_proc *c_proc, t_cor *core)
 			if (reg_nb > 15 || reg_nb < 0)
 				return ;
 			c_proc->r[reg_nb] = bit_cat(board, c_proc, (id % IDX_MOD), 4);
+			if ((id % IDX_MOD) % MEM_SIZE == 0)
+				c_proc->carry = 1;
+			else
+				c_proc->carry = 0;
 		}
-		if (((id % IDX_MOD)) % MEM_SIZE == 0)
-			c_proc->carry = 1;
-		else
-			c_proc->carry = 0;
+		// if ((id % IDX_MOD) % MEM_SIZE == 0)
+			// c_proc->carry = 1;
+		// else
+			// c_proc->carry = 0;
 		c_proc->ctp = 1;
 		if (core->options.verbose == 1 &&
 			((board[(c_proc->i + 1) % MEM_SIZE] == 0xd0) ||

@@ -19,7 +19,7 @@ void			cmd_verbose(unsigned char *board, t_proc *c_proc, int offset)
 	i = 0;
 	write(1, "ADV ", 4);
 	ft_putnbr(offset);
-	ft_printf(" (0x%.4x -> 0x%.4x) ", c_proc->i, (c_proc->i + offset) % MEM_SIZE);
+	ft_printf(" (0x%.4x -> 0x%.4x) ", c_proc->i, (c_proc->i + offset));
 	while (i < offset)
 	{
 		ft_printf("%.2x ", board[(c_proc->i + i) % MEM_SIZE]);
@@ -73,11 +73,14 @@ void			cmd_verbose_ld(int pid, int reg_nb, int id)
 
 void			cmd_verbose_zjmp_live(char *cmd, int pid, int id)
 {
-	write(1, "P", 1);
-	ft_printf("% 5d", pid);
-	write(1, " | ", 3);
-	write(1, cmd, 4);
-	write(1, " ", 1);
-	ft_putnbr(id);
+	if (cmd)
+	{
+		write(1, "P", 1);
+		ft_printf("% 5d", pid);
+		write(1, " | ", 3);
+		write(1, cmd, 4);
+		write(1, " ", 1);
+		ft_putnbr(id);
+	}
 	// ft_printf("P% 5d | zjmp %d", c_proc->pid, (short int)id);
 }

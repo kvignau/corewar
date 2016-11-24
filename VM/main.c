@@ -108,8 +108,11 @@ int		main(int argc, char **argv)
 			// if (core.cycles > 900)
 			// ft_printf("process_list_nb:%d\n", process_list->length);
 			// ft_printf("i:[%%] pc: [%p]\n" /*(((t_proc *)(tmp->content))->i)*/,(((t_proc *)(tmp->content))->pc));
+
 			if (iscmd(tmp->content, &core, champ_list, process_list) == 0)
 				next_pc(1, tmp->content, core.board);
+			// if (((t_proc *)(tmp->content))->pid == 1276)
+				// ft_printf("\n ##########CARRY ==                                           %d \n", ((t_proc *)(tmp->content))->pid);
 			// ((t_proc *)(tmp->content))->last_lived += 1;
 			tmp = tmp->next;
 		}
