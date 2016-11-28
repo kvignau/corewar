@@ -12,6 +12,20 @@
 
 #include "asm.h"
 
+static void	print_args_tab(char **args_tab)
+{
+	int		i;
+
+	i = 0;
+	ft_printf("Wrong line : ");
+	while (args_tab[i])
+	{
+		ft_printf("%s", args_tab[i]);
+		i++;
+	}
+	ft_printf("\n");
+}
+
 static int	valid_args(char **args_tab, int op_code, int *to_check)
 {
 	int		i;
@@ -20,7 +34,10 @@ static int	valid_args(char **args_tab, int op_code, int *to_check)
 	i = 0;
 	type = 0;
 	if (!(type = recover_args(args_tab, to_check)))
+	{
+		print_args_tab(args_tab);
 		return (0);
+	}
 	if (!(verif_type(type, op_code)))
 		return (0);
 	return (1);
@@ -70,7 +87,7 @@ int			check_args(char **args_tab, int op_code, t_data **data)
 	}
 	if (!(valid_args(args_tab, op_code, &to_check)))
 	{
-		ft_putstr("arg non valid\n");
+		ft_putstr(">> Non valid\n");
 		return (0);
 	}
 	return (1);
