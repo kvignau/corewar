@@ -129,5 +129,6 @@ char				*ft_strstr(const char *s1, const char *s2);
 char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strtrim(char const *s);
 int					ft_tolower(int c);
+char				*ft_strtolower(char *str);
 int					ft_toupper(int c);
 #endif

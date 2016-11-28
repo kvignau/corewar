@@ -68,9 +68,11 @@ static int				add_reg_ind(unsigned char *board, t_proc *c_proc, int v, int *reg_
 	*reg_nb = board[(c_proc->i + 2) % MEM_SIZE] - 1;
 	reg_nb2 = board[(c_proc->i + 3) % MEM_SIZE] - 1;
 	if ((*reg_nb < REG_NUMBER && reg_nb >= 0) && (reg_nb2 < REG_NUMBER && reg_nb2 >= 0))
+	{
 		add = (c_proc->r[reg_nb2] + bit_cat(board, c_proc, 4, 2)) % IDX_MOD;
-	if (v == 1 && (((*reg_nb < REG_NUMBER && reg_nb >= 0) && (reg_nb2 < REG_NUMBER && reg_nb2 >= 0))))
-		cmd_verbose_sti(board, c_proc, c_proc->r[reg_nb2], bit_cat(board, c_proc, 4, 2));
+		if (v == 1)
+			cmd_verbose_sti(board, c_proc, c_proc->r[reg_nb2], bit_cat(board, c_proc, 4, 2));
+	}
 	return (add);
 }
 

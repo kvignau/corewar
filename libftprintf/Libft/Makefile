@@ -94,6 +94,7 @@ C_FILES += ft_strstr.c
 C_FILES += ft_strsub.c
 C_FILES += ft_strtrim.c
 C_FILES += ft_tolower.c
+C_FILES += ft_strtolower.c
 C_FILES += ft_toupper.c
 C_FILES += get_next_line.c
 

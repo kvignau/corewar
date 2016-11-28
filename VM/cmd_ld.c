@@ -19,7 +19,7 @@ static int	dir_reg(t_cor *core, unsigned char *board, t_proc *c_proc)
 
 	id = bit_cat(board, c_proc, 2, 4);
 	reg_nb = (int)((board[(c_proc->i + 6) % MEM_SIZE] - 1));
-	if (reg_nb <= 15 && reg_nb >= 0)
+	if (reg_nb < REG_NUMBER && reg_nb >= 0)
 	{
 		c_proc->r[reg_nb] = id;
 		if ((id % IDX_MOD) % MEM_SIZE == 0)
@@ -37,7 +37,7 @@ static int	ind_reg(t_cor *core, unsigned char *board, t_proc *c_proc)
 
 	id = bit_cat(board, c_proc, 2, 2);
 	reg_nb = (int)((board[(c_proc->i + 4) % MEM_SIZE] - 1));
-	if (reg_nb <= 15 && reg_nb >= 0)
+	if (reg_nb < REG_NUMBER && reg_nb >= 0)
 	{
 		c_proc->r[reg_nb] = bit_cat(board, c_proc, (id % IDX_MOD), 4);
 		if ((id % IDX_MOD) % MEM_SIZE == 0)
@@ -65,7 +65,7 @@ void		cmd_ld(unsigned char *board, t_proc *c_proc, t_cor *core)
 		if (core->options.verbose == 1 &&
 			((board[(c_proc->i + 1) % MEM_SIZE] == 0xd0) ||
 			(board[(c_proc->i + 1) % MEM_SIZE] == 0x90)) &&
-				(reg_nb <= 15 && reg_nb >= 0))
+				(reg_nb < REG_NUMBER && reg_nb >= 0))
 			cmd_verbose_ld(c_proc->pid, c_proc->r[reg_nb], reg_nb + 1);
 		if (core->options.verbose == 1)
 			cmd_verbose(board, c_proc, get_cmd_size(get_type(board, c_proc), 4, 2));
