@@ -48,5 +48,11 @@ int		set_up_ncurses(t_cor *core)
 	core->u_delta_sleep = 0;
 	core->cycle_frequency = 1000;
 	core->nb_cycles_achieved = 0;
+	core->is_paused = 1;
+	core->is_first = 1;
+
+
+	// core->lolol = fopen("dbeug.sms", "w+");
+	// fclose(core->lolol);
 	return (0);
 }

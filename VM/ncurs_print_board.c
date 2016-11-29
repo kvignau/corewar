@@ -89,7 +89,7 @@ int		print_board(t_cor *core, t_dbllist *process_list, unsigned char *board)
 	int		j;
 	int		nb_process_to_diplay;
 	WINDOW	*gauche;
-	char	c;
+	char	c = 'a';
 
 	gauche = core->windows[0];
 	create_array_process_map(process_list, core->process_map, core);
@@ -111,20 +111,38 @@ int		print_board(t_cor *core, t_dbllist *process_list, unsigned char *board)
 	}
 	wrefresh(gauche);
 
-	if ((c = getch()) == ' ')
+
+	if (core->is_first)
 	{
+		print_menu(core, process_list);
+		core->is_first = 0;
+	}
+// core->lolol = fopen("dbug.sms", "a");
+// fprintf(core->lolol, "1\n");
+// fclose(core->lolol);
+	if ((c = getch()) == ' ' || core->is_paused)
+	{
+// core->lolol = fopen("dbug.sms", "a");
+// fprintf(core->lolol, "2\n");
+// fclose(core->lolol);
+		core->is_paused = 1;
 		timeout(-1);
-		while ((c = getch()) != ' ')
+		while (((c = getch()) != ' ' && c != 's'))
 		{
+// core->lolol = fopen("dbug.sms", "a");
+// fprintf(core->lolol, "3\n");
+// fclose(core->lolol);
 			handle_cycle_celerity(c, core);
 			print_menu(core, process_list);
 		}
+		if (c == ' ')
+			core->is_paused = 0;
 		timeout(0);
 	}
 	else
 		handle_cycle_celerity(c, core);
-	print_menu(core, process_list);
 	core->nb_cycles_achieved += 1;
+	print_menu(core, process_list);
 	if (core->cycle_frequency < 1000)
 		usleep(core->u_delta_sleep);
 	return (0);

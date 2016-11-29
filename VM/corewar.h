@@ -57,6 +57,9 @@ typedef struct		s_cor
 	int				nb_cycles_achieved;
 	int				process_map[4096];
 	int				color_map[4096];
+	int				is_paused;
+	int				is_first;
+	FILE			*lolol;
 }					t_cor;
 typedef struct		s_champ
 {
