@@ -21,7 +21,7 @@ int		execute_dead_process(t_dbllist *pr_list, t_cor *core)
 	tmp = pr_list->head;
 	while (tmp != NULL)
 	{
-		if (((t_proc *)(tmp->content))->live == 0)
+		if (((t_proc *)(tmp->content))->live == 0 || core->cycles_to_die <= 0)
 		{
 			if (core->options.verbose == 1)
 				ft_printf("Process %d hasn't lived for %d cycles (CTD %d)\n",
