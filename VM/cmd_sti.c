@@ -31,7 +31,7 @@ static int				add_dir_reg(unsigned char *board, t_proc *c_proc, int v, int *reg_
 			cmd_verbose_sti(board, c_proc, bit_cat(board, c_proc, id, 4), c_proc->r[reg_nb2]);
 		return (add);
 	}
-	*reg_nb = -1;
+	c_proc->error = 1;
 	return (-1);
 }
 
@@ -84,7 +84,7 @@ static int				add_reg_ind(unsigned char *board, t_proc *c_proc, int v, int *reg_
 			cmd_verbose_sti(board, c_proc, c_proc->r[reg_nb2], bit_cat(board, c_proc, 4, 2));
 		return (add);
 	}
-	*reg_nb = -1;
+	c_proc->error = 1;
 	return (-1);
 }
 
@@ -124,13 +124,14 @@ void					cmd_sti(unsigned char *board, t_proc *c_proc, t_cor *core)
 			add = add_dir_reg(board, c_proc, core->options.verbose, &reg_nb);
 		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0x78)
 			add = add_dir_ind(board, c_proc, core->options.verbose, &reg_nb);
-		if (oct_codageok(board, c_proc) && (reg_nb < REG_NUMBER && reg_nb >= 0))
+		if (oct_codageok(board, c_proc) && (reg_nb < REG_NUMBER && reg_nb >= 0) && c_proc->error == 0)
 			sti_result(core, c_proc, reg_nb, add);
 		if (core->options.verbose == 1)
 			cmd_verbose(board, c_proc, cmd_size);
 		c_proc->c_cmd = 0;
 		next_pc(cmd_size, c_proc, board);
 		c_proc->ctp = 1;
+		c_proc->error = 0;
 	}
 	else
 		c_proc->ctp += 1;

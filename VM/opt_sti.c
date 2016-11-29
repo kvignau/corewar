@@ -48,7 +48,7 @@ int					add_ind_reg(unsigned char *board, t_proc *c_proc, int v, int *reg_nb)
 			cmd_verbose_sti(board, c_proc, p1, c_proc->r[reg_nb2]);
 		return (add);
 	}
-	*reg_nb = -1;
+	c_proc->error = 1;
 	return (-1);
 }
 

@@ -26,14 +26,20 @@ int			isreg(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
 		else
 			reg_nb = bit_cat(board, c_proc, 4, 1);
 		if (reg_nb > 16 || reg_nb < 1)
-				return (0);
+		{
+			c_proc->error = 1;
+			return (-1);
+		}
 		result = c_proc->r[reg_nb - 1];
 	}
 	else
 	{
 		reg_nb = bit_cat(board, c_proc, 2, 1);
 		if (reg_nb > 16 || reg_nb < 1)
-				return (0);
+		{
+			c_proc->error = 1;
+			return (-1);
+		}
 		result = c_proc->r[reg_nb - 1];
 	}
 	// ft_printf("num du registre %d\n", (int)c_proc->r[reg_nb - 1]);

@@ -62,14 +62,14 @@ void					cmd_ldi(unsigned char *board, t_proc *c_proc, t_cor *core)
 			// ft_printf("REGISTRE 1 %d\n", c_proc->r[0]);
 			// ft_printf("type arg 2 %d\n", arg_2);
 			reg_nb = bit_cat(board, c_proc, get_cmd_size(type, 2, 3) - 1, 1);
-			if (reg_nb <= REG_NUMBER && reg_nb >= 1)
+			if (reg_nb <= REG_NUMBER && reg_nb >= 1 && c_proc->error == 0)
 			{
 				c_proc->r[reg_nb - 1] = bit_cat(board, c_proc, (arg_1 + arg_2) % IDX_MOD, REG_SIZE);
 				if (core->options.verbose == 1)
 				{
 					ft_printf("P% 5d | ldi %d %d r%d\n", c_proc->pid, arg_1, arg_2, reg_nb);
 					ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n",
-						arg_1, arg_2, arg_1 + arg_2, (arg_1 + arg_2 + c_proc->i) % MEM_SIZE);
+						arg_1, arg_2, arg_1 + arg_2, (arg_1 + arg_2) % IDX_MOD + c_proc->i);
 				}
 			}
 		}
@@ -78,6 +78,7 @@ void					cmd_ldi(unsigned char *board, t_proc *c_proc, t_cor *core)
 		c_proc->c_cmd = 0;
 		next_pc(cmd_size, c_proc, board);
 		c_proc->ctp = 1;
+		c_proc->error = 0;
 	}
 	else
 		c_proc->ctp += 1;

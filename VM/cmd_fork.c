@@ -25,7 +25,7 @@ void		cmd_fork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list, t_cor *
 		if (core->options.verbose == 1)
 		{
 			ft_printf("P% 5d | fork %d (%d)\n", c_proc->pid, value,
-				(c_proc->i + value) % MEM_SIZE);
+				c_proc->i + (value % IDX_MOD));
 			cmd_verbose(board, c_proc, 3);
 		}
 		((t_proc *)(tmp->content))->pc = (c_proc->pc + (value % IDX_MOD));

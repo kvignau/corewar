@@ -86,6 +86,7 @@ typedef struct		s_proc
 	int				last_lived;
 	unsigned char	c_cmd;
 	int				color;
+	int				error;
 }					t_proc;
 
 /*
