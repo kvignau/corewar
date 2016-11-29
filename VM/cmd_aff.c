@@ -25,7 +25,10 @@ void	cmd_aff(unsigned char *board, t_proc *c_proc, t_cor *core)
 			if (reg_nb <= 15 && reg_nb >= 0)
 			{
 				if (core->options.aff == 0)
+				{
 					write(1, &c_proc->r[reg_nb], 1);
+					write(1, "\n", 1);
+				}
 			}
 
 		}

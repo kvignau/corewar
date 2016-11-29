@@ -41,7 +41,7 @@ int					add_ind_reg(unsigned char *board, t_proc *c_proc, int v, int *reg_nb)
 	*reg_nb = board[(c_proc->i + 2) % MEM_SIZE] - 1;
 	reg_nb2 = board[(c_proc->i + 5) % MEM_SIZE] - 1;
 	add = (c_proc->r[reg_nb2] + p1) % IDX_MOD;
-	if ((*reg_nb < REG_NUMBER && reg_nb >= 0) && (reg_nb2 < REG_NUMBER && reg_nb2 >= 0))
+	if ((*reg_nb < REG_NUMBER && *reg_nb >= 0) && (reg_nb2 < REG_NUMBER && reg_nb2 >= 0))
 	{
 		add = (c_proc->r[reg_nb2] + p1) % IDX_MOD;
 		if (v == 1)
@@ -64,8 +64,14 @@ int					add_reg_reg(unsigned char *board, t_proc *c_proc, int v, int *reg_nb)
 	*reg_nb = board[(c_proc->i + 2) % MEM_SIZE] - 1;
 	reg_nb2 = board[(c_proc->i + 3) % MEM_SIZE] - 1;
 	reg_nb3 = board[(c_proc->i + 4) % MEM_SIZE] - 1;
-	add = ((c_proc->r[reg_nb2] + c_proc->r[reg_nb3])) % IDX_MOD;
-	if (v == 1)
-		cmd_verbose_sti(board, c_proc, c_proc->r[reg_nb2], c_proc->r[reg_nb3]);
-	return (add);
+	if ((*reg_nb < REG_NUMBER && *reg_nb >= 0) && (reg_nb2 < REG_NUMBER && reg_nb2 >= 0)
+		&& (reg_nb3 < REG_NUMBER && reg_nb3 >= 0))
+	{
+		add = ((c_proc->r[reg_nb2] + c_proc->r[reg_nb3])) % IDX_MOD;
+		if (v == 1)
+			cmd_verbose_sti(board, c_proc, c_proc->r[reg_nb2], c_proc->r[reg_nb3]);
+		return (add);
+	}
+	c_proc->error = 1;
+	return (-1);
 }

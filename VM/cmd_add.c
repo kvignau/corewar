@@ -32,7 +32,7 @@ void		cmd_add(unsigned char *board, t_proc *c_proc, t_cor *core)
 				&& r_dest <= REG_NUMBER && r1 > 0 && r2 > 0 && r_dest > 0)
 			{
 				c_proc->r[r_dest - 1] = c_proc->r[r1 - 1] + c_proc->r[r2 - 1];
-				c_proc->carry = c_proc->r[r_dest - 1] == 0 ? 1 : 0;
+				c_proc->carry = (c_proc->r[r_dest - 1] == 0) ? 1 : 0;
 				if (core->options.verbose == 1)
 				{
 					ft_printf("P% 5d | add r%d r%d r%d\n", c_proc->pid, r1, r2,

@@ -22,7 +22,7 @@ static int	dir_reg(t_cor *core, unsigned char *board, t_proc *c_proc)
 	if (reg_nb < REG_NUMBER && reg_nb >= 0)
 	{
 		c_proc->r[reg_nb] = id;
-		if ((id % IDX_MOD) % MEM_SIZE == 0)
+		if (id == 0)
 			c_proc->carry = 1;
 		else
 			c_proc->carry = 0;
@@ -40,7 +40,7 @@ static int	ind_reg(t_cor *core, unsigned char *board, t_proc *c_proc)
 	if (reg_nb < REG_NUMBER && reg_nb >= 0)
 	{
 		c_proc->r[reg_nb] = bit_cat(board, c_proc, (id % IDX_MOD), 4);
-		if ((id % IDX_MOD) % MEM_SIZE == 0)
+		if (id == 0)
 			c_proc->carry = 1;
 		else
 			c_proc->carry = 0;

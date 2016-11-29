@@ -90,7 +90,7 @@ void			cmd_verbose_st(int pid, int reg_nb, int id)
 		write(1, " ", 1);
 	if (pid < 1000)
 		write(1, " ", 1);
-	if (pid < 10000)
+	if (pid < 100000)
 		write(1, " ", 1);
 	ft_putnbr(pid);
 	write(1, " | st r", 7);
@@ -120,7 +120,7 @@ void			cmd_verbose_zjmp_live(char *cmd, int pid, int id)
 			write(1, " ", 1);
 		if (pid < 1000)
 			write(1, " ", 1);
-		if (pid < 10000)
+		if (pid < 100000)
 			write(1, " ", 1);
 		ft_putnbr(pid);
 			// ft_printf("% 5d", pid);

@@ -39,7 +39,7 @@ static int			comment_cleaner(t_data *data)
 	{
 		while (data->file[i][j] != '\0')
 		{
-			if (data->file[i][j] == ';')
+			if (data->file[i][j] == ';' || data->file[i][j] == '#')
 				comment_remover(data, i, j);
 			j++;
 		}
