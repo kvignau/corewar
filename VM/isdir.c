@@ -12,9 +12,9 @@
 
 #include "corewar.h"
 
-unsigned int		isdir(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
+int			isdir(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
 {
-	unsigned int		result;
+	int		result;
 
 	result = 0;
 	if (arg_nb == 2)

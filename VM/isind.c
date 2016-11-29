@@ -12,10 +12,10 @@
 
 #include "corewar.h"
 
-unsigned int		isind(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
+int					isind(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
 {
-	unsigned int		result;
-	unsigned int		id;
+	int				result;
+	unsigned int	id;
 
 	result = 0;
 	if (arg_nb == 2)

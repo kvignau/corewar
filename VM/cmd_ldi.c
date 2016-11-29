@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-static unsigned int		get_arg_value(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
+static int		get_arg_value(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
 {
 	if (type[arg_nb - 1] == REG)
 		return(isreg(board, c_proc, type, arg_nb));
@@ -39,33 +39,44 @@ void					cmd_ldi(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
 	int					reg_nb;
 	int					*type;
-	int					arg_1;
+	short				arg_1;
 	int					arg_2;
 	int					v_opc;
+	int					cmd_size;
 
 	reg_nb = 0;
 	v_opc = 0;
 	if (c_proc->ctp == 25)
 	{
 		type = get_type(board, c_proc);
+		// ft_printf("c_proc->i %d\n", c_proc->i);
+		// ft_printf("c_proc->i + 1 (codage) %x\n", board[(c_proc->i + 1)]);
+		// ft_printf("type arg 1 %d\n", type[0]);
+		// ft_printf("type arg 2 %d\n", type[1]);
+		cmd_size = get_cmd_size(get_type(board, c_proc), 2, 3);
 		if ((v_opc = valid_opc(board, c_proc)) == 1)
 		{
 			arg_1 = get_arg_value(board, c_proc, type, 1);
 			arg_2 = get_arg_value(board, c_proc, type, 2);
+			// ft_printf("type arg 1 %d\n", arg_1);
+			// ft_printf("REGISTRE 1 %d\n", c_proc->r[0]);
+			// ft_printf("type arg 2 %d\n", arg_2);
 			reg_nb = bit_cat(board, c_proc, get_cmd_size(type, 2, 3) - 1, 1);
-			if (reg_nb <= 16 && reg_nb >= 1)
+			if (reg_nb <= REG_NUMBER && reg_nb >= 1)
+			{
 				c_proc->r[reg_nb - 1] = bit_cat(board, c_proc, (arg_1 + arg_2) % IDX_MOD, REG_SIZE);
-		}
-		if (core->options.verbose == 1 && v_opc == 1 && (reg_nb <= 16 && reg_nb >= 1))
-		{
-			ft_printf("P% 5d | ldi %d %d r%d\n", c_proc->pid, arg_1, arg_2, reg_nb);
-			ft_printf("       | -> load from %u + %u = %d (with pc and mod %d)\n",
-				arg_1, arg_2, arg_1 + arg_2, ((arg_1 + arg_2) % IDX_MOD + c_proc->i) % MEM_SIZE);
+				if (core->options.verbose == 1)
+				{
+					ft_printf("P% 5d | ldi %d %d r%d\n", c_proc->pid, arg_1, arg_2, reg_nb);
+					ft_printf("       | -> load from %d + %d = %d (with pc and mod %d)\n",
+						arg_1, arg_2, arg_1 + arg_2, (arg_1 + arg_2 + c_proc->i) % MEM_SIZE);
+				}
+			}
 		}
 		if (core->options.verbose == 1)
-			cmd_verbose(board, c_proc, get_cmd_size(get_type(board, c_proc), 2, 3));
+			cmd_verbose(board, c_proc, cmd_size);
 		c_proc->c_cmd = 0;
-		next_pc(get_cmd_size(get_type(board, c_proc), 2, 3), c_proc, board);
+		next_pc(cmd_size, c_proc, board);
 		c_proc->ctp = 1;
 	}
 	else

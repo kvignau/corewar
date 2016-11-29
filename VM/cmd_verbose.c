@@ -77,7 +77,7 @@ void			cmd_verbose_sti(unsigned char *board, t_proc *c_proc, int p1, int p2)
 	write(1, " = ", 3);
 	ft_putnbr(p1 + p2);
 	write(1, " (with pc and mod ", 18);
-	ft_putnbr((((p1 + p2) % IDX_MOD) + c_proc->i) % MEM_SIZE);
+	ft_putnbr(((p1 + p2) % IDX_MOD + c_proc->i));
 	write(1, ")\n", 2);
 }
 

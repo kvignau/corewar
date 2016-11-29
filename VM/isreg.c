@@ -12,10 +12,10 @@
 
 #include "corewar.h"
 
-unsigned int		isreg(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
+int			isreg(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
 {
-	unsigned int		result;
-	int					reg_nb;
+	int		result;
+	int		reg_nb;
 
 	result = 0;
 	reg_nb = 0;
@@ -27,14 +27,16 @@ unsigned int		isreg(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
 			reg_nb = bit_cat(board, c_proc, 4, 1);
 		if (reg_nb > 16 || reg_nb < 1)
 				return (0);
-		result = (unsigned int)c_proc->r[reg_nb - 1];
+		result = c_proc->r[reg_nb - 1];
 	}
 	else
 	{
 		reg_nb = bit_cat(board, c_proc, 2, 1);
 		if (reg_nb > 16 || reg_nb < 1)
 				return (0);
-		result = (unsigned int)c_proc->r[reg_nb - 1];
+		result = c_proc->r[reg_nb - 1];
 	}
+	// ft_printf("num du registre %d\n", (int)c_proc->r[reg_nb - 1]);
+	// ft_printf("COUCOU %d\n", (unsigned short)-38);
 	return (result);
 }

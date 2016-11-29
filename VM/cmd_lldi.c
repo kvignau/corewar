@@ -53,10 +53,10 @@ void					cmd_lldi(unsigned char *board, t_proc *c_proc, t_cor *core)
 			arg_1 = get_arg_value(board, c_proc, type, 1);
 			arg_2 = get_arg_value(board, c_proc, type, 2);
 			reg_nb = bit_cat(board, c_proc, get_cmd_size(type, 2, 3) - 1, 1);
-			if (reg_nb <= 16 && reg_nb >= 1)
+			if (reg_nb <= REG_NUMBER && reg_nb >= 1)
 				c_proc->r[reg_nb - 1] = bit_cat(board, c_proc, (arg_1 + arg_2), REG_SIZE);
 		}
-		if (core->options.verbose == 1 && v_opc == 1 && (reg_nb <= 16 && reg_nb >= 1))
+		if (core->options.verbose == 1 && v_opc == 1 && (reg_nb <= REG_NUMBER && reg_nb >= 1))
 		{
 			ft_printf("P% 5d | lldi %d %d r%d\n", c_proc->pid, arg_1, arg_2, reg_nb);
 			ft_printf("       | -> load from %u + %u = %d (with pc %d)\n",

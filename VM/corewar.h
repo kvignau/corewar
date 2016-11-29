@@ -123,9 +123,9 @@ uintmax_t		ft_hextoi(unsigned char *str);
 char			*ft_hextoa(int *str, int size);
 unsigned char	*get_content(int *str, int size);
 int				reverse_byte(int buf, int readv);
-unsigned int	isreg(unsigned char *board, t_proc *c_proc, int *type, int arg_nb);
-unsigned int	isdir(unsigned char *board, t_proc *c_proc, int *type, int arg_nb);
-unsigned int	isind(unsigned char *board, t_proc *c_proc, int *type, int arg_nb);
+int				isreg(unsigned char *board, t_proc *c_proc, int *type, int arg_nb);
+int				isdir(unsigned char *board, t_proc *c_proc, int *type, int arg_nb);
+int				isind(unsigned char *board, t_proc *c_proc, int *type, int arg_nb);
 
 /*
 **********************  Memory Setter  **********************
