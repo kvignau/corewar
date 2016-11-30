@@ -47,6 +47,8 @@ static	void	add_zero_after(char **str, int nb)
 	i = 0;
 	tmp = ft_strdup("0");
 	new = NULL;
+	if (*str == NULL)
+		*str = ft_strdup("");
 	add_zero(&tmp, nb - 1 - ft_strlen(*str));
 	new = ft_strjoin(*str, tmp);
 	ft_strdel(str);

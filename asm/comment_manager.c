@@ -39,8 +39,10 @@ int			comment_manager(t_data *data, int *i, int *j)
 	if (data->file[*i][*j] == '"')
 	{
 		*j += 1;
-		while (data->file[*i][*j] != '"' && comment_size <= 2048 &&
-			*i <= data->nb_lines)
+		if (data->file[*i][*j] == '"')
+			data->comment[comment_size] = '\0';
+		while ((data->file[*i][*j] != '"' && comment_size <= 2048 &&
+			*i <= data->nb_lines))
 		{
 			if (data->file[*i][*j] == '\0')
 				gotonextline(i, j, data, &comment_size);
