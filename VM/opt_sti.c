@@ -69,7 +69,9 @@ int					add_reg_reg(unsigned char *board, t_proc *c_proc, int v, int *reg_nb)
 	{
 		add = ((c_proc->r[reg_nb2] + c_proc->r[reg_nb3])) % IDX_MOD;
 		if (v == 1)
+		{
 			cmd_verbose_sti(board, c_proc, c_proc->r[reg_nb2], c_proc->r[reg_nb3]);
+		}
 		return (add);
 	}
 	c_proc->error = 1;

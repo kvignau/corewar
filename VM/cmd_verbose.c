@@ -65,7 +65,7 @@ void			cmd_verbose_sti(unsigned char *board, t_proc *c_proc, int p1, int p2)
 	write(1, "P", 1);
 	ft_printf("% 5d", c_proc->pid);
 	write(1, " | sti r", 8);
-	ft_putnbr(board[c_proc->i + 2]);
+	ft_putnbr(board[(c_proc->i + 2) % MEM_SIZE]);
 	write(1, " ", 1);
 	ft_putnbr(p1);
 	write(1, " ", 1);

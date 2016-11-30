@@ -55,7 +55,7 @@ void	cmd_lld(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
 	int				reg_nb;
 
-	if (c_proc->ctp == 5)
+	if (c_proc->ctp == 10)
 	{
 		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x90)
 			reg_nb = dir_reg(core, board, c_proc);

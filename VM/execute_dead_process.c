@@ -12,15 +12,15 @@
 
 #include "corewar.h"
 
-int		execute_dead_process(t_dbllist *pr_list, t_cor *core)
+int		execute_dead_process(t_dbllist **pr_list, t_cor *core)
 {
 	t_elem		*tmp;
-	static int i =0;
+	t_elem		*tmp_next;
 
-	i++;
-	tmp = pr_list->head;
+	tmp = (*pr_list)->head;
 	while (tmp != NULL)
 	{
+		tmp_next = tmp->next;
 		if (((t_proc *)(tmp->content))->live == 0 || core->cycles_to_die <= 0)
 		{
 			if (core->options.verbose == 1)
@@ -28,13 +28,13 @@ int		execute_dead_process(t_dbllist *pr_list, t_cor *core)
 					((t_proc *)(tmp->content))->pid,
 					((t_proc *)(tmp->content))->last_lived,
 					core->cycles_to_die);
-			ft_lstdbldelone(&(pr_list), tmp);
+			ft_lstdbldelone(pr_list, tmp);
 		}
 		else
 			((t_proc *)(tmp->content))->live = 0;
-		tmp = tmp->next;
+		tmp = tmp_next;
 	}
-	if (pr_list->length == 0)
+	if ((*pr_list)->length == 0)
 		core->winner_nb = core->last_live;
-	return (pr_list->length);
+	return ((*pr_list)->length);
 }

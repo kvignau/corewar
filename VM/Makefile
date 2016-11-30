@@ -13,7 +13,10 @@
 NAME = corewar
 #-fsanitize=address
 
-FLAGS += -lncurses -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -g -Wall -Wextra -fsanitize=address 
+# -Werror
+
+# MallocStackLogging=1
 
 SRC = main.c op.c corewar_usage.c options_checkers.c champions_maker.c \
 ft_print_memory.c memory.c ft_hextoa.c get_content.c ft_hextoi.c\
@@ -28,16 +31,22 @@ OBJ = $(SRC:%.c=%.o)
 
 all: $(NAME)
 
+# $(NAME): $(OBJ)
+# 	make -C ../libftprintf/ all
+# 	$(CC) $(FLAGS) -o $(NAME) $(OBJ) 
+
 $(NAME): $(OBJ)
-	make -C ../libftprintf/ all
-	gcc $(FLAGS) -o $(NAME) $(OBJ) -L ../libftprintf/ -lftprintf
+	$(CC) $(FLAGS) $(OBJ) -o $@ -L../libftprintf/ -lftprintf -lncurses
+
+%.o: %.c
+	$(CC) $(FLAGS) -o $@ -c $< -Iincludes
 
 clean:
-	make -C ../libftprintf/ clean
+	# make -C ../libftprintf/ clean
 	rm -f $(OBJ)
 
 fclean: clean
-	make -C ../libftprintf/ fclean
+	# make -C ../libftprintf/ fclean
 	rm -f $(NAME)
 
 re: fclean all

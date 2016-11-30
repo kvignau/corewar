@@ -110,7 +110,7 @@ int		champion_validity_checker(t_var *var, t_champ *champ)
 	int					ret;
 
 	file_size = 0;
-	stock = (int *)ft_memalloc(COR_MAX_VALUE / 2);
+	stock = (int *)ft_memalloc((COR_MAX_VALUE / 2) * sizeof(int));
 	if ((ret = filetotab(&stock, &file_size, var)) != 1)
 	{
 		error_manager(ret, var);
@@ -121,13 +121,13 @@ int		champion_validity_checker(t_var *var, t_champ *champ)
 		error_manager(-4, var);
 		return(0);
 	}
-	champ->name = ft_strdup(ft_hextoa(&stock[EXEC_MAGIC_LENGTH / 2], PROG_NAME_LENGTH));
+	champ->name = ft_hextoa(&stock[EXEC_MAGIC_LENGTH / 2], PROG_NAME_LENGTH);
 	if ((champ->size = stock[PROG_NAME_LENGTH / 2 + EXEC_MAGIC_LENGTH]) != (file_size - COR_MIN_VALUE) / 2)
 	{
 		error_manager(-5, var);
 		return (0);
 	}
-	champ->comment = ft_strdup(ft_hextoa(&stock[(EXEC_MAGIC_LENGTH + PROG_NAME_LENGTH) / 2 + PAD], COMMENT_LENGTH));
+	champ->comment = ft_hextoa(&stock[(EXEC_MAGIC_LENGTH + PROG_NAME_LENGTH) / 2 + PAD], COMMENT_LENGTH);
 	champ->content = get_content(&stock[(COR_MIN_VALUE / 4)], champ->size * 2);
 	return (1);
 }
@@ -149,9 +149,7 @@ int		set_champion(t_var *var, t_options *opt, t_champ *champ)
 		champ->vm_number = vm_number;
 		vm_number--;
 	}
-	if (champion_validity_checker(var, champ) == 0)
-		return (0);
-	return(1);
+	return (champion_validity_checker(var, champ));
 }
 
 int		champions_maker(t_dbllist *champ_list, t_options *options, t_var *var)
@@ -162,5 +160,6 @@ int		champions_maker(t_dbllist *champ_list, t_options *options, t_var *var)
 	if (set_champion(var, options, &champ) == 0)
 		return (0);
 	ft_lstdbladd_tail(champ_list, &champ, sizeof(t_champ));
+	
 	return (1);
 }

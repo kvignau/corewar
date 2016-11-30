@@ -78,7 +78,7 @@ int		main(int argc, char **argv)
 	core.cycles = 0;
 	core.end = -1;
 	i = -1;
-	while (++i < 4096)
+	while (++i < MEM_SIZE)
 		core.color_map[i] = 0;
 	intro(champ_list);
 	init_board(champ_list, process_list, &core);
@@ -108,6 +108,10 @@ int		main(int argc, char **argv)
 		tmp = process_list->head;
 		while (tmp != NULL)
 		{
+			if (options.ncurse == 1)
+			{
+				print_board(&core, process_list, core.board);
+			}
 			// if (core.cycles > 900)
 			// ft_printf("process_list_nb:%d\n", process_list->length);
 			// ft_printf("i:[%%] pc: [%p]\n" /*(((t_proc *)(tmp->content))->i)*/,(((t_proc *)(tmp->content))->pc));
@@ -122,7 +126,7 @@ int		main(int argc, char **argv)
 		if(core.cycles_to_die <= 0 || (((core.era_cycles + 1) % core.cycles_to_die) == 1 && (core.cycles != 0)))
 		{
 			// ft_printf("core.cycles_to_die : %d\n core.era_cycles + 1: %d\n", core.cycles_to_die, core.era_cycles + 1);
-			core.end = execute_dead_process(process_list, &core);
+			core.end = execute_dead_process(&process_list, &core);
 			if (core.era_lives_counter >= NBR_LIVE || (core.check + 1) == MAX_CHECKS)
 				set_new_era(&core, process_list);
 			else
@@ -135,17 +139,18 @@ int		main(int argc, char **argv)
 			ft_print_memory(core.board, MEM_SIZE);
 			break ;
 		}
-		tmp = process_list->head;
-		while (tmp != NULL)
+		if (process_list)
 		{
-			((t_proc *)(tmp->content))->last_lived += 1;
-			tmp = tmp->next;
+			tmp = process_list->head;
+			while (tmp != NULL)
+			{
+				((t_proc *)(tmp->content))->last_lived += 1;
+				tmp = tmp->next;
+			}
 		}
 		core.cycles += 1;
 		core.era_cycles += 1;
-		if (options.ncurse == 1){
-			print_board(&core, process_list, core.board);
-		}
+
 		if (core.end == 0)
 			break ;
 	}

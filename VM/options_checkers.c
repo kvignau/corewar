@@ -79,5 +79,10 @@ int	options_checkers(int argc, char **argv, t_options *options,
 	}
 	if (var.error == 0)
 		return (0);
+	// t_elem *champ;
+
+	// champ = champ_list->head;
+	// champ = champ->next;
+	// ft_printf("options checkers yolo   %s\n");
 	return (1);
 }

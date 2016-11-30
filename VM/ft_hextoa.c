@@ -20,8 +20,8 @@ char	*ft_hextoa(int *str, int size)
 
 	i = 0;
 	j = 0;
-	hex = (char *)ft_memalloc(size + 1);
-	while (i <= size)
+	hex = (char *)ft_memalloc((size + 1) * sizeof(int));
+	while (i < size)
 	{
 		hex[j] = str[i] >> 24;
 		hex[j + 1] = str[i] >> 16;

@@ -16,7 +16,7 @@ H_DIR = includes/
 C_DIR = srcs/
 O_DIR = obj/
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 CC = gcc
 
 C_FILES = clean_open.c
