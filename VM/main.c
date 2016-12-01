@@ -103,13 +103,14 @@ int		main(int argc, char **argv)
 			// ft_printf("It is now cycle %d\n", core.cycles);
 		}
 		// ft_printf("core_cycles [%d]  ", core.cycles);
+		if (options.ncurse == 1)
+		{
+			print_board(&core, process_list, core.board);
+		}
 		tmp = process_list->head;
 		while (tmp != NULL)
 		{
-			if (options.ncurse == 1)
-			{
-				print_board(&core, process_list, core.board);
-			}
+
 			// if (core.cycles > 900)
 			// ft_printf("process_list_nb:%d\n", process_list->length);
 			// ft_printf("i:[%%] pc: [%p]\n" /*(((t_proc *)(tmp->content))->i)*/,(((t_proc *)(tmp->content))->pc));
