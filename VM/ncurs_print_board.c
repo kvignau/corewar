@@ -15,12 +15,16 @@
 static int		print_menu(t_cor *core, t_dbllist *process_list)
 {
 	wattron(core->windows[1], A_BOLD);
-	mvwprintw(core->windows[1], 1, 2, "nb proc: %d   :) ", process_list->length);
-	if (core->cycle_frequency == 1000)
-		mvwprintw(core->windows[1], 2, 2, "cycle_frequency: MAX   :D   ");
+	if (core->is_paused)
+		mvwprintw(core->windows[1], 2, 3, " ** PAUSED ** ");
 	else
-		mvwprintw(core->windows[1], 2, 2, "cycle_frequency: %d   :D ", core->cycle_frequency);
-	mvwprintw(core->windows[1], 3, 2, "nb_cycles_achieved: %d  :X ", core->nb_cycles_achieved);
+		mvwprintw(core->windows[1], 2, 3, " ** RUNNING ** ");
+	mvwprintw(core->windows[1], 4, 3, "Processes : %d   ", process_list->length);
+	if (core->cycle_frequency == 1000)
+		mvwprintw(core->windows[1], 6, 3, "Cycles/second limit : MAX     ");
+	else
+		mvwprintw(core->windows[1], 6, 3, "Cycles/second limit : %d    ", core->cycle_frequency);
+	mvwprintw(core->windows[1], 8, 3, "Cycle : %d  :X ", core->cycles);
 	wrefresh(core->windows[1]);
 	wattroff(core->windows[1], A_BOLD);
 	return (0);
@@ -126,6 +130,7 @@ int		print_board(t_cor *core, t_dbllist *process_list, unsigned char *board)
 // fclose(core->lolol);
 		core->is_paused = 1;
 		timeout(-1);
+		print_menu(core, process_list);
 		while (((c = getch()) != ' ' && c != 's'))
 		{
 // core->lolol = fopen("dbug.sms", "a");
@@ -140,7 +145,6 @@ int		print_board(t_cor *core, t_dbllist *process_list, unsigned char *board)
 	}
 	else
 		handle_cycle_celerity(c, core);
-	core->nb_cycles_achieved += 1;
 	print_menu(core, process_list);
 	if (core->cycle_frequency < 1000)
 		usleep(core->u_delta_sleep);
