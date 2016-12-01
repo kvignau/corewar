@@ -26,7 +26,7 @@ int			get_arg_val(int oc_trunc, unsigned char *board, t_proc *c_proc, int i[])
 	else if (oc_trunc == 0b11)
 	{
 		arg = bit_cat(board, c_proc, i[0], 2);
-		arg = bit_cat(board, c_proc, arg, 4);
+		arg = bit_cat(board, c_proc, (arg % IDX_MOD), 4);
 		i[0] += 2;
 		return (arg);
 	}
