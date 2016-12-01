@@ -33,7 +33,6 @@ static int		label_count(int *nb_label, t_data *data)
 {
 	int		i;
 	int		j;
-	int		k;
 
 	i = 0;
 	j = 0;

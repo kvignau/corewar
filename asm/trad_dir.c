@@ -69,7 +69,7 @@ static void		trad_dir_without_label(char *arg, char **hexa, t_data **data,
 {
 	int		size;
 
-	size = op_tab[op_code - 1].lbl_size;
+	size = g_op_tab[op_code - 1].lbl_size;
 	if (size == 4)
 		trad_dir_size_4(arg, hexa, data, op_code);
 	else if (size == 2)

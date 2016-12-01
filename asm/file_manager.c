@@ -6,7 +6,7 @@
 /*   By: mchevall <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/29 16:30:43 by mchevall          #+#    #+#             */
-/*   Updated: 2016/09/29 16:30:57 by mchevall         ###   ########.fr       */
+/*   Updated: 2016/12/01 18:42:07 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void			comment_remover(t_data *data, int i, int j)
 {
-	int		k;
+	size_t		k;
 
 	k = 0;
 	while (k < ft_strlen(&data->file[i][j]))

@@ -27,8 +27,7 @@ void			define_index(char *name, t_data **data, int *i_called,
 	}
 }
 
-int				already_trad(t_elem *elem, t_dbllist **lst_lines,
-				char *lbl_called)
+int				already_trad(t_elem *elem, char *lbl_called)
 {
 	t_elem	*tmp;
 
@@ -55,7 +54,7 @@ static t_elem	*find_elem_caller(char *lbl_called, t_dbllist **lst_lines,
 	{
 		if (((t_data_line *)((tmp)->content))->index == i_called)
 		{
-			if (already_trad(tmp, lst_lines, lbl_called) == 0)
+			if (already_trad(tmp, lbl_called) == 0)
 				return (tmp);
 		}
 		tmp = tmp->prev;

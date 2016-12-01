@@ -19,9 +19,10 @@ void	ft_strtrim_tab(char **args_tab)
 
 	i = 0;
 	tmp = NULL;
-	while (args_tab[i])
+	while (args_tab && args_tab[i])
 	{
 		tmp = ft_strtrim(args_tab[i]);
+		free(args_tab[i]);
 		args_tab[i] = ft_strdup(tmp);
 		ft_strdel(&tmp);
 		i++;
@@ -63,14 +64,13 @@ void	add_zero(char **str, int width)
 
 	tmp = NULL;
 	i = 0;
-	if (ft_strlen(*str) == width)
+	if (ft_strlen(*str) == (size_t)width)
 		return ;
-	while (ft_strlen(*str) < width)
+	while (ft_strlen(*str) < (size_t)width)
 	{
 		tmp = ft_strdup(*str);
 		ft_strdel(str);
-		*str = ft_strjoin("0", tmp);
-		ft_strdel(&tmp);
+		*str = ft_strjoinandfree("0", tmp, 2);
 	}
 }
 

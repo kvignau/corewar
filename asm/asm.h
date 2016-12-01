@@ -5,13 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mpaincha <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/09/29 16:41:25 by mpaincha          #+#    #+#             */
-/*   Updated: 2016/10/04 16:25:01 by mpaincha         ###   ########.fr       */
+/*   Created: 2016/12/01 18:33:22 by mpaincha          #+#    #+#             */
+/*   Updated: 2016/12/01 18:33:25 by mpaincha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ASM_H
-#define ASM_H
+# define ASM_H
 # include "../libftprintf/includes/ft_printf.h"
 # include "op.h"
 # include <fcntl.h>
@@ -21,7 +21,7 @@
 **********************  Structures  **********************
 */
 
-typedef struct 		s_final_trad
+typedef struct		s_final_trad
 {
 	char			*magic;
 	char			*name;
@@ -31,32 +31,32 @@ typedef struct 		s_final_trad
 
 }					t_final_trad;
 
-typedef struct 		s_hexa
+typedef struct		s_hexa
 {
 	char			*hexa;
 	char			*lbl_name;
 }					t_hexa;
 
-typedef struct 		s_sum_args
+typedef struct		s_sum_args
 {
 	int				type;
 	int				sum;
 }					t_sum_args;
 
-typedef struct 		s_tmp1
+typedef struct		s_tmp1
 {
 	char			*trad;
 	char			*tmp2;
 	char			*nw;
 }					t_tmp1;
 
-typedef struct 		s_tmp2
+typedef struct		s_tmp2
 {
 	char			*trad;
 	char			*to_trad;
 }					t_tmp2;
 
-typedef struct 		s_recup
+typedef struct		s_recup
 {
 	int				label;
 	char			*label_name;
@@ -68,13 +68,13 @@ typedef struct 		s_recup
 	int				nb_oct;
 }					t_recup;
 
-typedef struct 		s_called
+typedef struct		s_called
 {
 	char			*name;
 	int				trad;
 }					t_called;
 
-typedef struct 		s_data_line
+typedef struct		s_data_line
 {
 	int				index;
 	int				nb_oct;
@@ -82,7 +82,7 @@ typedef struct 		s_data_line
 	t_dbllist		*label_called;
 }					t_data_line;
 
-typedef struct 		s_data
+typedef struct		s_data
 {
 	char			**file;
 	char			*line;
@@ -96,7 +96,7 @@ typedef struct 		s_data
 	char			*trad;
 }					t_data;
 
-typedef struct 		s_lab
+typedef struct		s_lab
 {
 	char			*name;
 	int				oct;
@@ -104,12 +104,12 @@ typedef struct 		s_lab
 
 typedef struct		s_var
 {
-	int 			i;
-	int 			j;
-	int 			k;
-	int 			l;
-	int 			toggle;
-	char 			**label_cleaned;
+	int				i;
+	int				j;
+	int				k;
+	int				l;
+	int				toggle;
+	char			**label_cleaned;
 }					t_var;
 
 typedef	void		(*t_trad)(char *, char **, t_data **, int);

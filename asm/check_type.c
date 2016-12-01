@@ -19,15 +19,15 @@ static int		recover_valid_type(int op_code, int *type)
 
 	i = 0;
 	tmp = 0;
-	while (op_tab[op_code - 1].arg[i])
+	while (g_op_tab[op_code - 1].arg[i])
 	{
 		tmp = 0;
 		if (i == 0)
-			(*type) = op_tab[op_code - 1].arg[i];
+			(*type) = g_op_tab[op_code - 1].arg[i];
 		else if (i == 1)
-			(*type) = (*type) | (op_tab[op_code - 1].arg[i] << 4);
+			(*type) = (*type) | (g_op_tab[op_code - 1].arg[i] << 4);
 		else if (i == 2)
-			(*type) = (*type) | (op_tab[op_code - 1].arg[i] << 8);
+			(*type) = (*type) | (g_op_tab[op_code - 1].arg[i] << 8);
 		else
 			return (0);
 		i++;

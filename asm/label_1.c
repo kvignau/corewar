@@ -12,8 +12,7 @@
 
 #include "asm.h"
 
-static	int		front_decl(char *lbl_called, t_dbllist **lst_lines,
-				int i_called, int i_declared)
+static	int		front_decl(t_dbllist **lst_lines, int i_called, int i_declared)
 {
 	t_elem	*tmp;
 	int		nb_oct;
@@ -37,8 +36,7 @@ static	int		front_decl(char *lbl_called, t_dbllist **lst_lines,
 	return (nb_oct);
 }
 
-static	int		back_decl(char *lbl_called, t_dbllist **lst_lines, int i_called,
-		int i_declared)
+static	int		back_decl(t_dbllist **lst_lines, int i_called, int i_declared)
 {
 	t_elem	*tmp;
 	int		nb_oct;
@@ -75,8 +73,7 @@ static void		check_if_minus_one(char **str)
 	}
 }
 
-static char		*trad_label_called(char *lbl_called, char **tmp_trad,
-				t_data **data)
+static char		*trad_label_called(char *lbl_called, t_data **data)
 {
 	int		i_called;
 	int		i_declared;
@@ -89,11 +86,11 @@ static char		*trad_label_called(char *lbl_called, char **tmp_trad,
 		return (NULL);
 	define_index(lbl_called, data, &i_called, &i_declared);
 	if (i_called < i_declared)
-		tmp = ft_itoabase_imax(front_decl(lbl_called, &((*data)->lst_lines),
-								i_called, i_declared), 16);
+		tmp = ft_itoabase_imax(front_decl(&((*data)->lst_lines), i_called,
+			i_declared), 16);
 	else
-		tmp = ft_itoabase_imax(back_decl(lbl_called, &((*data)->lst_lines),
-								i_called, i_declared), 16);
+		tmp = ft_itoabase_imax(back_decl(&((*data)->lst_lines), i_called,
+			i_declared), 16);
 	check_if_minus_one(&tmp);
 	trad_to_ok(&((*data)->lst_lines), lbl_called, i_called);
 	hex_to_lower(&tmp);
@@ -119,7 +116,7 @@ void			trad_dir_label(t_data **data)
 				j++;
 			temp.to_trad = ft_strsub((*data)->tmp_trad, i + 2, j - (i + 2));
 			if (!(temp.trad =
-				trad_label_called(temp.to_trad, &((*data)->tmp_trad), data)))
+				trad_label_called(temp.to_trad, data)))
 				break ;
 			modif_trad(i, j, temp.trad, &((*data)->tmp_trad));
 			ft_strdel(&temp.trad);

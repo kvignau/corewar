@@ -19,8 +19,8 @@ static int	instruc_valid(char **name)
 	i = 0;
 	while (i < 16)
 	{
-		if (ft_strcmp(op_tab[i].name, *name) == 0)
-			return (op_tab[i].op_code);
+		if (ft_strcmp(g_op_tab[i].name, *name) == 0)
+			return (g_op_tab[i].op_code);
 		i++;
 	}
 	ft_strdel(name);
@@ -30,8 +30,11 @@ static int	instruc_valid(char **name)
 static void	make_args_tab(char *line, char *name, t_recup *recup)
 {
 	char	*args;
+	char	*tmp;
 
-	args = ft_strtrim(ft_strsub(line, ft_strlen(name), ft_strlen(line)));
+	tmp = ft_strsub(line, ft_strlen(name), ft_strlen(line));
+	args = ft_strtrim(tmp);
+	free(tmp);
 	recup->args_tab = ft_strsplit(args, ',');
 	ft_strdel(&args);
 	ft_strtrim_tab(recup->args_tab);
@@ -81,7 +84,7 @@ int			check_instruct(char *line, char **name, t_data **data,
 		free_t_recup(&recup);
 		return (0);
 	}
-	if (op_tab[recup.op_code - 1].octcod == 1)
+	if (g_op_tab[recup.op_code - 1].octcod == 1)
 		sum_args(&recup, &hex.hexa);
 	trad_args(&recup, &hex.hexa, data, recup.op_code);
 	dline->nb_oct = sum_nb_oct(hex.hexa);

@@ -19,7 +19,7 @@ int		ft_islabelchar(int c)
 
 	i = 0;
 	j = ft_strlen(LABEL_CHARS);
-	while (c != LABEL_CHARS[i] && i <= j)
+	while (i <= j && c != LABEL_CHARS[i])
 		i++;
 	if (i < j)
 		return (1);

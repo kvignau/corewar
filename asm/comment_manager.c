@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-static void	gotonextline(int *i, int *j, t_data *data, int *comment_size)
+static void		gotonextline(int *i, int *j, t_data *data, int *comment_size)
 {
 	data->comment[*comment_size] = '\n';
 	*i += 1;
@@ -20,14 +20,20 @@ static void	gotonextline(int *i, int *j, t_data *data, int *comment_size)
 	*comment_size += 1;
 }
 
-static void	savecomment(t_data *data, int *comment_size, int *i, int *j)
+static void		savecomment(t_data *data, int *comment_size, int *i, int *j)
 {
 	data->comment[*comment_size] = data->file[*i][*j];
 	*j += 1;
 	*comment_size += 1;
 }
 
-int			comment_manager(t_data *data, int *i, int *j)
+static void		nocomment(t_data *data, int *i, int *j, int comment_size)
+{
+	if (data->file[*i][*j] == '"')
+		data->comment[comment_size] = '\0';
+}
+
+int				comment_manager(t_data *data, int *i, int *j)
 {
 	int		comment_size;
 
@@ -39,8 +45,7 @@ int			comment_manager(t_data *data, int *i, int *j)
 	if (data->file[*i][*j] == '"')
 	{
 		*j += 1;
-		if (data->file[*i][*j] == '"')
-			data->comment[comment_size] = '\0';
+		nocomment(data, i, j, comment_size);
 		while ((data->file[*i][*j] != '"' && comment_size <= 2048 &&
 			*i <= data->nb_lines))
 		{
