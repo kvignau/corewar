@@ -31,7 +31,6 @@ static void	set_new_era(t_cor *core, t_dbllist *pr_list)
 		write(1, "Cycle to die is now ", 20);
 		ft_putnbr(core->cycles_to_die);
 		write(1, "\n", 1);
-		// ft_printf("Cycle to die is now %d\n", core->cycles_to_die);
 	}
 }
 
@@ -90,8 +89,7 @@ int		main(int argc, char **argv)
 		core.options.bool_vm_number = 0;
 		set_up_ncurses(&core);
 	}
-	// tmp2 = champ_list->head;
-	// ft_printf("champ:[0], name:[%s] nb: [%d]\n", (((t_champ *)(tmp2->content))->name),(((t_champ *)(tmp2->content))->vm_number));
+	
 
 	while (1)
 	{
@@ -100,23 +98,13 @@ int		main(int argc, char **argv)
 			write(1, "It is now cycle ", 16);
 			ft_putnbr(core.cycles);
 			write(1, "\n", 1);
-			// ft_printf("It is now cycle %d\n", core.cycles);
 		}
-		// ft_printf("core_cycles [%d]  ", core.cycles);
 	
 		tmp = process_list->head;
 		while (tmp != NULL)
 		{
-
-			// if (core.cycles > 900)
-			// ft_printf("process_list_nb:%d\n", process_list->length);
-			// ft_printf("i:[%%] pc: [%p]\n" /*(((t_proc *)(tmp->content))->i)*/,(((t_proc *)(tmp->content))->pc));
-
 			if (iscmd(tmp->content, &core, champ_list, process_list) == 0)
 				next_pc(1, tmp->content, core.board);
-			// if (((t_proc *)(tmp->content))->pid == 1276)
-				// ft_printf("\n ##########CARRY ==                                           %d \n", ((t_proc *)(tmp->content))->pid);
-			// ((t_proc *)(tmp->content))->last_lived += 1;
 			tmp = tmp->next;
 		}
 		if (options.ncurse == 1)
@@ -125,7 +113,7 @@ int		main(int argc, char **argv)
 		}
 		if(core.cycles_to_die <= 0 || (((core.era_cycles + 1) % core.cycles_to_die) == 1 && (core.cycles != 0)))
 		{
-			// ft_printf("core.cycles_to_die : %d\n core.era_cycles + 1: %d\n", core.cycles_to_die, core.era_cycles + 1);
+
 			core.end = execute_dead_process(&process_list, &core);
 			if (core.era_lives_counter >= NBR_LIVE || (core.check + 1) == MAX_CHECKS)
 				set_new_era(&core, process_list);
@@ -157,36 +145,9 @@ int		main(int argc, char **argv)
 	if (options.ncurse == 1)
 		ncurs_finish(&core);
 	check_winner(&core, champ_list);
-	// ft_print_memory(core.board, MEM_SIZE);
-	/*while (tmp != NULL && tmp2 != NULL)
-	{
-		ft_printf("champ:[%d], name:[%s] nb: [%d]\n", i, (((t_champ *)(tmp->content))->name),(((t_champ *)(tmp->content))->vm_number));
-		ft_printf("champ:[%d], i:[%d] pc: [%x]\n", i, (((t_proc *)(tmp2->content))->i),(((t_proc *)(tmp2->content))->pc));
-		i++;
-		cmd_aff(board, tmp2->content);
-		tmp = tmp->next;
-		tmp2 = tmp2->next;
-	}*/
-	// ft_printf("size before : %d\n", process_list->length);
-	// ft_printf("i:%d, add: {%x}\n", ((t_proc *)(tmp2->content))->i, (((t_proc *)(tmp2->content))->pc));
-	 //while (i < 35)
-	{
-		// cmd_live(core.board, tmp->content, &core, champ_list);
-		//cmd_ldi(board, tmp2->content);
-		//cmd_st(board, tmp2->content);
-		/*cmd_lld(board, tmp2->content);
-		cmd_ld(board, tmp2->content);
-		cmd_st(board, tmp2->content);
-		cmd_ld(board, tmp2->content);
-		cmd_st(board, tmp2->content);
-		cmd_st(board, tmp2->content);*/
-	}
-	/*tmp2 = process_list->head;
-	ft_printf("size after : %d\n", process_list->length);
-	ft_printf("i:%d, add: {%x}\n", ((t_proc *)(tmp2->content))->i, (((t_proc *)(tmp2->content))->pc));
-	tmp2 = process_list->head->next;
-	ft_printf("size after : %d\n", process_list->length);*/
-	// ft_print_memory(core.board, MEM_SIZE);
+
+	while(1)
+		;
 
 	return (0);
 }

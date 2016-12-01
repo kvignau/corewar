@@ -130,6 +130,7 @@ int		champion_validity_checker(t_var *var, t_champ *champ)
 	}
 	champ->comment = ft_hextoa(&stock[(EXEC_MAGIC_LENGTH + PROG_NAME_LENGTH) / 2 + PAD], COMMENT_LENGTH);
 	champ->content = get_content(&stock[(COR_MIN_VALUE / 4)], champ->size * 2);
+	free(stock);
 	return (1);
 }
 

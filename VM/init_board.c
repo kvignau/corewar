@@ -39,6 +39,7 @@ static void	content_to_board(t_elem *champ, t_cor *core,
 	proc->r[0] = (((t_champ *)(champ->content))->vm_number);
 	proc->pid = core->pid;
 	proc->color = ((t_champ *)(champ->content))->id;
+	free(str);
 }
 
 void		init_board(t_dbllist *ch_list, t_dbllist *pr_list, t_cor *core)

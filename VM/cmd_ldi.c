@@ -48,20 +48,14 @@ void					cmd_ldi(unsigned char *board, t_proc *c_proc, t_cor *core)
 	v_opc = 0;
 	if (c_proc->ctp == 25)
 	{
-		type = get_type(board, c_proc);
-		// ft_printf("c_proc->i %d\n", c_proc->i);
-		// ft_printf("c_proc->i + 1 (codage) %x\n", board[(c_proc->i + 1)]);
-		// ft_printf("type arg 1 %d\n", type[0]);
-		// ft_printf("type arg 2 %d\n", type[1]);
 		cmd_size = get_cmd_size(get_type(board, c_proc), 2, 3);
 		if ((v_opc = valid_opc(board, c_proc)) == 1)
 		{
+			type = get_type(board, c_proc);
 			arg_1 = get_arg_value(board, c_proc, type, 1);
 			arg_2 = get_arg_value(board, c_proc, type, 2);
-			// ft_printf("type arg 1 %d\n", arg_1);
-			// ft_printf("REGISTRE 1 %d\n", c_proc->r[0]);
-			// ft_printf("type arg 2 %d\n", arg_2);
-			reg_nb = bit_cat(board, c_proc, get_cmd_size(type, 2, 3) - 1, 1);
+			free(type);
+			reg_nb = bit_cat(board, c_proc, get_cmd_size(get_type(board, c_proc), 2, 3) - 1, 1);
 			if (reg_nb <= REG_NUMBER && reg_nb >= 1 && c_proc->error == 0)
 			{
 				c_proc->r[reg_nb - 1] = bit_cat(board, c_proc, (arg_1 + arg_2) % IDX_MOD, REG_SIZE);

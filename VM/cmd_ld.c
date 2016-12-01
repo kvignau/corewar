@@ -52,13 +52,11 @@ static void	ind_reg(unsigned char *board, t_proc *c_proc, int v)
 
 void		cmd_ld(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
-	int				*type;
 	int				cmd_size;
 
 	cmd_size = get_cmd_size(get_type(board, c_proc), 4, 2);
 	if (c_proc->ctp == 5)
 	{
-		type = get_type(board, c_proc);
 		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x90)
 			dir_reg(board, c_proc, core->options.verbose);
 		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0xd0)

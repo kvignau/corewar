@@ -44,5 +44,6 @@ int		get_cmd_size(int *type, int label_size, int nb_param)
 		else if (type[2] == IND)
 			size += 2;
 	}
+	free(type);
 	return (size);
 }
