@@ -13,8 +13,7 @@
 NAME = corewar
 #-fsanitize=address
 
-FLAGS = -g -Wall -Wextra -fsanitize=address 
-# -Werror
+FLAGS = -g -Wall -Werror -Wextra -fsanitize=address 
 
 # MallocStackLogging=1
 
