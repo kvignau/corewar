@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-static int	dir_reg(t_cor *core, unsigned char *board, t_proc *c_proc)
+static int	dir_reg(unsigned char *board, t_proc *c_proc)
 {
 	unsigned int	id;
 	int				reg_nb;
@@ -30,7 +30,7 @@ static int	dir_reg(t_cor *core, unsigned char *board, t_proc *c_proc)
 	return(reg_nb);
 }
 
-static int	ind_reg(t_cor *core, unsigned char *board, t_proc *c_proc)
+static int	ind_reg(unsigned char *board, t_proc *c_proc)
 {
 	unsigned int	id;
 	int				reg_nb;
@@ -58,9 +58,9 @@ void		cmd_ld(unsigned char *board, t_proc *c_proc, t_cor *core)
 	{
 		type = get_type(board, c_proc);
 		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x90)
-			reg_nb = dir_reg(core, board, c_proc);
+			reg_nb = dir_reg(board, c_proc);
 		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0xd0)
-			reg_nb = ind_reg(core, board, c_proc);
+			reg_nb = ind_reg(board, c_proc);
 		c_proc->ctp = 1;
 		if (core->options.verbose == 1 &&
 			((board[(c_proc->i + 1) % MEM_SIZE] == 0xd0) ||

@@ -37,7 +37,6 @@ static void	set_new_era(t_cor *core, t_dbllist *pr_list)
 
 static void	check_winner(t_cor *core, t_dbllist *ch_list)
 {
-	char			*name;
 	t_elem			*tmp;
 
 	tmp = ch_list->head;
@@ -60,7 +59,6 @@ int		main(int argc, char **argv)
 	t_dbllist		*champ_list;
 	t_dbllist		*process_list;
 	t_elem			*tmp;
-	t_elem			*tmp2;
 	int				i;
 
 	ft_bzero(&core, sizeof(t_cor));

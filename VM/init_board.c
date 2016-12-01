@@ -15,10 +15,9 @@
 static void	content_to_board(t_elem *champ, t_cor *core,
 	t_dbllist *ch_list, t_proc *proc)
 {
-	int		i;
-	int		j;
-	int		k;
-	unsigned char *str;
+	int					i;
+	unsigned int		j;
+	unsigned char		*str;
 
 	i = (((MEM_SIZE) / ch_list->length) *
 		((((t_champ *)(champ->content))->id) - 1));
