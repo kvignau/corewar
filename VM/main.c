@@ -103,10 +103,7 @@ int		main(int argc, char **argv)
 			// ft_printf("It is now cycle %d\n", core.cycles);
 		}
 		// ft_printf("core_cycles [%d]  ", core.cycles);
-		if (options.ncurse == 1)
-		{
-			print_board(&core, process_list, core.board);
-		}
+	
 		tmp = process_list->head;
 		while (tmp != NULL)
 		{
@@ -121,6 +118,10 @@ int		main(int argc, char **argv)
 				// ft_printf("\n ##########CARRY ==                                           %d \n", ((t_proc *)(tmp->content))->pid);
 			// ((t_proc *)(tmp->content))->last_lived += 1;
 			tmp = tmp->next;
+		}
+		if (options.ncurse == 1)
+		{
+			print_board(&core, process_list, core.board);
 		}
 		if(core.cycles_to_die <= 0 || (((core.era_cycles + 1) % core.cycles_to_die) == 1 && (core.cycles != 0)))
 		{

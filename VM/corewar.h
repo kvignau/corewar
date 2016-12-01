@@ -54,7 +54,6 @@ typedef struct		s_cor
 	WINDOW			*windows[2];
 	int				cycle_frequency;
 	int				u_delta_sleep;
-	int				nb_cycles_achieved;
 	int				process_map[4096];
 	int				color_map[4096];
 	int				is_paused;
