@@ -16,7 +16,6 @@ int		set_up_ncurses(t_cor *core)
 {
 	WINDOW		*gauche;
 	WINDOW		*droite;
-	int i;
 
 	initscr();
 	noecho();
@@ -34,13 +33,13 @@ int		set_up_ncurses(t_cor *core)
 	core->cycle_frequency = 0;
 	gauche= subwin(stdscr, 66, 195, 0, 0);// Créé une fenêtre de 66 lignes et de 195 colonnes en 0, 0
 	droite= subwin(stdscr, 66, 50, 0, 195);
-	
+
 	attron(A_STANDOUT);
 	box(gauche, ACS_VLINE, ACS_HLINE);// contour de la box
 	box(droite, ACS_VLINE, ACS_HLINE);
-	
 
-	mvwprintw(droite, 1, 2, "nb proc");	
+
+	mvwprintw(droite, 1, 2, "nb proc");
 	wrefresh(droite);
 
 	core->windows[0] = gauche;

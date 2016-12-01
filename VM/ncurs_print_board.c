@@ -57,7 +57,7 @@ static int		handle_cycle_celerity(char c_input, t_cor *core)
 	return (0);
 }
 
-static int		create_array_process_map(t_dbllist *process_list, int process_map[], t_cor *core)
+static int		create_array_process_map(t_dbllist *process_list, int process_map[])
 {
 	t_elem		*current_node;
 	t_proc		*node_proc;
@@ -87,12 +87,11 @@ int		print_board(t_cor *core, t_dbllist *process_list, unsigned char *board)
 {
 	int		i;
 	int		j;
-	int		nb_process_to_diplay;
 	WINDOW	*gauche;
 	char	c = 'a';
 
 	gauche = core->windows[0];
-	create_array_process_map(process_list, core->process_map, core);
+	create_array_process_map(process_list, core->process_map);
 	i = -1;
 	while (++i < 64)
 	{
