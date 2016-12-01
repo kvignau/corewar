@@ -70,6 +70,28 @@ static	int		is_dir_with_label(char *arg)
 	return (ret);
 }
 
+static	int		is_ind_with_label(char *arg)
+{
+	int		i;
+	char	*label;
+	int		ret;
+
+	i = 0;
+	label = NULL;
+	ret = 0;
+	if (arg[i] != ':')
+		return (0);
+	if (arg[i] == ':')
+	{
+		label = ft_strsub(arg, i + 1, ft_strlen(arg));
+		if (label_valid(label))
+			ret = 1;
+		ft_strdel(&label);
+		return (1);
+	}
+	return (ret);
+}
+
 void			label_called(t_data_line *dline, char **args_tab)
 {
 	int				i;
@@ -86,6 +108,13 @@ void			label_called(t_data_line *dline, char **args_tab)
 		if (is_dir_with_label(args_tab[i]))
 		{
 			caller.name = ft_strsub(args_tab[i], 2, ft_strlen(args_tab[i]));
+			caller.trad = 0;
+			ft_lstdbladd_head(dline->label_called, &caller, sizeof(t_called));
+			j++;
+		}
+		else if (is_ind_with_label(args_tab[i]))
+		{
+			caller.name = ft_strsub(args_tab[i], 1, ft_strlen(args_tab[i]));
 			caller.trad = 0;
 			ft_lstdbladd_head(dline->label_called, &caller, sizeof(t_called));
 			j++;

@@ -19,6 +19,13 @@ int			is_ind(char *arg)
 	i = 0;
 	while (arg[i])
 	{
+		if (i == 0 && arg[i] == ':')
+		{
+			if (label_valid(ft_strsub(arg, 1, ft_strlen(arg))))
+				return (T_IND);
+			else
+				return (0);
+		}
 		if (i == 0 && (arg[i] == '-' || arg[i] == '+'))
 			i++;
 		else if (!(ft_isdigit(arg[i])))
