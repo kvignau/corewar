@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-static int	dir_reg(unsigned char *board, t_proc *c_proc)
+static void	dir_reg(unsigned char *board, t_proc *c_proc, int v)
 {
 	unsigned int	id;
 	int				reg_nb;
@@ -26,11 +26,15 @@ static int	dir_reg(unsigned char *board, t_proc *c_proc)
 			c_proc->carry = 1;
 		else
 			c_proc->carry = 0;
+		if (v == 1)
+		{
+			ft_printf("P% 5d | lld %d r%d\n", c_proc->pid, c_proc->r[reg_nb],
+				reg_nb + 1);
+		}
 	}
-	return(reg_nb);
 }
 
-static int	ind_reg(unsigned char *board, t_proc *c_proc)
+static void	ind_reg(unsigned char *board, t_proc *c_proc, int v)
 {
 	unsigned int	id;
 	int				reg_nb;
@@ -47,29 +51,23 @@ static int	ind_reg(unsigned char *board, t_proc *c_proc)
 			c_proc->carry = 1;
 		else
 			c_proc->carry = 0;
-	}
-	return(reg_nb);
-}
-
-void	cmd_lld(unsigned char *board, t_proc *c_proc, t_cor *core)
-{
-	int				reg_nb;
-
-	if (c_proc->ctp == 10)
-	{
-		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x90)
-			reg_nb = dir_reg(board, c_proc);
-		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0xd0)
-			reg_nb = ind_reg(board, c_proc);
-		c_proc->ctp = 1;
-		if (core->options.verbose == 1 &&
-			((board[(c_proc->i + 1) % MEM_SIZE] == 0xd0) ||
-			(board[(c_proc->i + 1) % MEM_SIZE] == 0x90)) &&
-			(reg_nb < REG_NUMBER && reg_nb >= 0))
+		if (v == 1)
 		{
 			ft_printf("P% 5d | lld %d r%d\n", c_proc->pid, c_proc->r[reg_nb],
 				reg_nb + 1);
 		}
+	}
+}
+
+void	cmd_lld(unsigned char *board, t_proc *c_proc, t_cor *core)
+{
+	if (c_proc->ctp == 10)
+	{
+		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x90)
+			dir_reg(board, c_proc, core->options.verbose);
+		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0xd0)
+			ind_reg(board, c_proc, core->options.verbose);
+		c_proc->ctp = 1;
 		if (core->options.verbose == 1)
 			cmd_verbose(board, c_proc, get_cmd_size(get_type(board, c_proc), 4, 2));
 		c_proc->c_cmd = 0;
