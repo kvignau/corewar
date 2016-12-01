@@ -190,9 +190,7 @@ int					index_label_declared(char *name, t_dbllist *lst_lines);
 int					find_in_lst_called(char *name, t_dbllist *label_called);
 void				define_index(char *name, t_data **data, int *i_called,
 					int *i_declared);
-void				trad_all_label(t_data **data);
-int					trad_dir_label(int *j, int *i, t_data **data);
-int					trad_ind_label(int *j, int *i, t_data **data);
+void				trad_dir_label(t_data **data);
 void				tmp_trad_to_str(t_data **data);
 int					args_for_sum(char *arg);
 void				final_trad(t_data *data, int nb_oct);
@@ -201,8 +199,6 @@ void				trad_to_ok(t_dbllist **lst_lines, char *lbl_called,
 void				modif_trad(int i, int j, char *trad, char **tmp_trad);
 uintmax_t			ft_hextoi(unsigned char *str);
 void				reverse_hexdump(char const *trad, int fd);
-char				*trad_label_called(char *lbl_called, char **tmp_trad,
-					t_data **data);
 
 /*
 **********************  Output  ***********************

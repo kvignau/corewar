@@ -76,20 +76,7 @@ void	reduce_hex_ind(char **to_add, int size)
 	ft_strdel(&tmp);
 }
 
-static void	tmp_trad_ind_label(char *arg, char **hexa)
-{
-	char	*tmp;
-	char	*tmp1;
-	char	*tmp_char;
-
-	tmp_char = ft_strdup("!");
-	tmp = ft_strdup(*hexa);
-	ft_strdel(hexa);
-	tmp1 = ft_strjoinandfree(arg, tmp_char, 2);
-	(*hexa) = ft_strjoinandfree(tmp, tmp1, 3);
-}
-
-static void trad_ind_without_label(char *arg, char **hexa, t_data **data, int op_code)
+void	trad_ind(char *arg, char **hexa, t_data **data, int op_code)
 {
 	char	*tmp;
 	char	*to_add;
@@ -114,12 +101,4 @@ static void trad_ind_without_label(char *arg, char **hexa, t_data **data, int op
 	to_compete = ft_strdup(*hexa);
 	ft_strdel(hexa);
 	(*hexa) = ft_strjoinandfree(to_compete, to_add, 3);
-}
-
-void	trad_ind(char *arg, char **hexa, t_data **data, int op_code)
-{
-	if (arg[0] == ':')
-		tmp_trad_ind_label(arg, hexa);
-	else
-		trad_ind_without_label(arg, hexa, data, op_code);
 }
