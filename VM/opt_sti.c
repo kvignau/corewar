@@ -40,7 +40,6 @@ int					add_ind_reg(unsigned char *board, t_proc *c_proc, int v, int *reg_nb)
 	p1 = bit_cat(board, c_proc, 3, 2);
 	*reg_nb = board[(c_proc->i + 2) % MEM_SIZE] - 1;
 	reg_nb2 = board[(c_proc->i + 5) % MEM_SIZE] - 1;
-	add = (c_proc->r[reg_nb2] + p1) % IDX_MOD;
 	if ((*reg_nb < REG_NUMBER && *reg_nb >= 0) && (reg_nb2 < REG_NUMBER && reg_nb2 >= 0))
 	{
 		add = (c_proc->r[reg_nb2] + p1) % IDX_MOD;
