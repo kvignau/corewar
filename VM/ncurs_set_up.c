@@ -35,8 +35,8 @@ int				set_up_ncurses(t_cor *core)
 	WINDOW		*droite;
 
 	init_ncurses();
-	gauche= subwin(stdscr, 66, 195, 0, 0);
-	droite= subwin(stdscr, 66, 50, 0, 195);
+	gauche = subwin(stdscr, 66, 195, 0, 0);
+	droite = subwin(stdscr, 66, 50, 0, 195);
 	attron(A_STANDOUT);
 	box(gauche, ACS_VLINE, ACS_HLINE);
 	box(droite, ACS_VLINE, ACS_HLINE);

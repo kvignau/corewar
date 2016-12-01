@@ -14,8 +14,8 @@
 
 int		ncurs_finish(t_cor *core)
 {
+	delwin(core->windows[0]);
+	delwin(core->windows[1]);
 	endwin();
-	free(core->windows[0]);
-	free(core->windows[1]);
 	return (0);
 }

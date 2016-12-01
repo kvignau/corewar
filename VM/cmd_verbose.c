@@ -32,6 +32,7 @@ void			cmd_verbose(unsigned char *board, t_proc *c_proc, int offset)
 		i++;
 	}
 	ft_putstr(hex1);
+	free(hex1);
 	i = 0;
 	write(1, " -> 0x", 6);
 	while(i + ft_strlen(hex2) < 4)
@@ -40,6 +41,7 @@ void			cmd_verbose(unsigned char *board, t_proc *c_proc, int offset)
 		i++;
 	}
 	ft_putstr(hex2);
+	free(hex2);
 	write(1, ") ", 2);
 	// ft_printf("%.4x -> 0x%.4x) ", c_proc->i, (c_proc->i + offset));
 	i = 0;
@@ -53,6 +55,7 @@ void			cmd_verbose(unsigned char *board, t_proc *c_proc, int offset)
 			j++;
 		}
 		ft_putstr(hex3);
+		free(hex3);
 		write(1, " ", 1);
 		// ft_printf("%.2x ", board[(c_proc->i + i) % MEM_SIZE]);
 		i++;

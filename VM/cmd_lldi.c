@@ -47,9 +47,9 @@ void					cmd_lldi(unsigned char *board, t_proc *c_proc, t_cor *core)
 	v_opc = 0;
 	if (c_proc->ctp == 50)
 	{
-		type = get_type(board, c_proc);
 		if ((v_opc = valid_opc(board, c_proc)) == 1)
 		{
+			type = get_type(board, c_proc);
 			arg_1 = get_arg_value(board, c_proc, type, 1);
 			arg_2 = get_arg_value(board, c_proc, type, 2);
 			reg_nb = bit_cat(board, c_proc, get_cmd_size(type, 2, 3) - 1, 1);

@@ -146,7 +146,5 @@ int		main(int argc, char **argv)
 		ncurs_finish(&core);
 	check_winner(&core, champ_list);
 
-	
-
 	return (0);
 }
