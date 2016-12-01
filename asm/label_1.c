@@ -75,7 +75,7 @@ static void		check_if_minus_one(char **str)
 	}
 }
 
-static char		*trad_label_called(char *lbl_called, char **tmp_trad,
+char		*trad_label_called(char *lbl_called, char **tmp_trad,
 				t_data **data)
 {
 	int		i_called;
@@ -101,29 +101,24 @@ static char		*trad_label_called(char *lbl_called, char **tmp_trad,
 	return (tmp);
 }
 
-void			trad_dir_label(t_data **data)
+void			trad_all_label(t_data **data)
 {
 	int		i;
 	int		j;
-	t_tmp2	temp;
 
 	i = 0;
 	j = 0;
-	ini_tmp2(&temp);
 	while ((*data)->tmp_trad[i])
 	{
 		if ((*data)->tmp_trad[i] == '%')
 		{
-			j = i + 1;
-			while ((*data)->tmp_trad[j] != '!')
-				j++;
-			temp.to_trad = ft_strsub((*data)->tmp_trad, i + 2, j - (i + 2));
-			if (!(temp.trad =
-				trad_label_called(temp.to_trad, &((*data)->tmp_trad), data)))
+			if (trad_dir_label(&j, &i, data) == 0)
 				break ;
-			modif_trad(i, j, temp.trad, &((*data)->tmp_trad));
-			ft_strdel(&temp.trad);
-			ft_strdel(&temp.to_trad);
+		}
+		else if ((*data)->tmp_trad[i] == ':')
+		{
+			if (trad_ind_label(&j, &i, data) == 0)
+				break ;
 		}
 		j = 0;
 		i++;

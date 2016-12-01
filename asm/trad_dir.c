@@ -80,12 +80,12 @@ static	void	tmp_trad_dir_label(char *arg, char **hexa)
 {
 	char	*tmp;
 	char	*tmp1;
-	char	*pourcent;
+	char	*tmp_char;
 
-	pourcent = ft_strdup("!");
+	tmp_char = ft_strdup("!");
 	tmp = ft_strdup(*hexa);
 	ft_strdel(hexa);
-	tmp1 = ft_strjoinandfree(arg, pourcent, 2);
+	tmp1 = ft_strjoinandfree(arg, tmp_char, 2);
 	(*hexa) = ft_strjoinandfree(tmp, tmp1, 3);
 }
 
