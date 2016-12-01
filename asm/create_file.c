@@ -58,4 +58,5 @@ void			create_cor(t_data *data, char *file_name)
 	open(ft_strjoin(name, ".cor"), O_WRONLY);
 	reverse_hexdump(data->tmp_trad, fd);
 	close(fd);
+	ft_printf("Writing output program to %s.cor\n", name);
 }
