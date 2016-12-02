@@ -25,6 +25,6 @@ void	intro(t_dbllist *champ_list)
 			(((t_champ *)(tmp->content))->size),
 			(((t_champ *)(tmp->content))->name),
 			(((t_champ *)(tmp->content))->comment));
-		tmp= tmp->next;
+		tmp = tmp->next;
 	}
 }

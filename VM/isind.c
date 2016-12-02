@@ -12,7 +12,8 @@
 
 #include "corewar.h"
 
-int					isind(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
+int					isind(unsigned char *board, t_proc *c_proc,
+	int *type, int arg_nb)
 {
 	int				result;
 	int				id;

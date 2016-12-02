@@ -23,7 +23,7 @@ static void	content_to_board(t_elem *champ, t_cor *core,
 		((((t_champ *)(champ->content))->id) - 1));
 	proc->i = i;
 	j = 0;
-	str =(unsigned char *)ft_memalloc(3);
+	str = (unsigned char *)ft_memalloc(3);
 	proc->pc = &(core->board[i]);
 	proc->live = 0;
 	proc->ctp = 0;

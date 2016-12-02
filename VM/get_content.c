@@ -25,7 +25,7 @@ static unsigned char	*addzero(unsigned char *str, int len)
 	return (str);
 }
 
-static void	tolower(unsigned char *content, int tmp)
+static void				tolower(unsigned char *content, int tmp)
 {
 	int				i;
 
@@ -48,15 +48,16 @@ unsigned char			*get_content(int *str, int size)
 	content = (unsigned char *)ft_memalloc(1);
 	i = 0;
 	tmp = size;
-
 	while (size > 0)
 	{
 		if (size >= 8)
 			len = 8;
 		else
 			len = size;
-		nb = addzero((unsigned char *)ft_itoabase_uimax((unsigned int)str[i], 16), len);
-		content = (unsigned char *)ft_strjoinandfree((char *)content, (char *)nb, 3);
+		nb = addzero((unsigned char *)ft_itoabase_uimax((unsigned int)str[i],
+			16), len);
+		content = (unsigned char *)ft_strjoinandfree((char *)content,
+			(char *)nb, 3);
 		i += 2;
 		size -= 8;
 	}
