@@ -19,7 +19,7 @@ void	ft_print_memory(unsigned char *ptr, int memsize)
 	i = 0;
 	while (i < memsize)
 	{
-		if (i % 32 == 0)
+		if (i % 64 == 0)
 		{
 			if (i != 0)
 				write(1, "\n", 1);
