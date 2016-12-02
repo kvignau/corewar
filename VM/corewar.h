@@ -95,104 +95,119 @@ typedef struct		s_proc
 **********************  Display  **********************
 */
 
-int			corewar_usage(int argc);
-void		ft_print_memory(unsigned char *ptr, int memsize);
-void		intro(t_dbllist *champ_list);
+int					corewar_usage(int argc);
+void				ft_print_memory(unsigned char *ptr, int memsize);
+void				intro(t_dbllist *champ_list);
 
 /*
 **********************  Options  **********************
 */
 
-int			options_checkers(int argc, char **argv, t_options *options,
+int					options_checkers(int argc, char **argv, t_options *options,
 	t_dbllist *champ_list);
-void		cmd_verbose(unsigned char *board, t_proc *c_proc, int offset);
-void		cmd_verbose_sti(unsigned char *board, t_proc *c_proc, int p1, int p2);
-void		cmd_verbose_st(int pid, int reg_nb, int id);
-void		cmd_verbose_ld(int pid, int reg_nb, int id);
-void		cmd_verbose_zjmp_live(char *cmd, int pid, int id);
+void				cmd_verbose(unsigned char *board, t_proc *c_proc,
+	int offset);
+void				cmd_verbose_sti(unsigned char *board, t_proc *c_proc,
+	int p1, int p2);
+void				cmd_verbose_st(int pid, int reg_nb, int id);
+void				cmd_verbose_ld(int pid, int reg_nb, int id);
+void				cmd_verbose_zjmp_live(char *cmd, int pid, int id);
 
 /*
 **********************  Checkers  **********************
 */
 
-int			champions_maker(t_dbllist *champ_list, t_options *options,
+int					champions_maker(t_dbllist *champ_list, t_options *options,
 	t_var *var);
 
 /*
 **********************  Utils  **********************
 */
 
-uintmax_t		ft_hextoi(unsigned char *str);
-char			*ft_hextoa(int *str, int size);
-unsigned char	*get_content(int *str, int size);
-int				reverse_byte(int buf, int readv);
-int				isreg(unsigned char *board, t_proc *c_proc, int *type, int arg_nb);
-int				isdir(unsigned char *board, t_proc *c_proc, int *type, int arg_nb);
-int				isind(unsigned char *board, t_proc *c_proc, int *type, int arg_nb);
+uintmax_t			ft_hextoi(unsigned char *str);
+char				*ft_hextoa(int *str, int size);
+unsigned char		*get_content(int *str, int size);
+int					reverse_byte(int buf, int readv);
+int					isreg(unsigned char *board, t_proc *c_proc, int *type,
+	int arg_nb);
+int					isdir(unsigned char *board, t_proc *c_proc, int *type,
+	int arg_nb);
+int					isind(unsigned char *board, t_proc *c_proc, int *type,
+	int arg_nb);
 
 /*
 **********************  Memory Setter  **********************
 */
 
-unsigned char	*memory(void);
-void			init_board(t_dbllist *ch_list, t_dbllist *pr_list, t_cor *core);
+unsigned char		*memory(void);
+void				init_board(t_dbllist *ch_list, t_dbllist *pr_list,
+	t_cor *core);
 
 /*
 **********************  Commands **********************
 */
 
-
-int				get_cmd_size(int *type, int label_size, int nb_param);
-int				*get_type(unsigned char *board, t_proc *c_proc);
-int				get_register_name(unsigned char *board, t_proc *c_proc, int i[]);
-int				get_arg_val(int oc_trunc, unsigned char *board, t_proc *c_proc, int i[]);
-unsigned int	bit_cat(unsigned char *board, t_proc *c_proc, int start, int size);
-int				bit_cat_no_mod(unsigned char *board, t_proc *c_proc, int start, int size);
-void			next(unsigned char *board, t_proc *c_proc, int nb, int verbose);
-void			next_pc(int counter_offset, t_proc *c_proc, unsigned char *board);
-void			cmd_live(unsigned char *board, t_proc *c_proc, t_cor *core,
+int					get_cmd_size(int *type, int label_size, int nb_param);
+int					*get_type(unsigned char *board, t_proc *c_proc);
+int					get_register_name(unsigned char *board, t_proc *c_proc,
+	int i[]);
+int					get_arg_val(int oc_trunc, unsigned char *board,
+	t_proc *c_proc, int i[]);
+unsigned int		bit_cat(unsigned char *board, t_proc *c_proc, int start,
+	int size);
+int					bit_cat_no_mod(unsigned char *board, t_proc *c_proc,
+	int start, int size);
+void				next(unsigned char *board, t_proc *c_proc,
+	int nb, int verbose);
+void				next_pc(int counter_offset, t_proc *c_proc,
+	unsigned char *board);
+void				cmd_live(unsigned char *board, t_proc *c_proc, t_cor *core,
 	t_dbllist *ch_list);
-void			cmd_ld(unsigned char *board, t_proc *c_proc, t_cor *core);
-void			cmd_st(unsigned char *board, t_proc *c_proc, t_cor *core);
-void			cmd_add(unsigned char *board, t_proc *c_proc, t_cor *core);
-void			cmd_sub(unsigned char *board, t_proc *c_proc, t_cor *core);
-void			cmd_and(unsigned char *board, t_proc *c_proc, t_cor *core);
-void			cmd_or(unsigned char *board, t_proc *c_proc, t_cor *core);
-void			cmd_xor(unsigned char *board, t_proc *c_proc, t_cor *core);
-void			cmd_zjmp(unsigned char *board, t_proc *c_proc, t_cor *core);
-void			cmd_ldi(unsigned char *board, t_proc *c_proc, t_cor *core);
-void			cmd_sti(unsigned char *board, t_proc *c_proc, t_cor *core);
-void			sti_result(t_cor *core, t_proc *c_proc, int reg_nb, unsigned int add);
-int				add_ind_reg(unsigned char *board, t_proc *c_proc, int v, int *reg_nb);
-int				add_reg_reg(unsigned char *board, t_proc *c_proc, int v, int *reg_nb);
-void			cmd_fork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list, t_cor *core);
-void			cmd_lld(unsigned char *board, t_proc *c_proc, t_cor *core);
-void			cmd_lldi(unsigned char *board, t_proc *c_proc, t_cor *core);
-void			cmd_lfork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list, t_cor *core);
-void			cmd_aff(unsigned char *board, t_proc *c_proc, t_cor *core);
-
+void				cmd_ld(unsigned char *board, t_proc *c_proc, t_cor *core);
+void				cmd_st(unsigned char *board, t_proc *c_proc, t_cor *core);
+void				cmd_add(unsigned char *board, t_proc *c_proc, t_cor *core);
+void				cmd_sub(unsigned char *board, t_proc *c_proc, t_cor *core);
+void				cmd_and(unsigned char *board, t_proc *c_proc, t_cor *core);
+void				cmd_or(unsigned char *board, t_proc *c_proc, t_cor *core);
+void				cmd_xor(unsigned char *board, t_proc *c_proc, t_cor *core);
+void				cmd_zjmp(unsigned char *board, t_proc *c_proc, t_cor *core);
+void				cmd_ldi(unsigned char *board, t_proc *c_proc, t_cor *core);
+void				cmd_sti(unsigned char *board, t_proc *c_proc, t_cor *core);
+void				sti_result(t_cor *core, t_proc *c_proc, int reg_nb,
+	unsigned int add);
+int					add_ind_reg(unsigned char *board, t_proc *c_proc, int v,
+	int *reg_nb);
+int					add_reg_reg(unsigned char *board, t_proc *c_proc, int v,
+	int *reg_nb);
+void				cmd_fork(unsigned char *board, t_proc *c_proc,
+	t_dbllist *pr_list, t_cor *core);
+void				cmd_lld(unsigned char *board, t_proc *c_proc, t_cor *core);
+void				cmd_lldi(unsigned char *board, t_proc *c_proc, t_cor *core);
+void				cmd_lfork(unsigned char *board, t_proc *c_proc,
+	t_dbllist *pr_list, t_cor *core);
+void				cmd_aff(unsigned char *board, t_proc *c_proc, t_cor *core);
 
 /*
 **********************  Game Loop **********************
 */
 
-void			init(t_cor *core, t_options *options);
-int				game_loop(t_cor *core, t_dbllist *ch_list, t_dbllist *pr_list);
-void			verbose_cycles(t_cor *core);
-int				execute_dead_process(t_dbllist **pr_list, t_cor *core);
-int				iscmd(t_proc *c_proc, t_cor *core, t_dbllist *ch_list,
+void				init(t_cor *core, t_options *options);
+int					game_loop(t_cor *core, t_dbllist *ch_list,
 	t_dbllist *pr_list);
-void			check_cmd(t_cor *core, t_dbllist **ch_list,
+void				verbose_cycles(t_cor *core);
+int					execute_dead_process(t_dbllist **pr_list, t_cor *core);
+int					iscmd(t_proc *c_proc, t_cor *core, t_dbllist *ch_list,
+	t_dbllist *pr_list);
+void				check_cmd(t_cor *core, t_dbllist **ch_list,
 	t_dbllist **pr_list);
-
 
 /*
 **********************  Ncurses **********************
 */
 
-int				set_up_ncurses(t_cor *core);
-int 			print_board(t_cor *core, t_dbllist *process_list, unsigned char *board);
-int				ncurs_finish(t_cor *core);
-
+int					set_up_ncurses(t_cor *core);
+int					print_board(t_cor *core, t_dbllist *process_list,
+	unsigned char *board);
+int					ncurs_finish(t_cor *core);
 
 #endif
