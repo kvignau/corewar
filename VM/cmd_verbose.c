@@ -104,6 +104,8 @@ void			cmd_verbose_st(int pid, int reg_nb, int id)
 		write(1, " ", 1);
 	if (pid < 100000)
 		write(1, " ", 1);
+	if (pid >= 100000)
+		write(1, " ", 1);
 	ft_putnbr(pid);
 	write(1, " | st r", 7);
 	ft_putnbr(reg_nb);

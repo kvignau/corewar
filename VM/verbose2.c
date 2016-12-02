@@ -30,6 +30,8 @@ void		cmd_verbose_zjmp_live(char *cmd, int pid, int id)
 		write(1, " ", 1);
 	if (pid < 100000)
 		write(1, " ", 1);
+	if (pid >= 100000)
+		write(1, " ", 1);
 	ft_putnbr(pid);
 	write(1, " | ", 3);
 	write(1, cmd, 4);

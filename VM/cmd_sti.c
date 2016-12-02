@@ -12,7 +12,8 @@
 
 #include "corewar.h"
 
-static int				add_dir_reg(unsigned char *board, t_proc *c_proc, int v, int *reg_nb)
+static int	add_dir_reg(unsigned char *board, t_proc *c_proc, int v,
+	int *reg_nb)
 {
 	unsigned int		add;
 	unsigned int		id;
@@ -24,18 +25,21 @@ static int				add_dir_reg(unsigned char *board, t_proc *c_proc, int v, int *reg_
 	*reg_nb = board[(c_proc->i + 2) % MEM_SIZE] - 1;
 	reg_nb2 = board[(c_proc->i + 5) % MEM_SIZE] - 1;
 	id = bit_cat(board, c_proc, 3, 2);
-	if ((*reg_nb < REG_NUMBER && *reg_nb >= 0) && (reg_nb2 < REG_NUMBER && reg_nb2 >= 0))
+	if ((*reg_nb < REG_NUMBER && *reg_nb >= 0) && (reg_nb2 < REG_NUMBER &&
+		reg_nb2 >= 0))
 	{
 		add = (c_proc->r[reg_nb2] + bit_cat(board, c_proc, id, 4)) % IDX_MOD;
 		if (v == 1)
-			cmd_verbose_sti(board, c_proc, bit_cat(board, c_proc, id, 4), c_proc->r[reg_nb2]);
+			cmd_verbose_sti(board, c_proc, bit_cat(board, c_proc, id, 4),
+				c_proc->r[reg_nb2]);
 		return (add);
 	}
 	c_proc->error = 1;
 	return (-1);
 }
 
-static int				add_dir_ind(unsigned char *board, t_proc *c_proc, int v, int *reg_nb)
+static int	add_dir_ind(unsigned char *board, t_proc *c_proc, int v,
+	int *reg_nb)
 {
 	int					add;
 	int					id;
@@ -57,7 +61,8 @@ static int				add_dir_ind(unsigned char *board, t_proc *c_proc, int v, int *reg_
 	return (-1);
 }
 
-static int				add_ind_ind(unsigned char *board, t_proc *c_proc, int v, int *reg_nb)
+static int	add_ind_ind(unsigned char *board, t_proc *c_proc, int v,
+	int *reg_nb)
 {
 	unsigned int		add;
 	short		p1;
@@ -78,7 +83,8 @@ static int				add_ind_ind(unsigned char *board, t_proc *c_proc, int v, int *reg_
 	return (-1);
 }
 
-static int				add_reg_ind(unsigned char *board, t_proc *c_proc, int v, int *reg_nb)
+static int	add_reg_ind(unsigned char *board, t_proc *c_proc, int v,
+	int *reg_nb)
 {
 	unsigned int		add;
 	int					reg_nb2;
@@ -87,18 +93,20 @@ static int				add_reg_ind(unsigned char *board, t_proc *c_proc, int v, int *reg_
 	reg_nb2 = 0;
 	*reg_nb = board[(c_proc->i + 2) % MEM_SIZE] - 1;
 	reg_nb2 = board[(c_proc->i + 3) % MEM_SIZE] - 1;
-	if ((*reg_nb < REG_NUMBER && *reg_nb >= 0) && (reg_nb2 < REG_NUMBER && reg_nb2 >= 0))
+	if ((*reg_nb < REG_NUMBER && *reg_nb >= 0) && (reg_nb2 < REG_NUMBER &&
+		reg_nb2 >= 0))
 	{
 		add = (c_proc->r[reg_nb2] + bit_cat(board, c_proc, 4, 2)) % IDX_MOD;
 		if (v == 1)
-			cmd_verbose_sti(board, c_proc, c_proc->r[reg_nb2], bit_cat(board, c_proc, 4, 2));
+			cmd_verbose_sti(board, c_proc, c_proc->r[reg_nb2],
+				bit_cat(board, c_proc, 4, 2));
 		return (add);
 	}
 	c_proc->error = 1;
 	return (-1);
 }
 
-void					cmd_sti(unsigned char *board, t_proc *c_proc, t_cor *core)
+void		cmd_sti(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
 	int					reg_nb;
 	int					cmd_size;
@@ -128,11 +136,6 @@ void					cmd_sti(unsigned char *board, t_proc *c_proc, t_cor *core)
 			cmp = -1;
 		if (cmp != -1 && c_proc->error == 0)
 			sti_result(core, c_proc, reg_nb, add);
-		// if (core->cycles > 1970 && core->cycles < 2000)
-		// {
-		// 	ft_printf("oct : %x\n", board[(c_proc->i + 1) % MEM_SIZE]);
-		// 	ft_printf("add : %d\n", add);
-		// }
 		if (core->options.verbose == 1)
 			cmd_verbose(board, c_proc, cmd_size);
 		c_proc->c_cmd = 0;

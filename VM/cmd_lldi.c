@@ -12,19 +12,20 @@
 
 #include "corewar.h"
 
-static unsigned int		get_arg_value(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
+static int	get_arg_value(unsigned char *board, t_proc *c_proc, int *type,
+	int arg_nb)
 {
 	if (type[arg_nb - 1] == REG)
-		return(isreg(board, c_proc, type, arg_nb));
+		return (isreg(board, c_proc, type, arg_nb));
 	else if (type[arg_nb - 1] == DIR)
-		return (isdir(board, c_proc, type, arg_nb));
+		return ((short)isdir(board, c_proc, type, arg_nb));
 	else if (type[arg_nb - 1] == IND)
 		return (isind(board, c_proc, type, arg_nb));
 	else
 		return (0);
 }
 
-static int				valid_opc(unsigned char *board, t_proc *c_proc)
+static int	valid_opc(unsigned char *board, t_proc *c_proc)
 {
 	int		cmp;
 
@@ -35,44 +36,51 @@ static int				valid_opc(unsigned char *board, t_proc *c_proc)
 	return (0);
 }
 
-void					cmd_lldi(unsigned char *board, t_proc *c_proc, t_cor *core)
+static void	is_valid_opc(t_cor *core, t_proc *c_proc, unsigned char *board,
+	int cmd_size)
 {
-	int					reg_nb;
-	int					*type;
-	int					arg_1;
-	int					arg_2;
-	int					v_opc;
+	int			arg_1;
+	int			arg_2;
+	int			*type;
+	int			reg_nb;
 
-	reg_nb = 0;
-	v_opc = 0;
+	reg_nb = -1;
+	type = get_type(board, c_proc);
+	arg_1 = get_arg_value(board, c_proc, type, 1);
+	arg_2 = get_arg_value(board, c_proc, type, 2);
+	free(type);
+	reg_nb = board[(c_proc->i + cmd_size - 1) % MEM_SIZE];
+	if (reg_nb <= REG_NUMBER && reg_nb >= 1 && c_proc->error == 0)
+	{
+		c_proc->r[reg_nb - 1] = bit_cat(board, c_proc, (arg_1 + arg_2),
+			REG_SIZE);
+		if (core->options.verbose == 1)
+		{
+			ft_printf("P% 5d | lldi %d %d r%d\n", c_proc->pid, arg_1, arg_2,
+			bit_cat(board, c_proc, cmd_size - 1, 1));
+			ft_printf(
+				"       | -> load from %d + %d = %d (with pc and mod %d)\n"
+				, arg_1, arg_2, arg_1 + arg_2,
+				(arg_1 + arg_2) + c_proc->i);
+		}
+	}
+}
+
+void		cmd_lldi(unsigned char *board, t_proc *c_proc, t_cor *core)
+{
+	int					cmd_size;
+
 	if (c_proc->ctp == 50)
 	{
-		if ((v_opc = valid_opc(board, c_proc)) == 1)
-		{
-			type = get_type(board, c_proc);
-			arg_1 = get_arg_value(board, c_proc, type, 1);
-			arg_2 = get_arg_value(board, c_proc, type, 2);
-			reg_nb = bit_cat(board, c_proc, get_cmd_size(type, 2, 3) - 1, 1);
-			if (reg_nb <= REG_NUMBER && reg_nb >= 1)
-			{
-				c_proc->r[reg_nb - 1] = bit_cat(board, c_proc, (arg_1 + arg_2), REG_SIZE);
-				if (core->options.verbose == 1)
-				{
-					ft_printf("P% 5d | lldi %d %d r%d\n", c_proc->pid, arg_1, arg_2, reg_nb);
-					ft_printf("       | -> load from %d + %d = %d (with pc %d)\n",
-						arg_1, arg_2, arg_1 + arg_2, (arg_1 + arg_2 + c_proc->i));
-				}
-			}
-		}
-		if ((c_proc->r[reg_nb - 1] % MEM_SIZE) == 0)
-			c_proc->carry = 1;
-		else
-			c_proc->carry = 0;
+		cmd_size = get_cmd_size(get_type(board, c_proc), 2, 3);
+		if (valid_opc(board, c_proc) == 1)
+			is_valid_opc(core, c_proc, board, cmd_size);
 		if (core->options.verbose == 1)
-			cmd_verbose(board, c_proc, get_cmd_size(get_type(board, c_proc), 2, 3));
+			cmd_verbose(board, c_proc, cmd_size);
 		c_proc->c_cmd = 0;
-		next_pc(get_cmd_size(get_type(board, c_proc), 2, 3), c_proc, board);
+		next_pc(cmd_size, c_proc, board);
 		c_proc->ctp = 1;
+		c_proc->error = 0;
 	}
 	else
 		c_proc->ctp += 1;
