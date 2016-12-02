@@ -6,7 +6,7 @@
 #    By: kvignau <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/04 10:52:32 by kvignau           #+#    #+#              #
-#    Updated: 2016/12/02 03:31:57 by mchevall         ###   ########.fr        #
+#    Updated: 2016/12/02 06:26:20 by mchevall         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ FLAGS = -g -Wall -Werror -Wextra
 
 # MallocStackLogging=1
 
-SRC = main.c op.c corewar_usage.c options_checkers.c champions_maker.c \
+SRC = main.c corewar_usage.c options_checkers.c champions_maker.c \
 ft_print_memory.c memory.c ft_hextoa.c get_content.c ft_hextoi.c\
 init_board.c intro.c cmd_aff.c cmd_fork.c next_pc.c cmd_ld.c cmd_lfork.c\
 bit_cat.c cmd_ldi.c cmd_st.c cmd_add.c cmd_sub.c cmd_zjmp.c get_type.c\
