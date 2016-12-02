@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-static void		end_add(unsigned char *board, t_proc *c_proc, t_cor *core)
+static void		end_sub(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
 	if (core->options.verbose == 1)
 		cmd_verbose(board, c_proc, (get_cmd_size(get_type(board, c_proc),
