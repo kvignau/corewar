@@ -76,6 +76,13 @@ typedef struct		s_var
 	char			**argv;
 	int				error;
 }					t_var;
+typedef struct		s_aox
+{
+	int				arg1;
+	int				arg2;
+	int				r_dest;
+	int				o_code;
+}					t_aox;
 typedef struct		s_proc
 {
 	int				r[REG_NUMBER];
