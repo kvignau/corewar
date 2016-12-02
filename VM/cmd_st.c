@@ -21,8 +21,10 @@ static void		result_st(t_cor *core, t_proc *c_proc, int reg_nb, short int id)
 	result = c_proc->r[reg_nb] >> 24;
 	while (i < REG_SIZE)
 	{
-		core->board[(c_proc->i + ((unsigned int)(id % IDX_MOD) + i)) % MEM_SIZE] = result;
-		core->color_map[(c_proc->i + ((unsigned int)(id % IDX_MOD) + i)) % MEM_SIZE] = c_proc->color;
+		core->board[(c_proc->i + ((unsigned int)(id % IDX_MOD) +
+			i)) % MEM_SIZE] = result;
+		core->color_map[(c_proc->i + ((unsigned int)(id % IDX_MOD) +
+			i)) % MEM_SIZE] = c_proc->color;
 		result = c_proc->r[reg_nb] >> (24 - (8 * (i + 1)));
 		i++;
 	}
@@ -50,7 +52,8 @@ static void		reg_reg(unsigned char *board, t_proc *c_proc, int verbose)
 
 	reg_nb = (int)(board[(c_proc->i + 3) % MEM_SIZE]) - 1;
 	reg_nb2 = (int)(board[(c_proc->i + 2) % MEM_SIZE]) - 1;
-	if ((reg_nb < REG_NUMBER && reg_nb >= 0) && (reg_nb2 < REG_NUMBER && reg_nb2 >= 0))
+	if ((reg_nb < REG_NUMBER && reg_nb >= 0) &&
+		(reg_nb2 < REG_NUMBER && reg_nb2 >= 0))
 	{
 		if (verbose == 1)
 			cmd_verbose_st(c_proc->pid, reg_nb2 + 1, reg_nb + 1);
@@ -58,7 +61,7 @@ static void		reg_reg(unsigned char *board, t_proc *c_proc, int verbose)
 	}
 }
 
-void	cmd_st(unsigned char *board, t_proc *c_proc, t_cor *core)
+void			cmd_st(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
 	int				cmd_size;
 
