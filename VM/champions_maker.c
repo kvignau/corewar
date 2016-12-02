@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-int		reverse_byte(int buf, int readv)
+int				reverse_byte(int buf, int readv)
 {
 	if (readv == (sizeof(int)))
 		return (((buf >> 24) & 0xff) |
@@ -29,7 +29,7 @@ int		reverse_byte(int buf, int readv)
 		return(buf);
 }
 
-int		filetotab(int **stock, int *file_size, t_var *var)
+static int		filetotab(int **stock, int *file_size, t_var *var)
 {
 	int	fd;
 	int	buf;
@@ -54,56 +54,7 @@ int		filetotab(int **stock, int *file_size, t_var *var)
 	return (((*file_size) <= COR_MIN_VALUE) ? -3 : 1);
 }
 
-void	invalid_file(int error, t_var *var)
-{
-	if (error == 1)
-	{
-		ft_putstr_fd("File ", 2);
-		ft_putstr_fd(var->argv[var->i], 2);
-		ft_putstr_fd(" must be at most ",2);
-		ft_putnbr_fd(COR_MAX_VALUE, 2);
-		ft_putstr_fd(" bytes to be a valid champion.\n", 2);
-	}
-	else if (error == 2)
-	{
-		ft_putstr_fd("File ", 2);
-		ft_putstr_fd(var->argv[var->i], 2);
-		ft_putstr_fd("must be at least ", 2);
-		ft_putnbr_fd(COR_MIN_VALUE + 1, 2);
-		ft_putstr_fd(" bytes to be a valid champion.\n", 2);
-	}
-	else if (error == 3)
-	{
-		ft_putstr_fd("File ", 2);
-		ft_putstr_fd(var->argv[var->i], 2);
-		ft_putstr_fd(" has an invalid header.\n", 2);
-	}
-	else if (error == 4)
-	{
-		ft_putstr_fd("File ", 2);
-		ft_putstr_fd(var->argv[var->i], 2);
-		ft_putstr_fd(" is not the size specified in header.\n", 2);
-	}
-}
-
-void	error_manager(int ret, t_var *var)
-{
-	ft_putstr_fd("Error: ", 2);
-	if (ret == 0)
-		ft_putstr_fd("Open error.\n", 2);
-	else if (ret == -1)
-		ft_putstr_fd("Read error.\n", 2);
-	else if (ret == -2)
-		invalid_file(1, var);
-	else if (ret == -3)
-		invalid_file(2, var);
-	else if (ret == -4)
-		invalid_file(3, var);
-	else if (ret == -5)
-		invalid_file(4, var);
-}
-
-int		champion_validity_checker(t_var *var, t_champ *champ)
+static int		champion_validity_checker(t_var *var, t_champ *champ)
 {
 	int					file_size;
 	int					*stock;
@@ -134,7 +85,7 @@ int		champion_validity_checker(t_var *var, t_champ *champ)
 	return (1);
 }
 
-int		set_champion(t_var *var, t_options *opt, t_champ *champ)
+static int		set_champion(t_var *var, t_options *opt, t_champ *champ)
 {
 	static int			id = 1;
 	static unsigned int	vm_number = -1;
