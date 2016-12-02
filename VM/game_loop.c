@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-void	init(t_cor *core, t_options *options)
+void			init(t_cor *core, t_options *options)
 {
 	int				i;
 
@@ -34,11 +34,10 @@ void	init(t_cor *core, t_options *options)
 		core->options.bool_dump = 0;
 		core->options.bool_vm_number = 0;
 		set_up_ncurses(core);
-
 	}
 }
 
-static void	set_new_era(t_cor *core, t_dbllist *pr_list)
+static void		set_new_era(t_cor *core, t_dbllist *pr_list)
 {
 	t_elem			*tmp;
 
@@ -52,7 +51,7 @@ static void	set_new_era(t_cor *core, t_dbllist *pr_list)
 		((t_proc *)(tmp->content))->live = 0;
 		tmp = tmp->next;
 	}
-		if (core->options.cycle == 1)
+	if (core->options.cycle == 1)
 	{
 		write(1, "Cycle to die is now ", 20);
 		ft_putnbr(core->cycles_to_die);
@@ -85,14 +84,14 @@ static void		last_lived_add(t_dbllist **pr_list)
 	}
 }
 
-int		game_loop(t_cor *core, t_dbllist *ch_list, t_dbllist *pr_list)
+int				game_loop(t_cor *core, t_dbllist *ch_list, t_dbllist *pr_list)
 {
 	if (core->options.cycle == 1 && core->cycles != 0)
 		verbose_cycles(core);
 	check_cmd(core, &ch_list, &pr_list);
 	if (core->options.ncurse == 1)
 		print_board(core, pr_list, core->board);
-	if(core->cycles_to_die <= 0 ||
+	if (core->cycles_to_die <= 0 ||
 		(((core->era_cycles + 1) % core->cycles_to_die) == 1 &&
 			(core->cycles != 0)))
 		end_era(&pr_list, core);
