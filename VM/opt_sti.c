@@ -77,3 +77,29 @@ int		add_reg_reg(unsigned char *board, t_proc *c_proc, int v, int *reg_nb)
 	c_proc->error = 1;
 	return (-1);
 }
+
+int		add_dir_reg(unsigned char *board, t_proc *c_proc, int v,
+	int *reg_nb)
+{
+	unsigned int		add;
+	unsigned int		id;
+	int					reg_nb2;
+
+	add = 0;
+	id = 0;
+	reg_nb2 = 0;
+	*reg_nb = board[(c_proc->i + 2) % MEM_SIZE] - 1;
+	reg_nb2 = board[(c_proc->i + 5) % MEM_SIZE] - 1;
+	id = bit_cat(board, c_proc, 3, 2);
+	if ((*reg_nb < REG_NUMBER && *reg_nb >= 0) && (reg_nb2 < REG_NUMBER &&
+		reg_nb2 >= 0))
+	{
+		add = (c_proc->r[reg_nb2] + bit_cat(board, c_proc, id, 4)) % IDX_MOD;
+		if (v == 1)
+			cmd_verbose_sti(board, c_proc, bit_cat(board, c_proc, id, 4),
+				c_proc->r[reg_nb2]);
+		return (add);
+	}
+	c_proc->error = 1;
+	return (-1);
+}

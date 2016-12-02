@@ -17,7 +17,6 @@ int			get_arg_val(int oc_trunc, unsigned char *board, t_proc *c_proc,
 {
 	int		arg;
 
-	arg = 0;
 	if (oc_trunc == 0b10)
 	{
 		arg = bit_cat(board, c_proc, i[0], 4);

@@ -185,6 +185,8 @@ int					add_ind_reg(unsigned char *board, t_proc *c_proc, int v,
 	int *reg_nb);
 int					add_reg_reg(unsigned char *board, t_proc *c_proc, int v,
 	int *reg_nb);
+int					add_dir_reg(unsigned char *board, t_proc *c_proc, int v,
+	int *reg_nb);
 void				cmd_fork(unsigned char *board, t_proc *c_proc,
 	t_dbllist *pr_list, t_cor *core);
 void				cmd_lld(unsigned char *board, t_proc *c_proc, t_cor *core);
