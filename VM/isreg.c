@@ -22,9 +22,9 @@ int			isreg(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
 	if (arg_nb == 2)
 	{
 		if (type[0] == REG)
-			reg_nb = bit_cat(board, c_proc, 3, 1);
+			reg_nb = bit_cat_no_mod(board, c_proc, 3, 1);
 		else
-			reg_nb = bit_cat(board, c_proc, 4, 1);
+			reg_nb = bit_cat_no_mod(board, c_proc, 4, 1);
 		if (reg_nb > 16 || reg_nb < 1)
 		{
 			c_proc->error = 1;
@@ -34,7 +34,7 @@ int			isreg(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
 	}
 	else
 	{
-		reg_nb = bit_cat(board, c_proc, 2, 1);
+		reg_nb = bit_cat_no_mod(board, c_proc, 2, 1);
 		if (reg_nb > 16 || reg_nb < 1)
 		{
 			c_proc->error = 1;

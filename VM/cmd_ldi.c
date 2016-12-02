@@ -39,8 +39,8 @@ void					cmd_ldi(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
 	int					reg_nb;
 	int					*type;
-	short				arg_1;
-	short				arg_2;
+	int					arg_1;
+	int					arg_2;
 	int					v_opc;
 	int					cmd_size;
 

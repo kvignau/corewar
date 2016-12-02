@@ -20,11 +20,11 @@ int			isdir(unsigned char *board, t_proc *c_proc, int *type, int arg_nb)
 	if (arg_nb == 2)
 	{
 		if (type[0] == REG)
-			result = (bit_cat(board, c_proc, 3, 2));
+			result = (bit_cat_no_mod(board, c_proc, 3, 2));
 		else
-			result = bit_cat(board, c_proc, 4, 2);
+			result = bit_cat_no_mod(board, c_proc, 4, 2);
 	}
 	else
-		result = (bit_cat(board, c_proc, 2, 2));
+		result = (bit_cat_no_mod(board, c_proc, 2, 2));
 	return (result);
 }

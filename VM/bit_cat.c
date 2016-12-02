@@ -12,6 +12,26 @@
 
 #include "corewar.h"
 
+int		bit_cat_no_mod(unsigned char *board, t_proc *c_proc, int start, int size)
+{
+	int	result;
+	int	nb;
+	int				i;
+
+	i = 0;
+	nb = 0;
+	result = 0;
+	while (i < size)
+	{
+		nb = board[((c_proc->i + (start + i)))];
+		result = result | nb;
+		if (i < size - 1)
+			result = result << 8;
+		i++;
+	}
+	return (result);
+}
+
 unsigned int		bit_cat(unsigned char *board, t_proc *c_proc, int start, int size)
 {
 	unsigned int	result;

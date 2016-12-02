@@ -59,12 +59,12 @@ void					cmd_lldi(unsigned char *board, t_proc *c_proc, t_cor *core)
 				if (core->options.verbose == 1)
 				{
 					ft_printf("P% 5d | lldi %d %d r%d\n", c_proc->pid, arg_1, arg_2, reg_nb);
-					ft_printf("       | -> load from %u + %u = %d (with pc %d)\n",
-						arg_1, arg_2, arg_1 + arg_2, (arg_1 + arg_2 + c_proc->i) % MEM_SIZE);
+					ft_printf("       | -> load from %d + %d = %d (with pc %d)\n",
+						arg_1, arg_2, arg_1 + arg_2, (arg_1 + arg_2 + c_proc->i));
 				}
 			}
 		}
-		
+
 		if (core->options.verbose == 1)
 			cmd_verbose(board, c_proc, get_cmd_size(get_type(board, c_proc), 2, 3));
 		c_proc->c_cmd = 0;
