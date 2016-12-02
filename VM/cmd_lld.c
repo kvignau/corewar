@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-static void	dir_reg(unsigned char *board, t_proc *c_proc, int v)
+static void		dir_reg(unsigned char *board, t_proc *c_proc, int v)
 {
 	unsigned int	id;
 	int				reg_nb;
@@ -34,7 +34,7 @@ static void	dir_reg(unsigned char *board, t_proc *c_proc, int v)
 	}
 }
 
-static void	ind_reg(unsigned char *board, t_proc *c_proc, int v)
+static void		ind_reg(unsigned char *board, t_proc *c_proc, int v)
 {
 	unsigned int	id;
 	int				reg_nb;
@@ -59,7 +59,7 @@ static void	ind_reg(unsigned char *board, t_proc *c_proc, int v)
 	}
 }
 
-void	cmd_lld(unsigned char *board, t_proc *c_proc, t_cor *core)
+void			cmd_lld(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
 	if (c_proc->ctp == 10)
 	{
@@ -69,7 +69,8 @@ void	cmd_lld(unsigned char *board, t_proc *c_proc, t_cor *core)
 			ind_reg(board, c_proc, core->options.verbose);
 		c_proc->ctp = 1;
 		if (core->options.verbose == 1)
-			cmd_verbose(board, c_proc, get_cmd_size(get_type(board, c_proc), 4, 2));
+			cmd_verbose(board, c_proc, get_cmd_size(get_type(board, c_proc),
+				4, 2));
 		c_proc->c_cmd = 0;
 		next_pc(get_cmd_size(get_type(board, c_proc), 4, 2), c_proc, board);
 	}

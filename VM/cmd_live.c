@@ -12,20 +12,21 @@
 
 #include "corewar.h"
 
-static int		check_vm_number_exist(t_elem *tmp, unsigned int vm_num, t_cor *core)
+static int		check_vm_number_exist(t_elem *tmp, unsigned int vm_num,
+	t_cor *core)
 {
 	int				exist;
 
 	exist = 0;
-	while(tmp != NULL)
+	while (tmp != NULL)
 	{
 		if (((t_champ *)(tmp->content))->vm_number == vm_num)
 		{
 			exist = 1;
 			if (core->options.stealth == 0)
-			ft_printf("un processus dit que le joueur %d(%s) est en vie\n",
-				((t_champ *)(tmp->content))->id,
-				((t_champ *)(tmp->content))->name);
+				ft_printf("un processus dit que le joueur %d(%s) est en vie\n",
+					((t_champ *)(tmp->content))->id,
+					((t_champ *)(tmp->content))->name);
 		}
 		tmp = tmp->next;
 	}
@@ -51,11 +52,10 @@ void			cmd_live(unsigned char *board, t_proc *c_proc, t_cor *core,
 		{
 			cmd_verbose_zjmp_live("live", c_proc->pid, (int)vm_num_live);
 			write(1, "\n", 1);
-			// ft_printf("P% 5d | live %d\n", c_proc->pid, vm_num_live);
 			cmd_verbose(board, c_proc, 5);
 		}
 		c_proc->c_cmd = 0;
-		next_pc(5 ,c_proc, board);
+		next_pc(5, c_proc, board);
 		c_proc->ctp = 1;
 	}
 	else
