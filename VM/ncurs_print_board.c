@@ -19,11 +19,13 @@ static int		print_menu(t_cor *core, t_dbllist *process_list)
 		mvwprintw(core->windows[1], 2, 3, " ** PAUSED ** ");
 	else
 		mvwprintw(core->windows[1], 2, 3, " ** RUNNING ** ");
-	mvwprintw(core->windows[1], 4, 3, "Processes : %d   ", process_list->length);
+	mvwprintw(core->windows[1], 4, 3, "Processes : %d   ",
+		process_list->length);
 	if (core->cycle_frequency == 1000)
 		mvwprintw(core->windows[1], 6, 3, "Cycles/second limit : MAX     ");
 	else
-		mvwprintw(core->windows[1], 6, 3, "Cycles/second limit : %d    ", core->cycle_frequency);
+		mvwprintw(core->windows[1], 6, 3, "Cycles/second limit : %d    ",
+			core->cycle_frequency);
 	mvwprintw(core->windows[1], 8, 3, "Cycle : %d  :X ", core->cycles);
 	wrefresh(core->windows[1]);
 	wattroff(core->windows[1], A_BOLD);
@@ -33,35 +35,24 @@ static int		print_menu(t_cor *core, t_dbllist *process_list)
 static int		handle_cycle_celerity(char c_input, t_cor *core)
 {
 	if (c_input == 'r' && core->cycle_frequency < 1000)
-	{
 		core->cycle_frequency += 10;
-		if (core->cycle_frequency > 1000)
-			core->cycle_frequency = 1000;
-	}
 	else if (c_input == 'e' && core->cycle_frequency < 1000)
-	{
 		core->cycle_frequency += 1;
-		if (core->cycle_frequency > 1000)
-			core->cycle_frequency = 1000;
-	}
 	else if (c_input == 'w' && core->cycle_frequency > 1)
-	{
 		core->cycle_frequency -= 1;
-		if (core->cycle_frequency < 1)
-			core->cycle_frequency = 1;
-	}
 	else if (c_input == 'q' && core->cycle_frequency > 1)
-	{
 		core->cycle_frequency -= 10;
-		if (core->cycle_frequency < 1)
-			core->cycle_frequency = 1;
-	}
+	if (core->cycle_frequency > 1000)
+		core->cycle_frequency = 1000;
+	else if (core->cycle_frequency < 1)
+		core->cycle_frequency = 1;
 	core->u_delta_sleep = 1000000 / core->cycle_frequency;
 	flushinp();
 	return (0);
 }
 
-static int		create_array_process_map(t_dbllist *process_list, int process_map[])
+static int		create_array_process_map(t_dbllist *process_list,
+	int process_map[])
 {
 	t_elem		*current_node;
 	t_proc		*node_proc;
@@ -72,7 +63,6 @@ static int		create_array_process_map(t_dbllist *process_list, int process_map[])
 		process_map[i] = 0;
 	if (!process_list || !(process_list->head))
 		return (-1);
-
 	current_node = ((t_elem *)process_list->head);
 	while (current_node != NULL)
 	{
@@ -87,15 +77,14 @@ static int		create_array_process_map(t_dbllist *process_list, int process_map[])
 	return (0);
 }
 
-int		print_board(t_cor *core, t_dbllist *process_list, unsigned char *board)
+static void		print_b(t_cor *core, t_dbllist *proc_l, unsigned char *board)
 {
 	int		i;
 	int		j;
-	WINDOW	*gauche;
-	char	c = 'a';
 
+	WINDOW * gauche;
 	gauche = core->windows[0];
-	create_array_process_map(process_list, core->process_map);
+	create_array_process_map(proc_l, core->process_map);
 	i = -1;
 	while (++i < 64)
 	{
@@ -113,29 +102,25 @@ int		print_board(t_cor *core, t_dbllist *process_list, unsigned char *board)
 		}
 	}
 	wrefresh(gauche);
-
-
 	if (core->is_first)
-	{
-		print_menu(core, process_list);
+		print_menu(core, proc_l);
+}
+
+int				print_board(t_cor *core, t_dbllist *process_list,
+	unsigned char *board)
+{
+	char	c;
+
+	print_b(core, process_list, board);
+	if (core->is_first)
 		core->is_first = 0;
-	}
-// core->lolol = fopen("dbug.sms", "a");
-// fprintf(core->lolol, "1\n");
-// fclose(core->lolol);
 	if ((c = getch()) == ' ' || core->is_paused)
 	{
-// core->lolol = fopen("dbug.sms", "a");
-// fprintf(core->lolol, "2\n");
-// fclose(core->lolol);
 		core->is_paused = 1;
 		timeout(-1);
 		print_menu(core, process_list);
 		while (((c = getch()) != ' ' && c != 's'))
 		{
-// core->lolol = fopen("dbug.sms", "a");
-// fprintf(core->lolol, "3\n");
-// fclose(core->lolol);
 			handle_cycle_celerity(c, core);
 			print_menu(core, process_list);
 		}
@@ -150,8 +135,3 @@ int		print_board(t_cor *core, t_dbllist *process_list, unsigned char *board)
 		usleep(core->u_delta_sleep);
 	return (0);
 }
-
-
-
-
-

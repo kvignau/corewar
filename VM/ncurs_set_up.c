@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-static void		init_ncurses()
+static void		init_ncurses(void)
 {
 	initscr();
 	noecho();
@@ -31,9 +31,8 @@ static void		init_ncurses()
 
 int				set_up_ncurses(t_cor *core)
 {
-	WINDOW		*gauche;
-	WINDOW		*droite;
-
+	WINDOW * gauche;
+	WINDOW * droite;
 	init_ncurses();
 	gauche = subwin(stdscr, 66, 195, 0, 0);
 	droite = subwin(stdscr, 66, 50, 0, 195);
@@ -46,8 +45,5 @@ int				set_up_ncurses(t_cor *core)
 	core->cycle_frequency = 1000;
 	core->is_paused = 1;
 	core->is_first = 1;
-	// // debug
-	// core->lolol = fopen("dbeug.sms", "w+");
-	// fclose(core->lolol);
 	return (0);
 }
