@@ -64,7 +64,10 @@ void					cmd_lldi(unsigned char *board, t_proc *c_proc, t_cor *core)
 				}
 			}
 		}
-
+		if ((c_proc->r[reg_nb - 1] % MEM_SIZE) == 0)
+			c_proc->carry = 1;
+		else
+			c_proc->carry = 0;
 		if (core->options.verbose == 1)
 			cmd_verbose(board, c_proc, get_cmd_size(get_type(board, c_proc), 2, 3));
 		c_proc->c_cmd = 0;

@@ -16,7 +16,7 @@ void		init_aox_x(t_aox *aox, t_proc *c_proc, t_cor *core, int i[])
 {
 	int		o_code;
 
-	o_code = (core->board[(c_proc->i + 1) % MEM_SIZE] & 0xfc);
+	o_code = core->board[(c_proc->i + 1) % MEM_SIZE];
 	aox->arg1 = get_arg_val((o_code & 0b11000000) >> 6, core->board, c_proc, i);
 	aox->arg2 = get_arg_val((o_code & 0b00110000) >> 4, core->board, c_proc, i);
 	if ((o_code & 0b00001100) >> 2 == 0b01)
