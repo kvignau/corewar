@@ -47,7 +47,7 @@ static void		ind_reg(unsigned char *board, t_proc *c_proc, int v)
 			c_proc->r[reg_nb] = (bit_cat(board, c_proc, id, 2) | 0xffff0000);
 		else
 			c_proc->r[reg_nb] = bit_cat(board, c_proc, id, 2);
-		if (id % MEM_SIZE == 0)
+		if (c_proc->r[reg_nb] % MEM_SIZE == 0)
 			c_proc->carry = 1;
 		else
 			c_proc->carry = 0;

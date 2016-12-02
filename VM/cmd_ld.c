@@ -36,12 +36,12 @@ static void	ind_reg(unsigned char *board, t_proc *c_proc, int v)
 	unsigned int	id;
 	int				reg_nb;
 
-	id = bit_cat(board, c_proc, 2, 2);
+	id = bit_cat(board, c_proc, 2, 2) % IDX_MOD;
 	reg_nb = (int)((board[(c_proc->i + 4) % MEM_SIZE] - 1));
 	if (reg_nb < REG_NUMBER && reg_nb >= 0)
 	{
 		c_proc->r[reg_nb] = bit_cat(board, c_proc, (id % MEM_SIZE), 4);
-		if (id == 0)
+		if (c_proc->r[reg_nb] == 0)
 			c_proc->carry = 1;
 		else
 			c_proc->carry = 0;

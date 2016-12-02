@@ -59,7 +59,7 @@ static void	is_valid_opc(t_cor *core, t_proc *c_proc, unsigned char *board,
 			ft_printf("P% 5d | lldi %d %d r%d\n", c_proc->pid, arg_1, arg_2,
 			bit_cat(board, c_proc, cmd_size - 1, 1));
 			ft_printf(
-				"       | -> load from %d + %d = %d (with pc and mod %d)\n"
+				"       | -> load from %d + %d = %d (with pc %d)\n"
 				, arg_1, arg_2, arg_1 + arg_2,
 				(arg_1 + arg_2) + c_proc->i);
 		}
