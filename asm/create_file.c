@@ -53,7 +53,7 @@ void			create_cor(t_data *data, char *file_name)
 	tmp = recup_only_name(file_name);
 	name = ft_strsub(tmp, 0, ft_strlen(tmp) - 2);
 	free(tmp);
-	name =ft_strjoinandfree(name, ".cor", 1);
+	name = ft_strjoinandfree(name, ".cor", 1);
 	fd = open(name,
 		O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	close(fd);

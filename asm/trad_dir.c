@@ -91,9 +91,15 @@ static	void	tmp_trad_dir_label(char *arg, char **hexa)
 
 void			trad_dir(char *arg, char **hexa, t_data **data, int op_code)
 {
+	char	*tmp;
+
+	tmp = NULL;
 	if (arg[1] == ':')
 		tmp_trad_dir_label(arg, hexa);
 	else
-		trad_dir_without_label(ft_strsub(arg, 1, ft_strlen(arg)), hexa, data,
-		op_code);
+	{
+		tmp = ft_strsub(arg, 1, ft_strlen(arg));
+		trad_dir_without_label(tmp, hexa, data, op_code);
+		free(tmp);
+	}
 }

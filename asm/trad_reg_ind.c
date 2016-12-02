@@ -21,7 +21,9 @@ void	trad_neg(char *arg, char **to_add)
 	n = ft_atoi(tmp);
 	ft_strdel(&tmp);
 	free(*to_add);
-	*to_add = ft_strdup(ft_itoabase_uimax(65536 - n, 16));
+	tmp = ft_itoabase_uimax(65536 - n, 16);
+	*to_add = ft_strdup(tmp);
+	ft_strdel(&tmp);
 }
 
 void	trad_reg(char *arg, char **hexa, t_data **data, int op_code)

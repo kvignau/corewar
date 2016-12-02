@@ -24,7 +24,7 @@ void	ft_strtrim_tab(char **args_tab)
 		tmp = ft_strtrim(args_tab[i]);
 		free(args_tab[i]);
 		args_tab[i] = ft_strdup(tmp);
-		free(tmp);
+		ft_strdel(&tmp);
 		i++;
 	}
 }
@@ -69,7 +69,7 @@ void	add_zero(char **str, int width)
 	while (ft_strlen(*str) < (size_t)width)
 	{
 		tmp = ft_strdup(*str);
-		ft_strdel(str);
+		free(*str);
 		*str = ft_strjoinandfree("0", tmp, 2);
 	}
 }

@@ -29,7 +29,8 @@ char	*lsthexa_tostr(t_dbllist *lst)
 			tmp2 = ft_strdup(new);
 		ft_strdel(&new);
 		if (((t_hexa *)((tmp)->content))->hexa)
-			new = ft_strjoinandfree(tmp2, ((t_hexa *)((tmp)->content))->hexa, 1);
+			new = ft_strjoinandfree(tmp2,
+				((t_hexa *)((tmp)->content))->hexa, 1);
 		tmp = tmp->prev;
 	}
 	return (new);

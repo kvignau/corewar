@@ -41,11 +41,16 @@ void	free_t_recup(t_recup *recup)
 	if (recup->label_name)
 		ft_strdel(&(recup->label_name));
 	if (recup->args_tab)
+	{
 		free_tab_char(&(recup->args_tab));
+		free(recup->args_tab);
+		recup->args_tab = NULL;
+	}
 	if (recup->lst_hexa)
 	{
 		free_lst_hexa(&(recup->lst_hexa));
 		free((recup->lst_hexa));
+		recup->lst_hexa = NULL;
 	}
 }
 
@@ -59,5 +64,4 @@ void	free_tab_char(char ***tab)
 		ft_strdel(tab[i]);
 		i++;
 	}
-	tab = NULL;
 }

@@ -12,6 +12,13 @@
 
 #include "asm.h"
 
+static	void	string_to_hex_case(char *tmp1, char *tmp, char **new)
+{
+	tmp1 = ft_strdup(*new);
+	ft_strdel(new);
+	*new = ft_strjoinandfree(tmp1, tmp, 1);
+}
+
 static	void	string_to_hex(char *str, char **new)
 {
 	int		i;
@@ -33,11 +40,7 @@ static	void	string_to_hex(char *str, char **new)
 		if (*new == NULL)
 			*new = ft_strdup(tmp);
 		else
-		{
-			tmp1 = ft_strdup(*new);
-			ft_strdel(new);
-			*new = ft_strjoin(tmp1, tmp);
-		}
+			string_to_hex_case(tmp1, tmp, new);
 		if (tmp != NULL)
 			ft_strdel(&tmp);
 		i++;
@@ -56,8 +59,7 @@ static	void	add_zero_after(char **str, int nb)
 	if (*str == NULL)
 		*str = ft_strdup("");
 	add_zero(&tmp, nb - 1 - ft_strlen(*str));
-	new = ft_strjoin(*str, tmp);
-	ft_strdel(str);
+	new = ft_strjoinandfree(*str, tmp, 3);
 	*str = ft_strdup(new);
 	ft_strdel(&new);
 }
@@ -69,12 +71,8 @@ static	void	concat_all_trad(t_data **data, t_final_trad all_trad)
 
 	tmp = ft_strjoinandfree(all_trad.magic, all_trad.name, 3);
 	tmp1 = ft_strjoinandfree(tmp, all_trad.total_oct, 3);
-	// ft_strdel(&tmp);
 	tmp = ft_strjoinandfree(tmp1, all_trad.comment, 3);
-	// ft_strdel(&tmp1);
 	tmp1 = ft_strjoinandfree(tmp, (*data)->tmp_trad, 3);
-	// ft_strdel(&tmp);
-	// ft_strdel(&(*data)->tmp_trad);
 	(*data)->tmp_trad = ft_strdup(tmp1);
 	ft_strdel(&tmp1);
 }

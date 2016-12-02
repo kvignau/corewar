@@ -17,7 +17,7 @@ void		ft_free2dtab(void **tab, int tab_size)
 	int		i;
 
 	i = 0;
-	while (i < tab_size)
+	while (tab[i] && i < tab_size)
 	{
 		free(tab[i]);
 		i++;
