@@ -23,8 +23,8 @@ void				sti_result(t_cor *core, t_proc *c_proc, int reg_nb,
 	result = c_proc->r[reg_nb] >> (8 * (REG_SIZE - 1));
 	while (i < REG_SIZE)
 	{
-		core->board[(c_proc->i + (add + i) % IDX_MOD) % MEM_SIZE] = result;
-		core->color_map[(c_proc->i + (add + i) % IDX_MOD) % MEM_SIZE] = c_proc->color;
+		core->board[(c_proc->i + i + add) % MEM_SIZE] = result;
+		core->color_map[(c_proc->i + i + add) % MEM_SIZE] = c_proc->color;
 		result = c_proc->r[reg_nb] >> ((8 * (REG_SIZE - 1)) - (8 * (i + 1)));
 		i++;
 	}
