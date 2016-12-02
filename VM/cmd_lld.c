@@ -61,11 +61,14 @@ static void		ind_reg(unsigned char *board, t_proc *c_proc, int v)
 
 void			cmd_lld(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
+	int			cmd;
+
 	if (c_proc->ctp == 10)
 	{
-		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x90)
+		cmd = (board[(c_proc->i + 1) % MEM_SIZE] & 0xf0);
+		if (cmd == 0x90)
 			dir_reg(board, c_proc, core->options.verbose);
-		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0xd0)
+		else if (cmd == 0xd0)
 			ind_reg(board, c_proc, core->options.verbose);
 		c_proc->ctp = 1;
 		if (core->options.verbose == 1)
