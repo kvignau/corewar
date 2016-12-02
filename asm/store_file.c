@@ -23,7 +23,7 @@ int		store_file(char **argv, t_data *data, int *i)
 	{
 		while ((ret = get_next_line(fd, &data->line)) > 0)
 		{
-			(((data->file[*i] = ft_strdup(data->line)) == NULL) ?
+			(((data->file[*i] = data->line) == NULL) ?
 				error(data, "Malloc error\n") : 0);
 			*i += 1;
 			if (*i % 1024 == 0)

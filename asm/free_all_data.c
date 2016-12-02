@@ -74,6 +74,8 @@ static void	free_lst_recup(t_dbllist **lst)
 		free(tmp);
 		tmp = tmp_next;
 	}
+	free(tmp);
+	tmp = NULL;
 	(*lst)->tail = NULL;
 	(*lst)->head = NULL;
 	free(*lst);

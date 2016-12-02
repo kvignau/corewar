@@ -54,10 +54,13 @@ int				label_valid(char *name)
 int				check_label(char **name, t_data **data, t_data_line *dline)
 {
 	t_recup		recup;
+	char		*tmp;
 
 	ft_bzero(&recup, sizeof(t_recup));
 	recup.label = 1;
+	tmp = *name;
 	*name = ft_strsub(*name, 0, ft_strlen(*name) - 1);
+	free(tmp);
 	if (!(label_valid(*name)))
 	{
 		ft_strdel(name);

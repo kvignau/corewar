@@ -24,7 +24,7 @@ void	ft_strtrim_tab(char **args_tab)
 		tmp = ft_strtrim(args_tab[i]);
 		free(args_tab[i]);
 		args_tab[i] = ft_strdup(tmp);
-		ft_strdel(&tmp);
+		free(tmp);
 		i++;
 	}
 }

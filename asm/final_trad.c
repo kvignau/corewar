@@ -67,14 +67,14 @@ static	void	concat_all_trad(t_data **data, t_final_trad all_trad)
 	char	*tmp;
 	char	*tmp1;
 
-	tmp = ft_strjoin(all_trad.magic, all_trad.name);
-	tmp1 = ft_strjoin(tmp, all_trad.total_oct);
-	ft_strdel(&tmp);
-	tmp = ft_strjoin(tmp1, all_trad.comment);
-	ft_strdel(&tmp1);
-	tmp1 = ft_strjoin(tmp, (*data)->tmp_trad);
-	ft_strdel(&tmp);
-	ft_strdel(&(*data)->tmp_trad);
+	tmp = ft_strjoinandfree(all_trad.magic, all_trad.name, 3);
+	tmp1 = ft_strjoinandfree(tmp, all_trad.total_oct, 3);
+	// ft_strdel(&tmp);
+	tmp = ft_strjoinandfree(tmp1, all_trad.comment, 3);
+	// ft_strdel(&tmp1);
+	tmp1 = ft_strjoinandfree(tmp, (*data)->tmp_trad, 3);
+	// ft_strdel(&tmp);
+	// ft_strdel(&(*data)->tmp_trad);
 	(*data)->tmp_trad = ft_strdup(tmp1);
 	ft_strdel(&tmp1);
 }
@@ -82,19 +82,14 @@ static	void	concat_all_trad(t_data **data, t_final_trad all_trad)
 void			final_trad(t_data *data, int nb_oct)
 {
 	t_final_trad	all_trad;
-	// char			*tmp;
 
 	ft_bzero(&all_trad, sizeof(t_final_trad));
 	all_trad.magic = ft_strdup("00ea83f3");
 	string_to_hex(data->name, &all_trad.name);
-	// tmp = all_trad.name;
 	add_zero_after(&all_trad.name, 269);
-	// free(tmp);
 	all_trad.total_oct = ft_itoabase_imax(nb_oct, 16);
 	add_zero(&all_trad.total_oct, 4);
-	// tmp = all_trad.comment;
 	string_to_hex(data->comment, &all_trad.comment);
-	// free(tmp);
 	add_zero_after(&all_trad.comment, 4105);
 	concat_all_trad(&data, all_trad);
 	hex_to_lower(&(data->tmp_trad));

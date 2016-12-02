@@ -39,7 +39,7 @@ void		ini_data_line(t_data_line *dline, int index_line)
 
 void		ini_lab(t_lab *lab, t_data **data)
 {
-	lab = (t_lab *)ft_memalloc(sizeof(t_lab));
+	ft_bzero(lab, sizeof(t_lab));
 	if (lab == NULL)
 	{
 		error(*data, "File malloc error\n");

@@ -20,6 +20,7 @@ void	trad_neg(char *arg, char **to_add)
 	tmp = ft_strsub(arg, 1, ft_strlen(arg) - 1);
 	n = ft_atoi(tmp);
 	ft_strdel(&tmp);
+	free(*to_add);
 	*to_add = ft_strdup(ft_itoabase_uimax(65536 - n, 16));
 }
 
@@ -27,10 +28,13 @@ void	trad_reg(char *arg, char **hexa, t_data **data, int op_code)
 {
 	char	*to_add;
 	char	*to_compete;
+	char	*tmp;
 
 	(void)data;
 	(void)op_code;
-	to_add = ft_itoabase_imax(ft_atoi(ft_strsub(arg, 1, ft_strlen(arg))), 16);
+	tmp = ft_strsub(arg, 1, ft_strlen(arg));
+	to_add = ft_itoabase_imax(ft_atoi(tmp), 16);
+	free(tmp);
 	hex_to_lower(&to_add);
 	to_compete = ft_strdup(*hexa);
 	ft_strdel(hexa);

@@ -6,13 +6,13 @@
 #    By: kvignau <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/04 10:52:32 by kvignau           #+#    #+#              #
-#    Updated: 2016/12/01 20:04:02 by mchevall         ###   ########.fr        #
+#    Updated: 2016/12/02 01:01:29 by mchevall         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = asm
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 
 SRC = main.c op.c store_file.c data_initializer.c file_manager.c \
 ft_iscomment.c recovery.c header_manager.c name_manager.c \

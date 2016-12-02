@@ -43,7 +43,10 @@ void	free_t_recup(t_recup *recup)
 	if (recup->args_tab)
 		free_tab_char(&(recup->args_tab));
 	if (recup->lst_hexa)
+	{
 		free_lst_hexa(&(recup->lst_hexa));
+		free((recup->lst_hexa));
+	}
 }
 
 void	free_tab_char(char ***tab)
@@ -54,7 +57,7 @@ void	free_tab_char(char ***tab)
 	while (tab[i])
 	{
 		ft_strdel(tab[i]);
-		free(tab[i]);
 		i++;
 	}
+	tab = NULL;
 }

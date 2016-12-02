@@ -23,4 +23,5 @@ void		ft_free2dtab(void **tab, int tab_size)
 		i++;
 	}
 	free(tab);
+	tab = NULL;
 }
