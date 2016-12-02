@@ -12,6 +12,15 @@
 
 #include "corewar.h"
 
+void	norm_zjmp(t_proc *c_proc, short int id)
+{
+	cmd_verbose_zjmp_live("zjmp", c_proc->pid, id);
+	if (c_proc->carry == 1)
+		write(1, " OK\n", 4);
+	else
+		write(1, " FAILED\n", 8);
+}
+
 void	cmd_zjmp(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
 	short int	id;
@@ -25,13 +34,7 @@ void	cmd_zjmp(unsigned char *board, t_proc *c_proc, t_cor *core)
 			c_proc->pc = &board[c_proc->i];
 		}
 		if (core->options.verbose == 1)
-		{
-			cmd_verbose_zjmp_live("zjmp", c_proc->pid, id);
-			if (c_proc->carry == 1)
-				write(1, " OK\n", 4);
-			else
-				write(1, " FAILED\n", 8);
-		}
+			norm_zjmp(c_proc, id);
 		if (c_proc->carry == 0)
 		{
 			if (core->options.verbose == 1)
