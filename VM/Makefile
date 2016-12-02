@@ -6,14 +6,14 @@
 #    By: kvignau <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/04 10:52:32 by kvignau           #+#    #+#              #
-#    Updated: 2016/11/22 17:49:40 by mchevall         ###   ########.fr        #
+#    Updated: 2016/12/02 03:31:57 by mchevall         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = corewar
 #-fsanitize=address
 
-FLAGS = -g -Wall -Werror -Wextra -fsanitize=address 
+FLAGS = -g -Wall -Werror -Wextra
 
 # MallocStackLogging=1
 
@@ -24,7 +24,8 @@ bit_cat.c cmd_ldi.c cmd_st.c cmd_add.c cmd_sub.c cmd_zjmp.c get_type.c\
 cmd_lld.c get_cmd_size.c cmd_lldi.c cmd_and.c cmd_or.c cmd_xor.c\
 get_arg_val.c get_register_name.c isdir.c isind.c isreg.c cmd_sti.c\
 cmd_live.c iscmd.c execute_dead_process.c opt_sti.c cmd_verbose.c\
-ncurs_set_up.c ncurs_finish.c ncurs_print_board.c next.c
+ncurs_set_up.c ncurs_finish.c ncurs_print_board.c next.c set_new_era.c\
+verbose2.c
 
 OBJ = $(SRC:%.c=%.o)
 
@@ -32,7 +33,7 @@ all: $(NAME)
 
 # $(NAME): $(OBJ)
 # 	make -C ../libftprintf/ all
-# 	$(CC) $(FLAGS) -o $(NAME) $(OBJ) 
+# 	$(CC) $(FLAGS) -o $(NAME) $(OBJ)
 
 $(NAME): $(OBJ)
 	$(CC) $(FLAGS) $(OBJ) -o $@ -L../libftprintf/ -lftprintf -lncurses
