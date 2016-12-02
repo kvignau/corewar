@@ -12,4 +12,9 @@
 
 #include "corewar.h"
 
-
+void		verbose_cycles(t_cor *core)
+{
+	write(1, "It is now cycle ", 16);
+	ft_putnbr(core->cycles);
+	write(1, "\n", 1);
+}

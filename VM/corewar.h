@@ -141,9 +141,7 @@ void			init_board(t_dbllist *ch_list, t_dbllist *pr_list, t_cor *core);
 **********************  Commands **********************
 */
 
-void			set_new_era(t_cor *core, t_dbllist *pr_list);
-int				execute_dead_process(t_dbllist **pr_list, t_cor *core);
-int				iscmd(t_proc *c_proc, t_cor *core, t_dbllist *champ_list, t_dbllist *pr_list);
+
 int				get_cmd_size(int *type, int label_size, int nb_param);
 int				*get_type(unsigned char *board, t_proc *c_proc);
 int				get_register_name(unsigned char *board, t_proc *c_proc, int i[]);
@@ -171,6 +169,21 @@ void			cmd_lld(unsigned char *board, t_proc *c_proc, t_cor *core);
 void			cmd_lldi(unsigned char *board, t_proc *c_proc, t_cor *core);
 void			cmd_lfork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list, t_cor *core);
 void			cmd_aff(unsigned char *board, t_proc *c_proc, t_cor *core);
+
+
+/*
+**********************  Game Loop **********************
+*/
+
+void			init(t_cor *core, t_options *options);
+int				game_loop(t_cor *core, t_dbllist *ch_list, t_dbllist *pr_list);
+void			verbose_cycles(t_cor *core);
+int				execute_dead_process(t_dbllist **pr_list, t_cor *core);
+int				iscmd(t_proc *c_proc, t_cor *core, t_dbllist *ch_list,
+	t_dbllist *pr_list);
+void			check_cmd(t_cor *core, t_dbllist **ch_list,
+	t_dbllist **pr_list);
+
 
 /*
 **********************  Ncurses **********************
