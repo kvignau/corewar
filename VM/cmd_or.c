@@ -31,6 +31,8 @@ void		cmd_or(unsigned char *board, t_proc *c_proc, t_cor *core)
 			r_dest = get_register_name(board, c_proc, i);
 		else
 			i[1] = -1;
+		if ((o_code & 0b00000011) != 0b00)
+			i[1] = -2;
 		if (i[1] == 0)
 		{
 			c_proc->r[r_dest - 1] = arg1 | arg2;
@@ -38,7 +40,8 @@ void		cmd_or(unsigned char *board, t_proc *c_proc, t_cor *core)
 		}
 		if (core->options.verbose == 1)
 		{
-			ft_printf("P% 5d | or %d %d r%d\n", c_proc->pid, arg1, arg2,
+			if (i[1] == 0)
+				ft_printf("P% 5d | or %d %d r%d\n", c_proc->pid, arg1, arg2,
 					r_dest);
 			cmd_verbose(board, c_proc, (get_cmd_size(get_type(board, c_proc), 4, 3)));
 		}
