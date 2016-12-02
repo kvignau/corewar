@@ -19,7 +19,7 @@ void		verbose_cycles(t_cor *core)
 	write(1, "\n", 1);
 }
 
-void			cmd_verbose_zjmp_live(char *cmd, int pid, int id)
+void		cmd_verbose_zjmp_live(char *cmd, int pid, int id)
 {
 	write(1, "P", 1);
 	if (pid < 10)

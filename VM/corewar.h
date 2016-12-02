@@ -131,6 +131,7 @@ int					champions_maker(t_dbllist *champ_list, t_options *options,
 **********************  Utils  **********************
 */
 
+int					error_manager(int ret, t_var *var);
 uintmax_t			ft_hextoi(unsigned char *str);
 char				*ft_hextoa(int *str, int size);
 unsigned char		*get_content(int *str, int size);
