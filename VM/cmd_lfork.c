@@ -12,7 +12,17 @@
 
 #include "corewar.h"
 
-void		cmd_lfork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list, t_cor *core)
+void		norm_lfork(t_elem *tmp, t_proc *c_proc, short int value)
+{
+	((t_proc *)(tmp->content))->pc = (c_proc->pc + (value));
+	((t_proc *)(tmp->content))->i = (c_proc->i + (value));
+	((t_proc *)(tmp->content))->ctp = 1;
+	((t_proc *)(tmp->content))->c_cmd = 0;
+	((t_proc *)(tmp->content))->color = c_proc->color;
+}
+
+void		cmd_lfork(unsigned char *board, t_proc *c_proc,
+	t_dbllist *pr_list, t_cor *core)
 {
 	short int		value;
 	t_elem			*tmp;
@@ -28,11 +38,7 @@ void		cmd_lfork(unsigned char *board, t_proc *c_proc, t_dbllist *pr_list, t_cor 
 				(c_proc->i + value));
 			cmd_verbose(board, c_proc, 3);
 		}
-		((t_proc *)(tmp->content))->pc = (c_proc->pc + (value));
-		((t_proc *)(tmp->content))->i = (c_proc->i + (value));
-		((t_proc *)(tmp->content))->ctp = 1;
-		((t_proc *)(tmp->content))->c_cmd = 0;
-		((t_proc *)(tmp->content))->color = c_proc->color;
+		norm_lfork(tmp, c_proc, value);
 		core->pid += 1;
 		((t_proc *)(tmp->content))->pid = core->pid;
 		c_proc->c_cmd = 0;
