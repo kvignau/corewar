@@ -12,7 +12,25 @@
 
 #include "corewar.h"
 
-int	valid_options(t_var *var, t_options *options, t_dbllist *champ_list)
+static void		dump(t_var *var, t_options *options)
+{
+	options->bool_dump = 1;
+	var->i += 1;
+	options->dump_number = ft_atoi(var->argv[var->i]);
+}
+
+static void		set_num(t_var *var, t_options *options, t_dbllist *champ_list)
+{
+	var->i += 1;
+	options->bool_vm_number = 1;
+	options->vm_number = ft_atoi(var->argv[var->i]);
+	var->i += 1;
+	var->error = champions_maker(champ_list, options, var);
+	options->bool_vm_number = 0;
+}
+
+static int		valid_options(t_var *var, t_options *options,
+	t_dbllist *champ_list)
 {
 	if (var->str[0] == 's')
 		options->stealth = 1;
@@ -29,27 +47,22 @@ int	valid_options(t_var *var, t_options *options, t_dbllist *champ_list)
 		if (!var->argv[var->i + 1] || !var->argv[var->i + 2])
 			corewar_usage(0);
 		else if (var->str[0] == 'd')
-		{
-			options->bool_dump = 1;
-			var->i += 1;
-			options->dump_number = ft_atoi(var->argv[var->i]);
-		}
+			dump(var, options);
 		else if (var->str[0] == 'n')
-		{
-			var->i += 1;
-			options->bool_vm_number = 1;
-			options->vm_number = ft_atoi(var->argv[var->i]);
-			var->i += 1;
-			var->error = champions_maker(champ_list, options, var);
-			options->bool_vm_number = 0;
-		}
+			set_num(var, options, champ_list);
 	}
 	else if (var->str[0] != '\0' || var->error == 0)
 		return (0);
 	return (1);
 }
 
-int	options_checkers(int argc, char **argv, t_options *options,
+static void		too_many_champ(t_var *var)
+{
+	ft_putstr("Please input a maximum of four champions.\n");
+	var->error = 0;
+}
+
+int				options_checkers(int argc, char **argv, t_options *options,
 	t_dbllist *champ_list)
 {
 	t_var		var;
@@ -61,10 +74,7 @@ int	options_checkers(int argc, char **argv, t_options *options,
 	while (var.i < argc)
 	{
 		if (champ_list->length >= 4)
-		{
-			ft_putstr("Please input a maximum of four champions.\n");
-			var.error = 0;
-		}
+			too_many_champ(&var);
 		if (var.error == 0)
 			return (0);
 		if ((argv[var.i][0] == '-' && argv[var.i][1] && !argv[var.i][2]) &&
