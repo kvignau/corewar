@@ -12,7 +12,8 @@
 
 #include "corewar.h"
 
-int			get_arg_val(int oc_trunc, unsigned char *board, t_proc *c_proc, int i[])
+int			get_arg_val(int oc_trunc, unsigned char *board, t_proc *c_proc,
+	int i[])
 {
 	int		arg;
 

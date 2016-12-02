@@ -26,7 +26,7 @@ void			cmd_verbose(unsigned char *board, t_proc *c_proc, int offset)
 	write(1, " (0x", 4);
 	hex1 = ft_strtolower(ft_itoabase_imax(c_proc->i, 16));
 	hex2 = ft_strtolower(ft_itoabase_imax(c_proc->i + offset, 16));
-	while(i + ft_strlen(hex1) < 4)
+	while (i + ft_strlen(hex1) < 4)
 	{
 		write(1, "0", 1);
 		i++;
@@ -35,7 +35,7 @@ void			cmd_verbose(unsigned char *board, t_proc *c_proc, int offset)
 	free(hex1);
 	i = 0;
 	write(1, " -> 0x", 6);
-	while(i + ft_strlen(hex2) < 4)
+	while (i + ft_strlen(hex2) < 4)
 	{
 		write(1, "0", 1);
 		i++;
@@ -46,7 +46,8 @@ void			cmd_verbose(unsigned char *board, t_proc *c_proc, int offset)
 	i = 0;
 	while (i < offset)
 	{
-		hex3 = ft_strtolower(ft_itoabase_imax(board[(c_proc->i + i) % MEM_SIZE], 16));
+		hex3 = ft_strtolower(ft_itoabase_imax(board[(c_proc->i + i) % MEM_SIZE],
+		16));
 		j = 0;
 		while (j + ft_strlen(hex3) < 2)
 		{
@@ -61,7 +62,8 @@ void			cmd_verbose(unsigned char *board, t_proc *c_proc, int offset)
 	write(1, "\n", 1);
 }
 
-void			cmd_verbose_sti(unsigned char *board, t_proc *c_proc, int p1, int p2)
+void			cmd_verbose_sti(unsigned char *board, t_proc *c_proc, int p1,
+	int p2)
 {
 	write(1, "P", 1);
 	ft_printf("% 5d", c_proc->pid);
@@ -114,18 +116,18 @@ void			cmd_verbose_ld(int pid, int reg_nb, int id)
 
 void			cmd_verbose_zjmp_live(char *cmd, int pid, int id)
 {
-		write(1, "P", 1);
-		if (pid < 10)
-			write(1, " ", 1);
-		if (pid < 100)
-			write(1, " ", 1);
-		if (pid < 1000)
-			write(1, " ", 1);
-		if (pid < 100000)
-			write(1, " ", 1);
-		ft_putnbr(pid);
-		write(1, " | ", 3);
-		write(1, cmd, 4);
+	write(1, "P", 1);
+	if (pid < 10)
 		write(1, " ", 1);
-		ft_putnbr(id);
+	if (pid < 100)
+		write(1, " ", 1);
+	if (pid < 1000)
+		write(1, " ", 1);
+	if (pid < 100000)
+		write(1, " ", 1);
+	ft_putnbr(pid);
+	write(1, " | ", 3);
+	write(1, cmd, 4);
+	write(1, " ", 1);
+	ft_putnbr(id);
 }
