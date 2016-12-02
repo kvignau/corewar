@@ -25,7 +25,7 @@ cmd_lld.c get_cmd_size.c cmd_lldi.c cmd_and.c cmd_or.c cmd_xor.c\
 get_arg_val.c get_register_name.c isdir.c isind.c isreg.c cmd_sti.c\
 cmd_live.c iscmd.c execute_dead_process.c opt_sti.c cmd_verbose.c\
 ncurs_set_up.c ncurs_finish.c ncurs_print_board.c next.c\
-verbose2.c game_loop.c error_manager.c
+verbose2.c game_loop.c error_manager.c reverse_byte.c
 
 OBJ = $(SRC:%.c=%.o)
 
