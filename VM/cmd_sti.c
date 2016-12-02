@@ -48,7 +48,7 @@ static int				add_dir_ind(unsigned char *board, t_proc *c_proc, int v, int *reg_
 	id = bit_cat(board, c_proc, 3, 2);
 	if (*reg_nb < REG_NUMBER && *reg_nb >= 0)
 	{
-		add = (p2 + bit_cat(board, c_proc, id, 4)) % IDX_MOD;
+		add = (p2 + bit_cat(board, c_proc, id, 4));
 		if (v == 1)
 			cmd_verbose_sti(board, c_proc, bit_cat(board, c_proc, id, 4), p2);
 		return (add);
