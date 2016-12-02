@@ -50,7 +50,5 @@ uintmax_t			ft_hextoi(unsigned char *str)
 		len--;
 		i++;
 	}
-	// if (value != 0)
-		// ft_putendl("Coucou");
 	return (value);
 }
