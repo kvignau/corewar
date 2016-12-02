@@ -64,13 +64,15 @@ static void		reg_reg(unsigned char *board, t_proc *c_proc, int verbose)
 void			cmd_st(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
 	int				cmd_size;
+	int				cmp;
 
 	if (c_proc->ctp == 5)
 	{
+		cmp = (board[(c_proc->i + 1) % MEM_SIZE] & 0xf0);
 		cmd_size = get_cmd_size(get_type(board, c_proc), 4, 2);
-		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x70)
+		if (cmp == 0x70)
 			reg_ind(board, c_proc, core);
-		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0x50)
+		else if (cmp == 0x50)
 			reg_reg(board, c_proc, core->options.verbose);
 		c_proc->c_cmd = 0;
 		next(board, c_proc, cmd_size, core->options.verbose);

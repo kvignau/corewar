@@ -37,9 +37,9 @@ static int				add_dir_reg(unsigned char *board, t_proc *c_proc, int v, int *reg_
 
 static int				add_dir_ind(unsigned char *board, t_proc *c_proc, int v, int *reg_nb)
 {
-	unsigned int		add;
-	unsigned int		id;
-	short		p2;
+	int					add;
+	int					id;
+	short				p2;
 
 	add = 0;
 	id = 0;
@@ -48,7 +48,7 @@ static int				add_dir_ind(unsigned char *board, t_proc *c_proc, int v, int *reg_
 	id = bit_cat(board, c_proc, 3, 2);
 	if (*reg_nb < REG_NUMBER && *reg_nb >= 0)
 	{
-		add = (p2 + bit_cat(board, c_proc, id, 4));
+		add = (p2 + bit_cat(board, c_proc, id, 4)) % IDX_MOD;
 		if (v == 1)
 			cmd_verbose_sti(board, c_proc, bit_cat(board, c_proc, id, 4), p2);
 		return (add);
@@ -98,44 +98,41 @@ static int				add_reg_ind(unsigned char *board, t_proc *c_proc, int v, int *reg_
 	return (-1);
 }
 
-static int				oct_codageok(unsigned char *board, t_proc *c_proc)
-{
-	if (board[(c_proc->i + 1) % MEM_SIZE] == 0x68 ||
-		board[(c_proc->i + 1) % MEM_SIZE] == 0x58 ||
-		board[(c_proc->i + 1) % MEM_SIZE] == 0x64 ||
-		board[(c_proc->i + 1) % MEM_SIZE] == 0x54 ||
-		board[(c_proc->i + 1) % MEM_SIZE] == 0x74 ||
-		board[(c_proc->i + 1) % MEM_SIZE] == 0x78)
-		return (1);
-	return (0);
-}
-
 void					cmd_sti(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
 	int					reg_nb;
 	int					cmd_size;
-	unsigned int		add;
+	int					add;
+	int					cmp;
 
 	reg_nb = 0;
 	add = 0;
 	cmd_size = 0;
 	if (c_proc->ctp == 25)
 	{
+		cmp = (board[(c_proc->i + 1) % MEM_SIZE] & 0xfc);
 		cmd_size = get_cmd_size(get_type(board, c_proc), 2, 3);
-		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x68)
+		if (cmp == 0x68)
 			add = add_ind_ind(board, c_proc, core->options.verbose, &reg_nb);
-		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0x58)
+		else if (cmp == 0x58)
 			add = add_reg_ind(board, c_proc, core->options.verbose, &reg_nb);
-		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0x64)
+		else if (cmp == 0x64)
 			add = add_ind_reg(board, c_proc, core->options.verbose, &reg_nb);
-		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0x54)
+		else if (cmp == 0x54)
 			add = add_reg_reg(board, c_proc, core->options.verbose, &reg_nb);
-		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0x74)
+		else if (cmp == 0x74)
 			add = add_dir_reg(board, c_proc, core->options.verbose, &reg_nb);
-		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0x78)
+		else if (cmp == 0x78)
 			add = add_dir_ind(board, c_proc, core->options.verbose, &reg_nb);
-		if (oct_codageok(board, c_proc) && c_proc->error == 0)
+		else
+			cmp = -1;
+		if (cmp != -1 && c_proc->error == 0)
 			sti_result(core, c_proc, reg_nb, add);
+		// if (core->cycles > 1970 && core->cycles < 2000)
+		// {
+		// 	ft_printf("oct : %x\n", board[(c_proc->i + 1) % MEM_SIZE]);
+		// 	ft_printf("add : %d\n", add);
+		// }
 		if (core->options.verbose == 1)
 			cmd_verbose(board, c_proc, cmd_size);
 		c_proc->c_cmd = 0;

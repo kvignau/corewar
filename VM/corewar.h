@@ -161,10 +161,8 @@ int					get_register_name(unsigned char *board, t_proc *c_proc,
 	int i[]);
 int					get_arg_val(int oc_trunc, unsigned char *board,
 	t_proc *c_proc, int i[]);
-unsigned int		bit_cat(unsigned char *board, t_proc *c_proc, int start,
+int		bit_cat(unsigned char *board, t_proc *c_proc, int start,
 	int size);
-int					bit_cat_no_mod(unsigned char *board, t_proc *c_proc,
-	int start, int size);
 void				next(unsigned char *board, t_proc *c_proc,
 	int nb, int verbose);
 void				next_pc(int counter_offset, t_proc *c_proc,

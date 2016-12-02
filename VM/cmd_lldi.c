@@ -28,7 +28,7 @@ static int				valid_opc(unsigned char *board, t_proc *c_proc)
 {
 	int		cmp;
 
-	cmp = board[(c_proc->i + 1) % MEM_SIZE];
+	cmp = (board[(c_proc->i + 1) % MEM_SIZE] & 0xfc);
 	if (cmp == 0x64 || cmp == 0x54 || cmp == 0xa4 || cmp == 0x94 ||
 		cmp == 0xe4 || cmp == 0xd4)
 		return (1);

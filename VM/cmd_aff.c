@@ -19,7 +19,7 @@ void	cmd_aff(unsigned char *b, t_proc *c_proc, t_cor *core)
 	reg_nb = -1;
 	if (c_proc->ctp == 2)
 	{
-		if (b[(c_proc->i + 1) % MEM_SIZE] == 0x40)
+		if ((b[(c_proc->i + 1) % MEM_SIZE] & 0xc0) == 0x40)
 		{
 			reg_nb = (int)((b[(c_proc->i + 2) % MEM_SIZE] - 1));
 			if (reg_nb <= 15 && reg_nb >= 0)

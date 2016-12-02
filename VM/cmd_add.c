@@ -30,7 +30,7 @@ void			cmd_add(unsigned char *board, t_proc *c_proc, t_cor *core)
 
 	if (c_proc->ctp == 10)
 	{
-		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x54)
+		if ((board[(c_proc->i + 1) % MEM_SIZE] & 0xfc) == 0x54)
 		{
 			r1 = board[(c_proc->i + 2) % MEM_SIZE];
 			r2 = board[(c_proc->i + 3) % MEM_SIZE];

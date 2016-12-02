@@ -23,19 +23,19 @@ int					isind(unsigned char *board, t_proc *c_proc,
 	{
 		if (type[0] == REG)
 		{
-			id = bit_cat_no_mod(board, c_proc, 3, 4);
-			result = bit_cat_no_mod(board, c_proc, id, 4);
+			id = bit_cat(board, c_proc, 3, 4);
+			result = bit_cat(board, c_proc, id, 4);
 		}
 		else
 		{
-			id = bit_cat_no_mod(board, c_proc, 4, 4);
-			result = bit_cat_no_mod(board, c_proc, id, 4);
+			id = bit_cat(board, c_proc, 4, 4);
+			result = bit_cat(board, c_proc, id, 4);
 		}
 	}
 	else
 	{
-		id = bit_cat_no_mod(board, c_proc, 2, 2);
-		result = bit_cat_no_mod(board, c_proc, id, 4);
+		id = bit_cat(board, c_proc, 2, 2);
+		result = bit_cat(board, c_proc, id, 4);
 	}
 	return (result);
 }

@@ -53,13 +53,15 @@ static void	ind_reg(unsigned char *board, t_proc *c_proc, int v)
 void		cmd_ld(unsigned char *board, t_proc *c_proc, t_cor *core)
 {
 	int				cmd_size;
+	int				cmp;
 
 	cmd_size = get_cmd_size(get_type(board, c_proc), 4, 2);
 	if (c_proc->ctp == 5)
 	{
-		if (board[(c_proc->i + 1) % MEM_SIZE] == 0x90)
+		cmp = (board[(c_proc->i + 1) % MEM_SIZE] & 0xf0);
+		if (cmp == 0x90)
 			dir_reg(board, c_proc, core->options.verbose);
-		else if (board[(c_proc->i + 1) % MEM_SIZE] == 0xd0)
+		else if (cmp == 0xd0)
 			ind_reg(board, c_proc, core->options.verbose);
 		if (core->options.verbose == 1)
 			cmd_verbose(board, c_proc, cmd_size);
