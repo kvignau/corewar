@@ -12,13 +12,41 @@
 
 #include "corewar.h"
 
+static void		cmd_verbose2(unsigned char *board, char *hex2,
+	int offset, t_proc *c_proc)
+{
+	int			i;
+	int			j;
+	char		*hex3;
+
+	j = 0;
+	ft_putstr(hex2);
+	free(hex2);
+	write(1, ") ", 2);
+	i = 0;
+	while (i < offset)
+	{
+		hex3 = ft_strtolower(ft_itoabase_imax(board[(c_proc->i + i) % MEM_SIZE],
+		16));
+		j = 0;
+		while (j + ft_strlen(hex3) < 2)
+		{
+			write(1, "0", 1);
+			j++;
+		}
+		ft_putstr(hex3);
+		free(hex3);
+		write(1, " ", 1);
+		i++;
+	}
+	write(1, "\n", 1);
+}
+
 void			cmd_verbose(unsigned char *board, t_proc *c_proc, int offset)
 {
 	int				i;
-	int				j;
 	char			*hex1;
 	char			*hex2;
-	char			*hex3;
 
 	i = 0;
 	write(1, "ADV ", 4);
@@ -40,26 +68,7 @@ void			cmd_verbose(unsigned char *board, t_proc *c_proc, int offset)
 		write(1, "0", 1);
 		i++;
 	}
-	ft_putstr(hex2);
-	free(hex2);
-	write(1, ") ", 2);
-	i = 0;
-	while (i < offset)
-	{
-		hex3 = ft_strtolower(ft_itoabase_imax(board[(c_proc->i + i) % MEM_SIZE],
-		16));
-		j = 0;
-		while (j + ft_strlen(hex3) < 2)
-		{
-			write(1, "0", 1);
-			j++;
-		}
-		ft_putstr(hex3);
-		free(hex3);
-		write(1, " ", 1);
-		i++;
-	}
-	write(1, "\n", 1);
+	cmd_verbose2(board, hex2, offset, c_proc);
 }
 
 void			cmd_verbose_sti(unsigned char *board, t_proc *c_proc, int p1,
@@ -112,22 +121,4 @@ void			cmd_verbose_ld(int pid, int reg_nb, int id)
 	write(1, " r", 2);
 	ft_putnbr(id);
 	write(1, "\n", 1);
-}
-
-void			cmd_verbose_zjmp_live(char *cmd, int pid, int id)
-{
-	write(1, "P", 1);
-	if (pid < 10)
-		write(1, " ", 1);
-	if (pid < 100)
-		write(1, " ", 1);
-	if (pid < 1000)
-		write(1, " ", 1);
-	if (pid < 100000)
-		write(1, " ", 1);
-	ft_putnbr(pid);
-	write(1, " | ", 3);
-	write(1, cmd, 4);
-	write(1, " ", 1);
-	ft_putnbr(id);
 }
