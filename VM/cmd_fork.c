@@ -12,10 +12,12 @@
 
 #include "corewar.h"
 
-void		norm_fork(t_elem *tmp, t_proc *c_proc, short int value)
+void		norm_fork(t_elem *tmp, t_proc *c_proc, short int value,
+	unsigned char *board)
 {
-	((t_proc *)(tmp->content))->pc = (c_proc->pc + (value % IDX_MOD));
-	((t_proc *)(tmp->content))->i = (c_proc->i + (value % IDX_MOD));
+	((t_proc *)(tmp->content))->i = ((c_proc->i + (value % IDX_MOD))
+		% MEM_SIZE);
+	((t_proc *)(tmp->content))->pc = &(board[((t_proc *)(tmp->content))->i]);
 	((t_proc *)(tmp->content))->ctp = 1;
 	((t_proc *)(tmp->content))->c_cmd = 0;
 	((t_proc *)(tmp->content))->color = c_proc->color;
@@ -38,7 +40,7 @@ void		cmd_fork(unsigned char *board, t_proc *c_proc,
 				c_proc->i + (value % IDX_MOD));
 			cmd_verbose(board, c_proc, 3);
 		}
-		norm_fork(tmp, c_proc, value);
+		norm_fork(tmp, c_proc, value, board);
 		core->pid += 1;
 		((t_proc *)(tmp->content))->pid = core->pid;
 		c_proc->c_cmd = 0;

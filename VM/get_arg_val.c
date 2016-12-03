@@ -17,7 +17,6 @@ int			get_arg_val(int oc_trunc, unsigned char *board, t_proc *c_proc,
 {
 	int		arg;
 
-	arg = 0;
 	if (oc_trunc == 0b10)
 	{
 		arg = bit_cat(board, c_proc, i[0], 4);
@@ -31,12 +30,14 @@ int			get_arg_val(int oc_trunc, unsigned char *board, t_proc *c_proc,
 		i[0] += 2;
 		return (arg);
 	}
-	if (oc_trunc == 0b01)
+	else if (oc_trunc == 0b01)
 	{
 		arg = get_register_name(board, c_proc, i);
 		if (i[1] == 0)
 			arg = c_proc->r[arg - 1];
 		return (arg);
 	}
+	else
+		i[1] = -1;
 	return (0);
 }

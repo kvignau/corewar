@@ -14,11 +14,11 @@
 # define COREWAR_H
 # include "op.h"
 # include "../libftprintf/includes/ft_printf.h"
-# define OPTIONS	"dsnvcaN"
-# define REG 1
-# define DIR 2
-# define IND 3
 # include <ncurses.h>
+# define OPTIONS	"dsnvcaN"
+# define REG		1
+# define DIR		2
+# define IND		3
 
 /*
 **********************  Structures  **********************
@@ -161,7 +161,7 @@ int					get_register_name(unsigned char *board, t_proc *c_proc,
 	int i[]);
 int					get_arg_val(int oc_trunc, unsigned char *board,
 	t_proc *c_proc, int i[]);
-int		bit_cat(unsigned char *board, t_proc *c_proc, int start,
+int					bit_cat(unsigned char *board, t_proc *c_proc, int start,
 	int size);
 void				next(unsigned char *board, t_proc *c_proc,
 	int nb, int verbose);
@@ -184,6 +184,8 @@ void				sti_result(t_cor *core, t_proc *c_proc, int reg_nb,
 int					add_ind_reg(unsigned char *board, t_proc *c_proc, int v,
 	int *reg_nb);
 int					add_reg_reg(unsigned char *board, t_proc *c_proc, int v,
+	int *reg_nb);
+int					add_dir_reg(unsigned char *board, t_proc *c_proc, int v,
 	int *reg_nb);
 void				cmd_fork(unsigned char *board, t_proc *c_proc,
 	t_dbllist *pr_list, t_cor *core);

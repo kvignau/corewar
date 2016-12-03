@@ -6,7 +6,7 @@
 /*   By: kvignau <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/17 15:41:58 by kvignau           #+#    #+#             */
-/*   Updated: 2016/10/19 14:42:41 by kvignau          ###   ########.fr       */
+/*   Updated: 2016/12/03 00:32:47 by mchevall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_print_memory(unsigned char *ptr, int memsize)
 	i = 0;
 	while (i < memsize)
 	{
-		if (i % 64 == 0)
+		if (i % 32 == 0)
 		{
 			if (i != 0)
 				write(1, "\n", 1);

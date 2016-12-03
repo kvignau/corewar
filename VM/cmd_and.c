@@ -23,8 +23,6 @@ void			init_aox_a(t_aox *aox, t_proc *c_proc, t_cor *core, int i[])
 		aox->r_dest = get_register_name(core->board, c_proc, i);
 	else
 		i[1] = -1;
-	if ((o_code & 0b00000011) != 0b00)
-		i[1] = -2;
 	if (i[1] == 0)
 	{
 		c_proc->r[aox->r_dest - 1] = aox->arg1 & aox->arg2;
