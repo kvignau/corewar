@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libftprintf.a
+NAME = libft.a
 
 H_DIR = includes/
 C_DIR_PRINTF = srcs/
@@ -18,7 +18,6 @@ O_DIR_PRINTF = obj/
 LIBFT = Libft/
 
 FLAGS = -Wall -Wextra -Werror
-CC = gcc
 
 C_FILES_PRINTF = action_1.c
 C_FILES_PRINTF += action_2.c
@@ -55,7 +54,7 @@ all:
 	make $(NAME)
 
 $(NAME): $(O_FILES_PRINTF)
-	@rm -rf libftprintf.a 2> /dev/null || echo "" > /dev/null
+	@rm -rf $(NAME) 2> /dev/null || echo "" > /dev/null
 	ar rc $@ $^
 	libtool -static -o $@ $@ Libft/libft.a
 	ranlib $@

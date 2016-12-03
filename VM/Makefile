@@ -10,43 +10,70 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = corewar
-#-fsanitize=address
+NAME = ../corewar
 
-FLAGS = -g -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra
 
-# MallocStackLogging=1
-
-SRC = main.c corewar_usage.c options_checkers.c champions_maker.c \
-ft_print_memory.c memory.c ft_hextoa.c get_content.c ft_hextoi.c\
-init_board.c intro.c cmd_aff.c cmd_fork.c next_pc.c cmd_ld.c cmd_lfork.c\
-bit_cat.c cmd_ldi.c cmd_st.c cmd_add.c cmd_sub.c cmd_zjmp.c get_type.c\
-cmd_lld.c get_cmd_size.c cmd_lldi.c cmd_and.c cmd_or.c cmd_xor.c\
-get_arg_val.c get_register_name.c isdir.c isind.c isreg.c cmd_sti.c\
-cmd_live.c iscmd.c execute_dead_process.c opt_sti.c cmd_verbose.c\
-ncurs_set_up.c ncurs_finish.c ncurs_print_board.c next.c\
-verbose2.c game_loop.c error_manager.c reverse_byte.c
+SRC = main.c
+SRC += corewar_usage.c
+SRC += options_checkers.c
+SRC += champions_maker.c
+SRC += ft_print_memory.c
+SRC += memory.c
+SRC += ft_hextoa.c
+SRC += get_content.c
+SRC += ft_hextoi.c
+SRC += init_board.c
+SRC += intro.c
+SRC += cmd_aff.c
+SRC += cmd_fork.c
+SRC += next_pc.c
+SRC += cmd_ld.c
+SRC += cmd_lfork.c
+SRC += bit_cat.c
+SRC += cmd_ldi.c
+SRC += cmd_st.c
+SRC += cmd_add.c
+SRC += cmd_sub.c
+SRC += cmd_zjmp.c
+SRC += get_type.c
+SRC += cmd_lld.c
+SRC += get_cmd_size.c
+SRC += cmd_lldi.c
+SRC += cmd_and.c
+SRC += cmd_or.c
+SRC += cmd_xor.c
+SRC += get_arg_val.c
+SRC += get_register_name.c
+SRC += isdir.c
+SRC += isind.c
+SRC += isreg.c
+SRC += cmd_sti.c
+SRC += cmd_live.c
+SRC += iscmd.c
+SRC += execute_dead_process.c
+SRC += opt_sti.c
+SRC += cmd_verbose.c
+SRC += ncurs_set_up.c
+SRC += ncurs_finish.c
+SRC += ncurs_print_board.c
+SRC += next.c
+SRC += verbose2.c
+SRC += game_loop.c
+SRC += error_manager.c
+SRC += reverse_byte.c
 
 OBJ = $(SRC:%.c=%.o)
 
 all: $(NAME)
 
-# $(NAME): $(OBJ)
-# 	make -C ../libftprintf/ all
-# 	$(CC) $(FLAGS) -o $(NAME) $(OBJ)
-
 $(NAME): $(OBJ)
-	$(CC) $(FLAGS) $(OBJ) -o $@ -L../libftprintf/ -lftprintf -lncurses
-
-%.o: %.c
-	$(CC) $(FLAGS) -o $@ -c $< -Iincludes
+	$(CC) $(FLAGS) -o $(NAME) $(OBJ) ../libftprintf/libft.a -lncurses
 
 clean:
-	# make -C ../libftprintf/ clean
 	rm -f $(OBJ)
 
 fclean: clean
-	# make -C ../libftprintf/ fclean
 	rm -f $(NAME)
 
 re: fclean all
