@@ -110,7 +110,6 @@ void		free_all_data(t_data *data)
 	{
 		((data->file != NULL)
 			? ft_free2dtab((void **)data->file, data->nb_lines) : 0);
-		((data->line != NULL) ? free(data->line) : 0);
 		((data->comment != NULL) ? ft_memdel((void **)&data->comment) : 0);
 		((data->name != NULL) ? ft_memdel((void **)&data->name) : 0);
 		if (data->label_kw)

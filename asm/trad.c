@@ -53,7 +53,6 @@ void	trad_args(t_recup *recup, char **hexa, t_data **data, int op_code)
 	static const t_trad		ft_trad[] = {trad_reg, trad_dir, trad_ind};
 	t_trad					trad;
 
-	recup->lst_hexa = ft_lstdblnew();
 	i = 0;
 	while (recup->args_tab[i])
 	{

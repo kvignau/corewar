@@ -85,7 +85,6 @@ typedef struct		s_data_line
 typedef struct		s_data
 {
 	char			**file;
-	char			*line;
 	char			*comment;
 	char			*name;
 	int				nb_lines;
@@ -211,7 +210,6 @@ void				create_cor(t_data *data, char *file_name);
 */
 
 void				free_all_data(t_data *data);
-void				free_tab_char(char ***tab);
 void				free_t_recup(t_recup *recup);
 
 #endif

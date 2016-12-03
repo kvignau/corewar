@@ -12,7 +12,8 @@
 
 NAME = asm
 
-FLAGS = -Wall -Werror -Wextra -g
+FLAGS = -Wall -Werror -Wextra -g 
+# -fsanitize=address
 
 SRC = main.c op.c store_file.c data_initializer.c file_manager.c \
 ft_iscomment.c recovery.c header_manager.c name_manager.c \

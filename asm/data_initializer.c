@@ -19,9 +19,9 @@ void		data_initializer(t_data **data)
 	{
 		((((*data)->file = (char **)ft_memalloc(sizeof(char *) * BUFF)) == NULL)
 		? error(*data, "File malloc error\n") : 0);
-		(*data)->line = NULL;
 		(*data)->comment = NULL;
 		(*data)->name = NULL;
+		(*data)->nb_lines = 0;
 		((((*data)->label_kw = ft_lstdblnew()) == NULL) ?
 			error(*data, "label_kw malloc error") : 0);
 		((((*data)->lst_recup = ft_lstdblnew()) == NULL) ?

@@ -16,21 +16,23 @@ int		store_file(char **argv, t_data *data, int *i)
 {
 	int		fd;
 	int		ret;
+	char	*line;
 
 	if ((fd = open(argv[1], O_RDONLY)) == -1)
 		error(data, "Open error\n");
 	if (data->file != NULL)
 	{
-		while ((ret = get_next_line(fd, &data->line)) > 0)
+		while ((ret = get_next_line(fd, &line)) == 1)
 		{
-			(((data->file[*i] = data->line) == NULL) ?
-				error(data, "Malloc error\n") : 0);
+			data->file[*i] = line;
 			*i += 1;
 			if (*i % 1024 == 0)
 				(((data->file = realloc(data->file, 1024)) == NULL) ?
 					error(data, "Realloc error\n") : 0);
 		}
 		((ret == -1) ? error(data, "Read error\n") : 0);
+		free(line);
+		data->file[*i] = NULL;
 	}
 	else
 		return (0);

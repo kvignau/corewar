@@ -20,7 +20,6 @@ void	trad_neg(char *arg, char **to_add)
 	tmp = ft_strsub(arg, 1, ft_strlen(arg) - 1);
 	n = ft_atoi(tmp);
 	ft_strdel(&tmp);
-	free(*to_add);
 	tmp = ft_itoabase_uimax(65536 - n, 16);
 	*to_add = ft_strdup(tmp);
 	ft_strdel(&tmp);

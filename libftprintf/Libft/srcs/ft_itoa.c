@@ -12,7 +12,7 @@
 
 #include "../includes/libft.h"
 
-char	*ft_itoa(int n)
+char				*ft_itoa(int n)
 {
 	char			*str;
 	unsigned int	nb;
@@ -57,7 +57,7 @@ static size_t		ft_intlen_imax(intmax_t n, size_t base)
 	return (i);
 }
 
-char	*ft_itoa_imax(intmax_t n)
+char				*ft_itoa_imax(intmax_t n)
 {
 	char			*str;
 	unsigned int	nb;
