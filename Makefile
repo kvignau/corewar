@@ -16,13 +16,13 @@ ASM = asm_files/
 COR = VM/
 PRINTF = libftprintf/
 
-all: lib cor asm
+all: cor asm
 
-lib:
+libft:
 	make -C $(PRINTF) all
-cor:
+cor: libft
 	make -C $(COR) all
-asm:
+asm: libft
 	make -C $(ASM) all
 	
 clean:
