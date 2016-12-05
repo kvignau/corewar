@@ -12,38 +12,36 @@
 
 #include "../includes/libft.h"
 
-static void		dbldelone_end(t_dbllist **list, t_elem *to_remove)
+static	void	dbldelone_else(t_elem *to_remove)
 {
+	to_remove->next->prev = to_remove->prev;
+	to_remove->prev->next = to_remove->next;
+}
+
+void			ft_lstdbldelone(t_dbllist **list, t_elem *to_remove)
+{
+	if (to_remove == NULL)
+		return ;
+	if ((*list)->length == 1)
+	{
+		ft_lstdbldel(list);
+		*list = ft_lstdblnew();
+		(*list)->length = 0;
+		return ;
+	}
+	else if (to_remove->next == NULL)
+	{
+		(*list)->tail = to_remove->prev;
+		(*list)->tail->next = NULL;
+	}
+	else if (to_remove->prev == NULL)
+	{
+		(*list)->head = to_remove->next;
+		(*list)->head->prev = NULL;
+	}
+	else
+		dbldelone_else(to_remove);
 	free(to_remove->content);
 	free(to_remove);
 	(*list)->length--;
-}
-
-void			ft_lstdbldelone(t_dbllist **lst, t_elem *to_remove)
-{
-	t_elem		*tmp;
-
-	tmp = (*lst)->head;
-	while (tmp != NULL && tmp != to_remove)
-		tmp = tmp->next;
-	if (tmp == NULL)
-		return ;
-	if (tmp == (*lst)->head)
-	{
-		(*lst)->head = tmp->next;
-		tmp->next->prev = NULL;
-		tmp->next = NULL;
-	}
-	else if (tmp == (*lst)->tail)
-	{
-		(*lst)->tail = tmp->prev;
-		tmp->prev->next = NULL;
-		tmp->prev = NULL;
-	}
-	else
-	{
-		tmp->prev->next = tmp->next;
-		tmp->next->prev = tmp->prev;
-	}
-	dbldelone_end(lst, to_remove);
 }
