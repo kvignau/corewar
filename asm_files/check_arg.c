@@ -28,10 +28,8 @@ static void	print_args_tab(char **args_tab)
 
 static int	valid_args(char **args_tab, int op_code, int *to_check)
 {
-	int		i;
 	int		type;
 
-	i = 0;
 	type = 0;
 	if (!(type = recover_args(args_tab, to_check)))
 	{

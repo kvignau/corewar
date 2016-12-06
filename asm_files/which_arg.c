@@ -14,11 +14,6 @@
 
 int				args_for_sum(char *arg)
 {
-	int		type;
-	int		i;
-
-	type = 0;
-	i = 0;
 	if (is_reg(arg))
 		return (1);
 	if (is_dir(arg))
@@ -30,11 +25,6 @@ int				args_for_sum(char *arg)
 
 int				define_type_args(char *arg)
 {
-	int		type;
-	int		i;
-
-	type = 0;
-	i = 0;
 	if (is_reg(arg))
 		return (T_REG);
 	if (is_ind(arg))

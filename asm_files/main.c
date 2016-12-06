@@ -15,11 +15,9 @@
 int			main(int argc, char **argv)
 {
 	int		i;
-	int		j;
 	t_data	*data;
 
 	i = 0;
-	j = -1;
 	data_initializer(&data);
 	if (argc != 1)
 	{

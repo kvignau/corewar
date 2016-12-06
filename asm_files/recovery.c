@@ -44,10 +44,8 @@ static int		check_line(char *line, t_data **data)
 int				recovery(t_data *data)
 {
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
 	while (i < data->nb_lines)
 	{
 		if (data->file[i] == NULL)

@@ -33,10 +33,8 @@ static void	dir_reg(unsigned char *board, t_proc *c_proc, int v)
 
 static void	ind_reg(unsigned char *board, t_proc *c_proc, int v)
 {
-	unsigned int	id;
 	int				reg_nb;
 
-	id = bit_cat(board, c_proc, 2, 2) % IDX_MOD;
 	reg_nb = (int)((board[(c_proc->i + 4) % MEM_SIZE] - 1));
 	if (reg_nb < REG_NUMBER && reg_nb >= 0)
 	{

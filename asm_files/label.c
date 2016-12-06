@@ -73,13 +73,11 @@ static	int		is_dir_with_label(char *arg)
 void			label_called(t_data_line *dline, char **args_tab)
 {
 	int				i;
-	int				nb_called;
 	int				j;
 	t_called		caller;
 
 	i = 0;
 	j = 0;
-	nb_called = 0;
 	ft_bzero(&caller, sizeof(t_called));
 	while (args_tab[i])
 	{

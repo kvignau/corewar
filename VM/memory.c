@@ -15,9 +15,7 @@
 unsigned char		*memory(void)
 {
 	unsigned char	*plateau;
-	int				i;
 
-	i = 0;
 	plateau = (unsigned char *)ft_memalloc(sizeof(unsigned char) * (MEM_SIZE));
 	return (plateau);
 }

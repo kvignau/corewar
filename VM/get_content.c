@@ -25,7 +25,7 @@ static unsigned char	*addzero(unsigned char *str, int len)
 	return (str);
 }
 
-static void				tolower(unsigned char *content, int tmp)
+static void				gotolower(unsigned char *content, int tmp)
 {
 	int				i;
 
@@ -61,6 +61,6 @@ unsigned char			*get_content(int *str, int size)
 		i += 2;
 		size -= 8;
 	}
-	tolower(content, tmp);
+	gotolower(content, tmp);
 	return (content);
 }

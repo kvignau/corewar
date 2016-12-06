@@ -19,6 +19,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <inttypes.h>
 # define BUFF_SIZE 4096
 # define LINESS (((t_lines *)(tmp->content))->lines)
 

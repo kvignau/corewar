@@ -16,6 +16,7 @@ H_DIR = includes/
 C_DIR_PRINTF = srcs/
 O_DIR_PRINTF = obj/
 LIBFT = Libft/
+LIB = Libft/libft.a
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -55,9 +56,13 @@ all:
 
 $(NAME): $(O_FILES_PRINTF)
 	@rm -rf $(NAME) 2> /dev/null || echo "" > /dev/null
-	ar rc $@ $^
-	libtool -static -o $@ $@ Libft/libft.a
-	ranlib $@
+	cp $(LIB) $(NAME)
+	ar r $(NAME) $(O_FILES_PRINTF)
+	ranlib $(NAME)
+
+	##ar rc $@ $^
+	##libtool -static -o $@ $@ Libft/libft.a
+	##ranlib $@
 
 $(O_FILES_PRINTF): $(O_DIR_PRINTF)%.o: $(C_DIR_PRINTF)%.c
 	@mkdir $(O_DIR_PRINTF) 2> /dev/null || echo "" > /dev/null

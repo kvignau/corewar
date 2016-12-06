@@ -49,11 +49,9 @@ static	void	string_to_hex(char *str, char **new)
 
 static	void	add_zero_after(char **str, int nb)
 {
-	int		i;
 	char	*tmp;
 	char	*new;
 
-	i = 0;
 	tmp = ft_strdup("0");
 	new = NULL;
 	if (*str == NULL)

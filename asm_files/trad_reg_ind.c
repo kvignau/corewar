@@ -65,13 +65,11 @@ void	reduce_hex_ind(char **to_add, int size)
 
 void	trad_ind(char *arg, char **hexa, t_data **data, int op_code)
 {
-	char	*tmp;
 	char	*to_add;
 	char	*to_compete;
 
 	(void)data;
 	(void)op_code;
-	tmp = NULL;
 	if (arg[0] == '-')
 	{
 		trad_neg(arg, &to_add);

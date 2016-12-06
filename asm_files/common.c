@@ -60,10 +60,8 @@ void	hex_to_lower(char **hex)
 void	add_zero(char **str, int width)
 {
 	char	*tmp;
-	char	i;
 
 	tmp = NULL;
-	i = 0;
 	if (ft_strlen(*str) == (size_t)width)
 		return ;
 	while (ft_strlen(*str) < (size_t)width)

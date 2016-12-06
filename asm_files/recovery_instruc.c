@@ -67,11 +67,9 @@ static int	sum_nb_oct(char *hex)
 int			check_instruct(char *line, char **name, t_data **data,
 			t_data_line *dline)
 {
-	char	*args;
 	t_recup	recup;
 	t_hexa	hex;
 
-	args = NULL;
 	ft_bzero(&recup, sizeof(t_recup));
 	ft_bzero(&hex, sizeof(t_hexa));
 	recup.lst_hexa = ft_lstdblnew();

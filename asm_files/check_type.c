@@ -15,13 +15,10 @@
 static int		recover_valid_type(int op_code, int *type)
 {
 	int		i;
-	int		tmp;
 
 	i = 0;
-	tmp = 0;
 	while (g_op_tab[op_code - 1].arg[i])
 	{
-		tmp = 0;
 		if (i == 0)
 			(*type) = g_op_tab[op_code - 1].arg[i];
 		else if (i == 1)
@@ -37,10 +34,8 @@ static int		recover_valid_type(int op_code, int *type)
 
 int				verif_type(int type, int op_code)
 {
-	int		i;
 	int		valid_type;
 
-	i = 0;
 	recover_valid_type(op_code, &valid_type);
 	if ((type & valid_type) != type)
 	{

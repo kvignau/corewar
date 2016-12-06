@@ -37,9 +37,7 @@ void	minus_space(t_elem *tmpa, char **str, size_t len)
 void	minus_zero(t_elem *tmpa, char **str, size_t len)
 {
 	char	*tmp;
-	int		i;
 
-	i = 0;
 	tmp = NULL;
 	if (SFLAGS.width > len)
 		(*str)[0] = '-';

@@ -101,10 +101,8 @@ static int		label_cleaner(t_data *data, int nb_label)
 int				label_manager(t_data *data)
 {
 	int		nb_label;
-	int		i;
 
 	nb_label = 0;
-	i = 0;
 	label_count(&nb_label, data);
 	label_cleaner(data, nb_label);
 	data->nb_lines = data->nb_lines + nb_label;
