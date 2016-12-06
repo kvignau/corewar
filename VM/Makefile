@@ -6,7 +6,7 @@
 #    By: kvignau <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/01/04 10:52:32 by kvignau           #+#    #+#              #
-#    Updated: 2016/12/02 06:26:20 by mchevall         ###   ########.fr        #
+#    Updated: 2016/12/06 14:58:02 by kvignau          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,9 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CC) $(FLAGS) -o $(NAME) $(OBJ) ../libftprintf/libft.a -lncurses
+
+%.o : %.c
+	$(CC) $(FLAGS) -o $@ -c $< -Iincludes
 
 clean:
 	rm -f $(OBJ)
